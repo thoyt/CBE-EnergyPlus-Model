@@ -1,0 +1,3228 @@
+! ============ SYSTEMS INPUT DATA ====================
+
+Sizing:Parameters,
+Sizing_Factor[],                                                  !- Sizing factor
+Sizing_Factor[],
+4;                                                    !- Time steps in averaging window
+
+ThermostatSetpoint:DualSetpoint,
+Perimeter_Thermostat_Dual_Setpoint_Control,               !- Name
+Sch_LBL_Perimeter_Thermostat_Heating_Setpoint,                                   !- Heating Setpoint Temperature SCHEDULE Name
+Sch_LBL_Thermostat_Cooling_Setpoint;                                   !- Cooling Setpoint Temperature SCHEDULE Name
+
+ThermostatSetpoint:DualSetpoint,
+Core_Thermostat_Dual_Setpoint_Control,               !- Name
+Sch_LBL_Core_Thermostat_Heating_Setpoint,                                   !- Heating Setpoint Temperature SCHEDULE Name
+Sch_LBL_Thermostat_Cooling_Setpoint;                                   !- Cooling Setpoint Temperature SCHEDULE Name
+
+ZoneControl:Thermostat,
+GFWest Thermostat,                                    !- Thermostat Name
+GFWest,                                               !- Zone Name
+Sch_ThermostatControlType,                            !- Control Type SCHEDULE Name
+ThermostatSetpoint:DualSetpoint,                      !- Control Type
+Perimeter_Thermostat_Dual_Setpoint_Control;           !- Control Type Name
+
+Sizing:Zone,
+GFWest,                                               !- Name of a zone
+Zone_Cool_SAT_Perim[],                                     !- Zone cooling design supply air temperature {C}
+50,                                                   !- Zone heating design supply air temperature {C}
+0.008,                                                !- Zone cooling design supply air humidity ratio {kg-H20/kg-air}
+0.008,                                                !- Zone heating design supply air humidity ratio {kg-H2O/kg-air}
+maximum,                                          !- outside air method
+.007079,                                              !- outside air flow per person {m3/s}
+0.0007617375,                                                    !- outside air flow per zone area {m3/s-m2}
+0,                                                    !- outside air flow per zone {m3/s}
+,                                                     !- zone sizing factor
+,
+designday,                                           !- cooling design air flow method
+0,                                                    !- cooling design air flow rate {m3/s}
+,                                                     !- cooling min air flow per zone area {m3/s-m2}
+,                                                     !- cooling min air flow {m3/s}
+0,                                                    !- cooling min air flow fraction {}
+designday,                                           !- heating design air flow method
+0,                                                    !- heating design air flow rate {m3/s}
+,                                                     !- heating min air flow per zone area {m3/s-m2}
+,                                                     !- heating min air flow {m3/s}
+0;                                                    !- heating min air flow fraction {}
+
+ZoneHVAC:EquipmentConnections,
+GFWest,                                               !- Zone Name
+GFWest Equipment,                                     !- List Name: Zone Equipment
+##if #[UFAD_SysType[] EQS FCU ]
+GFWest ATU Outlet Node,                               !- Zone Air Inlet Node(s)
+,                                                     !- Zone Air Exhaust Node(s)
+GFWest Zone Node,                                 !- Zone Node Name
+GFRPWest Inlet Node;                      !- Zone Return Air Node(s)
+##endif
+##if #[UFAD_SysType[] EQS YORK ]
+GFWestInlets,                               !- Zone Air Inlet Node(s)
+GFWestUnitHeatAirInletNode,                                                     !- List Name: Zone Air Exhaust Nodes
+GFWest Zone Node,                                 !- Zone Node Name
+GFRPWest Inlet Node;                      !- Zone Return Air Node Name
+
+NodeList,
+GFWestInlets,
+GFWest ATU Outlet Node,
+GFWestUnitHeatAirOutletNode;
+##endif
+
+##if #[Return_Plenum[] EQS Yes ]
+	
+	AirLoopHVAC:ReturnPlenum,
+	GFWest Return Plenum,                            !- Zone Plenum Name
+	GFRPWest,                                             !- Zone Name
+	GFRPWest Zone Node,                               !- Zone Node Name
+	GFRPWest Outlet Node,                                 !- Outlet Node
+	GFRPWest Inlet Node;                      !- Inlet Node
+	
+##endif
+	
+	ZoneHVAC:EquipmentList,
+	GFWest Equipment,                                     !- Name
+	ZoneHVAC:AirDistributionUnit,                                !- KEY--Zone Equipment Type 1
+	GFWest ATU,                                           !- Type Name 1
+	##if #[UFAD_SysType[] EQS FCU ]
+	1,                                                    !- Cooling Priority
+	1;                                                    !- Heating Priority
+	##endif
+	##if #[UFAD_SysType[] EQS YORK ]
+	1,                                                    !- Cooling Priority
+	2,                                                    !- Heating Priority
+	ZoneHVAC:UnitHeater,
+    GFWestUnitHeat, 
+	2,
+	1;
+	##endif
+
+ZoneHVAC:AirDistributionUnit,
+GFWest ATU,                                           !- Air Distribution Unit Name
+GFWest ATU Outlet Node,                               !- Air Distribution Unit Outlet Node
+##if #[RunType[] EQS OH ]
+    ##if #[OH_VAV_Heating[] EQS Fixed_Min ]
+	AirTerminal:SingleDuct:VAV:Reheat,                               !- KEY--System Component Type 1
+	GFWest VAV Reheat;                                    !- Component Name 1
+	##endif
+	##if #[OH_VAV_Heating[] EQS VAV_Heating ]
+	AirTerminal:SingleDuct:VAV:HeatAndCool:Reheat,                               !- KEY--System Component Type 1
+	GFWest VAV Reheat;                                    !- Component Name 1
+	##endif
+##endif
+##if #[RunType[] EQS UFAD ]
+    ##if #[UFAD_SysType[] EQS FCU ]
+	AirTerminal:SingleDuct:VAV:Reheat:VariableSpeedFan,                               !- KEY--System Component Type 1
+	GFWest FCU Reheat;
+	##endif
+	##if #[UFAD_SysType[] EQS YORK ]
+	AirTerminal:SingleDuct:VAV:Reheat,                               !- KEY--System Component Type 1
+	GFWest FCU Reheat;
+	##endif
+##endif
+
+##if #[RunType[] EQS OH ]
+	##if #[OH_VAV_Heating[] EQS Fixed_Min ]
+	AirTerminal:SingleDuct:VAV:Reheat,
+	GFWest VAV Reheat,                                    !- Name of System
+	Sch_HVAC_System_Availability,                                !- System Availability schedule
+	GFWest Damper Outlet Node,                                 !- DAMPER Air Outlet Node
+	GFWest ATU Inlet Node,                              !- UNIT Air Inlet Node
+	FSFan_Max_CoolingAir_GFWest[],                                             !- Maximum air flow rate {m3/s}
+	Constant,                                             !- Zone Minimum Air Flow Input Method
+	FSFan_UFAD_Min_Frac_GFWest[],
+	,
+	,                                                    !- Minimum Air Flow Fraction Schedule Name
+	Coil:Heating:Water,                             !- Reheat Component Object
+	GFWest Reheat Coil,                                   !- Name of Reheat Component
+	autosize,                                             !- Max Reheat Water Flow {m3/s}
+	0.00000000001,                                                    !- Min Reheat Water Flow {m3/s}
+	GFWest ATU Outlet Node,                               !- Outlet Node
+	0.01,                                                !- Convergence Tolerance
+	Damper_action[],                                               !- Damper Heating Action
+	0.0,
+	0.5,
+	43.333;
+	##endif
+
+	##if #[OH_VAV_Heating[] EQS VAV_Heating ]
+	AirTerminal:SingleDuct:VAV:HeatAndCool:Reheat,
+	GFWest VAV Reheat,                                    !- Name of System
+	Sch_HVAC_System_Availability,                                !- System Availability schedule
+	GFWest Damper Outlet Node,                                 !- DAMPER Air Outlet Node
+	GFWest ATU Inlet Node,                              !- UNIT Air Inlet Node
+	FSFan_Max_CoolingAir_GFWest[],                                             !- Maximum air flow rate {m3/s}
+	FSFan_UFAD_Min_Frac_GFWest[],
+	GFWest Reheat Coil HW Inlet,                          !- Control node
+	Coil:Heating:Water,                             !- Reheat Component Object
+	GFWest Reheat Coil,                                   !- Name of Reheat Component
+	autosize,                                             !- Max Reheat Water Flow {m3/s}
+	0.00000000001,                                                    !- Min Reheat Water Flow {m3/s}
+	GFWest ATU Outlet Node,                               !- Outlet Node
+	0.01;                                                !- Convergence Tolerance
+	##endif
+	
+##endif
+
+Coil:Heating:Water,
+GFWest Reheat Coil,                                   !- Coil Name
+SCH_RH_Coil_Availability,                                  !- Available Schedule
+autosize,                                             !- UA of the Coil {W/K}
+autosize,                                             !- Max Water Flow Rate of Coil {m3/s}
+GFWest Reheat Coil HW Inlet,                          !- Coil Water Inlet Node
+GFWest Reheat Coil HW Outlet,                         !- Coil Water Outlet Node
+GFWest Damper Outlet Node,                                 !- Coil Air Inlet Node
+GFWest ATU Outlet Node,                               !- Coil Air Outlet Node
+UFactorTimesAreaAndDesignWaterFlowRate,                        !- Coil Performance Input Method
+autosize,                                             !- Nominal Capacity
+82.2,                                                 !- Design Inlet Water Temperature
+##if #[RunType[] EQS OH ]
+	13.89,                                                 !- Design Inlet Air Temperature
+##endif
+##if #[RunType[] EQS UFAD]
+	18.3,                                                 !- Design Inlet Air Temperature
+##endif
+71.1,                                                 !- Design Outlet Water Temperature
+##if #[RunType[] EQS OH ]
+	35.0;                                                 !- Design Outlet Air Temperature
+##endif
+##if #[RunType[] EQS UFAD]
+	45.0;                                                 !- Design Outlet Air Temperature
+##endif
+
+
+BRANCH,
+GFWest Reheat Coil HW Branch,                         !- Branch Name
+,                                                     !- Maximum Branch Flow Rate {m3/s}
+,
+Coil:Heating:Water,                             !- Comp1 Type
+GFWest Reheat Coil,                                   !- Comp1 Name
+GFWest Reheat Coil HW Inlet,                          !- Comp1 Inlet Node Name
+GFWest Reheat Coil HW Outlet,                         !- Comp1 Outlet Node Name
+ACTIVE;                                               !- Comp1 Branch Control Type
+
+ZoneControl:Thermostat,
+GFCore Thermostat,                                    !- Thermostat Name
+GFCore,                                               !- Zone Name
+Sch_ThermostatControlType,                                !- Control Type SCHEDULE Name
+ThermostatSetpoint:DualSetpoint,                          !- Control Type
+Core_Thermostat_Dual_Setpoint_Control;               !- Control Type Name
+
+Sizing:Zone,
+GFCore,                                               !- Name of a zone
+Zone_Cool_SAT_Core[],                                     !- Zone cooling design supply air temperature {C}
+50,                                                   !- Zone heating design supply air temperature {C}
+0.008,                                                !- Zone cooling design supply air humidity ratio {kg-H20/kg-air}
+0.008,                                                !- Zone heating design supply air humidity ratio {kg-H2O/kg-air}
+maximum,                                          !- outside air method
+.007079,                                              !- outside air flow per person {m3/s}
+0.0007617375,                                                    !- outside air flow per zone area {m3/s-m2}
+0,                                                    !- outside air flow per zone {m3/s}
+,                                                     !- zone sizing factor
+,
+designday,                                           !- cooling design air flow method
+0,                                                    !- cooling design air flow rate {m3/s}
+,                                                     !- cooling min air flow per zone area {m3/s-m2}
+,                                                     !- cooling min air flow {m3/s}
+0,                                                    !- cooling min air flow fraction {}
+designday,                                           !- heating design air flow method
+0,                                                    !- heating design air flow rate {m3/s}
+,                                                     !- heating min air flow per zone area {m3/s-m2}
+,                                                     !- heating min air flow {m3/s}
+0;                                                    !- heating min air flow fraction {}
+
+ZoneHVAC:EquipmentConnections,
+GFCore,                                               !- Zone Name
+GFCore Equipment,                                     !- List Name: Zone Equipment
+GFCore ATU Outlet Node,                           !- Zone Air Inlet Node(s)
+,                                                     !- List Name: Zone Air Exhaust Nodes
+GFCore Zone Node,                                 !- Zone Node Name
+GFRPCore Inlet Node;                      !- Zone Return Air Node Name
+
+##if #[Return_Plenum[] EQS Yes ]
+	
+	AirLoopHVAC:ReturnPlenum,
+	GFCore Return Plenum,    !- Zone Plenum Name
+	GFRPCore,                !- Zone Name
+	GFRPCore Zone Node,      !- Zone Node Name
+	GFRPCore Outlet Node,    !- Outlet_Node
+	GFRPCore Inlet Node,     !- Inlet_Node_1
+	GFRPWest Outlet Node,    !- Inlet_Node_2
+	GFRPEast Outlet Node,    !- Inlet_Node_3
+	GFRPSouth Outlet Node,   !- Inlet_Node_4
+	GFRPNorth Outlet Node;   !- Inlet_Node_5
+	
+##endif
+
+	
+	ZoneHVAC:EquipmentList,
+	GFCore Equipment,                                     !- Name
+	ZoneHVAC:AirDistributionUnit,                                !- KEY--Zone Equipment Type 1
+	GFCore ATU,                                           !- Type Name 1
+	1,                                                    !- Cooling Priority
+	1;                                                    !- Heating Priority
+	
+
+ZoneHVAC:AirDistributionUnit,
+GFCore ATU,                                           !- Air Distribution Unit Name
+GFCore ATU Outlet Node,                           !- Air Distribution Unit Outlet Node
+AirTerminal:SingleDuct:VAV:Reheat,                               !- KEY--System Component Type 1
+GFCore VAV Reheat;                                    !- Component Name 1
+
+AirTerminal:SingleDuct:VAV:Reheat,
+GFCore VAV Reheat,                                    !- Name of System
+Sch_HVAC_System_Availability,                                !- System Availability schedule
+GFCore Damper Outlet Node,                                 !- DAMPER Air Outlet Node
+GFCore ATU Inlet Node,                              !- UNIT Air Inlet Node
+FSFan_Max_CoolingAir_GFCore[],                                             !- Maximum air flow rate {m3/s}
+Constant,                                             !- Zone Minimum Air Flow Input Method
+FSFan_UFAD_Min_Frac_GFCore[],
+,
+,                                                    !- Minimum Air Flow Fraction Schedule Name
+Coil:Heating:Water,                             !- Reheat Component Object
+GFCore Reheat Coil,                                   !- Name of Reheat Component
+autosize,                                             !- Max Reheat Water Flow {m3/s}
+0.00000000001,                                                    !- Min Reheat Water Flow {m3/s}
+GFCore ATU Outlet Node,                           !- Air Distribution Unit Outlet Node
+0.01,                                                !- Convergence Tolerance
+Damper_action[],                                               !- Damper Heating Action
+0.0,
+0.5,
+43.333;
+
+Coil:Heating:Water,
+GFCore Reheat Coil,                                   !- Coil Name
+Sch_Core_Heating_Coil_Availability,                                  !- Available Schedule
+autosize,                                             !- UA of the Coil {W/K}
+autosize,                                             !- Max Water Flow Rate of Coil {m3/s}
+GFCore Reheat Coil HW Inlet,                          !- Coil Water Inlet Node
+GFCore Reheat Coil HW Outlet,                         !- Coil Water Outlet Node
+GFCore Damper Outlet Node,                                 !- Coil Air Inlet Node
+GFCore ATU Outlet Node,                                  !- Coil Air Outlet Node
+UFactorTimesAreaAndDesignWaterFlowRate,                        !- Coil Performance Input Method
+autosize,                                             !- Nominal Capacity
+82.2,                                                 !- Design Inlet Water Temperature
+##if #[RunType[] EQS OH ]
+	13.89,                                                 !- Design Inlet Air Temperature
+##endif
+##if #[RunType[] EQS UFAD]
+	18.3,                                                 !- Design Inlet Air Temperature
+##endif
+71.1,                                                 !- Design Outlet Water Temperature
+##if #[RunType[] EQS OH ]
+	35.0;                                                 !- Design Outlet Air Temperature
+##endif
+##if #[RunType[] EQS UFAD]
+	45.0;                                                 !- Design Outlet Air Temperature
+##endif
+
+BRANCH,
+GFCore Reheat Coil HW Branch,                         !- Branch Name
+,                                                     !- Maximum Branch Flow Rate {m3/s}
+,
+Coil:Heating:Water,                             !- Comp1 Type
+GFCore Reheat Coil,                                   !- Comp1 Name
+GFCore Reheat Coil HW Inlet,                          !- Comp1 Inlet Node Name
+GFCore Reheat Coil HW Outlet,                         !- Comp1 Outlet Node Name
+ACTIVE;                                               !- Comp1 Branch Control Type
+
+ZoneControl:Thermostat,
+GFEast Thermostat,                                    !- Thermostat Name
+GFEast,                                               !- Zone Name
+Sch_ThermostatControlType,                                !- Control Type SCHEDULE Name
+ThermostatSetpoint:DualSetpoint,                          !- Control Type
+Perimeter_Thermostat_Dual_Setpoint_Control;               !- Control Type Name
+
+Sizing:Zone,
+GFEast,                                               !- Name of a zone
+Zone_Cool_SAT_Perim[],                                     !- Zone cooling design supply air temperature {C}
+50,                                                   !- Zone heating design supply air temperature {C}
+0.008,                                                !- Zone cooling design supply air humidity ratio {kg-H20/kg-air}
+0.008,                                                !- Zone heating design supply air humidity ratio {kg-H2O/kg-air}
+maximum,                                          !- outside air method
+.007079,                                              !- outside air flow per person {m3/s}
+0.0007617375,                                                    !- outside air flow per zone area {m3/s-m2}
+0,                                                    !- outside air flow per zone {m3/s}
+,                                                     !- zone sizing factor
+,
+designday,                                           !- cooling design air flow method
+0,                                                    !- cooling design air flow rate {m3/s}
+,                                                     !- cooling min air flow per zone area {m3/s-m2}
+,                                                     !- cooling min air flow {m3/s}
+0,                                                    !- cooling min air flow fraction {}
+designday,                                           !- heating design air flow method
+0,                                                    !- heating design air flow rate {m3/s}
+,                                                     !- heating min air flow per zone area {m3/s-m2}
+,                                                     !- heating min air flow {m3/s}
+0;                                                    !- heating min air flow fraction {}
+
+ZoneHVAC:EquipmentConnections,
+GFEast,                                               !- Zone Name
+GFEast Equipment,                                     !- List Name: Zone Equipment
+##if #[UFAD_SysType[] EQS FCU ]
+GFEast ATU Outlet Node,                               !- Zone Air Inlet Node(s)
+,                                                     !- Zone Air Exhaust Node(s)
+GFEast Zone Node,                                 !- Zone Node Name
+GFRPEast Inlet Node;                      !- Zone Return Air Node(s)
+##endif
+##if #[UFAD_SysType[] EQS YORK ]
+GFEastInlets,                               !- Zone Air Inlet Node(s)
+GFEastUnitHeatAirInletNode,                                                     !- List Name: Zone Air Exhaust Nodes
+GFEast Zone Node,                                 !- Zone Node Name
+GFRPEast Inlet Node;                      !- Zone Return Air Node Name
+
+NodeList,
+GFEastInlets,
+GFEast ATU Outlet Node,
+GFEastUnitHeatAirOutletNode;
+##endif
+
+##if #[Return_Plenum[] EQS Yes ]
+	
+	AirLoopHVAC:ReturnPlenum,
+	GFEast Return Plenum,                            !- Zone Plenum Name
+	GFRPEast,                                             !- Zone Name
+	GFRPEast Zone Node,                               !- Zone Node Name
+	GFRPEast Outlet Node,                                 !- Outlet Node
+	GFRPEast Inlet Node;                      !- Inlet Node
+	
+##endif
+	
+	ZoneHVAC:EquipmentList,
+	GFEast Equipment,                                     !- Name
+	ZoneHVAC:AirDistributionUnit,                                !- KEY--Zone Equipment Type 1
+	GFEast ATU,                                           !- Type Name 1
+	##if #[UFAD_SysType[] EQS FCU ]
+	1,                                                    !- Cooling Priority
+	1;                                                    !- Heating Priority
+	##endif
+	##if #[UFAD_SysType[] EQS YORK ]
+	1,                                                    !- Cooling Priority
+	2,                                                    !- Heating Priority
+	ZoneHVAC:UnitHeater,
+    GFEastUnitHeat, 
+	2,
+	1;
+	##endif
+
+ZoneHVAC:AirDistributionUnit,
+GFEast ATU,                                           !- Air Distribution Unit Name
+GFEast ATU Outlet Node,                           !- Air Distribution Unit Outlet Node
+##if #[RunType[] EQS OH ]
+	##if #[OH_VAV_Heating[] EQS Fixed_Min ]
+	AirTerminal:SingleDuct:VAV:Reheat,                               !- KEY--System Component Type 1
+	GFEast VAV Reheat;                                    !- Component Name 1
+	##endif
+	##if #[OH_VAV_Heating[] EQS VAV_Heating ]
+	AirTerminal:SingleDuct:VAV:HeatAndCool:Reheat,                               !- KEY--System Component Type 1
+	GFEast VAV Reheat;                                    !- Component Name 1
+	##endif
+##endif
+##if #[RunType[] EQS UFAD ]
+	##if #[UFAD_SysType[] EQS FCU ]
+	AirTerminal:SingleDuct:VAV:Reheat:VariableSpeedFan,                               !- KEY--System Component Type 1
+	GFEast FCU Reheat;
+	##endif
+	##if #[UFAD_SysType[] EQS YORK ]
+	AirTerminal:SingleDuct:VAV:Reheat,                               !- KEY--System Component Type 1
+	GFEast FCU Reheat;
+	##endif
+##endif
+
+##if #[RunType[] EQS OH ]
+	
+	##if #[OH_VAV_Heating[] EQS Fixed_Min ]
+	AirTerminal:SingleDuct:VAV:Reheat,
+	GFEast VAV Reheat,                                    !- Name of System
+	Sch_HVAC_System_Availability,                                !- System Availability schedule
+	GFEast Damper Outlet Node,                                 !- DAMPER Air Outlet Node
+	GFEast ATU Inlet Node,                              !- UNIT Air Inlet Node
+	FSFan_Max_CoolingAir_GFEast[],                                             !- Maximum air flow rate {m3/s}
+	Constant,                                             !- Zone Minimum Air Flow Input Method
+	FSFan_UFAD_Min_Frac_GFEast[],
+	,
+	,                                                    !- Minimum Air Flow Fraction Schedule Name
+	Coil:Heating:Water,                             !- Reheat Component Object
+	GFEast Reheat Coil,                                   !- Name of Reheat Component
+	autosize,                                             !- Max Reheat Water Flow {m3/s}
+	0.00000000001,                                                    !- Min Reheat Water Flow {m3/s}
+	GFEast ATU Outlet Node,                               !- Outlet Node
+	0.01,                                                !- Convergence Tolerance
+	Damper_action[],                                               !- Damper Heating Action
+	0.0,
+	0.5,
+	43.333;
+	##endif
+
+	##if #[OH_VAV_Heating[] EQS VAV_Heating ]
+	AirTerminal:SingleDuct:VAV:HeatAndCool:Reheat,
+	GFEast VAV Reheat,                                    !- Name of System
+	Sch_HVAC_System_Availability,                                !- System Availability schedule
+	GFEast Damper Outlet Node,                                 !- DAMPER Air Outlet Node
+	GFEast ATU Inlet Node,                              !- UNIT Air Inlet Node
+	FSFan_Max_CoolingAir_GFEast[],                                             !- Maximum air flow rate {m3/s}
+	FSFan_UFAD_Min_Frac_GFEast[],
+	GFEast Reheat Coil HW Inlet,                          !- Control node
+	Coil:Heating:Water,                             !- Reheat Component Object
+	GFEast Reheat Coil,                                   !- Name of Reheat Component
+	autosize,                                             !- Max Reheat Water Flow {m3/s}
+	0.00000000001,                                                    !- Min Reheat Water Flow {m3/s}
+	GFEast ATU Outlet Node,                               !- Outlet Node
+	0.01;                                                !- Convergence Tolerance
+	##endif
+	
+##endif
+
+Coil:Heating:Water,
+GFEast Reheat Coil,                                   !- Coil Name
+SCH_RH_Coil_Availability,                                  !- Available Schedule
+autosize,                                             !- UA of the Coil {W/K}
+autosize,                                             !- Max Water Flow Rate of Coil {m3/s}
+GFEast Reheat Coil HW Inlet,                          !- Coil Water Inlet Node
+GFEast Reheat Coil HW Outlet,                         !- Coil Water Outlet Node
+GFEast Damper Outlet Node,                                 !- Coil Air Inlet Node
+GFEast ATU Outlet Node,                                  !- Coil Air Outlet Node
+UFactorTimesAreaAndDesignWaterFlowRate,                        !- Coil Performance Input Method
+autosize,                                             !- Nominal Capacity
+82.2,                                                 !- Design Inlet Water Temperature
+##if #[RunType[] EQS OH ]
+	13.89,                                                 !- Design Inlet Air Temperature
+##endif
+##if #[RunType[] EQS UFAD]
+	18.3,                                                 !- Design Inlet Air Temperature
+##endif
+71.1,                                                 !- Design Outlet Water Temperature
+##if #[RunType[] EQS OH ]
+	35.0;                                                 !- Design Outlet Air Temperature
+##endif
+##if #[RunType[] EQS UFAD]
+	45.0;                                                 !- Design Outlet Air Temperature
+##endif
+
+
+BRANCH,
+GFEast Reheat Coil HW Branch,                         !- Branch Name
+,                                                     !- Maximum Branch Flow Rate {m3/s}
+,
+Coil:Heating:Water,                             !- Comp1 Type
+GFEast Reheat Coil,                                   !- Comp1 Name
+GFEast Reheat Coil HW Inlet,                          !- Comp1 Inlet Node Name
+GFEast Reheat Coil HW Outlet,                         !- Comp1 Outlet Node Name
+ACTIVE;                                               !- Comp1 Branch Control Type
+
+ZoneControl:Thermostat,
+GFNorth Thermostat,                                   !- Thermostat Name
+GFNorth,                                              !- Zone Name
+Sch_ThermostatControlType,                                !- Control Type SCHEDULE Name
+ThermostatSetpoint:DualSetpoint,                          !- Control Type
+Perimeter_Thermostat_Dual_Setpoint_Control;              !- Control Type Name
+
+Sizing:Zone,
+GFNorth,                                              !- Name of a zone
+Zone_Cool_SAT_Perim[],                                     !- Zone cooling design supply air temperature {C}
+50,                                                   !- Zone heating design supply air temperature {C}
+0.008,                                                !- Zone cooling design supply air humidity ratio {kg-H20/kg-air}
+0.008,                                                !- Zone heating design supply air humidity ratio {kg-H2O/kg-air}
+maximum,                                          !- outside air method
+.007079,                                              !- outside air flow per person {m3/s}
+0.0007617375,                                                    !- outside air flow per zone area {m3/s-m2}
+0,                                                    !- outside air flow per zone {m3/s}
+,                                                     !- zone sizing factor
+,
+designday,                                           !- cooling design air flow method
+0,                                                    !- cooling design air flow rate {m3/s}
+,                                                     !- cooling min air flow per zone area {m3/s-m2}
+,                                                     !- cooling min air flow {m3/s}
+0,                                                    !- cooling min air flow fraction {}
+designday,                                           !- heating design air flow method
+0,                                                    !- heating design air flow rate {m3/s}
+,                                                     !- heating min air flow per zone area {m3/s-m2}
+,                                                     !- heating min air flow {m3/s}
+0;                                                    !- heating min air flow fraction {}
+
+ZoneHVAC:EquipmentConnections,
+GFNorth,                                              !- Zone Name
+GFNorth Equipment,                                    !- List Name: Zone Equipment
+##if #[UFAD_SysType[] EQS FCU ]
+GFNorth ATU Outlet Node,                               !- Zone Air Inlet Node(s)
+,                                                     !- Zone Air Exhaust Node(s)
+GFNorth Zone Node,                                 !- Zone Node Name
+GFRPNorth Inlet Node;                      !- Zone Return Air Node(s)
+##endif
+##if #[UFAD_SysType[] EQS YORK ]
+GFNorthInlets,                               !- Zone Air Inlet Node(s)
+GFNorthUnitHeatAirInletNode,                                                     !- List Name: Zone Air Exhaust Nodes
+GFNorth Zone Node,                                 !- Zone Node Name
+GFRPNorth Inlet Node;                      !- Zone Return Air Node Name
+
+NodeList,
+GFNorthInlets,
+GFNorth ATU Outlet Node,
+GFNorthUnitHeatAirOutletNode;
+##endif
+
+##if #[Return_Plenum[] EQS Yes ]
+	
+	AirLoopHVAC:ReturnPlenum,
+	GFNorth Return Plenum,                           !- Zone Plenum Name
+	GFRPNorth,                                            !- Zone Name
+	GFRPNorth Zone Node,                              !- Zone Node Name
+	GFRPNorth Outlet Node,                                !- Outlet Node
+	GFRPNorth Inlet Node;                     !- Inlet Node
+	
+##endif
+	
+	ZoneHVAC:EquipmentList,
+	GFNorth Equipment,                                    !- Name
+	ZoneHVAC:AirDistributionUnit,                                !- KEY--Zone Equipment Type 1
+	GFNorth ATU,                                          !- Type Name 1
+	##if #[UFAD_SysType[] EQS FCU ]
+	1,                                                    !- Cooling Priority
+	1;                                                    !- Heating Priority
+	##endif
+	##if #[UFAD_SysType[] EQS YORK ]
+	1,                                                    !- Cooling Priority
+	2,                                                    !- Heating Priority
+	ZoneHVAC:UnitHeater,
+    GFNorthUnitHeat, 
+	2,
+	1;
+	##endif
+
+ZoneHVAC:AirDistributionUnit,
+GFNorth ATU,                                          !- Air Distribution Unit Name
+GFNorth ATU Outlet Node,                           !- Air Distribution Unit Outlet Node
+##if #[RunType[] EQS OH ]
+	##if #[OH_VAV_Heating[] EQS Fixed_Min ]
+	AirTerminal:SingleDuct:VAV:Reheat,                               !- KEY--System Component Type 1
+	GFNorth VAV Reheat;                                    !- Component Name 1
+	##endif
+	##if #[OH_VAV_Heating[] EQS VAV_Heating ]
+	AirTerminal:SingleDuct:VAV:HeatAndCool:Reheat,                               !- KEY--System Component Type 1
+	GFNorth VAV Reheat;                                    !- Component Name 1
+	##endif
+##endif
+##if #[RunType[] EQS UFAD ]
+	##if #[UFAD_SysType[] EQS FCU ]
+	AirTerminal:SingleDuct:VAV:Reheat:VariableSpeedFan,                               !- KEY--System Component Type 1
+	GFNorth FCU Reheat;
+	##endif
+	##if #[UFAD_SysType[] EQS YORK ]
+	AirTerminal:SingleDuct:VAV:Reheat,                               !- KEY--System Component Type 1
+	GFNorth FCU Reheat;
+	##endif
+##endif
+
+##if #[RunType[] EQS OH ]
+	
+	##if #[OH_VAV_Heating[] EQS Fixed_Min ]
+	AirTerminal:SingleDuct:VAV:Reheat,
+	GFNorth VAV Reheat,                                    !- Name of System
+	Sch_HVAC_System_Availability,                                !- System Availability schedule
+	GFNorth Damper Outlet Node,                                 !- DAMPER Air Outlet Node
+	GFNorth ATU Inlet Node,                              !- UNIT Air Inlet Node
+	FSFan_Max_CoolingAir_GFNorth[],                                             !- Maximum air flow rate {m3/s}
+	Constant,                                             !- Zone Minimum Air Flow Input Method
+	FSFan_UFAD_Min_Frac_GFNorth[],
+	,
+	,                                                    !- Minimum Air Flow Fraction Schedule Name
+	Coil:Heating:Water,                             !- Reheat Component Object
+	GFNorth Reheat Coil,                                   !- Name of Reheat Component
+	autosize,                                             !- Max Reheat Water Flow {m3/s}
+	0.00000000001,                                                    !- Min Reheat Water Flow {m3/s}
+	GFNorth ATU Outlet Node,                               !- Outlet Node
+	0.01,                                                !- Convergence Tolerance
+	Damper_action[],                                               !- Damper Heating Action
+	0.0,
+	0.5,
+	43.333;
+	##endif
+
+	##if #[OH_VAV_Heating[] EQS VAV_Heating ]
+	AirTerminal:SingleDuct:VAV:HeatAndCool:Reheat,
+	GFNorth VAV Reheat,                                    !- Name of System
+	Sch_HVAC_System_Availability,                                !- System Availability schedule
+	GFNorth Damper Outlet Node,                                 !- DAMPER Air Outlet Node
+	GFNorth ATU Inlet Node,                              !- UNIT Air Inlet Node
+	FSFan_Max_CoolingAir_GFNorth[],                                             !- Maximum air flow rate {m3/s}
+	FSFan_UFAD_Min_Frac_GFNorth[],
+	GFNorth Reheat Coil HW Inlet,                          !- Control node
+	Coil:Heating:Water,                             !- Reheat Component Object
+	GFNorth Reheat Coil,                                   !- Name of Reheat Component
+	autosize,                                             !- Max Reheat Water Flow {m3/s}
+	0.00000000001,                                                    !- Min Reheat Water Flow {m3/s}
+	GFNorth ATU Outlet Node,                               !- Outlet Node
+	0.01;                                                !- Convergence Tolerance
+	##endif
+	
+##endif
+
+Coil:Heating:Water,
+GFNorth Reheat Coil,                                  !- Coil Name
+SCH_RH_Coil_Availability,                                 !- Available Schedule
+autosize,                                             !- UA of the Coil {W/K}
+autosize,                                             !- Max Water Flow Rate of Coil {m3/s}
+GFNorth Reheat Coil HW Inlet,                         !- Coil Water Inlet Node
+GFNorth Reheat Coil HW Outlet,                        !- Coil Water Outlet Node
+GFNorth Damper Outlet Node,                                !- Coil Air Inlet Node
+GFNorth ATU Outlet Node,                                 !- Coil Air Outlet Node
+UFactorTimesAreaAndDesignWaterFlowRate,                        !- Coil Performance Input Method
+autosize,                                             !- Nominal Capacity
+82.2,                                                 !- Design Inlet Water Temperature
+##if #[RunType[] EQS OH ]
+	13.89,                                                 !- Design Inlet Air Temperature
+##endif
+##if #[RunType[] EQS UFAD]
+	18.3,                                                 !- Design Inlet Air Temperature
+##endif
+71.1,                                                 !- Design Outlet Water Temperature
+##if #[RunType[] EQS OH ]
+	35.0;                                                 !- Design Outlet Air Temperature
+##endif
+##if #[RunType[] EQS UFAD]
+	45.0;                                                 !- Design Outlet Air Temperature
+##endif
+
+BRANCH,
+GFNorth Reheat Coil HW Branch,                        !- Branch Name
+,                                                     !- Maximum Branch Flow Rate {m3/s}
+,
+Coil:Heating:Water,                             !- Comp1 Type
+GFNorth Reheat Coil,                                  !- Comp1 Name
+GFNorth Reheat Coil HW Inlet,                         !- Comp1 Inlet Node Name
+GFNorth Reheat Coil HW Outlet,                        !- Comp1 Outlet Node Name
+ACTIVE;                                               !- Comp1 Branch Control Type
+
+ZoneControl:Thermostat,
+GFSouth Thermostat,                                   !- Thermostat Name
+GFSouth,                                              !- Zone Name
+Sch_ThermostatControlType,                                !- Control Type SCHEDULE Name
+ThermostatSetpoint:DualSetpoint,                          !- Control Type
+Perimeter_Thermostat_Dual_Setpoint_Control;              !- Control Type Name
+
+Sizing:Zone,
+GFSouth,                                              !- Name of a zone
+Zone_Cool_SAT_Perim[],                                     !- Zone cooling design supply air temperature {C}
+50,                                                   !- Zone heating design supply air temperature {C}
+0.008,                                                !- Zone cooling design supply air humidity ratio {kg-H20/kg-air}
+0.008,                                                !- Zone heating design supply air humidity ratio {kg-H2O/kg-air}
+maximum,                                          !- outside air method
+.007079,                                              !- outside air flow per person {m3/s}
+0.0007617375,                                                    !- outside air flow per zone area {m3/s-m2}
+0,                                                    !- outside air flow per zone {m3/s}
+,                                                     !- zone sizing factor
+,
+designday,                                           !- cooling design air flow method
+0,                                                    !- cooling design air flow rate {m3/s}
+,                                                     !- cooling min air flow per zone area {m3/s-m2}
+,                                                     !- cooling min air flow {m3/s}
+0,                                                    !- cooling min air flow fraction {}
+designday,                                           !- heating design air flow method
+0,                                                    !- heating design air flow rate {m3/s}
+,                                                     !- heating min air flow per zone area {m3/s-m2}
+,                                                     !- heating min air flow {m3/s}
+0;                                                    !- heating min air flow fraction {}
+
+ZoneHVAC:EquipmentConnections,
+GFSouth,                                              !- Zone Name
+GFSouth Equipment,                                    !- List Name: Zone Equipment
+##if #[UFAD_SysType[] EQS FCU ]
+GFSouth ATU Outlet Node,                               !- Zone Air Inlet Node(s)
+,                                                     !- Zone Air Exhaust Node(s)
+GFSouth Zone Node,                                 !- Zone Node Name
+GFRPSouth Inlet Node;                      !- Zone Return Air Node(s)
+##endif
+##if #[UFAD_SysType[] EQS YORK ]
+GFSouthInlets,                               !- Zone Air Inlet Node(s)
+GFSouthUnitHeatAirInletNode,                                                     !- List Name: Zone Air Exhaust Nodes
+GFSouth Zone Node,                                 !- Zone Node Name
+GFRPSouth Inlet Node;                      !- Zone Return Air Node Name
+
+NodeList,
+GFSouthInlets,
+GFSouth ATU Outlet Node,
+GFSouthUnitHeatAirOutletNode;
+##endif
+
+##if #[Return_Plenum[] EQS Yes ]
+	
+	AirLoopHVAC:ReturnPlenum,
+	GFSouth Return Plenum,                           !- Zone Plenum Name
+	GFRPSouth,                                            !- Zone Name
+	GFRPSouth Zone Node,                              !- Zone Node Name
+	GFRPSouth Outlet Node,                                !- Outlet Node
+	GFRPSouth Inlet Node;                     !- Inlet Node
+	
+##endif
+	
+	ZoneHVAC:EquipmentList,
+	GFSouth Equipment,                                    !- Name
+	ZoneHVAC:AirDistributionUnit,                                !- KEY--Zone Equipment Type 1
+	GFSouth ATU,                                          !- Type Name 1
+	##if #[UFAD_SysType[] EQS FCU ]
+	1,                                                    !- Cooling Priority
+	1;                                                    !- Heating Priority
+	##endif
+	##if #[UFAD_SysType[] EQS YORK ]
+	1,                                                    !- Cooling Priority
+	2,                                                    !- Heating Priority
+	ZoneHVAC:UnitHeater,
+    GFSouthUnitHeat, 
+	2,
+	1;
+	##endif
+
+ZoneHVAC:AirDistributionUnit,
+GFSouth ATU,                                          !- Air Distribution Unit Name
+GFSouth ATU Outlet Node,                           !- Air Distribution Unit Outlet Node
+##if #[RunType[] EQS OH ]
+	##if #[OH_VAV_Heating[] EQS Fixed_Min ]
+	AirTerminal:SingleDuct:VAV:Reheat,                               !- KEY--System Component Type 1
+	GFSouth VAV Reheat;                                    !- Component Name 1
+	##endif
+	##if #[OH_VAV_Heating[] EQS VAV_Heating ]
+	AirTerminal:SingleDuct:VAV:HeatAndCool:Reheat,                               !- KEY--System Component Type 1
+	GFSouth VAV Reheat;                                    !- Component Name 1
+	##endif
+##endif
+##if #[RunType[] EQS UFAD]
+	##if #[UFAD_SysType[] EQS FCU ]
+	AirTerminal:SingleDuct:VAV:Reheat:VariableSpeedFan,                               !- KEY--System Component Type 1
+	GFSouth FCU Reheat;
+	##endif
+	##if #[UFAD_SysType[] EQS YORK ]
+	AirTerminal:SingleDuct:VAV:Reheat,                               !- KEY--System Component Type 1
+	GFSouth FCU Reheat;
+	##endif
+##endif
+
+##if #[RunType[] EQS OH ]
+	
+	##if #[OH_VAV_Heating[] EQS Fixed_Min ]
+	AirTerminal:SingleDuct:VAV:Reheat,
+	GFSouth VAV Reheat,                                    !- Name of System
+	Sch_HVAC_System_Availability,                                !- System Availability schedule
+	GFSouth Damper Outlet Node,                                 !- DAMPER Air Outlet Node
+	GFSouth ATU Inlet Node,                              !- UNIT Air Inlet Node
+	FSFan_Max_CoolingAir_GFSouth[],                                             !- Maximum air flow rate {m3/s}
+	Constant,                                             !- Zone Minimum Air Flow Input Method
+	FSFan_UFAD_Min_Frac_GFSouth[],
+	,
+	,                                                    !- Minimum Air Flow Fraction Schedule Name
+	Coil:Heating:Water,                             !- Reheat Component Object
+	GFSouth Reheat Coil,                                   !- Name of Reheat Component
+	autosize,                                             !- Max Reheat Water Flow {m3/s}
+	0.00000000001,                                                    !- Min Reheat Water Flow {m3/s}
+	GFSouth ATU Outlet Node,                               !- Outlet Node
+	0.01,                                                !- Convergence Tolerance
+	Damper_action[],                                               !- Damper Heating Action
+	0.0,
+	0.5,
+	43.333;
+	##endif
+
+	##if #[OH_VAV_Heating[] EQS VAV_Heating ]
+	AirTerminal:SingleDuct:VAV:HeatAndCool:Reheat,
+	GFSouth VAV Reheat,                                    !- Name of System
+	Sch_HVAC_System_Availability,                                !- System Availability schedule
+	GFSouth Damper Outlet Node,                                 !- DAMPER Air Outlet Node
+	GFSouth ATU Inlet Node,                              !- UNIT Air Inlet Node
+	FSFan_Max_CoolingAir_GFSouth[],                                             !- Maximum air flow rate {m3/s}
+	FSFan_UFAD_Min_Frac_GFSouth[],
+	GFSouth Reheat Coil HW Inlet,                          !- Control node
+	Coil:Heating:Water,                             !- Reheat Component Object
+	GFSouth Reheat Coil,                                   !- Name of Reheat Component
+	autosize,                                             !- Max Reheat Water Flow {m3/s}
+	0.00000000001,                                                    !- Min Reheat Water Flow {m3/s}
+	GFSouth ATU Outlet Node,                               !- Outlet Node
+	0.01;                                                !- Convergence Tolerance
+	##endif
+	
+##endif
+
+Coil:Heating:Water,
+GFSouth Reheat Coil,                                  !- Coil Name
+SCH_RH_Coil_Availability,                                 !- Available Schedule
+autosize,                                             !- UA of the Coil {W/K}
+autosize,                                             !- Max Water Flow Rate of Coil {m3/s}
+GFSouth Reheat Coil HW Inlet,                         !- Coil Water Inlet Node
+GFSouth Reheat Coil HW Outlet,                        !- Coil Water Outlet Node
+GFSouth Damper Outlet Node,                                !- Coil Air Inlet Node
+GFSouth ATU Outlet Node,                                 !- Coil Air Outlet Node
+UFactorTimesAreaAndDesignWaterFlowRate,                        !- Coil Performance Input Method
+autosize,                                             !- Nominal Capacity
+82.2,                                                 !- Design Inlet Water Temperature
+##if #[RunType[] EQS OH ]
+	13.89,                                                 !- Design Inlet Air Temperature
+##endif
+##if #[RunType[] EQS UFAD]
+	18.3,                                                 !- Design Inlet Air Temperature
+##endif
+71.1,                                                 !- Design Outlet Water Temperature
+##if #[RunType[] EQS OH ]
+	35.0;                                                 !- Design Outlet Air Temperature
+##endif
+##if #[RunType[] EQS UFAD]
+	45.0;                                                 !- Design Outlet Air Temperature
+##endif
+
+BRANCH,
+GFSouth Reheat Coil HW Branch,                        !- Branch Name
+,                                                     !- Maximum Branch Flow Rate {m3/s}
+,
+Coil:Heating:Water,                             !- Comp1 Type
+GFSouth Reheat Coil,                                  !- Comp1 Name
+GFSouth Reheat Coil HW Inlet,                         !- Comp1 Inlet Node Name
+GFSouth Reheat Coil HW Outlet,                        !- Comp1 Outlet Node Name
+ACTIVE;                                               !- Comp1 Branch Control Type
+
+ZoneControl:Thermostat,
+MFCore Thermostat,                                    !- Thermostat Name
+MFCore,                                               !- Zone Name
+Sch_ThermostatControlType,                                !- Control Type SCHEDULE Name
+ThermostatSetpoint:DualSetpoint,                          !- Control Type
+Core_Thermostat_Dual_Setpoint_Control;               !- Control Type Name
+
+Sizing:Zone,
+MFCore,                                               !- Name of a zone
+Zone_Cool_SAT_Core[],                                     !- Zone cooling design supply air temperature {C}
+50,                                                   !- Zone heating design supply air temperature {C}
+0.008,                                                !- Zone cooling design supply air humidity ratio {kg-H20/kg-air}
+0.008,                                                !- Zone heating design supply air humidity ratio {kg-H2O/kg-air}
+maximum,                                          !- outside air method
+.007079,                                              !- outside air flow per person {m3/s}
+0.0007617375,                                                    !- outside air flow per zone area {m3/s-m2}
+0,                                                    !- outside air flow per zone {m3/s}
+,                                                     !- zone sizing factor
+,
+designday,                                           !- cooling design air flow method
+0,                                                    !- cooling design air flow rate {m3/s}
+,                                                     !- cooling min air flow per zone area {m3/s-m2}
+,                                                     !- cooling min air flow {m3/s}
+0,                                                    !- cooling min air flow fraction {}
+designday,                                           !- heating design air flow method
+0,                                                    !- heating design air flow rate {m3/s}
+,                                                     !- heating min air flow per zone area {m3/s-m2}
+,                                                     !- heating min air flow {m3/s}
+0;                                                    !- heating min air flow fraction {}
+
+ZoneHVAC:EquipmentConnections,
+MFCore,                                               !- Zone Name
+MFCore Equipment,                                     !- List Name: Zone Equipment
+MFCore ATU Outlet Node,                           !- Zone Air Inlet Node(s)
+,                                                     !- List Name: Zone Air Exhaust Nodes
+MFCore Zone Node,                                 !- Zone Node Name
+MFRPCore Inlet Node;                      !- Zone Return Air Node Name
+
+##if #[Return_Plenum[] EQS Yes ]
+	
+	AirLoopHVAC:ReturnPlenum,
+	MFCore Return Plenum,    !- Zone Plenum Name
+	MFRPCore,                !- Zone Name
+	MFRPCore Zone Node,      !- Zone Node Name
+	MFRPCore Outlet Node,    !- Outlet_Node
+	MFRPCore Inlet Node,     !- Inlet_Node_1
+	MFRPWest Outlet Node,    !- Inlet_Node_3
+	MFRPEast Outlet Node,    !- Inlet_Node_4
+	MFRPSouth Outlet Node,   !- Inlet_Node_5
+	MFRPNorth Outlet Node;   !- Inlet_Node_6
+	
+##endif
+	
+	ZoneHVAC:EquipmentList,
+	MFCore Equipment,                                     !- Name
+	ZoneHVAC:AirDistributionUnit,                                !- KEY--Zone Equipment Type 1
+	MFCore ATU,                                           !- Type Name 1
+	1,                                                    !- Cooling Priority
+	1;                                                    !- Heating Priority
+
+ZoneHVAC:AirDistributionUnit,
+MFCore ATU,                                           !- Air Distribution Unit Name
+MFCore ATU Outlet Node,                           !- Air Distribution Unit Outlet Node
+AirTerminal:SingleDuct:VAV:Reheat,                               !- KEY--System Component Type 1
+MFCore VAV Reheat;                                    !- Component Name 1
+
+AirTerminal:SingleDuct:VAV:Reheat,
+MFCore VAV Reheat,                                    !- Name of System
+Sch_HVAC_System_Availability,                                !- System Availability schedule
+MFCore Damper Outlet Node,                                 !- DAMPER Air Outlet Node
+MFCore ATU Inlet Node,                              !- UNIT Air Inlet Node
+FSFan_Max_CoolingAir_MFCore[],                                             !- Maximum air flow rate {m3/s}
+Constant,                                             !- Zone Minimum Air Flow Input Method
+FSFan_UFAD_Min_Frac_MFCore[],
+,
+,                                                    !- Minimum Air Flow Fraction Schedule Name
+Coil:Heating:Water,                             !- Reheat Component Object
+MFCore Reheat Coil,                                   !- Name of Reheat Component
+autosize,                                             !- Max Reheat Water Flow {m3/s}
+0.00000000001,                                                    !- Min Reheat Water Flow {m3/s}
+MFCore ATU Outlet Node,                           !- Air Distribution Unit Outlet Node
+0.01,                                                !- Convergence Tolerance
+Damper_action[],                                               !- Damper Heating Action
+0.0,
+0.5,
+43.333;
+
+
+Coil:Heating:Water,
+MFCore Reheat Coil,                                   !- Coil Name
+Sch_Core_Heating_Coil_Availability,                                  !- Available Schedule
+autosize,                                             !- UA of the Coil {W/K}
+autosize,                                             !- Max Water Flow Rate of Coil {m3/s}
+MFCore Reheat Coil HW Inlet,                          !- Coil Water Inlet Node
+MFCore Reheat Coil HW Outlet,                         !- Coil Water Outlet Node
+MFCore Damper Outlet Node,                                 !- Coil Air Inlet Node
+MFCore ATU Outlet Node,                                  !- Coil Air Outlet Node
+UFactorTimesAreaAndDesignWaterFlowRate,                        !- Coil Performance Input Method
+autosize,                                             !- Nominal Capacity
+82.2,                                                 !- Design Inlet Water Temperature
+##if #[RunType[] EQS OH ]
+	13.89,                                                 !- Design Inlet Air Temperature
+##endif
+##if #[RunType[] EQS UFAD]
+	18.3,                                                 !- Design Inlet Air Temperature
+##endif
+71.1,                                                 !- Design Outlet Water Temperature
+##if #[RunType[] EQS OH ]
+	35.0;                                                 !- Design Outlet Air Temperature
+##endif
+##if #[RunType[] EQS UFAD]
+	45.0;                                                 !- Design Outlet Air Temperature
+##endif
+
+BRANCH,
+MFCore Reheat Coil HW Branch,                         !- Branch Name
+,                                                     !- Maximum Branch Flow Rate {m3/s}
+,
+Coil:Heating:Water,                             !- Comp1 Type
+MFCore Reheat Coil,                                   !- Comp1 Name
+MFCore Reheat Coil HW Inlet,                          !- Comp1 Inlet Node Name
+MFCore Reheat Coil HW Outlet,                         !- Comp1 Outlet Node Name
+ACTIVE;                                               !- Comp1 Branch Control Type
+
+ZoneControl:Thermostat,
+MFEast Thermostat,                                    !- Thermostat Name
+MFEast,                                               !- Zone Name
+Sch_ThermostatControlType,                                !- Control Type SCHEDULE Name
+ThermostatSetpoint:DualSetpoint,                          !- Control Type
+Perimeter_Thermostat_Dual_Setpoint_Control;               !- Control Type Name
+
+Sizing:Zone,
+MFEast,                                               !- Name of a zone
+Zone_Cool_SAT_Perim[],                                     !- Zone cooling design supply air temperature {C}
+50,                                                   !- Zone heating design supply air temperature {C}
+0.008,                                                !- Zone cooling design supply air humidity ratio {kg-H20/kg-air}
+0.008,                                                !- Zone heating design supply air humidity ratio {kg-H2O/kg-air}
+maximum,                                          !- outside air method
+.007079,                                              !- outside air flow per person {m3/s}
+0.0007617375,                                                    !- outside air flow per zone area {m3/s-m2}
+0,                                                    !- outside air flow per zone {m3/s}
+,                                                     !- zone sizing factor
+,
+designday,                                           !- cooling design air flow method
+0,                                                    !- cooling design air flow rate {m3/s}
+,                                                     !- cooling min air flow per zone area {m3/s-m2}
+,                                                     !- cooling min air flow {m3/s}
+0,                                                    !- cooling min air flow fraction {}
+designday,                                           !- heating design air flow method
+0,                                                    !- heating design air flow rate {m3/s}
+,                                                     !- heating min air flow per zone area {m3/s-m2}
+,                                                     !- heating min air flow {m3/s}
+0;                                                    !- heating min air flow fraction {}
+
+ZoneHVAC:EquipmentConnections,
+MFEast,                                               !- Zone Name
+MFEast Equipment,                                     !- List Name: Zone Equipment
+##if #[UFAD_SysType[] EQS FCU ]
+MFEast ATU Outlet Node,                               !- Zone Air Inlet Node(s)
+,                                                     !- Zone Air Exhaust Node(s)
+MFEast Zone Node,                                 !- Zone Node Name
+MFRPEast Inlet Node;                      !- Zone Return Air Node(s)
+##endif
+##if #[UFAD_SysType[] EQS YORK ]
+MFEastInlets,                               !- Zone Air Inlet Node(s)
+MFEastUnitHeatAirInletNode,                                                     !- List Name: Zone Air Exhaust Nodes
+MFEast Zone Node,                                 !- Zone Node Name
+MFRPEast Inlet Node;                      !- Zone Return Air Node Name
+
+NodeList,
+MFEastInlets,
+MFEast ATU Outlet Node,
+MFEastUnitHeatAirOutletNode;
+##endif
+
+##if #[Return_Plenum[] EQS Yes ]
+	
+	AirLoopHVAC:ReturnPlenum,
+	MFEast Return Plenum,                            !- Zone Plenum Name
+	MFRPEast,                                             !- Zone Name
+	MFRPEast Zone Node,                               !- Zone Node Name
+	MFRPEast Outlet Node,                                 !- Outlet Node
+	MFRPEast Inlet Node;                      !- Inlet Node
+	
+##endif
+	
+	ZoneHVAC:EquipmentList,
+	MFEast Equipment,                                     !- Name
+	ZoneHVAC:AirDistributionUnit,                                !- KEY--Zone Equipment Type 1
+	MFEast ATU,                                           !- Type Name 1
+	##if #[UFAD_SysType[] EQS FCU ]
+	1,                                                    !- Cooling Priority
+	1;                                                    !- Heating Priority
+	##endif
+	##if #[UFAD_SysType[] EQS YORK ]
+	1,                                                    !- Cooling Priority
+	2,                                                    !- Heating Priority
+	ZoneHVAC:UnitHeater,
+    MFEastUnitHeat, 
+	2,
+	1;
+	##endif
+
+ZoneHVAC:AirDistributionUnit,
+MFEast ATU,                                           !- Air Distribution Unit Name
+MFEast ATU Outlet Node,                           !- Air Distribution Unit Outlet Node
+##if #[RunType[] EQS OH ]
+	##if #[OH_VAV_Heating[] EQS Fixed_Min ]
+	AirTerminal:SingleDuct:VAV:Reheat,                               !- KEY--System Component Type 1
+	MFEast VAV Reheat;                                    !- Component Name 1
+	##endif
+	##if #[OH_VAV_Heating[] EQS VAV_Heating ]
+	AirTerminal:SingleDuct:VAV:HeatAndCool:Reheat,                               !- KEY--System Component Type 1
+	MFEast VAV Reheat;                                    !- Component Name 1
+	##endif
+##endif
+##if #[RunType[] EQS UFAD]
+	##if #[UFAD_SysType[] EQS FCU ]
+	AirTerminal:SingleDuct:VAV:Reheat:VariableSpeedFan,                               !- KEY--System Component Type 1
+	MFEast FCU Reheat;
+	##endif
+	##if #[UFAD_SysType[] EQS YORK ]
+	AirTerminal:SingleDuct:VAV:Reheat,                               !- KEY--System Component Type 1
+	MFEast FCU Reheat;
+	##endif
+##endif
+
+##if #[RunType[] EQS OH ]
+	
+	##if #[OH_VAV_Heating[] EQS Fixed_Min ]
+	AirTerminal:SingleDuct:VAV:Reheat,
+	MFEast VAV Reheat,                                    !- Name of System
+	Sch_HVAC_System_Availability,                                !- System Availability schedule
+	MFEast Damper Outlet Node,                                 !- DAMPER Air Outlet Node
+	MFEast ATU Inlet Node,                              !- UNIT Air Inlet Node
+	FSFan_Max_CoolingAir_MFEast[],                                             !- Maximum air flow rate {m3/s}
+	Constant,                                             !- Zone Minimum Air Flow Input Method
+	FSFan_UFAD_Min_Frac_MFEast[],
+	,
+	,                                                    !- Minimum Air Flow Fraction Schedule Name
+	Coil:Heating:Water,                             !- Reheat Component Object
+	MFEast Reheat Coil,                                   !- Name of Reheat Component
+	autosize,                                             !- Max Reheat Water Flow {m3/s}
+	0.00000000001,                                                    !- Min Reheat Water Flow {m3/s}
+	MFEast ATU Outlet Node,                               !- Outlet Node
+	0.01,                                                !- Convergence Tolerance
+	Damper_action[],                                               !- Damper Heating Action
+	0.0,
+	0.5,
+	43.333;
+	##endif
+
+	##if #[OH_VAV_Heating[] EQS VAV_Heating ]
+	AirTerminal:SingleDuct:VAV:HeatAndCool:Reheat,
+	MFEast VAV Reheat,                                    !- Name of System
+	Sch_HVAC_System_Availability,                                !- System Availability schedule
+	MFEast Damper Outlet Node,                                 !- DAMPER Air Outlet Node
+	MFEast ATU Inlet Node,                              !- UNIT Air Inlet Node
+	FSFan_Max_CoolingAir_MFEast[],                                             !- Maximum air flow rate {m3/s}
+	FSFan_UFAD_Min_Frac_MFEast[],
+	MFEast Reheat Coil HW Inlet,                          !- Control node
+	Coil:Heating:Water,                             !- Reheat Component Object
+	MFEast Reheat Coil,                                   !- Name of Reheat Component
+	autosize,                                             !- Max Reheat Water Flow {m3/s}
+	0.00000000001,                                                    !- Min Reheat Water Flow {m3/s}
+	MFEast ATU Outlet Node,                               !- Outlet Node
+	0.01;                                                !- Convergence Tolerance
+	##endif
+	
+##endif
+
+Coil:Heating:Water,
+MFEast Reheat Coil,                                   !- Coil Name
+SCH_RH_Coil_Availability,                                  !- Available Schedule
+autosize,                                             !- UA of the Coil {W/K}
+autosize,                                             !- Max Water Flow Rate of Coil {m3/s}
+MFEast Reheat Coil HW Inlet,                          !- Coil Water Inlet Node
+MFEast Reheat Coil HW Outlet,                         !- Coil Water Outlet Node
+MFEast Damper Outlet Node,                                 !- Coil Air Inlet Node
+MFEast ATU Outlet Node,                                  !- Coil Air Outlet Node
+UFactorTimesAreaAndDesignWaterFlowRate,                        !- Coil Performance Input Method
+autosize,                                             !- Nominal Capacity
+82.2,                                                 !- Design Inlet Water Temperature
+##if #[RunType[] EQS OH ]
+	13.89,                                                 !- Design Inlet Air Temperature
+##endif
+##if #[RunType[] EQS UFAD]
+	18.3,                                                 !- Design Inlet Air Temperature
+##endif
+71.1,                                                 !- Design Outlet Water Temperature
+##if #[RunType[] EQS OH ]
+	35.0;                                                 !- Design Outlet Air Temperature
+##endif
+##if #[RunType[] EQS UFAD]
+	45.0;                                                 !- Design Outlet Air Temperature
+##endif
+
+BRANCH,
+MFEast Reheat Coil HW Branch,                         !- Branch Name
+,                                                     !- Maximum Branch Flow Rate {m3/s}
+,
+Coil:Heating:Water,                             !- Comp1 Type
+MFEast Reheat Coil,                                   !- Comp1 Name
+MFEast Reheat Coil HW Inlet,                          !- Comp1 Inlet Node Name
+MFEast Reheat Coil HW Outlet,                         !- Comp1 Outlet Node Name
+ACTIVE;                                               !- Comp1 Branch Control Type
+
+ZoneControl:Thermostat,
+MFWest Thermostat,                                    !- Thermostat Name
+MFWest,                                               !- Zone Name
+Sch_ThermostatControlType,                                !- Control Type SCHEDULE Name
+ThermostatSetpoint:DualSetpoint,                          !- Control Type
+Perimeter_Thermostat_Dual_Setpoint_Control;               !- Control Type Name
+
+Sizing:Zone,
+MFWest,                                               !- Name of a zone
+Zone_Cool_SAT_Perim[],                                     !- Zone cooling design supply air temperature {C}
+50,                                                   !- Zone heating design supply air temperature {C}
+0.008,                                                !- Zone cooling design supply air humidity ratio {kg-H20/kg-air}
+0.008,                                                !- Zone heating design supply air humidity ratio {kg-H2O/kg-air}
+maximum,                                          !- outside air method
+.007079,                                              !- outside air flow per person {m3/s}
+0.0007617375,                                                    !- outside air flow per zone area {m3/s-m2}
+0,                                                    !- outside air flow per zone {m3/s}
+,                                                     !- zone sizing factor
+,
+designday,                                           !- cooling design air flow method
+0,                                                    !- cooling design air flow rate {m3/s}
+,                                                     !- cooling min air flow per zone area {m3/s-m2}
+,                                                     !- cooling min air flow {m3/s}
+0,                                                    !- cooling min air flow fraction {}
+designday,                                           !- heating design air flow method
+0,                                                    !- heating design air flow rate {m3/s}
+,                                                     !- heating min air flow per zone area {m3/s-m2}
+,                                                     !- heating min air flow {m3/s}
+0;                                                    !- heating min air flow fraction {}
+
+ZoneHVAC:EquipmentConnections,
+MFWest,                                               !- Zone Name
+MFWest Equipment,                                     !- List Name: Zone Equipment
+##if #[UFAD_SysType[] EQS FCU ]
+MFWest ATU Outlet Node,                               !- Zone Air Inlet Node(s)
+,                                                     !- Zone Air Exhaust Node(s)
+MFWest Zone Node,                                 !- Zone Node Name
+MFRPWest Inlet Node;                      !- Zone Return Air Node(s)
+##endif
+##if #[UFAD_SysType[] EQS YORK ]
+MFWestInlets,                               !- Zone Air Inlet Node(s)
+MFWestUnitHeatAirInletNode,                                                     !- List Name: Zone Air Exhaust Nodes
+MFWest Zone Node,                                 !- Zone Node Name
+MFRPWest Inlet Node;                      !- Zone Return Air Node Name
+
+NodeList,
+MFWestInlets,
+MFWest ATU Outlet Node,
+MFWestUnitHeatAirOutletNode;
+##endif
+
+##if #[Return_Plenum[] EQS Yes ]
+	
+	AirLoopHVAC:ReturnPlenum,
+	MFWest Return Plenum,                            !- Zone Plenum Name
+	MFRPWest,                                             !- Zone Name
+	MFRPWest Zone Node,                               !- Zone Node Name
+	MFRPWest Outlet Node,                                 !- Outlet Node
+	MFRPWest Inlet Node;                      !- Inlet Node
+	
+##endif
+	
+	ZoneHVAC:EquipmentList,
+	MFWest Equipment,                                     !- Name
+	ZoneHVAC:AirDistributionUnit,                                !- KEY--Zone Equipment Type 1
+	MFWest ATU,                                           !- Type Name 1
+	##if #[UFAD_SysType[] EQS FCU ]
+	1,                                                    !- Cooling Priority
+	1;                                                    !- Heating Priority
+	##endif
+	##if #[UFAD_SysType[] EQS YORK ]
+	1,                                                    !- Cooling Priority
+	2,                                                    !- Heating Priority
+	ZoneHVAC:UnitHeater,
+    MFWestUnitHeat, 
+	2,
+	1;
+	##endif
+
+ZoneHVAC:AirDistributionUnit,
+MFWest ATU,                                           !- Air Distribution Unit Name
+MFWest ATU Outlet Node,                           !- Air Distribution Unit Outlet Node
+##if #[RunType[] EQS OH ]
+	##if #[OH_VAV_Heating[] EQS Fixed_Min ]
+	AirTerminal:SingleDuct:VAV:Reheat,                               !- KEY--System Component Type 1
+	MFWest VAV Reheat;                                    !- Component Name 1
+	##endif
+	##if #[OH_VAV_Heating[] EQS VAV_Heating ]
+	AirTerminal:SingleDuct:VAV:HeatAndCool:Reheat,                               !- KEY--System Component Type 1
+	MFWest VAV Reheat;                                    !- Component Name 1
+	##endif
+##endif
+##if #[RunType[] EQS UFAD ]
+	##if #[UFAD_SysType[] EQS FCU ]
+	AirTerminal:SingleDuct:VAV:Reheat:VariableSpeedFan,                               !- KEY--System Component Type 1
+	MFWest FCU Reheat;
+	##endif
+	##if #[UFAD_SysType[] EQS YORK ]
+	AirTerminal:SingleDuct:VAV:Reheat,                               !- KEY--System Component Type 1
+	MFWest FCU Reheat;
+	##endif
+##endif
+
+##if #[RunType[] EQS OH ]
+	
+	##if #[OH_VAV_Heating[] EQS Fixed_Min ]
+	AirTerminal:SingleDuct:VAV:Reheat,
+	MFWest VAV Reheat,                                    !- Name of System
+	Sch_HVAC_System_Availability,                                !- System Availability schedule
+	MFWest Damper Outlet Node,                                 !- DAMPER Air Outlet Node
+	MFWest ATU Inlet Node,                              !- UNIT Air Inlet Node
+	FSFan_Max_CoolingAir_MFWest[],                                             !- Maximum air flow rate {m3/s}
+	Constant,                                             !- Zone Minimum Air Flow Input Method
+	FSFan_UFAD_Min_Frac_MFWest[],
+	,
+	,                                                    !- Minimum Air Flow Fraction Schedule Name
+	Coil:Heating:Water,                             !- Reheat Component Object
+	MFWest Reheat Coil,                                   !- Name of Reheat Component
+	autosize,                                             !- Max Reheat Water Flow {m3/s}
+	0.00000000001,                                                    !- Min Reheat Water Flow {m3/s}
+	MFWest ATU Outlet Node,                               !- Outlet Node
+	0.01,                                                !- Convergence Tolerance
+	Damper_action[],                                               !- Damper Heating Action
+	0.0,
+	0.5,
+	43.333;
+	##endif
+
+	##if #[OH_VAV_Heating[] EQS VAV_Heating ]
+	AirTerminal:SingleDuct:VAV:HeatAndCool:Reheat,
+	MFWest VAV Reheat,                                    !- Name of System
+	Sch_HVAC_System_Availability,                                !- System Availability schedule
+	MFWest Damper Outlet Node,                                 !- DAMPER Air Outlet Node
+	MFWest ATU Inlet Node,                              !- UNIT Air Inlet Node
+	FSFan_Max_CoolingAir_MFWest[],                                             !- Maximum air flow rate {m3/s}
+	FSFan_UFAD_Min_Frac_MFWest[],
+	MFWest Reheat Coil HW Inlet,                          !- Control node
+	Coil:Heating:Water,                             !- Reheat Component Object
+	MFWest Reheat Coil,                                   !- Name of Reheat Component
+	autosize,                                             !- Max Reheat Water Flow {m3/s}
+	0.00000000001,                                                    !- Min Reheat Water Flow {m3/s}
+	MFWest ATU Outlet Node,                               !- Outlet Node
+	0.01;                                                !- Convergence Tolerance
+	##endif
+	
+##endif
+
+Coil:Heating:Water,
+MFWest Reheat Coil,                                   !- Coil Name
+SCH_RH_Coil_Availability,                                  !- Available Schedule
+autosize,                                             !- UA of the Coil {W/K}
+autosize,                                             !- Max Water Flow Rate of Coil {m3/s}
+MFWest Reheat Coil HW Inlet,                          !- Coil Water Inlet Node
+MFWest Reheat Coil HW Outlet,                         !- Coil Water Outlet Node
+MFWest Damper Outlet Node,                                 !- Coil Air Inlet Node
+MFWest ATU Outlet Node,                                  !- Coil Air Outlet Node
+UFactorTimesAreaAndDesignWaterFlowRate,                        !- Coil Performance Input Method
+autosize,                                             !- Nominal Capacity
+82.2,                                                 !- Design Inlet Water Temperature
+##if #[RunType[] EQS OH ]
+	13.89,                                                 !- Design Inlet Air Temperature
+##endif
+##if #[RunType[] EQS UFAD]
+	18.3,                                                 !- Design Inlet Air Temperature
+##endif
+	71.1,                                                 !- Design Outlet Water Temperature
+##if #[RunType[] EQS OH ]
+	35.0;                                                 !- Design Outlet Air Temperature
+##endif
+##if #[RunType[] EQS UFAD]
+	45.0;                                                 !- Design Outlet Air Temperature
+##endif
+
+BRANCH,
+MFWest Reheat Coil HW Branch,                         !- Branch Name
+,                                                     !- Maximum Branch Flow Rate {m3/s}
+,
+Coil:Heating:Water,                             !- Comp1 Type
+MFWest Reheat Coil,                                   !- Comp1 Name
+MFWest Reheat Coil HW Inlet,                          !- Comp1 Inlet Node Name
+MFWest Reheat Coil HW Outlet,                         !- Comp1 Outlet Node Name
+ACTIVE;                                               !- Comp1 Branch Control Type
+
+ZoneControl:Thermostat,
+MFNorth Thermostat,                                   !- Thermostat Name
+MFNorth,                                              !- Zone Name
+Sch_ThermostatControlType,                                !- Control Type SCHEDULE Name
+ThermostatSetpoint:DualSetpoint,                          !- Control Type
+Perimeter_Thermostat_Dual_Setpoint_Control;              !- Control Type Name
+
+Sizing:Zone,
+MFNorth,                                              !- Name of a zone
+Zone_Cool_SAT_Perim[],                                     !- Zone cooling design supply air temperature {C}
+50,                                                   !- Zone heating design supply air temperature {C}
+0.008,                                                !- Zone cooling design supply air humidity ratio {kg-H20/kg-air}
+0.008,                                                !- Zone heating design supply air humidity ratio {kg-H2O/kg-air}
+maximum,                                          !- outside air method
+.007079,                                              !- outside air flow per person {m3/s}
+0.0007617375,                                                    !- outside air flow per zone area {m3/s-m2}
+0,                                                    !- outside air flow per zone {m3/s}
+,                                                     !- zone sizing factor
+,
+designday,                                           !- cooling design air flow method
+0,                                                    !- cooling design air flow rate {m3/s}
+,                                                     !- cooling min air flow per zone area {m3/s-m2}
+,                                                     !- cooling min air flow {m3/s}
+0,                                                    !- cooling min air flow fraction {}
+designday,                                           !- heating design air flow method
+0,                                                    !- heating design air flow rate {m3/s}
+,                                                     !- heating min air flow per zone area {m3/s-m2}
+,                                                     !- heating min air flow {m3/s}
+0;                                                    !- heating min air flow fraction {}
+
+ZoneHVAC:EquipmentConnections,
+MFNorth,                                              !- Zone Name
+MFNorth Equipment,                                    !- List Name: Zone Equipment
+##if #[UFAD_SysType[] EQS FCU ]
+MFNorth ATU Outlet Node,                               !- Zone Air Inlet Node(s)
+,                                                     !- Zone Air Exhaust Node(s)
+MFNorth Zone Node,                                 !- Zone Node Name
+MFRPNorth Inlet Node;                      !- Zone Return Air Node(s)
+##endif
+##if #[UFAD_SysType[] EQS YORK ]
+MFNorthInlets,                               !- Zone Air Inlet Node(s)
+MFNorthUnitHeatAirInletNode,                                                     !- List Name: Zone Air Exhaust Nodes
+MFNorth Zone Node,                                 !- Zone Node Name
+MFRPNorth Inlet Node;                      !- Zone Return Air Node Name
+
+NodeList,
+MFNorthInlets,
+MFNorth ATU Outlet Node,
+MFNorthUnitHeatAirOutletNode;
+##endif
+
+##if #[Return_Plenum[] EQS Yes ]
+	
+	AirLoopHVAC:ReturnPlenum,
+	MFNorth Return Plenum,                           !- Zone Plenum Name
+	MFRPNorth,                                            !- Zone Name
+	MFRPNorth Zone Node,                              !- Zone Node Name
+	MFRPNorth Outlet Node,                                !- Outlet Node
+	MFRPNorth Inlet Node;                     !- Inlet Node
+	
+##endif
+	
+	ZoneHVAC:EquipmentList,
+	MFNorth Equipment,                                    !- Name
+	ZoneHVAC:AirDistributionUnit,                                !- KEY--Zone Equipment Type 1
+	MFNorth ATU,                                          !- Type Name 1
+	##if #[UFAD_SysType[] EQS FCU ]
+	1,                                                    !- Cooling Priority
+	1;                                                    !- Heating Priority
+	##endif
+	##if #[UFAD_SysType[] EQS YORK ]
+	1,                                                    !- Cooling Priority
+	2,                                                    !- Heating Priority
+	ZoneHVAC:UnitHeater,
+    MFNorthUnitHeat, 
+	2,
+	1;
+	##endif
+
+ZoneHVAC:AirDistributionUnit,
+MFNorth ATU,                                          !- Air Distribution Unit Name
+MFNorth ATU Outlet Node,                           !- Air Distribution Unit Outlet Node
+##if #[RunType[] EQS OH ]
+	##if #[OH_VAV_Heating[] EQS Fixed_Min ]
+	AirTerminal:SingleDuct:VAV:Reheat,                               !- KEY--System Component Type 1
+	MFNorth VAV Reheat;                                    !- Component Name 1
+	##endif
+	##if #[OH_VAV_Heating[] EQS VAV_Heating ]
+	AirTerminal:SingleDuct:VAV:HeatAndCool:Reheat,                               !- KEY--System Component Type 1
+	MFNorth VAV Reheat;                                    !- Component Name 1
+	##endif
+##endif
+##if #[RunType[] EQS UFAD]
+	##if #[UFAD_SysType[] EQS FCU ]
+	AirTerminal:SingleDuct:VAV:Reheat:VariableSpeedFan,                               !- KEY--System Component Type 1
+	MFNorth FCU Reheat;
+	##endif
+	##if #[UFAD_SysType[] EQS YORK ]
+	AirTerminal:SingleDuct:VAV:Reheat,                               !- KEY--System Component Type 1
+	MFNorth FCU Reheat;
+	##endif
+##endif
+
+##if #[RunType[] EQS OH ]
+	
+	##if #[OH_VAV_Heating[] EQS Fixed_Min ]
+	AirTerminal:SingleDuct:VAV:Reheat,
+	MFNorth VAV Reheat,                                    !- Name of System
+	Sch_HVAC_System_Availability,                                !- System Availability schedule
+	MFNorth Damper Outlet Node,                                 !- DAMPER Air Outlet Node
+	MFNorth ATU Inlet Node,                              !- UNIT Air Inlet Node
+	FSFan_Max_CoolingAir_MFNorth[],                                             !- Maximum air flow rate {m3/s}
+	Constant,                                             !- Zone Minimum Air Flow Input Method
+	FSFan_UFAD_Min_Frac_MFNorth[],
+	,
+	,                                                    !- Minimum Air Flow Fraction Schedule Name
+	Coil:Heating:Water,                             !- Reheat Component Object
+	MFNorth Reheat Coil,                                   !- Name of Reheat Component
+	autosize,                                             !- Max Reheat Water Flow {m3/s}
+	0.00000000001,                                                    !- Min Reheat Water Flow {m3/s}
+	MFNorth ATU Outlet Node,                               !- Outlet Node
+	0.01,                                                !- Convergence Tolerance
+	Damper_action[],                                               !- Damper Heating Action
+	0.0,
+	0.5,
+	43.333;
+	##endif
+
+	##if #[OH_VAV_Heating[] EQS VAV_Heating ]
+	AirTerminal:SingleDuct:VAV:HeatAndCool:Reheat,
+	MFNorth VAV Reheat,                                    !- Name of System
+	Sch_HVAC_System_Availability,                                !- System Availability schedule
+	MFNorth Damper Outlet Node,                                 !- DAMPER Air Outlet Node
+	MFNorth ATU Inlet Node,                              !- UNIT Air Inlet Node
+	FSFan_Max_CoolingAir_MFNorth[],                                             !- Maximum air flow rate {m3/s}
+	FSFan_UFAD_Min_Frac_MFNorth[],
+	MFNorth Reheat Coil HW Inlet,                          !- Control node
+	Coil:Heating:Water,                             !- Reheat Component Object
+	MFNorth Reheat Coil,                                   !- Name of Reheat Component
+	autosize,                                             !- Max Reheat Water Flow {m3/s}
+	0.00000000001,                                                    !- Min Reheat Water Flow {m3/s}
+	MFNorth ATU Outlet Node,                               !- Outlet Node
+	0.01;                                                !- Convergence Tolerance
+	##endif
+	
+##endif
+
+Coil:Heating:Water,
+MFNorth Reheat Coil,                                  !- Coil Name
+SCH_RH_Coil_Availability,                                 !- Available Schedule
+autosize,                                             !- UA of the Coil {W/K}
+autosize,                                             !- Max Water Flow Rate of Coil {m3/s}
+MFNorth Reheat Coil HW Inlet,                         !- Coil Water Inlet Node
+MFNorth Reheat Coil HW Outlet,                        !- Coil Water Outlet Node
+MFNorth Damper Outlet Node,                                !- Coil Air Inlet Node
+MFNorth ATU Outlet Node,                                 !- Coil Air Outlet Node
+UFactorTimesAreaAndDesignWaterFlowRate,                        !- Coil Performance Input Method
+autosize,                                             !- Nominal Capacity
+82.2,                                                 !- Design Inlet Water Temperature
+##if #[RunType[] EQS OH ]
+	13.89,                                                 !- Design Inlet Air Temperature
+##endif
+##if #[RunType[] EQS UFAD]
+	18.3,                                                 !- Design Inlet Air Temperature
+##endif
+71.1,                                                 !- Design Outlet Water Temperature
+##if #[RunType[] EQS OH ]
+	35.0;                                                 !- Design Outlet Air Temperature
+##endif
+##if #[RunType[] EQS UFAD]
+	45.0;                                                 !- Design Outlet Air Temperature
+##endif
+
+BRANCH,
+MFNorth Reheat Coil HW Branch,                        !- Branch Name
+,                                                     !- Maximum Branch Flow Rate {m3/s}
+,
+Coil:Heating:Water,                             !- Comp1 Type
+MFNorth Reheat Coil,                                  !- Comp1 Name
+MFNorth Reheat Coil HW Inlet,                         !- Comp1 Inlet Node Name
+MFNorth Reheat Coil HW Outlet,                        !- Comp1 Outlet Node Name
+ACTIVE;                                               !- Comp1 Branch Control Type
+
+ZoneControl:Thermostat,
+MFSouth Thermostat,                                   !- Thermostat Name
+MFSouth,                                              !- Zone Name
+Sch_ThermostatControlType,                                !- Control Type SCHEDULE Name
+ThermostatSetpoint:DualSetpoint,                          !- Control Type
+Perimeter_Thermostat_Dual_Setpoint_Control;              !- Control Type Name
+
+Sizing:Zone,
+MFSouth,                                              !- Name of a zone
+Zone_Cool_SAT_Perim[],                                     !- Zone cooling design supply air temperature {C}
+50,                                                   !- Zone heating design supply air temperature {C}
+0.008,                                                !- Zone cooling design supply air humidity ratio {kg-H20/kg-air}
+0.008,                                                !- Zone heating design supply air humidity ratio {kg-H2O/kg-air}
+maximum,                                          !- outside air method
+.007079,                                              !- outside air flow per person {m3/s}
+0.0007617375,                                                    !- outside air flow per zone area {m3/s-m2}
+0,                                                    !- outside air flow per zone {m3/s}
+,                                                     !- zone sizing factor
+,
+designday,                                           !- cooling design air flow method
+0,                                                    !- cooling design air flow rate {m3/s}
+,                                                     !- cooling min air flow per zone area {m3/s-m2}
+,                                                     !- cooling min air flow {m3/s}
+0,                                                    !- cooling min air flow fraction {}
+designday,                                           !- heating design air flow method
+0,                                                    !- heating design air flow rate {m3/s}
+,                                                     !- heating min air flow per zone area {m3/s-m2}
+,                                                     !- heating min air flow {m3/s}
+0;                                                    !- heating min air flow fraction {}
+
+ZoneHVAC:EquipmentConnections,
+MFSouth,                                              !- Zone Name
+MFSouth Equipment,                                    !- List Name: Zone Equipment
+##if #[UFAD_SysType[] EQS FCU ]
+MFSouth ATU Outlet Node,                               !- Zone Air Inlet Node(s)
+,                                                     !- Zone Air Exhaust Node(s)
+MFSouth Zone Node,                                 !- Zone Node Name
+MFRPSouth Inlet Node;                      !- Zone Return Air Node(s)
+##endif
+##if #[UFAD_SysType[] EQS YORK ]
+MFSouthInlets,                               !- Zone Air Inlet Node(s)
+MFSouthUnitHeatAirInletNode,                                                     !- List Name: Zone Air Exhaust Nodes
+MFSouth Zone Node,                                 !- Zone Node Name
+MFRPSouth Inlet Node;                      !- Zone Return Air Node Name
+
+NodeList,
+MFSouthInlets,
+MFSouth ATU Outlet Node,
+MFSouthUnitHeatAirOutletNode;
+##endif
+
+##if #[Return_Plenum[] EQS Yes ]
+	
+	AirLoopHVAC:ReturnPlenum,
+	MFSouth Return Plenum,                           !- Zone Plenum Name
+	MFRPSouth,                                            !- Zone Name
+	MFRPSouth Zone Node,                              !- Zone Node Name
+	MFRPSouth Outlet Node,                                !- Outlet Node
+	MFRPSouth Inlet Node;                     !- Inlet Node
+	
+##endif
+	
+	ZoneHVAC:EquipmentList,
+	MFSouth Equipment,                                    !- Name
+	ZoneHVAC:AirDistributionUnit,                                !- KEY--Zone Equipment Type 1
+	MFSouth ATU,                                          !- Type Name 1
+	##if #[UFAD_SysType[] EQS FCU ]
+	1,                                                    !- Cooling Priority
+	1;                                                    !- Heating Priority
+	##endif
+	##if #[UFAD_SysType[] EQS YORK ]
+	1,                                                    !- Cooling Priority
+	2,                                                    !- Heating Priority
+	ZoneHVAC:UnitHeater,
+    MFSouthUnitHeat, 
+	2,
+	1;
+	##endif
+
+ZoneHVAC:AirDistributionUnit,
+MFSouth ATU,                                          !- Air Distribution Unit Name
+MFSouth ATU Outlet Node,                           !- Air Distribution Unit Outlet Node
+##if #[RunType[] EQS OH ]
+	##if #[OH_VAV_Heating[] EQS Fixed_Min ]
+	AirTerminal:SingleDuct:VAV:Reheat,                               !- KEY--System Component Type 1
+	MFSouth VAV Reheat;                                    !- Component Name 1
+	##endif
+	##if #[OH_VAV_Heating[] EQS VAV_Heating ]
+	AirTerminal:SingleDuct:VAV:HeatAndCool:Reheat,                               !- KEY--System Component Type 1
+	MFSouth VAV Reheat;                                    !- Component Name 1
+	##endif
+##endif
+##if #[RunType[] EQS UFAD]
+	##if #[UFAD_SysType[] EQS FCU ]
+	AirTerminal:SingleDuct:VAV:Reheat:VariableSpeedFan,                               !- KEY--System Component Type 1
+	MFSouth FCU Reheat;
+	##endif
+	##if #[UFAD_SysType[] EQS YORK ]
+	AirTerminal:SingleDuct:VAV:Reheat,                               !- KEY--System Component Type 1
+	MFSouth FCU Reheat;
+	##endif
+##endif
+
+##if #[RunType[] EQS OH ]
+	
+	##if #[OH_VAV_Heating[] EQS Fixed_Min ]
+	AirTerminal:SingleDuct:VAV:Reheat,
+	MFSouth VAV Reheat,                                    !- Name of System
+	Sch_HVAC_System_Availability,                                !- System Availability schedule
+	MFSouth Damper Outlet Node,                                 !- DAMPER Air Outlet Node
+	MFSouth ATU Inlet Node,                              !- UNIT Air Inlet Node
+	FSFan_Max_CoolingAir_MFSouth[],                                             !- Maximum air flow rate {m3/s}
+	Constant,                                             !- Zone Minimum Air Flow Input Method
+	FSFan_UFAD_Min_Frac_MFSouth[],
+	,
+	,                                                    !- Minimum Air Flow Fraction Schedule Name
+	Coil:Heating:Water,                             !- Reheat Component Object
+	MFSouth Reheat Coil,                                   !- Name of Reheat Component
+	autosize,                                             !- Max Reheat Water Flow {m3/s}
+	0.00000000001,                                                    !- Min Reheat Water Flow {m3/s}
+	MFSouth ATU Outlet Node,                               !- Outlet Node
+	0.01,                                                !- Convergence Tolerance
+	Damper_action[],                                               !- Damper Heating Action
+	0.0,
+	0.5,
+	43.333;
+	##endif
+
+	##if #[OH_VAV_Heating[] EQS VAV_Heating ]
+	AirTerminal:SingleDuct:VAV:HeatAndCool:Reheat,
+	MFSouth VAV Reheat,                                    !- Name of System
+	Sch_HVAC_System_Availability,                                !- System Availability schedule
+	MFSouth Damper Outlet Node,                                 !- DAMPER Air Outlet Node
+	MFSouth ATU Inlet Node,                              !- UNIT Air Inlet Node
+	FSFan_Max_CoolingAir_MFSouth[],                                             !- Maximum air flow rate {m3/s}
+	FSFan_UFAD_Min_Frac_MFSouth[],
+	MFSouth Reheat Coil HW Inlet,                          !- Control node
+	Coil:Heating:Water,                             !- Reheat Component Object
+	MFSouth Reheat Coil,                                   !- Name of Reheat Component
+	autosize,                                             !- Max Reheat Water Flow {m3/s}
+	0.00000000001,                                                    !- Min Reheat Water Flow {m3/s}
+	MFSouth ATU Outlet Node,                               !- Outlet Node
+	0.01;                                                !- Convergence Tolerance
+	##endif
+	
+##endif
+
+Coil:Heating:Water,
+MFSouth Reheat Coil,                                  !- Coil Name
+SCH_RH_Coil_Availability,                                 !- Available Schedule
+autosize,                                             !- UA of the Coil {W/K}
+autosize,                                             !- Max Water Flow Rate of Coil {m3/s}
+MFSouth Reheat Coil HW Inlet,                         !- Coil Water Inlet Node
+MFSouth Reheat Coil HW Outlet,                        !- Coil Water Outlet Node
+MFSouth Damper Outlet Node,                                !- Coil Air Inlet Node
+MFSouth ATU Outlet Node,                                 !- Coil Air Outlet Node
+UFactorTimesAreaAndDesignWaterFlowRate,                        !- Coil Performance Input Method
+autosize,                                             !- Nominal Capacity
+82.2,                                                 !- Design Inlet Water Temperature
+##if #[RunType[] EQS OH ]
+	13.89,                                                 !- Design Inlet Air Temperature
+##endif
+##if #[RunType[] EQS UFAD]
+	18.3,                                                 !- Design Inlet Air Temperature
+##endif
+71.1,                                                 !- Design Outlet Water Temperature
+##if #[RunType[] EQS OH ]
+	35.0;                                                 !- Design Outlet Air Temperature
+##endif
+##if #[RunType[] EQS UFAD]
+	45.0;                                                 !- Design Outlet Air Temperature
+##endif
+
+BRANCH,
+MFSouth Reheat Coil HW Branch,                        !- Branch Name
+,                                                     !- Maximum Branch Flow Rate {m3/s}
+,
+Coil:Heating:Water,                             !- Comp1 Type
+MFSouth Reheat Coil,                                  !- Comp1 Name
+MFSouth Reheat Coil HW Inlet,                         !- Comp1 Inlet Node Name
+MFSouth Reheat Coil HW Outlet,                        !- Comp1 Outlet Node Name
+ACTIVE;                                               !- Comp1 Branch Control Type
+
+ZoneControl:Thermostat,
+TFCore Thermostat,                                    !- Thermostat Name
+TFCore,                                               !- Zone Name
+Sch_ThermostatControlType,                                !- Control Type SCHEDULE Name
+ThermostatSetpoint:DualSetpoint,                          !- Control Type
+Core_Thermostat_Dual_Setpoint_Control;               !- Control Type Name
+
+Sizing:Zone,
+TFCore,                                               !- Name of a zone
+Zone_Cool_SAT_Core[],                                     !- Zone cooling design supply air temperature {C}
+50,                                                   !- Zone heating design supply air temperature {C}
+0.008,                                                !- Zone cooling design supply air humidity ratio {kg-H20/kg-air}
+0.008,                                                !- Zone heating design supply air humidity ratio {kg-H2O/kg-air}
+maximum,                                          !- outside air method
+.007079,                                              !- outside air flow per person {m3/s}
+0.0007617375,                                                    !- outside air flow per zone area {m3/s-m2}
+0,                                                    !- outside air flow per zone {m3/s}
+,                                                     !- zone sizing factor
+,
+designday,                                           !- cooling design air flow method
+0,                                                    !- cooling design air flow rate {m3/s}
+,                                                     !- cooling min air flow per zone area {m3/s-m2}
+,                                                     !- cooling min air flow {m3/s}
+0,                                                    !- cooling min air flow fraction {}
+designday,                                           !- heating design air flow method
+0,                                                    !- heating design air flow rate {m3/s}
+,                                                     !- heating min air flow per zone area {m3/s-m2}
+,                                                     !- heating min air flow {m3/s}
+0;                                                    !- heating min air flow fraction {}
+
+ZoneHVAC:EquipmentConnections,
+TFCore,                                               !- Zone Name
+TFCore Equipment,                                     !- List Name: Zone Equipment
+TFCore ATU Outlet Node,                           !- Zone Air Inlet Node(s)
+,                                                     !- List Name: Zone Air Exhaust Nodes
+TFCore Zone Node,                                 !- Zone Node Name
+TFRPCore Inlet Node;                      !- Zone Return Air Node Name
+
+##if #[Return_Plenum[] EQS Yes ]
+	
+	AirLoopHVAC:ReturnPlenum,
+	TFCore Return Plenum,    !- Zone Plenum Name
+	TFRPCore,                !- Zone Name
+	TFRPCore Zone Node,      !- Zone Node Name
+	TFRPCore Outlet Node,    !- Outlet_Node
+	TFRPCore Inlet Node,     !- Inlet_Node_1
+	TFRPSouth Outlet Node,   !- Inlet_Node_3
+	TFRPNorth Outlet Node,   !- Inlet_Node_4
+	TFRPEast Outlet Node,    !- Inlet_Node_5
+	TFRPWest Outlet Node;    !- Inlet_Node_6
+	
+##endif
+	
+	ZoneHVAC:EquipmentList,
+	TFCore Equipment,                                     !- Name
+	ZoneHVAC:AirDistributionUnit,                                !- KEY--Zone Equipment Type 1
+	TFCore ATU,                                           !- Type Name 1
+	1,                                                    !- Cooling Priority
+	1;                                                    !- Heating Priority
+	
+ZoneHVAC:AirDistributionUnit,
+TFCore ATU,                                           !- Air Distribution Unit Name
+TFCore ATU Outlet Node,                           !- Air Distribution Unit Outlet Node
+AirTerminal:SingleDuct:VAV:Reheat,                               !- KEY--System Component Type 1
+TFCore VAV Reheat;                                    !- Component Name 1
+
+AirTerminal:SingleDuct:VAV:Reheat,
+TFCore VAV Reheat,                                    !- Name of System
+Sch_HVAC_System_Availability,                                !- System Availability schedule
+TFCore Damper Outlet Node,                                 !- DAMPER Air Outlet Node
+TFCore ATU Inlet Node,                              !- UNIT Air Inlet Node
+FSFan_Max_CoolingAir_TFCore[],                                             !- Maximum air flow rate {m3/s}
+Constant,                                             !- Zone Minimum Air Flow Input Method
+FSFan_UFAD_Min_Frac_TFCore[],
+,
+,                                                    !- Minimum Air Flow Fraction Schedule Name
+Coil:Heating:Water,                             !- Reheat Component Object
+TFCore Reheat Coil,                                   !- Name of Reheat Component
+autosize,                                             !- Max Reheat Water Flow {m3/s}
+0.00000000001,                                                    !- Min Reheat Water Flow {m3/s}
+TFCore ATU Outlet Node,                           !- Air Distribution Unit Outlet Node
+0.01,                                                !- Convergence Tolerance
+Damper_action[],                                               !- Damper Heating Action
+0.0,
+0.5,
+43.333;
+
+Coil:Heating:Water,
+TFCore Reheat Coil,                                   !- Coil Name
+Sch_Core_Heating_Coil_Availability,                                  !- Available Schedule
+autosize,                                             !- UA of the Coil {W/K}
+autosize,                                             !- Max Water Flow Rate of Coil {m3/s}
+TFCore Reheat Coil HW Inlet,                          !- Coil Water Inlet Node
+TFCore Reheat Coil HW Outlet,                         !- Coil Water Outlet Node
+TFCore Damper Outlet Node,                                 !- Coil Air Inlet Node
+TFCore ATU Outlet Node,                                  !- Coil Air Outlet Node
+UFactorTimesAreaAndDesignWaterFlowRate,                        !- Coil Performance Input Method
+autosize,                                             !- Nominal Capacity
+82.2,                                                 !- Design Inlet Water Temperature
+##if #[RunType[] EQS OH ]
+	13.89,                                                 !- Design Inlet Air Temperature
+##endif
+##if #[RunType[] EQS UFAD]
+18.3,                                                 !- Design Inlet Air Temperature
+##endif
+71.1,                                                 !- Design Outlet Water Temperature
+##if #[RunType[] EQS OH ]
+	35.0;                                                 !- Design Outlet Air Temperature
+##endif
+##if #[RunType[] EQS UFAD]
+	45.0;                                                 !- Design Outlet Air Temperature
+##endif
+
+BRANCH,
+TFCore Reheat Coil HW Branch,                         !- Branch Name
+,                                                     !- Maximum Branch Flow Rate {m3/s}
+,
+Coil:Heating:Water,                             !- Comp1 Type
+TFCore Reheat Coil,                                   !- Comp1 Name
+TFCore Reheat Coil HW Inlet,                          !- Comp1 Inlet Node Name
+TFCore Reheat Coil HW Outlet,                         !- Comp1 Outlet Node Name
+ACTIVE;                                               !- Comp1 Branch Control Type
+
+ZoneControl:Thermostat,
+TFEast Thermostat,                                    !- Thermostat Name
+TFEast,                                               !- Zone Name
+Sch_ThermostatControlType,                                !- Control Type SCHEDULE Name
+ThermostatSetpoint:DualSetpoint,                          !- Control Type
+Perimeter_Thermostat_Dual_Setpoint_Control;               !- Control Type Name
+
+Sizing:Zone,
+TFEast,                                               !- Name of a zone
+Zone_Cool_SAT_Perim[],                                     !- Zone cooling design supply air temperature {C}
+50,                                                   !- Zone heating design supply air temperature {C}
+0.008,                                                !- Zone cooling design supply air humidity ratio {kg-H20/kg-air}
+0.008,                                                !- Zone heating design supply air humidity ratio {kg-H2O/kg-air}
+maximum,                                          !- outside air method
+.007079,                                              !- outside air flow per person {m3/s}
+0.0007617375,                                                    !- outside air flow per zone area {m3/s-m2}
+0,                                                    !- outside air flow per zone {m3/s}
+,                                                     !- zone sizing factor
+,
+designday,                                           !- cooling design air flow method
+0,                                                    !- cooling design air flow rate {m3/s}
+,                                                     !- cooling min air flow per zone area {m3/s-m2}
+,                                                     !- cooling min air flow {m3/s}
+0,                                                    !- cooling min air flow fraction {}
+designday,                                           !- heating design air flow method
+0,                                                    !- heating design air flow rate {m3/s}
+,                                                     !- heating min air flow per zone area {m3/s-m2}
+,                                                     !- heating min air flow {m3/s}
+0;                                                    !- heating min air flow fraction {}
+
+ZoneHVAC:EquipmentConnections,
+TFEast,                                               !- Zone Name
+TFEast Equipment,                                     !- List Name: Zone Equipment
+##if #[UFAD_SysType[] EQS FCU ]
+TFEast ATU Outlet Node,                               !- Zone Air Inlet Node(s)
+,                                                     !- Zone Air Exhaust Node(s)
+TFEast Zone Node,                                 !- Zone Node Name
+TFRPEast Inlet Node;                      !- Zone Return Air Node(s)
+##endif
+##if #[UFAD_SysType[] EQS YORK ]
+TFEastInlets,                               !- Zone Air Inlet Node(s)
+TFEastUnitHeatAirInletNode,                                                     !- List Name: Zone Air Exhaust Nodes
+TFEast Zone Node,                                 !- Zone Node Name
+TFRPEast Inlet Node;                      !- Zone Return Air Node Name
+
+NodeList,
+TFEastInlets,
+TFEast ATU Outlet Node,
+TFEastUnitHeatAirOutletNode;
+##endif
+
+##if #[Return_Plenum[] EQS Yes ]
+	
+	AirLoopHVAC:ReturnPlenum,
+	TFEast Return Plenum,                            !- Zone Plenum Name
+	TFRPEast,                                             !- Zone Name
+	TFRPEast Zone Node,                               !- Zone Node Name
+	TFRPEast Outlet Node,                                 !- Outlet Node
+	TFRPEast Inlet Node;                      !- Inlet Node
+	
+##endif
+	
+	ZoneHVAC:EquipmentList,
+	TFEast Equipment,                                     !- Name
+	ZoneHVAC:AirDistributionUnit,                                !- KEY--Zone Equipment Type 1
+	TFEast ATU,                                           !- Type Name 1
+	##if #[UFAD_SysType[] EQS FCU ]
+	1,                                                    !- Cooling Priority
+	1;                                                    !- Heating Priority
+	##endif
+	##if #[UFAD_SysType[] EQS YORK ]
+	1,                                                    !- Cooling Priority
+	2,                                                    !- Heating Priority
+	ZoneHVAC:UnitHeater,
+    TFEastUnitHeat, 
+	2,
+	1;
+	##endif
+
+ZoneHVAC:AirDistributionUnit,
+TFEast ATU,                                           !- Air Distribution Unit Name
+TFEast ATU Outlet Node,                           !- Air Distribution Unit Outlet Node
+##if #[RunType[] EQS OH ]
+	##if #[OH_VAV_Heating[] EQS Fixed_Min ]
+	AirTerminal:SingleDuct:VAV:Reheat,                               !- KEY--System Component Type 1
+	TFEast VAV Reheat;                                    !- Component Name 1
+	##endif
+	##if #[OH_VAV_Heating[] EQS VAV_Heating ]
+	AirTerminal:SingleDuct:VAV:HeatAndCool:Reheat,                               !- KEY--System Component Type 1
+	TFEast VAV Reheat;                                    !- Component Name 1
+	##endif
+##endif
+##if #[RunType[] EQS UFAD]
+	##if #[UFAD_SysType[] EQS FCU ]
+	AirTerminal:SingleDuct:VAV:Reheat:VariableSpeedFan,                               !- KEY--System Component Type 1
+	TFEast FCU Reheat;
+	##endif
+	##if #[UFAD_SysType[] EQS YORK ]
+	AirTerminal:SingleDuct:VAV:Reheat,                               !- KEY--System Component Type 1
+	TFEast FCU Reheat;
+	##endif
+##endif
+
+##if #[RunType[] EQS OH ]
+	
+	##if #[OH_VAV_Heating[] EQS Fixed_Min ]
+	AirTerminal:SingleDuct:VAV:Reheat,
+	TFEast VAV Reheat,                                    !- Name of System
+	Sch_HVAC_System_Availability,                                !- System Availability schedule
+	TFEast Damper Outlet Node,                                 !- DAMPER Air Outlet Node
+	TFEast ATU Inlet Node,                              !- UNIT Air Inlet Node
+	FSFan_Max_CoolingAir_TFEast[],                                             !- Maximum air flow rate {m3/s}
+	Constant,                                             !- Zone Minimum Air Flow Input Method
+	FSFan_UFAD_Min_Frac_TFEast[],
+	,
+	,                                                    !- Minimum Air Flow Fraction Schedule Name
+	Coil:Heating:Water,                             !- Reheat Component Object
+	TFEast Reheat Coil,                                   !- Name of Reheat Component
+	autosize,                                             !- Max Reheat Water Flow {m3/s}
+	0.00000000001,                                                    !- Min Reheat Water Flow {m3/s}
+	TFEast ATU Outlet Node,                               !- Outlet Node
+	0.01,                                                !- Convergence Tolerance
+	Damper_action[],                                               !- Damper Heating Action
+	0.0,
+	0.5,
+	43.333;
+	##endif
+
+	##if #[OH_VAV_Heating[] EQS VAV_Heating ]
+	AirTerminal:SingleDuct:VAV:HeatAndCool:Reheat,
+	TFEast VAV Reheat,                                    !- Name of System
+	Sch_HVAC_System_Availability,                                !- System Availability schedule
+	TFEast Damper Outlet Node,                                 !- DAMPER Air Outlet Node
+	TFEast ATU Inlet Node,                              !- UNIT Air Inlet Node
+	FSFan_Max_CoolingAir_TFEast[],                                             !- Maximum air flow rate {m3/s}
+	FSFan_UFAD_Min_Frac_TFEast[],
+	TFEast Reheat Coil HW Inlet,                          !- Control node
+	Coil:Heating:Water,                             !- Reheat Component Object
+	TFEast Reheat Coil,                                   !- Name of Reheat Component
+	autosize,                                             !- Max Reheat Water Flow {m3/s}
+	0.00000000001,                                                    !- Min Reheat Water Flow {m3/s}
+	TFEast ATU Outlet Node,                               !- Outlet Node
+	0.01;                                                !- Convergence Tolerance
+	##endif
+	
+##endif
+
+Coil:Heating:Water,
+TFEast Reheat Coil,                                   !- Coil Name
+SCH_RH_Coil_Availability,                                  !- Available Schedule
+autosize,                                             !- UA of the Coil {W/K}
+autosize,                                             !- Max Water Flow Rate of Coil {m3/s}
+TFEast Reheat Coil HW Inlet,                          !- Coil Water Inlet Node
+TFEast Reheat Coil HW Outlet,                         !- Coil Water Outlet Node
+TFEast Damper Outlet Node,                                 !- Coil Air Inlet Node
+TFEast ATU Outlet Node,                                  !- Coil Air Outlet Node
+UFactorTimesAreaAndDesignWaterFlowRate,                        !- Coil Performance Input Method
+autosize,                                             !- Nominal Capacity
+82.2,                                                 !- Design Inlet Water Temperature
+##if #[RunType[] EQS OH ]
+	13.89,                                                 !- Design Inlet Air Temperature
+##endif
+##if #[RunType[] EQS UFAD]
+	18.3,                                                 !- Design Inlet Air Temperature
+##endif
+71.1,                                                 !- Design Outlet Water Temperature
+##if #[RunType[] EQS OH ]
+	35.0;                                                 !- Design Outlet Air Temperature
+##endif
+##if #[RunType[] EQS UFAD]
+	45.0;                                                 !- Design Outlet Air Temperature
+##endif
+
+BRANCH,
+TFEast Reheat Coil HW Branch,                         !- Branch Name
+,                                                     !- Maximum Branch Flow Rate {m3/s}
+,
+Coil:Heating:Water,                             !- Comp1 Type
+TFEast Reheat Coil,                                   !- Comp1 Name
+TFEast Reheat Coil HW Inlet,                          !- Comp1 Inlet Node Name
+TFEast Reheat Coil HW Outlet,                         !- Comp1 Outlet Node Name
+ACTIVE;                                               !- Comp1 Branch Control Type
+
+ZoneControl:Thermostat,
+TFWest Thermostat,                                    !- Thermostat Name
+TFWest,                                               !- Zone Name
+Sch_ThermostatControlType,                                !- Control Type SCHEDULE Name
+ThermostatSetpoint:DualSetpoint,                          !- Control Type
+Perimeter_Thermostat_Dual_Setpoint_Control;               !- Control Type Name
+
+Sizing:Zone,
+TFWest,                                               !- Name of a zone
+Zone_Cool_SAT_Perim[],                                     !- Zone cooling design supply air temperature {C}
+50,                                                   !- Zone heating design supply air temperature {C}
+0.008,                                                !- Zone cooling design supply air humidity ratio {kg-H20/kg-air}
+0.008,                                                !- Zone heating design supply air humidity ratio {kg-H2O/kg-air}
+maximum,                                          !- outside air method
+.007079,                                              !- outside air flow per person {m3/s}
+0.0007617375,                                                    !- outside air flow per zone area {m3/s-m2}
+0,                                                    !- outside air flow per zone {m3/s}
+,                                                     !- zone sizing factor
+,
+designday,                                           !- cooling design air flow method
+0,                                                    !- cooling design air flow rate {m3/s}
+,                                                     !- cooling min air flow per zone area {m3/s-m2}
+,                                                     !- cooling min air flow {m3/s}
+0,                                                    !- cooling min air flow fraction {}
+designday,                                           !- heating design air flow method
+0,                                                    !- heating design air flow rate {m3/s}
+,                                                     !- heating min air flow per zone area {m3/s-m2}
+,                                                     !- heating min air flow {m3/s}
+0;                                                    !- heating min air flow fraction {}
+
+ZoneHVAC:EquipmentConnections,
+TFWest,                                               !- Zone Name
+TFWest Equipment,                                     !- List Name: Zone Equipment
+##if #[UFAD_SysType[] EQS FCU ]
+TFWest ATU Outlet Node,                               !- Zone Air Inlet Node(s)
+,                                                     !- Zone Air Exhaust Node(s)
+TFWest Zone Node,                                 !- Zone Node Name
+TFRPWest Inlet Node;                      !- Zone Return Air Node(s)
+##endif
+##if #[UFAD_SysType[] EQS YORK ]
+TFWestInlets,                               !- Zone Air Inlet Node(s)
+TFWestUnitHeatAirInletNode,                                                     !- List Name: Zone Air Exhaust Nodes
+TFWest Zone Node,                                 !- Zone Node Name
+TFRPWest Inlet Node;                      !- Zone Return Air Node Name
+
+NodeList,
+TFWestInlets,
+TFWest ATU Outlet Node,
+TFWestUnitHeatAirOutletNode;
+##endif
+
+##if #[Return_Plenum[] EQS Yes ]
+	
+	AirLoopHVAC:ReturnPlenum,
+	TFWest Return Plenum,                            !- Zone Plenum Name
+	TFRPWest,                                             !- Zone Name
+	TFRPWest Zone Node,                               !- Zone Node Name
+	TFRPWest Outlet Node,                                 !- Outlet Node
+	TFRPWest Inlet Node;                      !- Inlet Node
+	
+##endif
+	
+	ZoneHVAC:EquipmentList,
+	TFWest Equipment,                                     !- Name
+	ZoneHVAC:AirDistributionUnit,                                !- KEY--Zone Equipment Type 1
+	TFWest ATU,                                           !- Type Name 1
+	##if #[UFAD_SysType[] EQS FCU ]
+	1,                                                    !- Cooling Priority
+	1;                                                    !- Heating Priority
+	##endif
+	##if #[UFAD_SysType[] EQS YORK ]
+	1,                                                    !- Cooling Priority
+	2,                                                    !- Heating Priority
+	ZoneHVAC:UnitHeater,
+    TFWestUnitHeat, 
+	2,
+	1;
+	##endif
+
+ZoneHVAC:AirDistributionUnit,
+TFWest ATU,                                           !- Air Distribution Unit Name
+TFWest ATU Outlet Node,                           !- Air Distribution Unit Outlet Node
+##if #[RunType[] EQS OH ]
+	##if #[OH_VAV_Heating[] EQS Fixed_Min ]
+	AirTerminal:SingleDuct:VAV:Reheat,                               !- KEY--System Component Type 1
+	TFWest VAV Reheat;                                    !- Component Name 1
+	##endif
+	##if #[OH_VAV_Heating[] EQS VAV_Heating ]
+	AirTerminal:SingleDuct:VAV:HeatAndCool:Reheat,                               !- KEY--System Component Type 1
+	TFWest VAV Reheat;                                    !- Component Name 1
+	##endif
+##endif
+##if #[RunType[] EQS UFAD]
+	##if #[UFAD_SysType[] EQS FCU ]
+	AirTerminal:SingleDuct:VAV:Reheat:VariableSpeedFan,                               !- KEY--System Component Type 1
+	TFWest FCU Reheat;
+	##endif
+	##if #[UFAD_SysType[] EQS YORK ]
+	AirTerminal:SingleDuct:VAV:Reheat,                               !- KEY--System Component Type 1
+	TFWest FCU Reheat;
+	##endif
+##endif
+
+##if #[RunType[] EQS OH ]
+	
+	##if #[OH_VAV_Heating[] EQS Fixed_Min ]
+	AirTerminal:SingleDuct:VAV:Reheat,
+	TFWest VAV Reheat,                                    !- Name of System
+	Sch_HVAC_System_Availability,                                !- System Availability schedule
+	TFWest Damper Outlet Node,                                 !- DAMPER Air Outlet Node
+	TFWest ATU Inlet Node,                              !- UNIT Air Inlet Node
+	FSFan_Max_CoolingAir_TFWest[],                                             !- Maximum air flow rate {m3/s}
+	Constant,                                             !- Zone Minimum Air Flow Input Method
+	FSFan_UFAD_Min_Frac_TFWest[],
+	,
+	,                                                    !- Minimum Air Flow Fraction Schedule Name
+	Coil:Heating:Water,                             !- Reheat Component Object
+	TFWest Reheat Coil,                                   !- Name of Reheat Component
+	autosize,                                             !- Max Reheat Water Flow {m3/s}
+	0.00000000001,                                                    !- Min Reheat Water Flow {m3/s}
+	TFWest ATU Outlet Node,                               !- Outlet Node
+	0.01,                                                !- Convergence Tolerance
+	Damper_action[],                                               !- Damper Heating Action
+	0.0,
+	0.5,
+	43.333;
+	##endif
+
+	##if #[OH_VAV_Heating[] EQS VAV_Heating ]
+	AirTerminal:SingleDuct:VAV:HeatAndCool:Reheat,
+	TFWest VAV Reheat,                                    !- Name of System
+	Sch_HVAC_System_Availability,                                !- System Availability schedule
+	TFWest Damper Outlet Node,                                 !- DAMPER Air Outlet Node
+	TFWest ATU Inlet Node,                              !- UNIT Air Inlet Node
+	FSFan_Max_CoolingAir_TFWest[],                                             !- Maximum air flow rate {m3/s}
+	FSFan_UFAD_Min_Frac_TFWest[],
+	TFWest Reheat Coil HW Inlet,                          !- Control node
+	Coil:Heating:Water,                             !- Reheat Component Object
+	TFWest Reheat Coil,                                   !- Name of Reheat Component
+	autosize,                                             !- Max Reheat Water Flow {m3/s}
+	0.00000000001,                                                    !- Min Reheat Water Flow {m3/s}
+	TFWest ATU Outlet Node,                               !- Outlet Node
+	0.01;                                                !- Convergence Tolerance
+	##endif
+	
+##endif
+
+Coil:Heating:Water,
+TFWest Reheat Coil,                                   !- Coil Name
+SCH_RH_Coil_Availability,                                  !- Available Schedule
+autosize,                                             !- UA of the Coil {W/K}
+autosize,                                             !- Max Water Flow Rate of Coil {m3/s}
+TFWest Reheat Coil HW Inlet,                          !- Coil Water Inlet Node
+TFWest Reheat Coil HW Outlet,                         !- Coil Water Outlet Node
+TFWest Damper Outlet Node,                                 !- Coil Air Inlet Node
+TFWest ATU Outlet Node,                                  !- Coil Air Outlet Node
+UFactorTimesAreaAndDesignWaterFlowRate,                        !- Coil Performance Input Method
+autosize,                                             !- Nominal Capacity
+82.2,                                                 !- Design Inlet Water Temperature
+##if #[RunType[] EQS OH ]
+	13.89,                                                 !- Design Inlet Air Temperature
+##endif
+##if #[RunType[] EQS UFAD]
+	18.3,                                                 !- Design Inlet Air Temperature
+##endif
+71.1,                                                 !- Design Outlet Water Temperature
+##if #[RunType[] EQS OH ]
+	35.0;                                                 !- Design Outlet Air Temperature
+##endif
+##if #[RunType[] EQS UFAD]
+	45.0;                                                 !- Design Outlet Air Temperature
+##endif
+
+BRANCH,
+TFWest Reheat Coil HW Branch,                         !- Branch Name
+,                                                     !- Maximum Branch Flow Rate {m3/s}
+,
+Coil:Heating:Water,                             !- Comp1 Type
+TFWest Reheat Coil,                                   !- Comp1 Name
+TFWest Reheat Coil HW Inlet,                          !- Comp1 Inlet Node Name
+TFWest Reheat Coil HW Outlet,                         !- Comp1 Outlet Node Name
+ACTIVE;                                               !- Comp1 Branch Control Type
+
+ZoneControl:Thermostat,
+TFNorth Thermostat,                                   !- Thermostat Name
+TFNorth,                                              !- Zone Name
+Sch_ThermostatControlType,                                !- Control Type SCHEDULE Name
+ThermostatSetpoint:DualSetpoint,                          !- Control Type
+Perimeter_Thermostat_Dual_Setpoint_Control;              !- Control Type Name
+
+Sizing:Zone,
+TFNorth,                                              !- Name of a zone
+Zone_Cool_SAT_Perim[],                                     !- Zone cooling design supply air temperature {C}
+50,                                                   !- Zone heating design supply air temperature {C}
+0.008,                                                !- Zone cooling design supply air humidity ratio {kg-H20/kg-air}
+0.008,                                                !- Zone heating design supply air humidity ratio {kg-H2O/kg-air}
+maximum,                                          !- outside air method
+.007079,                                              !- outside air flow per person {m3/s}
+0.0007617375,                                                    !- outside air flow per zone area {m3/s-m2}
+0,                                                    !- outside air flow per zone {m3/s}
+,                                                     !- zone sizing factor
+,
+designday,                                           !- cooling design air flow method
+0,                                                    !- cooling design air flow rate {m3/s}
+,                                                     !- cooling min air flow per zone area {m3/s-m2}
+,                                                     !- cooling min air flow {m3/s}
+0,                                                    !- cooling min air flow fraction {}
+designday,                                           !- heating design air flow method
+0,                                                    !- heating design air flow rate {m3/s}
+,                                                     !- heating min air flow per zone area {m3/s-m2}
+,                                                     !- heating min air flow {m3/s}
+0;                                                    !- heating min air flow fraction {}
+
+ZoneHVAC:EquipmentConnections,
+TFNorth,                                              !- Zone Name
+TFNorth Equipment,                                    !- List Name: Zone Equipment
+##if #[UFAD_SysType[] EQS FCU ]
+TFNorth ATU Outlet Node,                               !- Zone Air Inlet Node(s)
+,                                                     !- Zone Air Exhaust Node(s)
+TFNorth Zone Node,                                 !- Zone Node Name
+TFRPNorth Inlet Node;                      !- Zone Return Air Node(s)
+##endif
+##if #[UFAD_SysType[] EQS YORK ]
+TFNorthInlets,                               !- Zone Air Inlet Node(s)
+TFNorthUnitHeatAirInletNode,                                                     !- List Name: Zone Air Exhaust Nodes
+TFNorth Zone Node,                                 !- Zone Node Name
+TFRPNorth Inlet Node;                      !- Zone Return Air Node Name
+
+NodeList,
+TFNorthInlets,
+TFNorth ATU Outlet Node,
+TFNorthUnitHeatAirOutletNode;
+##endif
+
+##if #[Return_Plenum[] EQS Yes ]
+	
+	AirLoopHVAC:ReturnPlenum,
+	TFNorth Return Plenum,                           !- Zone Plenum Name
+	TFRPNorth,                                            !- Zone Name
+	TFRPNorth Zone Node,                              !- Zone Node Name
+	TFRPNorth Outlet Node,                                !- Outlet Node
+	TFRPNorth Inlet Node;                     !- Inlet Node
+	
+##endif
+	
+	ZoneHVAC:EquipmentList,
+	TFNorth Equipment,                                    !- Name
+	ZoneHVAC:AirDistributionUnit,                                !- KEY--Zone Equipment Type 1
+	TFNorth ATU,                                          !- Type Name 1
+	##if #[UFAD_SysType[] EQS FCU ]
+	1,                                                    !- Cooling Priority
+	1;                                                    !- Heating Priority
+	##endif
+	##if #[UFAD_SysType[] EQS YORK ]
+	1,                                                    !- Cooling Priority
+	2,                                                    !- Heating Priority
+	ZoneHVAC:UnitHeater,
+    TFNorthUnitHeat, 
+	2,
+	1;
+	##endif
+
+	
+ZoneHVAC:AirDistributionUnit,
+TFNorth ATU,                                          !- Air Distribution Unit Name
+TFNorth ATU Outlet Node,                           !- Air Distribution Unit Outlet Node
+##if #[RunType[] EQS OH ]
+	##if #[OH_VAV_Heating[] EQS Fixed_Min ]
+	AirTerminal:SingleDuct:VAV:Reheat,                               !- KEY--System Component Type 1
+	TFNorth VAV Reheat;                                    !- Component Name 1
+	##endif
+	##if #[OH_VAV_Heating[] EQS VAV_Heating ]
+	AirTerminal:SingleDuct:VAV:HeatAndCool:Reheat,                               !- KEY--System Component Type 1
+	TFNorth VAV Reheat;                                    !- Component Name 1
+	##endif
+##endif
+##if #[RunType[] EQS UFAD]
+	##if #[UFAD_SysType[] EQS FCU ]
+	AirTerminal:SingleDuct:VAV:Reheat:VariableSpeedFan,                               !- KEY--System Component Type 1
+	TFNorth FCU Reheat;
+	##endif
+	##if #[UFAD_SysType[] EQS YORK ]
+	AirTerminal:SingleDuct:VAV:Reheat,                               !- KEY--System Component Type 1
+	TFNorth FCU Reheat;
+	##endif
+##endif
+
+##if #[RunType[] EQS OH ]
+	
+	##if #[OH_VAV_Heating[] EQS Fixed_Min ]
+	AirTerminal:SingleDuct:VAV:Reheat,
+	TFNorth VAV Reheat,                                    !- Name of System
+	Sch_HVAC_System_Availability,                                !- System Availability schedule
+	TFNorth Damper Outlet Node,                                 !- DAMPER Air Outlet Node
+	TFNorth ATU Inlet Node,                              !- UNIT Air Inlet Node
+	FSFan_Max_CoolingAir_TFNorth[],                                             !- Maximum air flow rate {m3/s}
+	Constant,                                             !- Zone Minimum Air Flow Input Method
+	FSFan_UFAD_Min_Frac_TFNorth[],
+	,
+	,                                                    !- Minimum Air Flow Fraction Schedule Name
+	Coil:Heating:Water,                             !- Reheat Component Object
+	TFNorth Reheat Coil,                                   !- Name of Reheat Component
+	autosize,                                             !- Max Reheat Water Flow {m3/s}
+	0.00000000001,                                                    !- Min Reheat Water Flow {m3/s}
+	TFNorth ATU Outlet Node,                               !- Outlet Node
+	0.01,                                                !- Convergence Tolerance
+	Damper_action[],                                               !- Damper Heating Action
+	0.0,
+	0.5,
+	43.333;
+	##endif
+
+	##if #[OH_VAV_Heating[] EQS VAV_Heating ]
+	AirTerminal:SingleDuct:VAV:HeatAndCool:Reheat,
+	TFNorth VAV Reheat,                                    !- Name of System
+	Sch_HVAC_System_Availability,                                !- System Availability schedule
+	TFNorth Damper Outlet Node,                                 !- DAMPER Air Outlet Node
+	TFNorth ATU Inlet Node,                              !- UNIT Air Inlet Node
+	FSFan_Max_CoolingAir_TFNorth[],                                             !- Maximum air flow rate {m3/s}
+	FSFan_UFAD_Min_Frac_TFNorth[],
+	TFNorth Reheat Coil HW Inlet,                          !- Control node
+	Coil:Heating:Water,                             !- Reheat Component Object
+	TFNorth Reheat Coil,                                   !- Name of Reheat Component
+	autosize,                                             !- Max Reheat Water Flow {m3/s}
+	0.00000000001,                                                    !- Min Reheat Water Flow {m3/s}
+	TFNorth ATU Outlet Node,                               !- Outlet Node
+	0.01;                                                !- Convergence Tolerance
+	##endif
+	
+##endif
+
+Coil:Heating:Water,
+TFNorth Reheat Coil,                                  !- Coil Name
+SCH_RH_Coil_Availability,                                 !- Available Schedule
+autosize,                                             !- UA of the Coil {W/K}
+autosize,                                             !- Max Water Flow Rate of Coil {m3/s}
+TFNorth Reheat Coil HW Inlet,                         !- Coil Water Inlet Node
+TFNorth Reheat Coil HW Outlet,                        !- Coil Water Outlet Node
+TFNorth Damper Outlet Node,                                !- Coil Air Inlet Node
+TFNorth ATU Outlet Node,                                 !- Coil Air Outlet Node
+UFactorTimesAreaAndDesignWaterFlowRate,                        !- Coil Performance Input Method
+autosize,                                             !- Nominal Capacity
+82.2,                                                 !- Design Inlet Water Temperature
+##if #[RunType[] EQS OH ]
+	13.89,                                                 !- Design Inlet Air Temperature
+##endif
+##if #[RunType[] EQS UFAD]
+	18.3,                                                 !- Design Inlet Air Temperature
+##endif
+71.1,                                                 !- Design Outlet Water Temperature
+##if #[RunType[] EQS OH ]
+	35.0;                                                 !- Design Outlet Air Temperature
+##endif
+##if #[RunType[] EQS UFAD]
+	45.0;                                                 !- Design Outlet Air Temperature
+##endif
+
+BRANCH,
+TFNorth Reheat Coil HW Branch,                        !- Branch Name
+,                                                     !- Maximum Branch Flow Rate {m3/s}
+,
+Coil:Heating:Water,                                   !- Comp1 Type
+TFNorth Reheat Coil,                                  !- Comp1 Name
+TFNorth Reheat Coil HW Inlet,                         !- Comp1 Inlet Node Name
+TFNorth Reheat Coil HW Outlet,                        !- Comp1 Outlet Node Name
+ACTIVE;                                               !- Comp1 Branch Control Type
+
+ZoneControl:Thermostat,
+TFSouth Thermostat,                                   !- Thermostat Name
+TFSouth,                                              !- Zone Name
+Sch_ThermostatControlType,                            !- Control Type SCHEDULE Name
+ThermostatSetpoint:DualSetpoint,                      !- Control Type
+Perimeter_Thermostat_Dual_Setpoint_Control;           !- Control Type Name
+
+Sizing:Zone,
+TFSouth,                                              !- Name of a zone
+Zone_Cool_SAT_Perim[],                                     !- Zone cooling design supply air temperature {C}
+50,                                                   !- Zone heating design supply air temperature {C}
+0.008,                                                !- Zone cooling design supply air humidity ratio {kg-H20/kg-air}
+0.008,                                                !- Zone heating design supply air humidity ratio {kg-H2O/kg-air}
+maximum,                                          !- outside air method
+.007079,                                              !- outside air flow per person {m3/s}
+0.0007617375,                                                    !- outside air flow per zone area {m3/s-m2}
+0,                                                    !- outside air flow per zone {m3/s}
+,                                                     !- zone sizing factor
+,
+designday,                                           !- cooling design air flow method
+0,                                                    !- cooling design air flow rate {m3/s}
+,                                                     !- cooling min air flow per zone area {m3/s-m2}
+,                                                     !- cooling min air flow {m3/s}
+0,                                                    !- cooling min air flow fraction {}
+designday,                                           !- heating design air flow method
+0,                                                    !- heating design air flow rate {m3/s}
+,                                                     !- heating min air flow per zone area {m3/s-m2}
+,                                                     !- heating min air flow {m3/s}
+0;                                                    !- heating min air flow fraction {}
+
+ZoneHVAC:EquipmentConnections,
+TFSouth,                                              !- Zone Name
+TFSouth Equipment,                                    !- List Name: Zone Equipment
+##if #[UFAD_SysType[] EQS FCU ]
+TFSouth ATU Outlet Node,                               !- Zone Air Inlet Node(s)
+,                                                     !- Zone Air Exhaust Node(s)
+TFSouth Zone Node,                                 !- Zone Node Name
+TFRPSouth Inlet Node;                      !- Zone Return Air Node(s)
+##endif
+##if #[UFAD_SysType[] EQS YORK ]
+TFSouthInlets,                               !- Zone Air Inlet Node(s)
+TFSouthUnitHeatAirInletNode,                                                     !- List Name: Zone Air Exhaust Nodes
+TFSouth Zone Node,                                 !- Zone Node Name
+TFRPSouth Inlet Node;                      !- Zone Return Air Node Name
+
+NodeList,
+TFSouthInlets,
+TFSouth ATU Outlet Node,
+TFSouthUnitHeatAirOutletNode;
+##endif
+
+##if #[Return_Plenum[] EQS Yes ]
+	
+	AirLoopHVAC:ReturnPlenum,
+	TFSouth Return Plenum,                           !- Zone Plenum Name
+	TFRPSouth,                                            !- Zone Name
+	TFRPSouth Zone Node,                              !- Zone Node Name
+	TFRPSouth Outlet Node,                                !- Outlet Node
+	TFRPSouth Inlet Node;                     !- Inlet Node
+	
+##endif
+	
+	ZoneHVAC:EquipmentList,
+	TFSouth Equipment,                                    !- Name
+	ZoneHVAC:AirDistributionUnit,                                !- KEY--Zone Equipment Type 1
+	TFSouth ATU,                                          !- Type Name 1
+	##if #[UFAD_SysType[] EQS FCU ]
+	1,                                                    !- Cooling Priority
+	1;                                                    !- Heating Priority
+	##endif
+	##if #[UFAD_SysType[] EQS YORK ]
+	1,                                                    !- Cooling Priority
+	2,                                                    !- Heating Priority
+	ZoneHVAC:UnitHeater,
+    TFSouthUnitHeat, 
+	2,
+	1;
+	##endif
+
+ZoneHVAC:AirDistributionUnit,
+TFSouth ATU,                                          !- Air Distribution Unit Name
+TFSouth ATU Outlet Node,                           !- Air Distribution Unit Outlet Node
+##if #[RunType[] EQS OH ]
+	##if #[OH_VAV_Heating[] EQS Fixed_Min ]
+	AirTerminal:SingleDuct:VAV:Reheat,                               !- KEY--System Component Type 1
+	TFSouth VAV Reheat;                                    !- Component Name 1
+	##endif
+	##if #[OH_VAV_Heating[] EQS VAV_Heating ]
+	AirTerminal:SingleDuct:VAV:HeatAndCool:Reheat,                               !- KEY--System Component Type 1
+	TFSouth VAV Reheat;                                    !- Component Name 1
+	##endif
+##endif
+##if #[RunType[] EQS UFAD]
+	##if #[UFAD_SysType[] EQS FCU ]
+	AirTerminal:SingleDuct:VAV:Reheat:VariableSpeedFan,                               !- KEY--System Component Type 1
+	TFSouth FCU Reheat;
+	##endif
+	##if #[UFAD_SysType[] EQS YORK ]
+	AirTerminal:SingleDuct:VAV:Reheat,                               !- KEY--System Component Type 1
+	TFSouth FCU Reheat;
+	##endif
+##endif
+
+##if #[RunType[] EQS OH ]
+	
+	##if #[OH_VAV_Heating[] EQS Fixed_Min ]
+	AirTerminal:SingleDuct:VAV:Reheat,
+	TFSouth VAV Reheat,                                    !- Name of System
+	Sch_HVAC_System_Availability,                                !- System Availability schedule
+	TFSouth Damper Outlet Node,                                 !- DAMPER Air Outlet Node
+	TFSouth ATU Inlet Node,                              !- UNIT Air Inlet Node
+	FSFan_Max_CoolingAir_TFSouth[],                                             !- Maximum air flow rate {m3/s}
+	Constant,                                             !- Zone Minimum Air Flow Input Method
+	FSFan_UFAD_Min_Frac_TFSouth[],
+	,
+	,                                                    !- Minimum Air Flow Fraction Schedule Name
+	Coil:Heating:Water,                             !- Reheat Component Object
+	TFSouth Reheat Coil,                                   !- Name of Reheat Component
+	autosize,                                             !- Max Reheat Water Flow {m3/s}
+	0.00000000001,                                                    !- Min Reheat Water Flow {m3/s}
+	TFSouth ATU Outlet Node,                               !- Outlet Node
+	0.01,                                                !- Convergence Tolerance
+	Damper_action[],                                               !- Damper Heating Action
+	0.0,
+	0.5,
+	43.333;
+	##endif
+
+	##if #[OH_VAV_Heating[] EQS VAV_Heating ]
+	AirTerminal:SingleDuct:VAV:HeatAndCool:Reheat,
+	TFSouth VAV Reheat,                                    !- Name of System
+	Sch_HVAC_System_Availability,                                !- System Availability schedule
+	TFSouth Damper Outlet Node,                                 !- DAMPER Air Outlet Node
+	TFSouth ATU Inlet Node,                              !- UNIT Air Inlet Node
+	FSFan_Max_CoolingAir_TFSouth[],                                             !- Maximum air flow rate {m3/s}
+	FSFan_UFAD_Min_Frac_TFSouth[],
+	TFSouth Reheat Coil HW Inlet,                          !- Control node
+	Coil:Heating:Water,                             !- Reheat Component Object
+	TFSouth Reheat Coil,                                   !- Name of Reheat Component
+	autosize,                                             !- Max Reheat Water Flow {m3/s}
+	0.00000000001,                                                    !- Min Reheat Water Flow {m3/s}
+	TFSouth ATU Outlet Node,                               !- Outlet Node
+	0.01;                                                !- Convergence Tolerance
+	##endif
+	
+##endif
+
+Coil:Heating:Water,
+TFSouth Reheat Coil,                                          !- Coil Name
+SCH_RH_Coil_Availability,                                  !- Available Schedule
+autosize,                                                     !- UA of the Coil {W/K}
+autosize,                                                     !- Max Water Flow Rate of Coil {m3/s}
+TFSouth Reheat Coil HW Inlet,                                 !- Coil Water Inlet Node
+TFSouth Reheat Coil HW Outlet,                                !- Coil Water Outlet Node
+TFSouth Damper Outlet Node,                                   !- Coil Air Inlet Node
+TFSouth ATU Outlet Node,                                      !- Coil Air Outlet Node
+UFactorTimesAreaAndDesignWaterFlowRate,                       !- Coil Performance Input Method
+autosize,                                                     !- Nominal Capacity
+82.2,                                                         !- Design Inlet Water Temperature
+##if #[RunType[] EQS OH ]
+	13.89,                                                !- Design Inlet Air Temperature
+##endif
+##if #[RunType[] EQS UFAD]
+	18.3,                                                 !- Design Inlet Air Temperature
+##endif
+71.1,                                                         !- Design Outlet Water Temperature
+##if #[RunType[] EQS OH ]
+	35.0;                                                 !- Design Outlet Air Temperature
+##endif
+##if #[RunType[] EQS UFAD]
+	45.0;                                                 !- Design Outlet Air Temperature
+##endif
+
+BRANCH,
+TFSouth Reheat Coil HW Branch,                        !- Branch Name
+,                                                     !- Maximum Branch Flow Rate {m3/s}
+,
+Coil:Heating:Water,                                   !- Comp1 Type
+TFSouth Reheat Coil,                                  !- Comp1 Name
+TFSouth Reheat Coil HW Inlet,                         !- Comp1 Inlet Node Name
+TFSouth Reheat Coil HW Outlet,                        !- Comp1 Outlet Node Name
+ACTIVE;                                               !- Comp1 Branch Control Type
+
+Sizing:System,
+AHU,                                                  !- name of an AIR PRIMARY LOOP object
+sensible,                                             !- type of load to size on
+OSA_Min_Flow[],                                       !- Design (minimum) outside air volumetric flow rate {m3/s}
+0.3,                                                  !- minimum system air flow ratio
+10,                                                   !- Preheat design temperature {C}
+0.008,                                                !- Preheat design humidity ratio {kg-H2O/kg-air}
+11,                                                   !- Precool design temperature {C}
+0.008,                                                !- Precool design humidity ratio {kg-H2O/kg-air}
+AHU_SAT_SPT_Cool[],                                   !- Central cooling design supply air temperature {C}
+AHU_SAT_SPT_Heat[],                                   !- Central heating design supply air temperature {C}
+coincident,                                           !- Sizing Option
+no,                                                   !- Cooling 100% Outside Air
+no,                                                   !- Heating 100% Outside Air
+0.008,                                                !- Central cooling design supply air humidity ratio {kg-H2O/kg-air}
+0.008,                                                !- Central heating design supply air humidity ratio {kg-H2O/kg-air}
+designday,                                            !- cooling design air flow method
+0,                                                    !- cooling design air flow rate {m3/s}
+designday,                                            !- heating design air flow method
+0;                                                    !- heating design air flow rate {m3/s}
+
+AIRLOOPHVAC,
+AHU,                                                  !- Primary Air Loop Name
+AHU Controllers,                                      !- Name: Controller List
+AHU Availability Managers,                            !- Name: System Availability Manager List
+autosize,                                             !- Primary air design volumetric flow rate {m3/s}
+AHU Branches,                                         !- Air Loop Branch List Name
+##if #[Return_Bypass[] EQS Yes ]
+Return Air Bypass Connectors,                                                     !- Air Loop Connector List Name
+AHU Air Loop Previous Inlet,                                   !- ReturnAir AirLoop Inlet Node
+##endif
+##if #[Return_Bypass[] EQS No ]
+,                                                     !- Air Loop Connector List Name
+AHU Air Loop Inlet,                                   !- ReturnAir AirLoop Inlet Node
+##endif
+Zones RA Path Outlet,                                 !- ZoneEquipGroup Outlet Node
+Zones SA Path Inlet,                                  !- SupplyAirPath ZoneEquipGroup Inlet Nodes
+AHU Supply Fan Outlet;                                !- AirLoop Outlet Nodes
+
+AirLoopHVAC:ControllerList,
+AHU Controllers,                                      !- Name
+Controller:WaterCoil,                                 !- Controller Type
+AHU Cooling Coil Controller,                          !- Controller Name
+Controller:WaterCoil,                                 !- Controller Type
+AHU Heating Coil Controller;                          !- Controller Name
+
+BRANCHLIST,
+AHU Branches,                                         !- Branch List Name
+##if #[Return_Bypass[] EQS Yes ]
+Main AHU Inlet Branch,
+Main AHU Outlet Branch,
+Main AHU Bypass Branch,
+##endif
+AHU Main Branch;                                      !- Branch Name 1
+
+BRANCH,
+AHU Main Branch,                   !- Branch Name
+autosize,                          !- Maximum Branch Flow Rate {m3/s}
+,
+##if #[Return_System[] EQS Return_Fan ]
+FAN:VariableVolume,                !- Comp1 Type
+Return Fan 1,                      !- Comp1 Name
+AHU Air Loop Inlet,                !- Comp1 Inlet Node Name
+Return Fan 1 Outlet Node,          !- Comp1 Outlet Node Name
+PASSIVE,                           !- Comp1 Branch Control Type
+AirLoopHVAC:OutdoorAirSystem,      !- Comp2 Type
+AHU OA System,                     !- Comp2 Name
+Return Fan 1 Outlet Node,          !- Comp2 Inlet Node Name
+##endif
+##if #[#[Return_System[] EQS Relief_Fan ] or #[Return_System[] EQS None ]]
+AirLoopHVAC:OutdoorAirSystem,      !- Comp2 Type
+AHU OA System,                     !- Comp2 Name
+AHU Air Loop Inlet,          !- Comp2 Inlet Node Name
+##endif
+AHU Mixed Air Outlet,              !- Comp2 Outlet Node Name
+PASSIVE,                           !- Comp2 Branch Control Type
+COIL:Cooling:Water,                !- Comp3 Type
+AHU Cooling Coil,                  !- Comp3 Name
+AHU Mixed Air Outlet,              !- Comp3 Inlet Node Name
+AHU Cooling Coil Outlet,           !- Comp3 Outlet Node Name
+PASSIVE,                           !- Comp3 Branch Control Type
+Coil:Heating:Water,                !- Comp4 Type
+AHU Heating Coil,                  !- Comp4 Name
+AHU Cooling Coil Outlet,           !- Comp4 Inlet Node Name
+AHU Heating Coil Outlet,           !- Comp4 Outlet Node Name
+##if #[Return_Bypass[] EQS Yes ]
+PASSIVE;
+##endif
+##if #[Return_Bypass[] EQS No ]
+PASSIVE,                           !- Comp4 Branch Control Type
+FAN:VariableVolume,                !- Comp5 Type
+AHU Supply Fan,                    !- Comp5 Name
+AHU Heating Coil Outlet,           !- Comp5 Inlet Node Name
+AHU Supply Fan Outlet,             !- Comp5 Outlet Node Name
+ACTIVE;                            !- Comp5 Branch Control Type
+##endif
+
+##if #[RunType[] EQS OH] ! only include these definitions if OH -- UFAD defined in systems_UFAD file
+	
+	AirLoopHVAC:SupplyPath,
+	Zones SA Path,                                      !- Supply Air Path Name
+	Zones SA Path Inlet,                                !- Supply Air Path Inlet Node
+	AirLoopHVAC:ZoneSplitter,                                        !- KEY--System Component Type
+	Zones Main SA Splitter;                                    !- Component Name
+	
+	AirLoopHVAC:ZoneSplitter,
+	Zones Main SA Splitter,                                    !- Splitter Name
+	Zones SA Path Inlet,                                !- Inlet Node
+	GFWest ATU Inlet Node,                              !- Outlet Node
+	GFCore ATU Inlet Node,                              !- Outlet Node
+	GFEast ATU Inlet Node,                              !- Outlet Node
+	GFNorth ATU Inlet Node,                             !- Outlet Node
+	GFSouth ATU Inlet Node,                             !- Outlet Node
+	MFCore ATU Inlet Node,                              !- Outlet Node
+	MFEast ATU Inlet Node,                              !- Outlet Node
+	MFWest ATU Inlet Node,                              !- Outlet Node
+	MFNorth ATU Inlet Node,                             !- Outlet Node
+	MFSouth ATU Inlet Node,                             !- Outlet Node
+	TFCore ATU Inlet Node,                              !- Outlet Node
+	TFEast ATU Inlet Node,                              !- Outlet Node
+	TFWest ATU Inlet Node,                              !- Outlet Node
+	TFNorth ATU Inlet Node,                             !- Outlet Node
+	TFSouth ATU Inlet Node;                             !- Outlet Node
+	
+##endif
+
+##if #[Return_Plenum[] EQS Yes ]
+	
+	AirLoopHVAC:ReturnPath,
+	Zones RA Path,                                      !- Return Air Path Name
+	Zones RA Path Outlet,                                !- Return Air Path Outlet Node
+	AirLoopHVAC:ReturnPlenum,                                   !- KEY--System Component Type
+	GFWest Return Plenum,                            !- Component Name
+	AirLoopHVAC:ReturnPlenum,                                   !- KEY--System Component Type
+	GFEast Return Plenum,                            !- Component Name
+	AirLoopHVAC:ReturnPlenum,                                   !- KEY--System Component Type
+	GFNorth Return Plenum,                           !- Component Name
+	AirLoopHVAC:ReturnPlenum,                                   !- KEY--System Component Type
+	GFSouth Return Plenum,                           !- Component Name
+	AirLoopHVAC:ReturnPlenum,                                   !- KEY--System Component Type
+	GFCore Return Plenum,                            !- Component Name
+	AirLoopHVAC:ReturnPlenum,                                   !- KEY--System Component Type
+	MFEast Return Plenum,                            !- Component Name
+	AirLoopHVAC:ReturnPlenum,                                   !- KEY--System Component Type
+	MFWest Return Plenum,                            !- Component Name
+	AirLoopHVAC:ReturnPlenum,                                   !- KEY--System Component Type
+	MFNorth Return Plenum,                           !- Component Name
+	AirLoopHVAC:ReturnPlenum,                                   !- KEY--System Component Type
+	MFSouth Return Plenum,                           !- Component Name
+	AirLoopHVAC:ReturnPlenum,                                   !- KEY--System Component Type
+	MFCore Return Plenum,                            !- Component Name
+	AirLoopHVAC:ReturnPlenum,                                   !- KEY--System Component Type
+	TFEast Return Plenum,                            !- Component Name
+	AirLoopHVAC:ReturnPlenum,                                   !- KEY--System Component Type
+	TFWest Return Plenum,                            !- Component Name
+	AirLoopHVAC:ReturnPlenum,                                   !- KEY--System Component Type
+	TFNorth Return Plenum,                           !- Component Name
+	AirLoopHVAC:ReturnPlenum,                                   !- KEY--System Component Type
+	TFSouth Return Plenum,                           !- Component Name
+	AirLoopHVAC:ReturnPlenum,                                   !- KEY--System Component Type
+	TFCore Return Plenum,                            !- Component Name
+	AirLoopHVAC:ZoneMixer,                                           !- KEY--System Component Type
+	Zones RA Mixer;                                       !- Component Name
+	
+	AirLoopHVAC:ZoneMixer,
+	Zones RA Mixer,                                       !- Mixer Name
+	Zones RA Path Outlet,                                !- Outlet Node
+	GFRPCore Outlet Node,                                 !- Inlet Node
+	MFRPCore Outlet Node,                                 !- Inlet Node
+	TFRPCore Outlet Node;                                 !- Inlet Node
+	
+##endif
+
+AvailabilityManagerAssignmentList,
+AHU Availability Managers,                            !- Name
+AVAILABILITYMANAGER:NIGHTCYCLE,                       !- System Availability Manager type
+AHU Availability;                                     !- System Availability Manager name
+
+
+
+AVAILABILITYMANAGER:NIGHTCYCLE,
+AHU Availability,                                     !- Name
+Sch_Always_On,                                !- Applicability schedule name
+Sch_Always_On,                                                   !- Fan schedule name
+##if #[RunType[] EQS OH ]
+	CycleOnAny,                                             !- Control type
+##endif
+##if #[RunType[] EQS UFAD]
+	CycleOnAnyZoneFansOnly,                         !- Control type
+##endif
+0,                                                    !- thermostat on/off tolerance {deltaC}
+7200;                                                 !- Cycling run time {s}
+
+
+##if #[SAT_Reset[] EQS No ]
+SETPOINTMANAGER:SCHEDULED,
+AHU Cooling Supply Air Temp Manager,                  !- Name
+TEMPerature,                                          !- Control variable
+##if #[Return_Bypass[] EQS Yes ]
+Sch_AHU_SAT_Two,                                          !- Schedule Name
+AHU Heating Coil Outlet;                                !- Name of the set point Node or Node List
+##endif
+##if #[Return_Bypass[] EQS No ]
+Sch_AHU_SAT,                                          !- Schedule Name
+AHU Supply Fan Outlet;                                !- Name of the set point Node or Node List
+##endif
+##endif
+
+##if #[SAT_Reset[] EQS Yes ]
+SetpointManager:Warmest,
+	AHU Cooling Supply Air Temp Manager, !- Name
+	Temperature, !- Control Variable
+	AHU, !- HVAC Air Loop Name
+	AHU_SAT_SPT[], !- Minimum Setpoint Temperature
+	High_AHU_SAT[], !- Maximum Setpoint Temperature
+	MaximumTemperature, !- Strategy
+	AHU Supply Fan Outlet; !- Setpoint Node
+##endif
+
+COIL:Cooling:Water,
+AHU Cooling Coil,                                     !- Coil Name
+Sch_HVAC_System_Availability,                          !- Available Schedule
+autosize,                                             !- Design Water Flow Rate of Coil {m3/s}
+!CoolCoil_Water_Flow[],                               !- Design Water Flow Rate of Coil {m3/s}
+autosize,                                             !- Design Air Volume Flow Rate {m3/s}
+autosize,                                             !- Design Inlet Water Temperature {C}
+CC_Intlet_Temp[],                                     !- Design Inlet Air Temperature {C}
+CC_Outlet_Temp[],                                     !- Design Outlet Air Temperature {C}
+0.009,                                                !- Design Inlet Air Humidity Ratio {kg-H2O/kg-air}
+0.0085,                                               !- Design Outlet Air Humidity Ratio {kg-H2O/kg-air}
+AHU Cooling Coil ChW Inlet,                           !- Coil Water Inlet Node
+AHU Cooling Coil ChW Outlet,                          !- Coil Water Outlet Node
+AHU Mixed Air Outlet,                                 !- Coil Air Inlet Node
+AHU Cooling Coil Outlet,                              !- Coil Air Outlet Node
+DetailedAnalysis,                                     !- Type of Analysis
+CrossFlow;                                            !- Heat Exchanger Configuration
+
+Controller:WaterCoil,
+AHU Cooling Coil Controller,                          !- Name
+Temperature,                                          !- Control variable
+Reverse,                                              !- Action
+FLOW,                                                 !- Actuator variable
+##if #[Return_Bypass[] EQS Yes ]
+AHU Heating Coil Outlet,                                !- Name of the set point Node or Node List
+##endif
+##if #[Return_Bypass[] EQS No ]
+AHU Supply Fan Outlet,                                !- Name of the set point Node or Node List
+##endif
+AHU Cooling Coil ChW Inlet,                           !- Actuator Node
+autosize,                                             !- Controller Convergence Tolerance: delta temp from setpoint temp {deltaC}
+autosize,                                             !- Max Actuated Flow {m3/s}
+0.00000000001;                                        !- Min Actuated Flow {m3/s}
+
+SETPOINTMANAGER:MIXEDAIR,
+AHU Cooling Coil Air Temp Manager,                    !- Name
+TEMPerature,                                                 !- Control variable:
+##if #[Return_Bypass[] EQS Yes ]
+AHU Heating Coil Outlet,                                !- Name of the set point Node or Node List
+##endif
+##if #[Return_Bypass[] EQS No ]
+AHU Supply Fan Outlet,                                !- Name of the set point Node or Node List
+##endif
+##if #[Return_Bypass[] EQS Yes ]
+AHU Supply Fan Outlet,                              !- fan inlet node name
+##endif
+##if #[Return_Bypass[] EQS No ]
+AHU Heating Coil Outlet,                              !- fan inlet node name
+##endif
+AHU Supply Fan Outlet,                                !- fan outlet node name
+AHU Mixed Air Outlet;                                  !- Name of the set point Node or Node List
+
+NODELIST,
+AHU Mixed Air Nodes,                                  !- Node List Name
+AHU Cooling Coil Outlet,                              !- Node ID
+AHU Mixed Air Outlet;                                 !- Node ID
+
+BRANCH,
+AHU Cooling Coil ChW Branch,                          !- Branch Name
+,                                                     !- Maximum Branch Flow Rate {m3/s}
+,
+COIL:Cooling:Water,                                   !- Comp Type
+AHU Cooling Coil,                                     !- Comp1 Name
+AHU Cooling Coil ChW Inlet,                           !- Comp1 Inlet Node Name
+AHU Cooling Coil ChW Outlet,                          !- Comp1 Outlet Node Name
+ACTIVE;                                               !- Comp1 Branch Control Type
+
+Coil:Heating:Water,
+AHU Heating Coil,                                     !- Coil Name
+##if #[Central_HeatingCoil[] EQS On ]
+Sch_HVAC_System_Availability,                          !- Available Schedule
+##endif
+##if #[Central_HeatingCoil[] EQS Off ]
+Sch_Work_Efficiency,                          !- Available Schedule
+##endif
+autosize,                                             !- UA of the Coil {W/K}
+autosize,                                             !- Max Water Flow Rate of Coil {m3/s}
+AHU Heating Coil HW Inlet,                            !- Coil Water Inlet Node
+AHU Heating Coil HW Outlet,                           !- Coil Water Outlet Node
+AHU Cooling Coil Outlet,                              !- Coil Air Inlet Node
+AHU Heating Coil Outlet,                              !- Coil Air Outlet Node
+UFactorTimesAreaAndDesignWaterFlowRate,               !- Coil Performance Input Method
+autosize,                                             !- Nominal Capacity
+82.2,                                                 !- Design Inlet Water Temperature
+0,                                                    !- Design Inlet Air Temperature
+71.1,                                                 !- Design Outlet Water Temperature
+12.8;                                                 !- Design Outlet Air Temperature
+
+BRANCH,
+AHU Heating Coil HW Branch,                           !- Branch Name
+,                                                     !- Maximum Branch Flow Rate {m3/s}
+,
+Coil:Heating:Water,                                   !- Comp1 Type
+AHU Heating Coil,                                     !- Comp1 Name
+AHU Heating Coil HW Inlet,                            !- Comp1 Inlet Node Name
+AHU Heating Coil HW Outlet,                           !- Comp1 Outlet Node Name
+ACTIVE;                                               !- Comp1 Branch Control Type
+
+Controller:WaterCoil,
+AHU Heating Coil Controller,                          !- Name
+Temperature,                                          !- Control variable
+Normal,                                               !- Action
+FLOW,                                                 !- Actuator variable
+##if #[Return_Bypass[] EQS Yes ]
+AHU Heating Coil Outlet,                                !- Name of the set point Node or Node List
+##endif
+##if #[Return_Bypass[] EQS No ]
+AHU Supply Fan Outlet,                                !- Name of the set point Node or Node List
+##endif
+AHU Heating Coil HW Inlet,                            !- Actuator Node
+autosize,                                             !- Controller Convergence Tolerance: delta temp from setpoint temp {deltaC}
+autosize,                                             !- Max Actuated Flow {m3/s}
+0.00000000001;                                        !- Min Actuated Flow {m3/s}
+
+##if #[AHU_Static_Reset[] EQS Yes ]
+	
+	FAN:VariableVolume,
+	AHU Supply Fan,                                       !- Fan Name
+	Sch_Always_On,                                                   !- Available Schedule
+	0.63,                                                  !- Fan Total Efficiency
+	AHU_Design_SP[],                                                 !- Delta Pressure {Pa}
+	Central_SupplyFan_MaxFlow[],                                             !- Max Flow Rate {m3/s}
+	FixedFlowRate,
+	,
+	0.00000000001,                                             !- Min Flow Rate {m3/s}
+	0.9,                                                    !- Motor Efficiency
+	1,                                                    !- Motor In Airstream Fraction
+	0.21976201,                                         !- FanCoefficient 1
+	-0.87478399,                                         !- FanCoefficient 2
+	1.65259695,                                            !- FanCoefficient 3
+	0.0,                                          !- FanCoefficient 4
+	0.0,                                                    !- FanCoefficient 5
+	##if #[Return_Bypass[] EQS Yes ]
+	AHU Supply Fan Inlet,                              !- Fan Inlet Node
+	##endif
+	##if #[Return_Bypass[] EQS No ]
+	AHU Heating Coil Outlet,                              !- Fan Inlet Node
+	##endif
+	AHU Supply Fan Outlet;                                !- Fan Outlet Node
+	
+##endif
+
+##if #[AHU_Static_Reset[] EQS No ]
+	
+	##if #[Shutoff_Pressure[] EQS One ]
+	FAN:VariableVolume,
+	AHU Supply Fan,                                       !- Fan Name
+	Sch_Always_On,                                                   !- Available Schedule
+	0.63,                                                  !- Fan Total Efficiency
+	AHU_Design_SP[],                                                 !- Delta Pressure {Pa}
+	Central_SupplyFan_MaxFlow[],                                             !- Max Flow Rate {m3/s}
+	FixedFlowRate,
+	,
+	0.00000000001,                                             !- Min Flow Rate {m3/s}
+	0.9,                                                    !- Motor Efficiency
+	1,                                                    !- Motor In Airstream Fraction
+	0.0662,                                         !- FanCoefficient 1
+	0.1131,                                         !- FanCoefficient 2
+	0.3063,                                            !- FanCoefficient 3
+	0.2227,                                          !- FanCoefficient 4
+	0.2939,                                                    !- FanCoefficient 5
+	##if #[Return_Bypass[] EQS Yes ]
+	AHU Supply Fan Inlet,                              !- Fan Inlet Node
+	##endif
+	##if #[Return_Bypass[] EQS No ]
+	AHU Heating Coil Outlet,                              !- Fan Inlet Node
+	##endif
+	AHU Supply Fan Outlet;                                !- Fan Outlet Node
+	##endif
+
+	##if #[Shutoff_Pressure[] EQS One_Half ]
+	FAN:VariableVolume,
+	AHU Supply Fan,                                       !- Fan Name
+	Sch_Always_On,                                                   !- Available Schedule
+	0.63,                                                  !- Fan Total Efficiency
+	AHU_Design_SP[],                                                 !- Delta Pressure {Pa}
+	Central_SupplyFan_MaxFlow[],                                             !- Max Flow Rate {m3/s}
+	FixedFlowRate,
+	,
+	0.00000000001,                                             !- Min Flow Rate {m3/s}
+	0.9,                                                    !- Motor Efficiency
+	1,                                                    !- Motor In Airstream Fraction
+	0.0704,                                         !- FanCoefficient 1
+    0.3853,                                         !- FanCoefficient 2
+    -0.4609,                                            !- FanCoefficient 3
+    1.0092,                                          !- FanCoefficient 4
+    0.0,                                                    !- FanCoefficient 5
+	##if #[Return_Bypass[] EQS Yes ]
+	AHU Supply Fan Inlet,                              !- Fan Inlet Node
+	##endif
+	##if #[Return_Bypass[] EQS No ]
+	AHU Heating Coil Outlet,                              !- Fan Inlet Node
+	##endif
+	AHU Supply Fan Outlet;                                !- Fan Outlet Node
+	##endif
+	
+##endif
+
+##if #[Return_System[] EQS Return_Fan ]
+FAN:VariableVolume,
+Return Fan 1,            !- Fan Name
+Sch_Always_On,                      !- Available Schedule
+0.63,                     !- Fan Total Efficiency
+498.1778,                     !- Delta Pressure {Pa}
+Central_ReturnFan_MaxFlow[],                !- Max Flow Rate {m3/s}
+FixedFlowRate,
+,
+0.0000000001,            !- Min Flow Rate {m3/s}
+0.9,                     !- Motor Efficiency
+1.0,                     !- Motor In Airstream Fraction
+0.21976201,                                         !- FanCoefficient 1
+-0.87478399,                                         !- FanCoefficient 2
+1.65259695,                                            !- FanCoefficient 3
+0.0,                                          !- FanCoefficient 4
+0.0,                                                    !- FanCoefficient 5
+AHU Air Loop Inlet,      !- Fan_Inlet_Node
+Return Fan 1 Outlet Node;!- Fan_Outlet_Node
+##endif
+
+##if #[Return_System[] EQS Relief_Fan ]
+FAN:VariableVolume,
+Relief Fan 1,            !- Fan Name
+Sch_Always_On,                      !- Available Schedule
+0.37,                     !- Fan Total Efficiency
+149,                     !- Delta Pressure {Pa}
+Central_ReturnFan_MaxFlow[],                !- Max Flow Rate {m3/s}
+FixedFlowRate,
+,
+0.0000000000,            !- Min Flow Rate {m3/s}
+0.9,                     !- Motor Efficiency
+1.0,                     !- Motor In Airstream Fraction
+-0.0065,            !- FanCoefficient 1
+0.1983,            !- FanCoefficient 2
+-0.4837,               !- FanCoefficient 3
+1.2976,             !- FanCoefficient 4
+0,                       !- FanCoefficient 5
+AHU Relief Air Outlet,      !- Fan_Inlet_Node
+AHU Secondary Relief Air Outlet; !- Fan_Outlet_Node
+##endif
+
+##if #[Heat_Recovery[] EQS Yes ]
+  HeatExchanger:AirToAir:SensibleAndLatent,
+    AHU Heat Recovery,      !- Name
+    Sch_HVAC_System_Availability,    !- Availability Schedule Name
+    autosize,                  !- Nominal Supply Air Flow Rate {m3/s}
+    .72,                     !- Sensible Effectiveness at 100% Heating Air Flow {dimensionless}
+    .71,                     !- Latent Effectiveness at 100% Heating Air Flow {dimensionless}
+    .77,                     !- Sensible Effectiveness at 75% Heating Air Flow {dimensionless}
+    .75,                     !- Latent Effectiveness at 75% Heating Air Flow {dimensionless}
+    .72,                     !- Sensible Effectiveness at 100% Cooling Air Flow {dimensionless}
+    .62,                     !- Latent Effectiveness at 100% Cooling Air Flow {dimensionless}
+    .77,                     !- Sensible Effectiveness at 75% Cooling Air Flow {dimensionless}
+    .70,                     !- Latent Effectiveness at 75% Cooling Air Flow {dimensionless}
+    AHU Outside Air Inlet,  !- Supply Air Inlet Node Name
+    AHU_HeatRecovery Outlet Node,  !- Supply Air Outlet Node Name
+##if #[Return_System[] EQS Relief_Fan ]
+    AHU Secondary Relief Air Outlet,  !- Exhaust Air Inlet Node Name
+##endif
+##if #[#[Return_System[] EQS Return_Fan ] or #[Return_System[] EQS None ]]
+    AHU Relief Air Outlet,  !- Exhaust Air Inlet Node Name
+##endif
+    AHU_HeatRecovery Secondary Outlet Node,  !- Exhaust Air Outlet Node Name
+    200.0,                   !- Nominal Electric Power {W}
+    No,                      !- Supply Air Outlet Temperature Control
+    Rotary,                   !- Heat Exchanger Type
+    None;                    !- Frost Control Type
+##endif
+
+OUTDOORAIR:NODELIST,
+AHU Outside Air Inlet;                                !- 1st Node name or node list name
+
+AirLoopHVAC:OutdoorAirSystem,
+AHU OA System,                                        !- Name
+AHU OA System Controllers,                            !- Name: Controller List
+AHU OA System Equipment,                              !- Name of an Air Loop Equipment List
+AHU Availability Managers;                            !- Name of a System Availability Manager List
+
+AirLoopHVAC:ControllerList,
+AHU OA System Controllers,                            !- Name
+CONTROLLER:OUTDOORAIR,                                !- Controller Type
+AHU OA Controller;                                    !- Controller Name
+
+AirLoopHVAC:OutdoorAirSystem:EquipmentList,
+AHU OA System Equipment,                              !- Name
+##if #[Return_System[] EQS Relief_Fan ]
+FAN:VariableVolume,
+Relief Fan 1,
+##endif
+##if #[Heat_Recovery[] EQS Yes ]
+HeatExchanger:AirToAir:SensibleAndLatent,
+AHU Heat Recovery,
+##endif
+OutdoorAir:Mixer,                                     !- KEY--System Component
+AHU OA Mixing Box;                                    !- Component Name
+
+OutdoorAir:Mixer,
+AHU OA Mixing Box,                                    !- Name
+AHU Mixed Air Outlet,                                 !- Mixed Air Node
+##if #[Heat_Recovery[] EQS Yes ]
+AHU_HeatRecovery Outlet Node,                                !- Outside Air Stream Node
+##endif
+##if #[Heat_Recovery[] EQS No ]
+AHU Outside Air Inlet,                                !- Outside Air Stream Node
+##endif
+AHU Relief Air Outlet,                                !- Relief Air Stream Node
+##if #[Return_System[] EQS Return_Fan ]
+Return Fan 1 Outlet Node;                             !- Return_Air_Stream_Node
+##endif
+##if #[#[Return_System[] EQS Relief_Fan ] or #[Return_System[] EQS None ]]
+AHU Air Loop Inlet;                             !- Return_Air_Stream_Node
+##endif
+
+CONTROLLER:OUTDOORAIR,
+AHU OA Controller,                                    !- Name
+AHU Relief Air Outlet,                                !- Relief Air Outlet Node
+##if #[Return_System[] EQS Return_Fan ]
+Return Fan 1 Outlet Node,                             !- Return_Air_Stream_Node
+##endif
+##if #[#[Return_System[] EQS Relief_Fan ] or #[Return_System[] EQS None ]]
+AHU Air Loop Inlet,                             !- Return_Air_Stream_Node
+##endif
+AHU Mixed Air Outlet,                                 !- Control Node
+AHU Outside Air Inlet,                                !- Actuated Node
+OSA_Min_Flow[],                                       !- minimum outside air flow rate {m3/s}
+autosize,                                             !- maximum outside air flow rate {m3/s}
+##if #[Weather_Location[] EQS miami]
+NoEconomizer,										  !- EconomizerChoice
+##else
+DifferentialDryBulb,                                  !- EconomizerChoice
+##endif
+ModulateFlow,                                         !- Economizer Control Action Type
+##if #[Weather_Location[] EQS sanfrancisco]
+75,													  !- Economizer Maximum Limit Dry-Bulb Temperature {C}
+##elseif #[Weather_Location[] EQS minneapolis]
+70,													  !- Economizer Maximum Limit Dry-Bulb Temperature {C}
+##else
+,													  !- Economizer Maximum Limit Dry-Bulb Temperature {C}
+##endif
+,                                                     !- Economizer Maximum Limit Enthalpy {J/kg}
+,                                                     !- Economizer Maximum Limit Dewpoint Temperature {C}
+,                                                     !- Electronic Enthalpy Limit Curve Name
+,                                                     !- Economizer Minimum Limit Dry-Bulb Temperature {C}
+NoLockout,                                            !- Lockout
+FixedMinimum,                                         !- MinimumLimit
+Sch_HVAC_System_Availability,                          !- Minimum Outside Air Schedule Name
+;                                                     !- Name of VENTILATION:MECHANICAL object
+
+##if #[Return_Bypass[] EQS Yes ]
+Duct,
+    Main AHU Inlet Duct,    !- Name
+    AHU Air Loop Previous Inlet,    !- Inlet Node Name
+    Main AHU Inlet Duct Outlet Node;  !- Outlet Node Name
+
+Duct,
+    Main AHU Bypass Duct,   !- Name
+    Main AHU Bypass Duct Inlet Node,  !- Inlet Node Name
+    Main AHU Bypass Duct Outlet Node;  !- Outlet Node Name
+
+SetpointManager:ReturnAirBypassFlow,
+    RAB Manager,           !- Name
+    FLOW,                    !- Control Variable
+    AHU,               !- HVAC Air Loop Name
+    Sch_AHU_SAT;  !- Temperature Setpoint Schedule Name
+
+Branch,
+Main AHU Outlet Branch,    !- Name
+autosize,
+,
+FAN:VariableVolume,                !- Comp5 Type
+AHU Supply Fan,                    !- Comp5 Name
+AHU Supply Fan Inlet,           !- Comp5 Inlet Node Name
+AHU Supply Fan Outlet,             !- Comp5 Outlet Node Name
+ACTIVE;                            !- Comp5 Branch Control Type
+
+Branch,
+Main AHU Inlet Branch,    !- Name
+autosize,
+,
+Duct,                !- Comp5 Type
+Main AHU Inlet Duct,    !- Name
+AHU Air Loop Previous Inlet,    !- Inlet Node Name
+Main AHU Inlet Duct Outlet Node,             !- Comp5 Outlet Node Name
+PASSIVE;                            !- Comp5 Branch Control Type
+
+Branch,
+Main AHU Bypass Branch,    !- Name
+autosize,
+,
+Duct,                !- Comp5 Type
+Main AHU Bypass Duct,   !- Name
+Main AHU Bypass Duct Inlet Node,  !- Inlet Node Name
+Main AHU Bypass Duct Outlet Node,             !- Comp5 Outlet Node Name
+PASSIVE;                            !- Comp5 Branch Control Type
+
+Connector:Splitter,
+    Return Air Bypass Splitter,  !- Name
+    Main AHU Inlet Branch,  !- Inlet Branch Name
+    Main AHU Bypass Branch, !- Outlet Branch 1 Name
+    AHU Main Branch;   !- Outlet Branch 2 Name
+
+Connector:Mixer,
+    Return Air Bypass Mixer, !- Name
+    Main AHU Outlet Branch, !- Outlet Branch Name
+    AHU Main Branch,   !- Inlet Branch 1 Name
+    Main AHU Bypass Branch; !- Inlet Branch 2 Name
+
+ConnectorList,
+    Return Air Bypass Connectors,  !- Name
+    Connector:Splitter,      !- Connector 1 Object Type
+    Return Air Bypass Splitter,  !- Connector 1 Name
+    Connector:Mixer,         !- Connector 2 Object Type
+    Return Air Bypass Mixer; !- Connector 2 Name
+	
+	SCHEDULE:COMPACT,
+	Sch_AHU_SAT_Two,               
+	Temperature,   
+	Through: 12/31,            
+	For: AllDays,              
+	Until: 24:00,              
+	13.89; 
+
+##endif

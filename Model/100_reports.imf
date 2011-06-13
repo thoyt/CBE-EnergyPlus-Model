@@ -1,0 +1,5377 @@
+! ============ REPORTS ====================
+
+Output:VariableDictionary, Regular;
+
+
+OutputControl:Table:Style,
+CommaAndHTML,
+JtoKWH;
+
+Output:Variable,
+AHU Heating Coil,                              
+Total Water Heating Coil Rate,  
+hourly;
+
+Output:Variable,
+*,                              
+Boiler Gas Consumption Rate,  
+hourly;
+
+
+Output:Table:SummaryReports,
+AllSummary;
+
+Output:Table:Monthly,
+    Setpoints Not Met With Temperatures,  !- Name
+    2,                       !- Digits After Decimal
+    Time Heating Setpoint Not Met,  !- Variable or Meter 1 Name
+    HoursNonZero,            !- Aggregation Type for Variable or Meter 1
+    Zone Mean Air Temperature,  !- Variable or Meter 2 Name
+    SumOrAverageDuringHoursShown,  !- Aggregation Type for Variable or Meter 2
+    Time Heating Setpoint Not Met While Occupied,  !- Variable or Meter 3 Name
+    HoursNonZero,            !- Aggregation Type for Variable or Meter 3
+    Zone Mean Air Temperature,  !- Variable or Meter 4 Name
+    SumOrAverageDuringHoursShown,  !- Aggregation Type for Variable or Meter 4
+    Time Cooling Setpoint Not Met,  !- Variable or Meter 5 Name
+    HoursNonZero,            !- Aggregation Type for Variable or Meter 5
+    Zone Mean Air Temperature,  !- Variable or Meter 6 Name
+    SumOrAverageDuringHoursShown,  !- Aggregation Type for Variable or Meter 6
+    Time Cooling Setpoint Not Met While Occupied,  !- Variable or Meter 7 Name
+    HoursNonZero,            !- Aggregation Type for Variable or Meter 7
+    Zone Mean Air Temperature,  !- Variable or Meter 8 Name
+    SumOrAverageDuringHoursShown;  !- Aggregation Type for Variable or Meter 8
+
+Output:Table:Monthly,
+    Building Loads - Cooling,!- Name
+    2,                       !- Digits After Decimal
+    Zone/Sys Sensible Cooling Energy,  !- Variable or Meter 1 Name
+    SumOrAverage,            !- Aggregation Type for Variable or Meter 1
+    Zone/Sys Sensible Cooling Rate,  !- Variable or Meter 2 Name
+    Maximum,                 !- Aggregation Type for Variable or Meter 2
+    Outdoor Dry Bulb,        !- Variable or Meter 3 Name
+    ValueWhenMaximumOrMinimum,  !- Aggregation Type for Variable or Meter 3
+    Outdoor Wet Bulb,        !- Variable or Meter 4 Name
+    ValueWhenMaximumOrMinimum,  !- Aggregation Type for Variable or Meter 4
+    Zone Total Internal Latent Gain,  !- Variable or Meter 5 Name
+    SumOrAverage,            !- Aggregation Type for Variable or Meter 5
+    Zone Total Internal Latent Gain,  !- Variable or Meter 6 Name
+    Maximum,                 !- Aggregation Type for Variable or Meter 6
+    Outdoor Dry Bulb,        !- Variable or Meter 7 Name
+    ValueWhenMaximumOrMinimum,  !- Aggregation Type for Variable or Meter 7
+    Outdoor Wet Bulb,        !- Variable or Meter 8 Name
+    ValueWhenMaximumOrMinimum;  !- Aggregation Type for Variable or Meter 8
+
+
+Output:Variable,
+*,                        
+Plant Loop Cooling Demand,
+hourly;                   
+
+Output:Variable,
+*,                        
+Plant Loop Heating Demand,
+hourly;
+
+Output:Variable,
+*,                       !- Key_Value
+Outdoor Dry Bulb,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+*,                       !- Key_Value
+Outdoor Wet Bulb,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+*,                       !- Key_Value
+DayType Index,           !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+
+Output:Variable,
+*,     !- Key_Value
+Total Building Electric Demand,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+*,     !- Key_Value
+Total HVAC Electric Demand,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+*,     !- Key_Value
+Chiller Electric Consumption,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+*,     !- Key_Value
+Total Electric Demand,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+*,     !- Key_Value
+Pump Electric Consumption,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+*,     !- Key_Value
+Boiler Gas Consumption,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+*,     !- Key_Value
+Chiller Evap Heat Trans Rate,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+
+! ===== UFAD VARIABLES / END =====
+
+Output:Meter:MeterFileOnly,
+ HeatRejection:Electricity,
+    daily;        
+
+Output:Meter:MeterFileOnly,
+ HeatRejection:Electricity,
+    monthly;
+    
+Output:Meter:MeterFileOnly,
+ HeatRejection:Electricity,
+    hourly;
+
+Output:Meter:MeterFileOnly,
+ Electricity:Facility,
+    daily;
+
+Output:Meter:MeterFileOnly,
+ Electricity:Facility,
+    monthly;
+
+Output:Meter:MeterFileOnly,
+ InteriorLights:Electricity,
+    daily;
+
+Output:Meter:MeterFileOnly,
+ InteriorLights:Electricity,
+    hourly;
+
+Output:Meter:MeterFileOnly,
+ InteriorLights:Electricity,
+    monthly;
+
+Output:Meter:MeterFileOnly,
+ InteriorEquipment:Electricity,
+    daily;
+
+Output:Meter:MeterFileOnly,
+ InteriorEquipment:Electricity,
+    hourly;
+
+Output:Meter:MeterFileOnly,
+ InteriorEquipment:Electricity,
+    monthly;
+
+Output:Meter:MeterFileOnly,
+ Electricity:Building,
+    daily;
+
+Output:Meter:MeterFileOnly,
+ Electricity:Building,
+    monthly;
+
+Output:Meter:MeterFileOnly,
+ Fans:Electricity,
+    daily;
+
+Output:Meter:MeterFileOnly,
+ Fans:Electricity,
+    monthly;
+
+Output:Meter:MeterFileOnly,
+ Pumps:Electricity,
+    daily;
+
+Output:Meter:MeterFileOnly,
+ Pumps:Electricity,
+    monthly;
+
+Output:Meter:MeterFileOnly,
+ Cooling:Electricity,
+    daily;
+
+Output:Meter:MeterFileOnly,
+ Cooling:Electricity,
+    monthly;
+
+Output:Meter:MeterFileOnly,
+ Gas:Facility,
+    daily;
+    
+Output:Meter:MeterFileOnly,
+ Gas:Facility,
+    Hourly;    
+
+Output:Meter:MeterFileOnly,
+ Gas:Facility,
+    monthly;
+
+Output:Meter:MeterFileOnly,
+ Electricity:Plant,
+    daily;
+
+Output:Meter:MeterFileOnly,
+ Electricity:Plant,
+    hourly;    
+
+Output:Meter:MeterFileOnly,
+ Fans:Electricity,
+    hourly;    
+    
+Output:Meter:MeterFileOnly,
+ Electricity:Plant,
+    monthly;
+
+Output:Meter:MeterFileOnly,
+ Electricity:HVAC,
+    daily;
+
+Output:Meter:MeterFileOnly,
+ Electricity:HVAC,
+    monthly;
+
+Output:Meter:MeterFileOnly,
+ Electricity:Facility,
+    annual;
+
+Output:Meter:MeterFileOnly,
+ InteriorLights:Electricity,
+    annual;
+
+Output:Meter:MeterFileOnly,
+ InteriorEquipment:Electricity,
+    annual;
+
+Output:Meter:MeterFileOnly,
+ Electricity:Building,
+    annual;
+
+Output:Meter:MeterFileOnly,
+ Fans:Electricity,
+    annual;
+
+Output:Meter:MeterFileOnly,
+ Pumps:Electricity,
+    annual;
+
+Output:Meter:MeterFileOnly,
+ Cooling:Electricity,
+    annual;
+
+Output:Meter:MeterFileOnly,
+ Gas:Facility,
+    annual;
+
+Output:Meter:MeterFileOnly,
+ Electricity:Plant,
+    annual;
+
+Output:Meter:MeterFileOnly,
+ Electricity:HVAC,
+    annual;
+
+Output:Variable,
+GFEast ATU Outlet Node,     !- Key_Value
+System Node Volume Flow Rate Standard Density ,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+GFWest ATU Outlet Node,     !- Key_Value
+System Node Volume Flow Rate Standard Density ,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+GFSouth ATU Outlet Node,     !- Key_Value
+System Node Volume Flow Rate Standard Density ,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+GFNorth ATU Outlet Node,     !- Key_Value
+System Node Volume Flow Rate Standard Density ,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+GFCore ATU Outlet Node,     !- Key_Value
+System Node Volume Flow Rate Standard Density ,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+GFServCore ATU Outlet Node,     !- Key_Value
+System Node Volume Flow Rate Standard Density ,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+MFEast ATU Outlet Node,     !- Key_Value
+System Node Volume Flow Rate Standard Density ,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+MFWest ATU Outlet Node,     !- Key_Value
+System Node Volume Flow Rate Standard Density ,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+MFSouth ATU Outlet Node,     !- Key_Value
+System Node Volume Flow Rate Standard Density ,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+MFNorth ATU Outlet Node,     !- Key_Value
+System Node Volume Flow Rate Standard Density ,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+MFCore ATU Outlet Node,     !- Key_Value
+System Node Volume Flow Rate Standard Density ,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+MFServCore ATU Outlet Node,     !- Key_Value
+System Node Volume Flow Rate Standard Density ,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFEast ATU Outlet Node,     !- Key_Value
+System Node Volume Flow Rate Standard Density ,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFWest ATU Outlet Node,     !- Key_Value
+System Node Volume Flow Rate Standard Density ,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFSouth ATU Outlet Node,     !- Key_Value
+System Node Volume Flow Rate Standard Density ,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFNorth ATU Outlet Node,     !- Key_Value
+System Node Volume Flow Rate Standard Density ,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFCore ATU Outlet Node,     !- Key_Value
+System Node Volume Flow Rate Standard Density ,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+AHU Supply Fan Outlet,     !- Key_Value
+System Node Volume Flow Rate Standard Density ,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+Chilled water loop ChW Supply Outlet,     !- Key_Value
+System Node Volume Flow Rate Standard Density ,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+##if #[DetailedReportTwo[] EQS Yes ]
+##if #[DetailedReport[] EQS Yes ]
+
+Output:Variable,
+*,     !- Key_Value
+Fan Electric Power,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+*,                                !- Key_Value
+Zone Electric Equipment Convective Heat Gain,  !- Variable_Name
+hourly;
+
+Output:Variable,
+*,                                !- Key_Value
+Zone Electric Equipment Total Heat Gain,  !- Variable_Name
+hourly;
+
+Output:Variable,
+*,                                !- Key_Value
+Zone Lights Convective Heat Gain,  !- Variable_Name
+hourly;
+
+Output:Variable,
+*,                                !- Key_Value
+Zone Lights Total Heat Gain,  !- Variable_Name
+hourly;
+
+Output:Variable,
+*,                                !- Key_Value
+Zone People Convective Heat Gain,  !- Variable_Name
+hourly;
+
+Output:Variable,
+*,                                !- Key_Value
+Zone People Total Heat Gain,  !- Variable_Name
+hourly;
+
+Output:Variable,
+*,                                !- Key_Value
+Zone Lights Convective Heat Gain,  !- Variable_Name
+hourly;
+
+Output:Variable,
+*,                                !- Key_Value
+Zone Lights Total Heat Gain,  !- Variable_Name
+hourly;
+
+Output:Variable,
+*,   !- Key_Value
+Pump Electric Consumption,  !- Variable_Name
+runperiod;   
+
+Output:Variable,
+*,                                !- Key_Value
+Pump Electric Consumption,  !- Variable_Name
+runperiod; 
+
+Output:Variable,
+*,     !- Key_Value
+Tower Fan Electric Consumption,        !- Variable_Name
+monthly;                  !- Reporting_Frequency
+
+Output:Variable,
+*,     !- Key_Value
+Pump Electric Consumption,        !- Variable_Name
+monthly;                  !- Reporting_Frequency
+
+Output:Variable,
+*,     !- Key_Value
+Pump Electric Power,        !- Variable_Name
+monthly;                  !- Reporting_Frequency
+
+Output:Variable,
+*,     !- Key_Value
+Total Building Electric Demand,        !- Variable_Name
+daily;                  !- Reporting_Frequency
+
+Output:Variable,
+*,     !- Key_Value
+Total HVAC Electric Demand,        !- Variable_Name
+daily;                  !- Reporting_Frequency
+
+Output:Variable,
+*,     !- Key_Value
+Total Electric Demand,        !- Variable_Name
+daily;                  !- Reporting_Frequency
+
+Output:Variable,
+Chiller,     !- Key_Value
+Chiller Cond Heat Trans Rate,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+Chiller,     !- Key_Value
+Chiller COP,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+Chiller,     !- Key_Value
+Chiller Evap Heat Trans Rate,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+Chiller,     !- Key_Value
+Chiller Part Load Ratio,        !- Variable_Name
+hourly;
+
+Output:Variable,
+*,     !- Key_Value
+Boiler Heating Output Rate,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+*,     !- Key_Value
+Boiler Water Inlet Temp,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+*,     !- Key_Value
+Boiler Water Outlet Temp,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+*,     !- Key_Value
+Boiler Water Mass Flow Rate,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+Chilled water loop ChW Supply Inlet,     !- Key_Value
+System Node Volume Flow Rate Standard Density ,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+Chilled water loop ChW Supply Inlet,     !- Key_Value
+System Node Temp,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+Chilled water loop ChW Supply Outlet,     !- Key_Value
+System Node Volume Flow Rate Standard Density ,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+Chilled water loop ChW Supply Outlet,     !- Key_Value
+System Node Temp,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+Chiller ChW Inlet,     !- Key_Value
+System Node Volume Flow Rate Standard Density ,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+Chiller ChW Inlet,     !- Key_Value
+System Node Temp,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+AHU Cooling Coil ChW Inlet,     !- Key_Value
+System Node Volume Flow Rate Standard Density ,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+AHU Cooling Coil ChW Inlet,     !- Key_Value
+System Node Temp,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+AHU Cooling Coil ChW Outlet,     !- Key_Value
+System Node Volume Flow Rate Standard Density ,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+AHU Cooling Coil ChW Outlet,     !- Key_Value
+System Node Temp,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+Hot water loop HW Pump Outlet,     !- Key_Value
+System Node Volume Flow Rate Standard Density ,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+Condenser water loop CndW Pump Outlet,     !- Key_Value
+System Node Volume Flow Rate Standard Density ,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+GFCore People,     !- Key_Value
+People Total Heat Gain,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFEast,    !- Key_Value
+Zone Transmitted Solar,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFWest,    !- Key_Value
+Zone Transmitted Solar,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+MFWest,    !- Key_Value
+Zone Transmitted Solar,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFEast,    !- Key_Value
+Zone/Sys Sensible Cooling Energy,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFWest,    !- Key_Value
+Zone/Sys Sensible Cooling Energy,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFWest_Win_W,            !- Key_Value
+Window Heat Gain,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFWest_Win_W,            !- Key_Value
+Window Solar Absorbed:Shading Device,  !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFWest_Win_W,            !- Key_Value
+Window Gap Convective Heat Flow,  !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFWest_Win_W,            !- Key_Value
+Surface Inside Temperature,  !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+MFRPWest_FLOOR,            !- Key_Value
+Surface Int Convection Coeff,  !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+MFWest_Ceiling,            !- Key_Value
+Surface Int Convection Coeff,  !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+MFRPWest_Ceiling,            !- Key_Value
+Surface Int Convection Coeff,  !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFSPWest_FLOOR,            !- Key_Value
+Surface Int Convection Coeff,  !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFSPWest_Ceiling,            !- Key_Value
+Surface Int Convection Coeff,  !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+MFSPWest_FLOOR,            !- Key_Value
+Surface Int Convection Coeff,  !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+MFSPWest_Ceiling,            !- Key_Value
+Surface Int Convection Coeff,  !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFWest_Floor,            !- Key_Value
+Surface Int Convection Coeff,  !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFWest_Win_W,            !- Key_Value
+Surface Int Convection Heat Rate ,  !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFWest_Win_W,            !- Key_Value
+Blind Beam-Beam Solar Transmittance,  !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFWest_Win_W,            !- Key_Value
+Blind Beam-Diffuse Solar Transmittance,  !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFWest_Win_W,            !- Key_Value
+Blind Diffuse-Diffuse Solar Transmittance,  !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFWest_Win_W,            !- Key_Value
+Blind/Glass System Beam-Beam Solar Transmittance,  !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFWest_Win_W,            !- Key_Value
+Blind/Glass System Diffuse-Diffuse Solar Transmittance,  !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFEast_Win_E,            !- Key_Value
+Blind Diffuse-Diffuse Solar Transmittance,  !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFEast_Win_E,            !- Key_Value
+Blind/Glass System Beam-Beam Solar Transmittance,  !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFEast_Win_E,            !- Key_Value
+Blind/Glass System Diffuse-Diffuse Solar Transmittance,  !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+GFEast,    !- Key_Value
+Zone Total Internal Convective Heat Gain,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+GFCore,    !- Key_Value
+Zone Total Internal Convective Heat Gain,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+GFWest,    !- Key_Value
+Zone Total Internal Convective Heat Gain,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+GFSouth,    !- Key_Value
+Zone Total Internal Convective Heat Gain,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+GFNorth,    !- Key_Value
+Zone Total Internal Convective Heat Gain,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+MFCore,    !- Key_Value
+Zone Total Internal Convective Heat Gain,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+MFEast,    !- Key_Value
+Zone Total Internal Convective Heat Gain,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+MFWest,    !- Key_Value
+Zone Total Internal Convective Heat Gain,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+MFSouth,    !- Key_Value
+Zone Total Internal Convective Heat Gain,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+MFNorth,    !- Key_Value
+Zone Total Internal Convective Heat Gain,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFCore,    !- Key_Value
+Zone Total Internal Convective Heat Gain,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFEast,    !- Key_Value
+Zone Total Internal Convective Heat Gain,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFWest,    !- Key_Value
+Zone Total Internal Convective Heat Gain,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFSouth,    !- Key_Value
+Zone Total Internal Convective Heat Gain,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFNorth,    !- Key_Value
+Zone Total Internal Convective Heat Gain,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+*,    !- Key_Value
+Zone/Sys Sensible Cooling Rate,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+*,    !- Key_Value
+Zone/Sys Sensible Heating Rate,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+GFEast,    !- Key_Value
+Zone Total Internal Total Heat Gain,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+GFEast,                  !- Key_Value
+Zone Window Heat Gain,   !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+GFWest,    !- Key_Value
+Zone/Sys Sensible Cooling Rate,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+GFWest,    !- Key_Value
+Zone Total Internal Total Heat Gain,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+GFWest,                  !- Key_Value
+Zone Window Heat Gain,   !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+GFSouth,    !- Key_Value
+Zone/Sys Sensible Cooling Rate,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+GFSouth,    !- Key_Value
+Zone Total Internal Total Heat Gain,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+GFSouth,                  !- Key_Value
+Zone Window Heat Gain,   !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+GFNorth,    !- Key_Value
+Zone/Sys Sensible Cooling Rate,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+GFNorth,    !- Key_Value
+Zone Total Internal Total Heat Gain,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+GFNorth,                  !- Key_Value
+Zone Window Heat Gain,   !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+GFCore,    !- Key_Value
+Zone/Sys Sensible Cooling Rate,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+GFCore,    !- Key_Value
+Zone Total Internal Total Heat Gain,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+GFCore,                  !- Key_Value
+Zone Window Heat Gain,   !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+MFEast,    !- Key_Value
+Zone/Sys Sensible Cooling Rate,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+MFEast,    !- Key_Value
+Zone Total Internal Total Heat Gain,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+MFEast,                  !- Key_Value
+Zone Window Heat Gain,   !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+MFWest,    !- Key_Value
+Zone/Sys Sensible Cooling Rate,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+MFWest,    !- Key_Value
+Zone Total Internal Total Heat Gain,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+MFWest,                  !- Key_Value
+Zone Window Heat Gain,   !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+MFSouth,    !- Key_Value
+Zone/Sys Sensible Cooling Rate,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+MFSouth,    !- Key_Value
+Zone Total Internal Total Heat Gain,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+MFSouth,                  !- Key_Value
+Zone Window Heat Gain,   !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+MFNorth,    !- Key_Value
+Zone/Sys Sensible Cooling Rate,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+MFNorth,    !- Key_Value
+Zone Total Internal Total Heat Gain,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+MFNorth,                  !- Key_Value
+Zone Window Heat Gain,   !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+MFCore,    !- Key_Value
+Zone/Sys Sensible Cooling Rate,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+MFCore,    !- Key_Value
+Zone Total Internal Total Heat Gain,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+MFCore,                  !- Key_Value
+Zone Window Heat Gain,   !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFEast,    !- Key_Value
+Zone/Sys Sensible Cooling Rate,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFEast,    !- Key_Value
+Zone Total Internal Total Heat Gain,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFEast,                  !- Key_Value
+Zone Window Heat Gain,   !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFWest,    !- Key_Value
+Zone/Sys Sensible Cooling Rate,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFWest,    !- Key_Value
+Zone Total Internal Total Heat Gain,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFWest,                  !- Key_Value
+Zone Window Heat Gain,   !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFSouth,    !- Key_Value
+Zone/Sys Sensible Cooling Rate,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFSouth,    !- Key_Value
+Zone Total Internal Total Heat Gain,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFSouth,                  !- Key_Value
+Zone Window Heat Gain,   !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFNorth,    !- Key_Value
+Zone/Sys Sensible Cooling Rate,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFNorth,    !- Key_Value
+Zone Total Internal Total Heat Gain,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFNorth,                  !- Key_Value
+Zone Window Heat Gain,   !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFCore,    !- Key_Value
+Zone/Sys Sensible Cooling Rate,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFCore,    !- Key_Value
+Zone Total Internal Total Heat Gain,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFCore,                  !- Key_Value
+Zone Window Heat Gain,   !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+##if #[Return_Plenum[] EQS Yes ]
+	
+	Output:Variable,
+	GFRPEast_Ceiling,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFRPEast_Wall_E,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFRPEast_Floor,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFRPWest_Floor,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFRPWest_Ceiling,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFRPWest_Wall_W,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFRPSouth_Floor,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFRPSouth_Ceiling,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFRPSouth_Wall_S,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFRPNorth_Floor,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFRPNorth_Ceiling,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFRPNorth_Wall_N,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFRPEast_Ceiling,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFRPEast_Wall_E,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFRPEast_Floor,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFRPWest_Floor,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFRPWest_Ceiling,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFRPWest_Wall_W,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFRPSouth_Floor,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFRPSouth_Ceiling,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFRPSouth_Wall_S,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFRPNorth_Floor,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFRPNorth_Ceiling,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFRPNorth_Wall_N,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFRPEast_Ceiling,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFRPEast_Wall_E,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFRPEast_Floor,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFRPWest_Floor,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFRPWest_Ceiling,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFRPWest_Wall_W,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFRPSouth_Floor,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFRPSouth_Ceiling,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFRPSouth_Wall_S,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFRPNorth_Floor,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFRPNorth_Ceiling,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFRPNorth_Wall_N,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFRPCore_Floor1,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFRPCore_Ceiling1,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFRPCore_Floor1,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFRPCore_Ceiling1,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFRPCore_Floor1,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFRPCore_Ceiling1,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+
+##endif     ! ##if #[Return_Plenum[] EQS Yes ]
+
+Output:Variable,
+MFEast,     !- Key_Value
+Zone Mean Radiant Temperature,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+MFEast,     !- Key_Value
+Zone Operative Temperature,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+MFWest,     !- Key_Value
+Zone Mean Radiant Temperature,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+MFWest,     !- Key_Value
+Zone Operative Temperature,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+MFSouth,     !- Key_Value
+Zone Mean Radiant Temperature,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+MFSouth,     !- Key_Value
+Zone Operative Temperature,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+MFNorth,     !- Key_Value
+Zone Mean Radiant Temperature,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+MFNorth,     !- Key_Value
+Zone Operative Temperature,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+MFCore,     !- Key_Value
+Zone Mean Radiant Temperature,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+MFCore,     !- Key_Value
+Zone Operative Temperature,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+GFEast,     !- Key_Value
+Zone Mean Radiant Temperature,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+GFEast,     !- Key_Value
+Zone Operative Temperature,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+GFWest,     !- Key_Value
+Zone Mean Radiant Temperature,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+GFWest,     !- Key_Value
+Zone Operative Temperature,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+GFSouth,     !- Key_Value
+Zone Mean Radiant Temperature,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+GFSouth,     !- Key_Value
+Zone Operative Temperature,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+GFNorth,     !- Key_Value
+Zone Mean Radiant Temperature,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+GFNorth,     !- Key_Value
+Zone Operative Temperature,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+GFCore,     !- Key_Value
+Zone Mean Radiant Temperature,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+GFCore,     !- Key_Value
+Zone Operative Temperature,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFEast,     !- Key_Value
+Zone Mean Radiant Temperature,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFEast,     !- Key_Value
+Zone Operative Temperature,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFWest,     !- Key_Value
+Zone Mean Radiant Temperature,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFWest,     !- Key_Value
+Zone Operative Temperature,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFSouth,     !- Key_Value
+Zone Mean Radiant Temperature,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFSouth,     !- Key_Value
+Zone Operative Temperature,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFNorth,     !- Key_Value
+Zone Mean Radiant Temperature,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+*,     !- Key_Value
+Window Convection Heat Gain from Glazing to Zone,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFNorth,     !- Key_Value
+Zone Operative Temperature,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFCore,     !- Key_Value
+Zone Mean Radiant Temperature,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFCore,     !- Key_Value
+Zone Operative Temperature,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+##if #[RunType[] EQS UFAD]
+	
+	! UFAD Hourly variables
+	
+	Output:Variable,
+	GFSPCore Inlet Node,     !- Key_Value
+	System Node Volume Flow Rate Standard Density ,        !- Variable_Name
+	hourly;                  !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSPCore Inlet Node,     !- Key_Value
+	System Node Volume Flow Rate Standard Density ,        !- Variable_Name
+	hourly;                  !- Reporting_Frequency
+	
+	Output:Variable,
+	TFSPCore Inlet Node,     !- Key_Value
+	System Node Volume Flow Rate Standard Density ,        !- Variable_Name
+	hourly;                  !- Reporting_Frequency
+	
+	Output:Variable,
+	*,                                !- Key_Value
+	UF Mixed Subzone Temperature,     !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	*,                                !- Key_Value
+	UF Occupied Subzone Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFSPEast_Ceiling,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFSPEast_Wall_E,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFSPEast_Floor,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFSPWest_Floor,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFSPWest_Ceiling,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFSPWest_Wall_W,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFSPSouth_Floor,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFSPSouth_Ceiling,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFSPSouth_Wall_S,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFSPNorth_Floor,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFSPNorth_Ceiling,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFSPNorth_Wall_N,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSPEast_Ceiling,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSPEast_Wall_E,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSPEast_Floor,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSPWest_Floor,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSPWest_Ceiling,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSPWest_Wall_W,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSPSouth_Floor,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSPSouth_Ceiling,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSPSouth_Wall_S,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSPNorth_Floor,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSPNorth_Ceiling,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSPNorth_Wall_N,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFSPEast_Ceiling,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFSPEast_Wall_E,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFSPEast_Floor,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFSPWest_Floor,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFSPWest_Ceiling,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFSPWest_Wall_W,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFSPSouth_Floor,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFSPSouth_Ceiling,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFSPSouth_Wall_S,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFSPNorth_Floor,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFSPNorth_Ceiling,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFSPNorth_Wall_N,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFSPCore_Floor1,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFSPCore_Ceiling1,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSPCore_Floor1,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSPCore_Floor2,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSPCore_Ceiling1,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFSPCore_Floor1,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFSPCore_Ceiling1,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	*,                                !- Key_Value
+	UF Transition Height,             !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	*,                                        !- Key_Value
+	UF Gamma,                                 !- Variable_Name
+	hourly;                                   !- Reporting_Frequency
+	
+	Output:Variable,
+	*,                                        !- Key_Value
+	Phi,                                      !- Variable_Name
+	hourly;                                   !- Reporting_Frequency
+	
+##endif
+
+Output:Variable,
+*,                       !- Key_Value
+Zone/Sys Air Temperature,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+MFWest Reheat Coil HW Inlet,     !- Key_Value
+System Node Volume Flow Rate Standard Density ,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+AHU Supply Fan Outlet,     !- Key_Value
+System Node Temp,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+GFEast ATU Inlet Node,     !- Key_Value
+System Node Temp,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+GFWest ATU Inlet Node,     !- Key_Value
+System Node Temp,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+GFSouth ATU Inlet Node,     !- Key_Value
+System Node Temp,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+GFNorth ATU Inlet Node,     !- Key_Value
+System Node Temp,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+GFCore ATU Inlet Node,     !- Key_Value
+System Node Temp,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+GFServCore ATU Inlet Node,     !- Key_Value
+System Node Temp,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+MFEast ATU Inlet Node,     !- Key_Value
+System Node Temp,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+MFWest ATU Inlet Node,     !- Key_Value
+System Node Temp,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+MFSouth ATU Inlet Node,     !- Key_Value
+System Node Temp,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+MFNorth ATU Inlet Node,     !- Key_Value
+System Node Temp,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+MFCore ATU Inlet Node,     !- Key_Value
+System Node Temp,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+MFServCore ATU Inlet Node,     !- Key_Value
+System Node Temp,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFEast ATU Inlet Node,     !- Key_Value
+System Node Temp,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFWest ATU Inlet Node,     !- Key_Value
+System Node Temp,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFSouth ATU Inlet Node,     !- Key_Value
+System Node Temp,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFNorth ATU Inlet Node,     !- Key_Value
+System Node Temp,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFCore ATU Inlet Node,     !- Key_Value
+System Node Temp,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFServCore ATU Inlet Node,     !- Key_Value
+System Node Temp,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+GFEast ATU Outlet Node,     !- Key_Value
+System Node Temp,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+GFWest ATU Outlet Node,     !- Key_Value
+System Node Temp,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+GFSouth ATU Outlet Node,     !- Key_Value
+System Node Temp,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+GFNorth ATU Outlet Node,     !- Key_Value
+System Node Temp,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+GFCore ATU Outlet Node,     !- Key_Value
+System Node Temp,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+GFServCore ATU Outlet Node,     !- Key_Value
+System Node Temp,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+MFEast ATU Outlet Node,     !- Key_Value
+System Node Temp,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+MFWest ATU Outlet Node,     !- Key_Value
+System Node Temp,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+MFSouth ATU Outlet Node,     !- Key_Value
+System Node Temp,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+MFNorth ATU Outlet Node,     !- Key_Value
+System Node Temp,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+MFCore ATU Outlet Node,     !- Key_Value
+System Node Temp,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+MFServCore ATU Outlet Node,     !- Key_Value
+System Node Temp,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFEast ATU Outlet Node,     !- Key_Value
+System Node Temp,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFWest ATU Outlet Node,     !- Key_Value
+System Node Temp,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFSouth ATU Outlet Node,     !- Key_Value
+System Node Temp,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFNorth ATU Outlet Node,     !- Key_Value
+System Node Temp,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFCore ATU Outlet Node,     !- Key_Value
+System Node Temp,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFServCore ATU Outlet Node,     !- Key_Value
+System Node Temp,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFServCore ATU Outlet Node,     !- Key_Value
+System Node Volume Flow Rate Standard Density ,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+GFCore,     !- Key_Value
+Zone/Sys Thermostat Heating Setpoint,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+GFCore,     !- Key_Value
+Zone/Sys Thermostat Cooling Setpoint,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+MFCore,     !- Key_Value
+Zone/Sys Thermostat Heating Setpoint,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+MFCore,     !- Key_Value
+Zone/Sys Thermostat Cooling Setpoint,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFCore,     !- Key_Value
+Zone/Sys Thermostat Heating Setpoint,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFCore,     !- Key_Value
+Zone/Sys Thermostat Cooling Setpoint,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFEast,     !- Key_Value
+Zone/Sys Thermostat Heating Setpoint,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+TFEast,     !- Key_Value
+Zone/Sys Thermostat Cooling Setpoint,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+
+Output:Variable,
+GFCore Reheat Coil,     !- Key_Value
+Total Water Heating Coil Rate,        !- Variable_Name
+runperiod;                  !- Reporting_Frequency
+
+Output:Variable,
+MFCore Reheat Coil,     !- Key_Value
+Total Water Heating Coil Rate,        !- Variable_Name
+runperiod;                  !- Reporting_Frequency
+
+Output:Variable,
+TFCore Reheat Coil,     !- Key_Value
+Total Water Heating Coil Rate,        !- Variable_Name
+runperiod;                  !- Reporting_Frequency
+
+Output:Variable,
+GFEast Reheat Coil,     !- Key_Value
+Total Water Heating Coil Rate,        !- Variable_Name
+runperiod;                  !- Reporting_Frequency
+
+Output:Variable,
+GFWest Reheat Coil,     !- Key_Value
+Total Water Heating Coil Rate,        !- Variable_Name
+runperiod;                  !- Reporting_Frequency
+
+Output:Variable,
+GFSouth Reheat Coil,     !- Key_Value
+Total Water Heating Coil Rate,        !- Variable_Name
+runperiod;                  !- Reporting_Frequency
+
+Output:Variable,
+GFNorth Reheat Coil,     !- Key_Value
+Total Water Heating Coil Rate,        !- Variable_Name
+runperiod;                  !- Reporting_Frequency
+
+Output:Variable,
+MFEast Reheat Coil,     !- Key_Value
+Total Water Heating Coil Rate,        !- Variable_Name
+runperiod;                  !- Reporting_Frequency
+
+Output:Variable,
+MFWest Reheat Coil,     !- Key_Value
+Total Water Heating Coil Rate,        !- Variable_Name
+runperiod;                  !- Reporting_Frequency
+
+Output:Variable,
+MFSouth Reheat Coil,     !- Key_Value
+Total Water Heating Coil Rate,        !- Variable_Name
+runperiod;                  !- Reporting_Frequency
+
+Output:Variable,
+MFSouth Reheat Coil,     !- Key_Value
+Total Water Heating Coil Rate,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+MFNorth Reheat Coil,     !- Key_Value
+Total Water Heating Coil Rate,        !- Variable_Name
+runperiod;                  !- Reporting_Frequency
+
+Output:Variable,
+TFEast Reheat Coil,     !- Key_Value
+Total Water Heating Coil Rate,        !- Variable_Name
+runperiod;                  !- Reporting_Frequency
+
+Output:Variable,
+TFWest Reheat Coil,     !- Key_Value
+Total Water Heating Coil Rate,        !- Variable_Name
+runperiod;                  !- Reporting_Frequency
+
+Output:Variable,
+TFSouth Reheat Coil,     !- Key_Value
+Total Water Heating Coil Rate,        !- Variable_Name
+runperiod;                  !- Reporting_Frequency
+
+Output:Variable,
+TFNorth Reheat Coil,     !- Key_Value
+Total Water Heating Coil Rate,        !- Variable_Name
+runperiod;                  !- Reporting_Frequency
+
+Output:Variable,
+*,                              
+Availability Manager Night Cycle Control Status,  
+hourly;
+
+Output:Variable,
+AHU Heating Coil,     !- Key_Value
+Total Water Heating Coil Rate,        !- Variable_Name
+runperiod;                  !- Reporting_Frequency
+
+Output:Variable,
+AHU Heating Coil,     !- Key_Value
+Total Water Heating Coil Rate,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+AHU Cooling Coil,     !- Key_Value
+Total Water Cooling Coil Rate,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+AHU Cooling Coil,     !- Key_Value
+Total Water Cooling Coil Rate,        !- Variable_Name
+monthly;                  !- Reporting_Frequency
+
+Output:Variable,
+AHU Cooling Coil,     !- Key_Value
+Total Water Cooling Coil Rate,        !- Variable_Name
+annual;                  !- Reporting_Frequency
+
+Output:Variable,
+AHU Mixed Air Outlet,    !- Key_Value
+System Node Temp,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+AHU Outside Air Inlet,   !- Key_Value
+System Node Volume Flow Rate Standard Density , !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+AHU Mixed Air Outlet,    !- Key_Value
+System Node Volume Flow Rate Standard Density , !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+AHU Cooling Coil Outlet,    !- Key_Value
+System Node Temp,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+AHU Cooling Coil Outlet,   !- Key_Value
+System Node Volume Flow Rate Standard Density , !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+AHU Heating Coil Outlet,    !- Key_Value
+System Node Temp,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+AHU Heating Coil Outlet,   !- Key_Value
+System Node Volume Flow Rate Standard Density , !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+##if #[Return_System[] EQS Return_Fan ]
+Output:Variable,
+Return Fan 1 Outlet Node,    !- Key_Value
+System Node Temp,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+Return Fan 1 Outlet Node,    !- Key_Value
+System Node Volume Flow Rate Standard Density ,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+##endif
+
+Output:Variable,
+AHU Air Loop Inlet,    !- Key_Value
+System Node Temp,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+AHU Air Loop Inlet,    !- Key_Value
+System Node Volume Flow Rate Standard Density ,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+AHU Air Loop Inlet,    !- Key_Value
+System Node Humidity Ratio,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+AHU Cooling Coil Outlet,    !- Key_Value
+System Node Humidity Ratio,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+AHU Air Loop Inlet,    !- Key_Value
+System Node Relative Humidity,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+##if #[Return_System[] EQS Relief_Fan ]
+Output:Variable,
+AHU Secondary Relief Air Outlet,    !- Key_Value
+System Node Temp,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+AHU Secondary Relief Air Outlet,    !- Key_Value
+System Node Volume Flow Rate Standard Density ,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+##endif
+
+##if #[Heat_Recovery[] EQS Yes ]
+Output:Variable,
+AHU_HeatRecovery Outlet Node,    !- Key_Value
+System Node Temp,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+AHU_HeatRecovery Outlet Node,    !- Key_Value
+System Node Volume Flow Rate Standard Density ,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+AHU_HeatRecovery Secondary Outlet Node,    !- Key_Value
+System Node Temp,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+AHU_HeatRecovery Secondary Outlet Node,    !- Key_Value
+System Node Volume Flow Rate Standard Density ,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+##endif
+
+Output:Variable,
+AHU Relief Air Outlet,    !- Key_Value
+System Node Temp,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+AHU Relief Air Outlet,    !- Key_Value
+System Node Volume Flow Rate Standard Density ,        !- Variable_Name
+hourly;                  !- Reporting_Frequency
+
+Output:Variable,
+AHU SUPPLY FAN,    !- Key_Value
+Fan Electric Consumption,        !- Variable_Name
+runperiod;                  !- Reporting_Frequency
+
+##if #[Return_System[] EQS Return_Fan ]
+Output:Variable,
+RETURN FAN 1,    !- Key_Value
+Fan Electric Consumption,        !- Variable_Name
+runperiod;                  !- Reporting_Frequency
+##endif
+
+Output:Variable,
+*,                              
+Boiler Heating Output Rate,  
+hourly;
+
+Output:Variable,
+*,                              
+Boiler Part-Load Ratio,  
+hourly;
+
+Output:Variable,
+Chiller,                              
+Chiller Evap Water Inlet Temp,  
+hourly;
+
+Output:Variable,
+*,                              
+Outdoor Dry Bulb,  
+Monthly;
+
+Output:Variable,
+*,                              
+Outdoor Wet Bulb,  
+Monthly;
+                         
+Output:Variable,
+Chiller,                              
+Chiller Evap Water Outlet Temp, 
+hourly;
+                         
+Output:Variable,
+Chiller,                              
+Chiller Evap Water Mass Flow Rate,
+hourly;
+                         
+Output:Variable,
+Chiller,                              
+Chiller Cond Heat Trans Rate,  
+hourly;
+                         
+Output:Variable,
+Chiller,                              
+Chiller Cond Water Inlet Temp,  
+hourly;
+                         
+Output:Variable,
+Chiller,                              
+Chiller Cond Water Outlet Temp, 
+hourly;
+                         
+Output:Variable,
+Chiller,                              
+Chiller Cond Water Mass Flow Rate,
+hourly;
+                         
+Output:Variable,
+*,                              
+Tower Water Inlet Temp,  
+hourly;
+ 
+Output:Variable,
+*,                            
+Tower Water Outlet Temp, 
+hourly;
+ 
+Output:Variable,
+*,                              
+Tower Water Mass Flow Rate,  
+hourly;
+ 
+Output:Variable,
+*,                              
+Tower Heat Transfer,  
+hourly;
+     
+Output:Variable,
+*,                              
+Tower Fan Electric Power,
+hourly;  
+
+Output:Variable,
+*,                              
+FangerPMV,  
+hourly;  
+
+Output:Variable,
+*,                       !- Key Value
+Zone People Number Of Occupants,               !- Variable Name
+Hourly;                  !- Reporting Frequency
+
+Output:Variable,
+*,                       !- Key Value
+Time Not Comfortable Summer Or Winter Clothes,  !- Variable Name
+Hourly;                  !- Reporting Frequency
+
+
+Output:Variable,
+*,                              
+Total Water Heating Coil Rate,  
+hourly;                         
+
+Output:Variable,
+*,                              
+Total Water Cooling Coil Rate,  
+hourly;     
+
+Output:Variable,
+MFEast_Ceiling,                              
+Surface Inside Temperature,  
+hourly;
+
+Output:Variable,
+MFWest_Ceiling,                              
+Surface Inside Temperature,  
+hourly;
+
+Output:Variable,
+MFSouth_Ceiling,                              
+Surface Inside Temperature,  
+hourly;
+
+Output:Variable,
+MFNorth_Ceiling,                              
+Surface Inside Temperature,  
+hourly;
+
+! Start MFCore ceiling slab heat balance var reporting
+Output:Variable,
+MFCore_Floor1,                              
+Surface Inside Temperature,  
+hourly;
+
+Output:Variable,
+MFCore_Floor1,                              
+Surface Outside Temperature,  
+hourly;
+
+Output:Variable,
+MFCore_Wall_E,                              
+Surface Int Convection Heat Rate,  
+hourly;
+
+Output:Variable,
+MFCore,                              
+Zone Air Balance Surface Convection Rate,  
+hourly;
+
+Output:Variable,
+MFWest,                              
+Zone Air Balance Surface Convection Rate,  
+hourly;
+
+Output:Variable,
+MFCore_Wall_W,                              
+Surface Int Convection Heat Rate,  
+hourly;
+
+Output:Variable,
+MFCore_Wall_S,                              
+Surface Int Convection Heat Rate,  
+hourly;
+
+Output:Variable,
+MFCore_Wall_N,                              
+Surface Int Convection Heat Rate,  
+hourly;
+
+Output:Variable,
+MFCore_Ceiling,                              
+Surface Int Convection Heat Rate,  
+hourly;
+
+
+Output:Variable,
+TFSPCore_Floor1,                              
+Surface Inside Temperature,  
+hourly;
+
+Output:Variable,
+TFSPCore_Floor1,                              
+Surface Outside Temperature,  
+hourly;
+
+Output:Variable,
+TFSPCore_Floor1,                              
+Surface Int Convection Heat Rate,  
+hourly;
+
+Output:Variable,
+TFSPCore,                              
+Zone Mean Air Temperature,
+hourly;
+
+Output:Variable,
+TFSPCore_Floor1,                              
+Opaque Surface Inside Face Conduction,
+hourly;
+
+Output:Variable,
+MFCore_Ceiling1,                              
+Opaque Surface Inside Face Conduction,
+hourly;
+
+Output:Variable,
+TFSPCore,                              
+Zone Mean Radiant Temperature,
+hourly;
+
+! End
+
+Output:Variable,
+MFSouth_Wall_N,                              
+Surface Inside Temperature,  
+hourly;
+
+Output:Variable,
+MFSouth_Wall_N,                              
+Surface Outside Temperature,  
+hourly;
+
+Output:Variable,
+MFSouth_Wall_N,                              
+Surface Int Convection Heat Rate,  
+hourly;
+
+Output:Variable,
+MFWest_Wall_E,                              
+Surface Inside Temperature,  
+hourly;
+
+Output:Variable,
+MFWest_Wall_E,                              
+Surface Outside Temperature,  
+hourly;
+
+Output:Variable,
+MFWest_Wall_E,                              
+Surface Int Convection Heat Rate,  
+hourly;
+
+Output:Variable,
+MFWest_Wall_S,                              
+Surface Int Convection Heat Rate,  
+hourly;
+
+Output:Variable,
+MFWest_Wall_N,                              
+Surface Int Convection Heat Rate,  
+hourly;
+
+Output:Variable,
+MFEast_Wall_W,                              
+Surface Inside Temperature,  
+hourly;
+
+Output:Variable,
+MFEast_Wall_W,                              
+Surface Outside Temperature,  
+hourly;
+
+Output:Variable,
+MFEast_Wall_W,                              
+Surface Int Convection Heat Rate,  
+hourly;
+
+Output:Variable,
+MFNorth_Wall_S,                              
+Surface Inside Temperature,  
+hourly;
+
+Output:Variable,
+MFNorth_Wall_S,                              
+Surface Outside Temperature,  
+hourly;
+
+Output:Variable,
+MFNorth_Wall_S,                              
+Surface Int Convection Heat Rate,  
+hourly;
+
+Output:Variable,
+MFSouth,                              
+Zone Infiltration Total Heat Loss,  
+hourly;
+
+Output:Variable,
+*,                              
+Zone/Sys Sensible Load to Heating Setpoint Predicted,  
+hourly;
+
+Output:Variable,
+*,                              
+Zone/Sys Sensible Load to Cooling Setpoint Predicted,  
+hourly;
+
+Output:Variable,
+*,                              
+Zone/Sys Sensible Load Predicted,  
+hourly;
+
+Output:Variable,
+MFSPSouth,                              
+Zone Infiltration Total Heat Loss,  
+hourly;
+
+Output:Variable,
+MFRPSouth,                              
+Zone Infiltration Total Heat Loss,  
+hourly;
+
+Output:Variable,
+MFSPEast,                              
+Zone Infiltration Total Heat Loss,  
+hourly;
+
+Output:Variable,
+MFEast,                              
+Zone Infiltration Total Heat Loss,  
+hourly;
+
+Output:Variable,
+MFRPEast,                              
+Zone Infiltration Total Heat Loss,  
+hourly;
+
+Output:Variable,
+MFSouth,                              
+Zone Infiltration Total Heat Gain,  
+hourly;
+
+Output:Variable,
+MFSPSouth,                              
+Zone Infiltration Total Heat Gain,  
+hourly;
+
+Output:Variable,
+MFRPSouth,                              
+Zone Infiltration Total Heat Gain,  
+hourly;
+
+Output:Variable,
+MFEast,                              
+Zone Infiltration Total Heat Gain,  
+hourly;
+
+Output:Variable,
+MFSPEast,                              
+Zone Infiltration Total Heat Gain,  
+hourly;
+
+Output:Variable,
+MFRPEast,                              
+Zone Infiltration Total Heat Gain,  
+hourly;
+
+##if #[TDV_Evaluation[] EQS Yes ]
+	##if #[Weather_Location[] EQS Sacramento ]
+		
+		Output:Meter:MeterFileOnly,
+		Carbon Equivalent:Facility,
+		monthly;
+		
+		Output:Meter:MeterFileOnly,
+		CarbonEquivalentEmissions:Carbon Equivalent,
+		monthly;
+		
+		Output:Variable,
+		Sac Gas TDV,                              
+		Schedule Value,  
+		hourly;
+		
+		Output:Variable,
+		Sac Elec TDV,                              
+		Schedule Value,  
+		hourly;
+		
+		Schedule:File,
+		Sac Elec TDV,            !- Name
+		Any_Number,              !- Schedule Type Limits Name
+		TDV_kBtu_CTZ12.csv,      !- File Name
+		1,                       !- Column Number
+		4,                       !- Rows to Skip at Top
+		8760;                    !- Number of Hours of Data
+		
+		Schedule:File,
+		Sac Gas TDV,             !- Name
+		Any_Number,              !- Schedule Type Limits Name
+		TDV_kBtu_CTZ12.csv,      !- File Name
+		3,                       !- Column Number
+		4,                       !- Rows to Skip at Top
+		8760;                    !- Number of Hours of Data
+		
+		Output:EnvironmentalImpactFactors,
+		Monthly;                 !- Reporting Frequency
+		
+		EnvironmentalImpactFactors,
+		0.3,                     !- District Heating Efficiency
+		3.0,                     !- District Cooling COP
+		0.25,                    !- Steam Conversion Efficiency
+		80.7272,                 !- Total Carbon Equivalent Emission Factor From NOx {kg/kg}
+		6.2727,                  !- Total Carbon Equivalent Emission Factor From CH4 {kg/kg}
+		0.2727;                  !- Total Carbon Equivalent Emission Factor From CO2 {kg/kg}
+		
+		FuelFactors,
+		NaturalGas,              !- Existing Fuel Resource Name
+		m3,                      !- Units of Measure
+		,                        !- Energy per Unit Factor
+		0.01,                    !- Source Energy Factor {J/J}
+		Sac Gas TDV,             !- Source Energy Schedule Name
+		50.23439,                !- CO2 Emission Factor {g/MJ}
+		,                        !- CO2 Emission Factor Schedule Name
+		3.51641E-02,             !- CO Emission Factor {g/MJ}
+		,                        !- CO Emission Factor Schedule Name
+		9.62826E-04,             !- CH4 Emission Factor {g/MJ}
+		,                        !- CH4 Emission Factor Schedule Name
+		4.18620E-02,             !- NOx Emission Factor {g/MJ}
+		,                        !- NOx Emission Factor Schedule Name
+		9.20964E-04,             !- N2O Emission Factor {g/MJ}
+		,                        !- N2O Emission Factor Schedule Name
+		2.51172E-04,             !- SO2 Emission Factor {g/MJ}
+		,                        !- SO2 Emission Factor Schedule Name
+		3.18151E-03,             !- PM Emission Factor {g/MJ}
+		,                        !- PM Emission Factor Schedule Name
+		2.38613E-03,             !- PM10 Emission Factor {g/MJ}
+		,                        !- PM10 Emission Factor Schedule Name
+		7.95378E-04,             !- PM2.5 Emission Factor {g/MJ}
+		,                        !- PM2.5 Emission Factor Schedule Name
+		0,                       !- NH3 Emission Factor {g/MJ}
+		,                        !- NH3 Emission Factor Schedule Name
+		2.30241E-03,             !- NMVOC Emission Factor {g/MJ}
+		,                        !- NMVOC Emission Factor Schedule Name
+		1.08841E-07,             !- Hg Emission Factor {g/MJ}
+		,                        !- Hg Emission Factor Schedule Name
+		2.09310E-07,             !- Pb Emission Factor {g/MJ}
+		,                        !- Pb Emission Factor Schedule Name
+		0,                       !- Water Emission Factor {L/MJ}
+		,                        !- Water Emission Factor Schedule Name
+		0,                       !- Nuclear High Level Emission Factor {g/MJ}
+		,                        !- Nuclear High Level Emission Factor Schedule Name
+		0;                       !- Nuclear Low Level Emission Factor {m3/MJ}
+		
+		FuelFactors,
+		Electricity,             !- Existing Fuel Resource Name
+		kg,                      !- Units of Measure
+		,                        !- Energy per Unit Factor
+		0.293,                   !- Source Energy Factor {J/J}
+		Sac Elec TDV,            !- Source Energy Schedule Name
+		168.33317,               !- CO2 Emission Factor {g/MJ}
+		,                        !- CO2 Emission Factor Schedule Name
+		4.20616E-02,             !- CO Emission Factor {g/MJ}
+		,                        !- CO Emission Factor Schedule Name
+		1.398578E-03,            !- CH4 Emission Factor {g/MJ}
+		,                        !- CH4 Emission Factor Schedule Name
+		4.10753E-01,             !- NOx Emission Factor {g/MJ}
+		,                        !- NOx Emission Factor Schedule Name
+		2.41916E-03,             !- N2O Emission Factor {g/MJ}
+		,                        !- N2O Emission Factor Schedule Name
+		8.65731E-01,             !- SO2 Emission Factor {g/MJ}
+		,                        !- SO2 Emission Factor Schedule Name
+		2.95827E-02,             !- PM Emission Factor {g/MJ}
+		,                        !- PM Emission Factor Schedule Name
+		1.80450E-02,             !- PM10 Emission Factor {g/MJ}
+		,                        !- PM10 Emission Factor Schedule Name
+		1.15377E-02,             !- PM2.5 Emission Factor {g/MJ}
+		,                        !- PM2.5 Emission Factor Schedule Name
+		1.10837E-03,             !- NH3 Emission Factor {g/MJ}
+		,                        !- NH3 Emission Factor Schedule Name
+		3.72332E-03,             !- NMVOC Emission Factor {g/MJ}
+		,                        !- NMVOC Emission Factor Schedule Name
+		3.36414E-06,             !- Hg Emission Factor {g/MJ}
+		,                        !- Hg Emission Factor Schedule Name
+		0,                       !- Pb Emission Factor {g/MJ}
+		,                        !- Pb Emission Factor Schedule Name
+		2.10074,                 !- Water Emission Factor {L/MJ}
+		,                        !- Water Emission Factor Schedule Name
+		0,                       !- Nuclear High Level Emission Factor {g/MJ}
+		,                        !- Nuclear High Level Emission Factor Schedule Name
+		0;                       !- Nuclear Low Level Emission Factor {m3/MJ}
+		
+	##endif
+##endif
+
+##if #[UFAD_SysType[] EQS YORK ]
+	
+	Output:Variable,
+	*,                              
+	Unit Heater Heating Rate,  
+	hourly;
+	
+	Output:Variable,
+	*,                              
+	Unit Heater Fan Electric Power,  
+	hourly;
+	
+	
+##endif
+
+##if #[Whole_Floor_Breakdown[] EQS Yes ]
+	
+	##if #[Return_Plenum[] EQS Yes ]
+		
+		Output:Variable,
+		GFRPCore_Floor1,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		GFRPCore_Floor1,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		MFRPCore_Floor1,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		MFRPCore_Floor1,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		TFRPCore_Floor1,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		TFRPCore_Floor1,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		TFRPCore_Ceiling1,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		TFRPCore_Ceiling1,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		GFRPEast_Floor,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		GFRPEast_Floor,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		MFRPEast_Floor,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		MFRPEast_Floor,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		TFRPEast_Floor,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		TFRPEast_Floor,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		TFRPEast_Ceiling,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		TFRPEast_Ceiling,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		GFRPWest_Floor,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		GFRPWest_Floor,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		MFRPWest_Floor,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		MFRPWest_Floor,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		TFRPWest_Floor,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		TFRPWest_Floor,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		TFRPWest_Ceiling,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		TFRPWest_Ceiling,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		GFRPSouth_Floor,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		GFRPSouth_Floor,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		MFRPSouth_Floor,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		MFRPSouth_Floor,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		TFRPSouth_Floor,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		TFRPSouth_Floor,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		TFRPSouth_Ceiling,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		TFRPSouth_Ceiling,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		GFRPNorth_Floor,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		GFRPNorth_Floor,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		MFRPNorth_Floor,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		MFRPNorth_Floor,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		TFRPNorth_Floor,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		TFRPNorth_Floor,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		TFRPNorth_Ceiling,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		TFRPNorth_Ceiling,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		GFRPEast,    !- Key_Value
+		Zone/Sys Sensible Cooling Rate,        !- Variable_Name
+		hourly;                  !- Reporting_Frequency
+		
+		Output:Variable,
+		GFRPWest,    !- Key_Value
+		Zone/Sys Sensible Cooling Rate,        !- Variable_Name
+		hourly;                  !- Reporting_Frequency
+		
+		Output:Variable,
+		GFRPSouth,    !- Key_Value
+		Zone/Sys Sensible Cooling Rate,        !- Variable_Name
+		hourly;                  !- Reporting_Frequency
+		
+		Output:Variable,
+		GFRPNorth,    !- Key_Value
+		Zone/Sys Sensible Cooling Rate,        !- Variable_Name
+		hourly;                  !- Reporting_Frequency
+		
+		Output:Variable,
+		GFRPCore,    !- Key_Value
+		Zone/Sys Sensible Cooling Rate,        !- Variable_Name
+		hourly;                  !- Reporting_Frequency
+		
+		Output:Variable,
+		MFRPEast,    !- Key_Value
+		Zone/Sys Sensible Cooling Rate,        !- Variable_Name
+		hourly;                  !- Reporting_Frequency
+		
+		Output:Variable,
+		MFRPWest,    !- Key_Value
+		Zone/Sys Sensible Cooling Rate,        !- Variable_Name
+		hourly;                  !- Reporting_Frequency
+		
+		Output:Variable,
+		MFRPSouth,    !- Key_Value
+		Zone/Sys Sensible Cooling Rate,        !- Variable_Name
+		hourly;                  !- Reporting_Frequency
+		
+		Output:Variable,
+		MFRPNorth,    !- Key_Value
+		Zone/Sys Sensible Cooling Rate,        !- Variable_Name
+		hourly;                  !- Reporting_Frequency
+		
+		Output:Variable,
+		TFRPEast,    !- Key_Value
+		Zone/Sys Sensible Cooling Rate,        !- Variable_Name
+		hourly;                  !- Reporting_Frequency
+		
+		Output:Variable,
+		TFRPWest,    !- Key_Value
+		Zone/Sys Sensible Cooling Rate,        !- Variable_Name
+		hourly;                  !- Reporting_Frequency
+		
+		Output:Variable,
+		TFRPSouth,    !- Key_Value
+		Zone/Sys Sensible Cooling Rate,        !- Variable_Name
+		hourly;                  !- Reporting_Frequency
+		
+		Output:Variable,
+		TFRPNorth,    !- Key_Value
+		Zone/Sys Sensible Cooling Rate,        !- Variable_Name
+		hourly;                  !- Reporting_Frequency
+		
+		Output:Variable,
+		MFRPCore,    !- Key_Value
+		Zone/Sys Sensible Cooling Rate,        !- Variable_Name
+		hourly;                  !- Reporting_Frequency
+		
+		Output:Variable,
+		TFRPCore,    !- Key_Value
+		Zone/Sys Sensible Cooling Rate,        !- Variable_Name
+		hourly;                  !- Reporting_Frequency
+		
+	##endif   
+	
+	Output:Variable,
+	GFEast_Wall_E,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;
+	
+	Output:Variable,
+	GFWest_Wall_W,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;
+	
+	Output:Variable,
+	GFSouth_Wall_S,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;
+	
+	Output:Variable,
+	GFNorth_Wall_N,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;
+	
+	Output:Variable,
+	MFEast_Wall_E,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;
+	
+	Output:Variable,
+	MFWest_Wall_W,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;
+	
+	Output:Variable,
+	MFSouth_Wall_S,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;
+	
+	Output:Variable,
+	MFNorth_Wall_N,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;
+	
+	Output:Variable,
+	TFEast_Wall_E,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;
+	
+	Output:Variable,
+	TFWest_Wall_W,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;
+	
+	Output:Variable,
+	TFSouth_Wall_S,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;
+	
+	Output:Variable,
+	TFNorth_Wall_N,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;
+	
+	##if #[Return_Plenum[] EQS Yes ]
+		
+		Output:Variable,
+		GFRPEast_Wall_E,                                !- Key_Value
+		Surface Int Convection Heat Rate,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		GFRPWest_Wall_W,                                !- Key_Value
+		Surface Int Convection Heat Rate,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		GFRPSouth_Wall_S,                                !- Key_Value
+		Surface Int Convection Heat Rate,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		GFRPNorth_Wall_N,                                !- Key_Value
+		Surface Int Convection Heat Rate,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		MFRPEast_Wall_E,                                !- Key_Value
+		Surface Int Convection Heat Rate,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		MFRPWest_Wall_W,                                !- Key_Value
+		Surface Int Convection Heat Rate,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		MFRPSouth_Wall_S,                                !- Key_Value
+		Surface Int Convection Heat Rate,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		MFRPNorth_Wall_N,                                !- Key_Value
+		Surface Int Convection Heat Rate,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		TFRPEast_Wall_E,                                !- Key_Value
+		Surface Int Convection Heat Rate,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		TFRPWest_Wall_W,                                !- Key_Value
+		Surface Int Convection Heat Rate,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		TFRPSouth_Wall_S,                                !- Key_Value
+		Surface Int Convection Heat Rate,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		TFRPNorth_Wall_N,                                !- Key_Value
+		Surface Int Convection Heat Rate,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		GFRPCore_Ceiling1,                                !- Key_Value
+		Opaque Surface Inside Face Conduction,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		MFRPCore_Ceiling1,                                !- Key_Value
+		Opaque Surface Inside Face Conduction,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		TFRPCore_Ceiling1,                                !- Key_Value
+		Opaque Surface Inside Face Conduction,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		GFRPEast_Ceiling,                                !- Key_Value
+		Opaque Surface Inside Face Conduction,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		GFRPWest_Ceiling,                                !- Key_Value
+		Opaque Surface Inside Face Conduction,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		GFRPSouth_Ceiling,                                !- Key_Value
+		Opaque Surface Inside Face Conduction,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		GFRPNorth_Ceiling,                                !- Key_Value
+		Opaque Surface Inside Face Conduction,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		MFRPEast_Ceiling,                                !- Key_Value
+		Opaque Surface Inside Face Conduction,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		MFRPWest_Ceiling,                                !- Key_Value
+		Opaque Surface Inside Face Conduction,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		MFRPSouth_Ceiling,                                !- Key_Value
+		Opaque Surface Inside Face Conduction,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		MFRPNorth_Ceiling,                                !- Key_Value
+		Opaque Surface Inside Face Conduction,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		TFRPEast_Ceiling,                                !- Key_Value
+		Opaque Surface Inside Face Conduction,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		TFRPWest_Ceiling,                                !- Key_Value
+		Opaque Surface Inside Face Conduction,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		TFRPSouth_Ceiling,                                !- Key_Value
+		Opaque Surface Inside Face Conduction,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		TFRPNorth_Ceiling,                                !- Key_Value
+		Opaque Surface Inside Face Conduction,  !- Variable_Name
+		hourly;
+		
+	##endif
+	
+	Output:Variable,
+	GFNorth_Ceiling,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFNorth_Ceiling,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFNorth_Ceiling,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFSouth_Ceiling,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSouth_Ceiling,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFSouth_Ceiling,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFEast_Ceiling,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFEast_Ceiling,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFEast_Ceiling,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;       
+	
+	Output:Variable,
+	GFWest_Ceiling,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFWest_Ceiling,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFWest_Ceiling,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;       
+	
+	Output:Variable,
+	GFCore_Ceiling1,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFCore_Ceiling1,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFCore_Ceiling1,                                !- Key_Value
+	Surface Int Convection Heat Rate,  !- Variable_Name
+	hourly;
+	
+	##if #[RunType[] EQS OH ]
+		
+		Output:Variable,
+		GFCore_Floor1,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		GFCore_Floor1,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		MFCore_Floor1,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		MFCore_Floor1,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		TFCore_Floor1,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		TFCore_Floor1,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		GFCore_Floor1,                                !- Key_Value
+		Surface Int Convection Heat Rate,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		MFCore_Floor,                                !- Key_Value
+		Surface Int Convection Heat Rate,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		TFCore_Floor1,                                !- Key_Value
+		Surface Int Convection Heat Rate,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		GFEast_Floor,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		GFEast_Floor,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		MFEast_Floor,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		MFEast_Floor,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		TFEast_Floor,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		TFEast_Floor,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		GFEast_Floor,                                !- Key_Value
+		Surface Int Convection Heat Rate,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		MFEast_Floor,                                !- Key_Value
+		Surface Int Convection Heat Rate,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		TFEast_Floor,                                !- Key_Value
+		Surface Int Convection Heat Rate,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		GFWest_Floor,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		GFWest_Floor,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		MFWest_Floor,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		MFWest_Floor,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		TFWest_Floor,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		TFWest_Floor,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		GFWest_Floor,                                !- Key_Value
+		Surface Int Convection Heat Rate,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		MFWest_Floor,                                !- Key_Value
+		Surface Int Convection Heat Rate,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		TFWest_Floor,                                !- Key_Value
+		Surface Int Convection Heat Rate,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		GFSouth_Floor,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		GFSouth_Floor,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		MFSouth_Floor,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		MFSouth_Floor,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		TFSouth_Floor,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		TFSouth_Floor,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		GFSouth_Floor,                                !- Key_Value
+		Surface Int Convection Heat Rate,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		MFSouth_Floor,                                !- Key_Value
+		Surface Int Convection Heat Rate,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		TFSouth_Floor,                                !- Key_Value
+		Surface Int Convection Heat Rate,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		GFNorth_Floor,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		GFNorth_Floor,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		MFNorth_Floor,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		MFNorth_Floor,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		TFNorth_Floor,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		TFNorth_Floor,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		GFNorth_Floor,                                !- Key_Value
+		Surface Int Convection Heat Rate,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		MFNorth_Floor,                                !- Key_Value
+		Surface Int Convection Heat Rate,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		TFNorth_Floor,                                !- Key_Value
+		Surface Int Convection Heat Rate,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		GFCore_Floor1,                                !- Key_Value
+		Opaque Surface Inside Face Conduction,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		GFEast_Floor,                                !- Key_Value
+		Opaque Surface Inside Face Conduction,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		GFWest_Floor,                                !- Key_Value
+		Opaque Surface Inside Face Conduction,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		GFSouth_Floor,                                !- Key_Value
+		Opaque Surface Inside Face Conduction,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		GFNorth_Floor,                                !- Key_Value
+		Opaque Surface Inside Face Conduction,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		MFEast_Floor,                                !- Key_Value
+		Opaque Surface Inside Face Conduction,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		MFWest_Floor,                                !- Key_Value
+		Opaque Surface Inside Face Conduction,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		MFSouth_Floor,                                !- Key_Value
+		Opaque Surface Inside Face Conduction,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		MFNorth_Floor,                                !- Key_Value
+		Opaque Surface Inside Face Conduction,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		MFCore_Floor1,                                !- Key_Value
+		Opaque Surface Inside Face Conduction,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		TFEast_Floor,                                !- Key_Value
+		Opaque Surface Inside Face Conduction,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		TFWest_Floor,                                !- Key_Value
+		Opaque Surface Inside Face Conduction,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		TFSouth_Floor,                                !- Key_Value
+		Opaque Surface Inside Face Conduction,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		TFNorth_Floor,                                !- Key_Value
+		Opaque Surface Inside Face Conduction,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		TFCore_Floor1,                                !- Key_Value
+		Opaque Surface Inside Face Conduction,  !- Variable_Name
+		hourly;
+		
+	##endif     ! ##if #[RunType[] EQS OH ]
+	
+	##if #[RunType[] EQS UFAD]
+		
+		Output:Variable,
+		GFSPCore_Floor1,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		GFSPCore_Floor1,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		GFSPCore_Ceiling1,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		GFSPCore_Ceiling1,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly;                     
+		
+		Output:Variable,
+		MFSPCore_Floor1,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		MFSPCore_Floor1,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		MFSPCore_Ceiling1,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		MFSPCore_Ceiling1,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly; 
+		
+		Output:Variable,
+		TFSPCore_Floor1,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		TFSPCore_Floor1,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		TFSPCore_Ceiling1,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		TFSPCore_Ceiling1,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly; 
+		
+		Output:Variable,
+		GFSPEast_Floor,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		GFSPEast_Floor,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		GFSPEast_Ceiling,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		GFSPEast_Ceiling,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly;                     
+		
+		Output:Variable,
+		MFSPEast_Floor,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		MFSPEast_Floor,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		MFSPEast_Ceiling,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		MFSPEast_Ceiling,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly; 
+		
+		Output:Variable,
+		TFSPEast_Floor,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		TFSPEast_Floor,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		TFSPEast_Ceiling,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		TFSPEast_Ceiling,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly; 
+		
+		Output:Variable,
+		GFSPWest_Floor,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		GFSPWest_Floor,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		GFSPWest_Ceiling,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		GFSPWest_Ceiling,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly;                     
+		
+		Output:Variable,
+		MFSPWest_Floor,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		MFSPWest_Floor,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		MFSPWest_Ceiling,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		MFSPWest_Ceiling,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly; 
+		
+		Output:Variable,
+		TFSPWest_Floor,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		TFSPWest_Floor,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		TFSPWest_Ceiling,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		TFSPWest_Ceiling,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly; 
+		
+		Output:Variable,
+		GFSPSouth_Floor,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		GFSPSouth_Floor,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		GFSPSouth_Ceiling,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		GFSPSouth_Ceiling,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly;                     
+		
+		Output:Variable,
+		MFSPSouth_Floor,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		MFSPSouth_Floor,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		MFSPSouth_Ceiling,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		MFSPSouth_Ceiling,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly; 
+		
+		Output:Variable,
+		TFSPSouth_Floor,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		TFSPSouth_Floor,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		TFSPSouth_Ceiling,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		TFSPSouth_Ceiling,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly; 
+		
+		Output:Variable,
+		GFSPNorth_Floor,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		GFSPNorth_Floor,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		GFSPNorth_Ceiling,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		GFSPNorth_Ceiling,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly;                     
+		
+		Output:Variable,
+		MFSPNorth_Floor,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		MFSPNorth_Floor,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		MFSPNorth_Ceiling,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		MFSPNorth_Ceiling,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly; 
+		
+		Output:Variable,
+		TFSPNorth_Floor,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		TFSPNorth_Floor,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		TFSPNorth_Ceiling,                                !- Key_Value
+		Surface Inside Temperature,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		TFSPNorth_Ceiling,                                !- Key_Value
+		Surface Outside Temperature,  !- Variable_Name
+		hourly; 
+		
+		Output:Variable,
+		GFSPEast,    !- Key_Value
+		Zone/Sys Sensible Cooling Rate,        !- Variable_Name
+		hourly;                  !- Reporting_Frequency
+		
+		Output:Variable,
+		GFSPWest,    !- Key_Value
+		Zone/Sys Sensible Cooling Rate,        !- Variable_Name
+		hourly;                  !- Reporting_Frequency
+		
+		Output:Variable,
+		GFSPSouth,    !- Key_Value
+		Zone/Sys Sensible Cooling Rate,        !- Variable_Name
+		hourly;                  !- Reporting_Frequency
+		
+		Output:Variable,
+		GFSPNorth,    !- Key_Value
+		Zone/Sys Sensible Cooling Rate,        !- Variable_Name
+		hourly;                  !- Reporting_Frequency
+		
+		Output:Variable,
+		GFSPCore,    !- Key_Value
+		Zone/Sys Sensible Cooling Rate,        !- Variable_Name
+		hourly;                  !- Reporting_Frequency
+		
+		Output:Variable,
+		MFSPEast,    !- Key_Value
+		Zone/Sys Sensible Cooling Rate,        !- Variable_Name
+		hourly;                  !- Reporting_Frequency
+		
+		Output:Variable,
+		MFSPWest,    !- Key_Value
+		Zone/Sys Sensible Cooling Rate,        !- Variable_Name
+		hourly;                  !- Reporting_Frequency
+		
+		Output:Variable,
+		MFSPSouth,    !- Key_Value
+		Zone/Sys Sensible Cooling Rate,        !- Variable_Name
+		hourly;                  !- Reporting_Frequency
+		
+		Output:Variable,
+		MFSPNorth,    !- Key_Value
+		Zone/Sys Sensible Cooling Rate,        !- Variable_Name
+		hourly;                  !- Reporting_Frequency
+		
+		Output:Variable,
+		TFSPEast,    !- Key_Value
+		Zone/Sys Sensible Cooling Rate,        !- Variable_Name
+		hourly;                  !- Reporting_Frequency
+		
+		Output:Variable,
+		TFSPWest,    !- Key_Value
+		Zone/Sys Sensible Cooling Rate,        !- Variable_Name
+		hourly;                  !- Reporting_Frequency
+		
+		Output:Variable,
+		TFSPSouth,    !- Key_Value
+		Zone/Sys Sensible Cooling Rate,        !- Variable_Name
+		hourly;                  !- Reporting_Frequency
+		
+		Output:Variable,
+		TFSPNorth,    !- Key_Value
+		Zone/Sys Sensible Cooling Rate,        !- Variable_Name
+		hourly;                  !- Reporting_Frequency
+		
+		Output:Variable,
+		MFSPCore,    !- Key_Value
+		Zone/Sys Sensible Cooling Rate,        !- Variable_Name
+		hourly;                  !- Reporting_Frequency
+		
+		Output:Variable,
+		TFSPCore,    !- Key_Value
+		Zone/Sys Sensible Cooling Rate,        !- Variable_Name
+		hourly;                  !- Reporting_Frequency
+		
+		Output:Variable,
+		GFSPEast_Wall_E,                                !- Key_Value
+		Surface Int Convection Heat Rate,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		GFSPWest_Wall_W,                                !- Key_Value
+		Surface Int Convection Heat Rate,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		GFSPSouth_Wall_S,                                !- Key_Value
+		Surface Int Convection Heat Rate,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		GFSPNorth_Wall_N,                                !- Key_Value
+		Surface Int Convection Heat Rate,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		MFSPEast_Wall_E,                                !- Key_Value
+		Surface Int Convection Heat Rate,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		MFSPWest_Wall_W,                                !- Key_Value
+		Surface Int Convection Heat Rate,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		MFSPSouth_Wall_S,                                !- Key_Value
+		Surface Int Convection Heat Rate,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		MFSPNorth_Wall_N,                                !- Key_Value
+		Surface Int Convection Heat Rate,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		TFSPEast_Wall_E,                                !- Key_Value
+		Surface Int Convection Heat Rate,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		TFSPWest_Wall_W,                                !- Key_Value
+		Surface Int Convection Heat Rate,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		TFSPSouth_Wall_S,                                !- Key_Value
+		Surface Int Convection Heat Rate,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		TFSPNorth_Wall_N,                                !- Key_Value
+		Surface Int Convection Heat Rate,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		GFNorth_Floor,                                !- Key_Value
+		Surface Int Convection Heat Rate,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		MFNorth_Floor,                                !- Key_Value
+		Surface Int Convection Heat Rate,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		TFNorth_Floor,                                !- Key_Value
+		Surface Int Convection Heat Rate,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		GFSouth_Floor,                                !- Key_Value
+		Surface Int Convection Heat Rate,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		MFSouth_Floor,                                !- Key_Value
+		Surface Int Convection Heat Rate,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		TFSouth_Floor,                                !- Key_Value
+		Surface Int Convection Heat Rate,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		GFEast_Floor,                                !- Key_Value
+		Surface Int Convection Heat Rate,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		MFEast_Floor,                                !- Key_Value
+		Surface Int Convection Heat Rate,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		TFEast_Floor,                                !- Key_Value
+		Surface Int Convection Heat Rate,  !- Variable_Name
+		hourly;       
+		
+		Output:Variable,
+		GFWest_Floor,                                !- Key_Value
+		Surface Int Convection Heat Rate,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		MFWest_Floor,                                !- Key_Value
+		Surface Int Convection Heat Rate,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		TFWest_Floor,                                !- Key_Value
+		Surface Int Convection Heat Rate,  !- Variable_Name
+		hourly;       
+		
+		Output:Variable,
+		GFCore_Floor1,                                !- Key_Value
+		Surface Int Convection Heat Rate,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		MFCore_Floor1,                                !- Key_Value
+		Surface Int Convection Heat Rate,  !- Variable_Name
+		hourly;                           !- Reporting_Frequency
+		
+		Output:Variable,
+		TFCore_Floor1,                                !- Key_Value
+		Surface Int Convection Heat Rate,  !- Variable_Name
+		hourly;       
+		
+		Output:Variable,
+		GFSPCore_Floor1,                                !- Key_Value
+		Opaque Surface Inside Face Conduction,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		GFSPEast_Floor,                                !- Key_Value
+		Opaque Surface Inside Face Conduction,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		GFSPWest_Floor,                                !- Key_Value
+		Opaque Surface Inside Face Conduction,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		GFSPSouth_Floor,                                !- Key_Value
+		Opaque Surface Inside Face Conduction,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		GFSPNorth_Floor,                                !- Key_Value
+		Opaque Surface Inside Face Conduction,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		MFSPEast_Floor,                                !- Key_Value
+		Opaque Surface Inside Face Conduction,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		MFSPWest_Floor,                                !- Key_Value
+		Opaque Surface Inside Face Conduction,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		MFSPSouth_Floor,                                !- Key_Value
+		Opaque Surface Inside Face Conduction,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		MFSPNorth_Floor,                                !- Key_Value
+		Opaque Surface Inside Face Conduction,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		MFSPCore_Floor1,                                !- Key_Value
+		Opaque Surface Inside Face Conduction,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		TFSPEast_Floor,                                !- Key_Value
+		Opaque Surface Inside Face Conduction,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		TFSPWest_Floor,                                !- Key_Value
+		Opaque Surface Inside Face Conduction,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		TFSPSouth_Floor,                                !- Key_Value
+		Opaque Surface Inside Face Conduction,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		TFSPNorth_Floor,                                !- Key_Value
+		Opaque Surface Inside Face Conduction,  !- Variable_Name
+		hourly;
+		
+		Output:Variable,
+		TFSPCore_Floor1,                                !- Key_Value
+		Opaque Surface Inside Face Conduction,  !- Variable_Name
+		hourly;
+		
+	##endif     ! ##if #[RunType[] EQS UFAD]
+	
+##endif     ! ##if #[Whole_Floor_Breakdown[] EQS Yes ]
+
+##if #[RunType[] EQS Thermal_Decay_Analysis ]
+	
+	Output:Variable,
+	GFRPEast_Ceiling,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFRPEast_Wall_E,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFRPEast_Wall_E,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFRPEast_Ceiling,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFRPEast_Ceiling,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFRPEast_Floor,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFRPEast_Floor,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFRPWest_Floor,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFRPWest_Ceiling,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFRPWest_Wall_W,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFRPWest_Wall_W,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFRPWest_Ceiling,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFRPWest_Ceiling,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFRPWest_Floor,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFRPWest_Floor,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	
+	Output:Variable,
+	GFRPSouth_Floor,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFRPSouth_Ceiling,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFRPSouth_Wall_S,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFRPSouth_Wall_S,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFRPSouth_Ceiling,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFRPSouth_Ceiling,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFRPSouth_Floor,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFRPSouth_Floor,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFRPNorth_Floor,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFRPNorth_Ceiling,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFRPNorth_Wall_N,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFRPNorth_Wall_N,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFRPNorth_Ceiling,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFRPNorth_Ceiling,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFRPNorth_Floor,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFRPNorth_Floor,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFRPEast_Floor,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFRPEast_Ceiling,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFRPEast_Wall_E,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFRPEast_Wall_E,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFRPEast_Ceiling,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFRPEast_Ceiling,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFRPEast_Floor,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFRPEast_Floor,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFRPWest_Floor,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFRPWest_Ceiling,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFRPWest_Wall_W,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFRPWest_Wall_W,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFRPWest_Ceiling,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFRPWest_Ceiling,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFRPWest_Floor,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFRPWest_Floor,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFRPSouth_Floor,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFRPSouth_Ceiling,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFRPSouth_Wall_S,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFRPSouth_Wall_S,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFRPSouth_Ceiling,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFRPSouth_Ceiling,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFRPSouth_Floor,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFRPSouth_Floor,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFRPNorth_Floor,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFRPNorth_Ceiling,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFRPNorth_Wall_N,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFRPNorth_Wall_N,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFRPNorth_Ceiling,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFRPNorth_Ceiling,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFRPNorth_Floor,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFRPNorth_Floor,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFRPEast_Floor,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFRPEast_Ceiling,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFRPEast_Wall_E,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFRPEast_Wall_E,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFRPEast_Ceiling,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFRPEast_Ceiling,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFRPEast_Floor,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFRPEast_Floor,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFRPWest_Floor,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFRPWest_Ceiling,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFRPWest_Wall_W,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFRPWest_Wall_W,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFRPWest_Ceiling,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFRPWest_Ceiling,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFRPWest_Floor,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFRPWest_Floor,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFRPSouth_Floor,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFRPSouth_Ceiling,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFRPSouth_Wall_S,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFRPSouth_Wall_S,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFRPSouth_Ceiling,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFRPSouth_Ceiling,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFRPSouth_Floor,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFRPSouth_Floor,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFRPNorth_Floor,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFRPNorth_Ceiling,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFRPNorth_Wall_N,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFRPNorth_Wall_N,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFRPNorth_Ceiling,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFRPNorth_Ceiling,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFRPNorth_Floor,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFRPNorth_Floor,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFRPCore_Floor1,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFRPCore_Ceiling1,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFRPCore_Floor1,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFRPCore_Floor1,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFRPCore_Ceiling1,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFRPCore_Ceiling1,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFRPCore_Floor2,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFRPCore_Ceiling2,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFRPCore_Floor2,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFRPCore_Floor2,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFRPCore_Ceiling2,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFRPCore_Ceiling2,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFRPCore_Floor1,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFRPCore_Ceiling1,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFRPCore_Floor1,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFRPCore_Floor1,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFRPCore_Ceiling1,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFRPCore_Ceiling1,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFRPCore_Floor2,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFRPCore_Ceiling2,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFRPCore_Floor2,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFRPCore_Floor2,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFRPCore_Ceiling2,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFRPCore_Ceiling2,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFRPCore_Floor1,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFRPCore_Ceiling1,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFRPCore_Floor1,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFRPCore_Floor1,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFRPCore_Ceiling1,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFRPCore_Ceiling1,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFRPCore_Floor2,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFRPCore_Ceiling2,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFRPCore_Floor2,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFRPCore_Floor2,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFRPCore_Ceiling2,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFRPCore_Ceiling2,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	
+	Output:Variable,
+	GFSPEast_Floor,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFSPEast_Ceiling,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFSPEast_Wall_E,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFSPEast_Wall_E,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFSPEast_Ceiling,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFSPEast_Ceiling,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFSPEast_Floor,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFSPEast_Floor,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFSPWest_Floor,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFSPWest_Ceiling,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFSPWest_Wall_W,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFSPWest_Wall_W,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFSPWest_Ceiling,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFSPWest_Ceiling,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFSPWest_Floor,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFSPWest_Floor,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFSPSouth_Floor,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFSPSouth_Ceiling,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFSPSouth_Wall_S,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFSPSouth_Wall_S,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFSPSouth_Ceiling,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFSPSouth_Ceiling,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFSPSouth_Floor,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFSPSouth_Floor,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFSPNorth_Floor,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFSPNorth_Ceiling,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFSPNorth_Wall_N,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFSPNorth_Wall_N,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFSPNorth_Ceiling,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFSPNorth_Ceiling,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFSPNorth_Floor,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFSPNorth_Floor,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSPEast_Floor,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSPEast_Ceiling,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSPEast_Wall_E,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSPEast_Wall_E,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSPEast_Ceiling,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSPEast_Ceiling,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSPEast_Floor,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSPEast_Floor,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSPWest_Floor,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSPWest_Ceiling,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSPWest_Wall_W,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSPWest_Wall_W,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSPWest_Ceiling,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSPWest_Ceiling,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSPWest_Floor,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSPWest_Floor,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSPSouth_Floor,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSPSouth_Ceiling,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSPSouth_Wall_S,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSPSouth_Wall_S,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSPSouth_Ceiling,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSPSouth_Ceiling,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSPSouth_Floor,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSPSouth_Floor,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSPNorth_Floor,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSPNorth_Ceiling,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSPNorth_Wall_N,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSPNorth_Wall_N,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSPNorth_Ceiling,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSPNorth_Ceiling,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSPNorth_Floor,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSPNorth_Floor,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFSPEast_Floor,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFSPEast_Ceiling,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFSPEast_Wall_E,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFSPEast_Wall_E,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFSPEast_Ceiling,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFSPEast_Ceiling,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFSPEast_Floor,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFSPEast_Floor,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFSPWest_Floor,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFSPWest_Ceiling,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFSPWest_Wall_W,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFSPWest_Wall_W,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFSPWest_Ceiling,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFSPWest_Ceiling,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFSPWest_Floor,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFSPWest_Floor,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFSPSouth_Floor,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFSPSouth_Ceiling,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFSPSouth_Wall_S,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFSPSouth_Wall_S,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFSPSouth_Ceiling,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFSPSouth_Ceiling,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFSPSouth_Floor,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFSPSouth_Floor,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFSPNorth_Floor,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFSPNorth_Ceiling,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFSPNorth_Wall_N,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFSPNorth_Wall_N,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFSPNorth_Ceiling,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFSPNorth_Ceiling,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFSPNorth_Floor,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFSPNorth_Floor,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFSPCore_Floor1,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFSPCore_Ceiling1,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFSPCore_Floor1,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFSPCore_Floor1,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFSPCore_Ceiling1,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFSPCore_Ceiling1,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFSPCore_Floor2,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFSPCore_Ceiling2,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFSPCore_Floor2,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFSPCore_Floor2,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFSPCore_Ceiling2,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	GFSPCore_Ceiling2,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSPCore_Floor1,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSPCore_Ceiling1,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSPCore_Floor1,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSPCore_Floor1,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSPCore_Ceiling1,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSPCore_Ceiling1,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSPCore_Floor2,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSPCore_Ceiling2,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSPCore_Floor2,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSPCore_Floor2,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSPCore_Ceiling2,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	MFSPCore_Ceiling2,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFSPCore_Floor1,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFSPCore_Ceiling1,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFSPCore_Floor1,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFSPCore_Floor1,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFSPCore_Ceiling1,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFSPCore_Ceiling1,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFSPCore_Floor2,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFSPCore_Ceiling2,                                !- Key_Value
+	Surface Int Convection Coeff,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFSPCore_Floor2,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFSPCore_Floor2,                                !- Key_Value
+	Surface Outside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+	Output:Variable,
+	TFSPCore_Ceiling2,                                !- Key_Value
+	Surface Inside Temperature,  !- Variable_Name
+	hourly;                           !- Reporting_Frequency
+	
+##endif     ! ##if #[RunType[] EQS Thermal_Decay_Analysis ]
+
+##endif     ! ##if #[DetailedReport[] EQS Yes ]
+##endif     ! ##if #[DetailedReportTwo[] EQS Yes ]
