@@ -1,0 +1,252 @@
+##if #[RunType[] EQS UFAD]
+	
+	! ============ ZONES DATA ====================
+	!
+	! Whole-Building Overhead VAVR System EnergyPlus Input File
+	! Developed by the Center for the Built Environment, UC Berkeley, www.cbe.berkeley.edu
+	! and UCSD, (contact info??)
+	! and Taylor Engineering, www.taylor-engineering.com
+	!
+	! ========== CURRENT VERSION ==========
+	!
+	! Version: 002
+	! Revision Date: 7/16/2008
+	!
+	! ========== CHANGE HISTORY ==========
+	!
+	! Version: 002
+	! Revision Date: 7/16/2008
+	! AD: changed inside convection algorithm in ServCore supply plenums to detailed -- these plenums are not used because these zones are always OH mixing
+	!
+	! Version: 001
+	! Revision Date: 7/10/2008
+	! PT: File created by using OH file as template.
+	! PT: Added supply plenum zones.
+	!
+	!
+	! ========== GROUND FLOOR SUPPLY PLENUM ==========
+	##if #[Supply_Plenum[] EQS Single_Plenum ]
+
+	##else
+
+	! GroundFloorSupplyPlenum - GFSPNorth
+	ZONE, 
+	GFSPNorth,                                     	 	!- Zone Name
+	0,                                             		!- Relative North (to building)
+	0,                                             		!- X Origin (M)
+	0,                                             		!- Y Origin (M)
+	0,                                             		!- Z Origin (M)
+	1,                                            		!- Zone Type
+	1,                                            		!- Zone multiplier
+	,                                             		!- Zone ceiling height - Let EnergyPlus work it out
+	autocalculate,                                      	!- Zone volume
+	CBEKwang;                               		!- Zone inside convection algorithm
+	
+	! GroundFloorSupplyPlenum - GFSPEast
+	ZONE, 
+	GFSPEast,                                      		!- Zone Name
+	0,                                             		!- Relative North (to building)
+	0,                                             		!- X Origin (M)
+	0,                                             		!- Y Origin (M)
+	0,                                             		!- Z Origin (M)
+	1,                                            		!- Zone Type
+	1,                                            		!- Zone multiplier
+	,                                              		!- Zone ceiling height - Let EnergyPlus work it out
+	autocalculate,                                      	!- Zone volume
+	CBEKwang;                               		!- Zone inside convection algorithm
+	
+	! GroundFloorSupplyPlenum - GFSPSouth
+	ZONE, 
+	GFSPSouth,                                      	!- Zone Name
+	0,                                             		!- Relative North (to building)
+	0,                                             		!- X Origin (M)
+	0,                                             		!- Y Origin (M)
+	0,                                            		!- Z Origin (M)
+	1,                                            		!- Zone Type
+	1,                                            		!- Zone multiplier
+	,                                              		!- Zone ceiling height - Let EnergyPlus work it out
+	autocalculate,                                      	!- Zone volume
+	CBEKwang;                               		!- Zone inside convection algorithm
+	
+	
+	! GroundFloorSupplyPlenum - GFSPWest
+	ZONE, 
+	GFSPWest,                                      		!- Zone Name
+	0,                                             		!- Relative North (to building)
+	0,                                             		!- X Origin (M)
+	0,                                             		!- Y Origin (M)
+	0,                                             		!- Z Origin (M)
+	1,                                            		!- Zone Type
+	1,                                            		!- Zone multiplier
+	,                                              		!- Zone ceiling height - Let EnergyPlus work it out
+	autocalculate,                                      	!- Zone volume
+	CBEKwang;                               		!- Zone inside convection algorithm
+
+	##endif
+	
+	! GroundFloorSupplyPlenum - GFSPCore
+	ZONE, 
+	GFSPCore,                                      		!- Zone Name
+	0,                                             		!- Relative North (to building)
+	0,                                             		!- X Origin (M)
+	0,                                             		!- Y Origin (M)
+	0,                                             		!- Z Origin (M)
+	1,                                            		!- Zone Type
+	1,                                            		!- Zone multiplier
+	,                                              		!- Zone ceiling height - Let EnergyPlus work it out
+	autocalculate,                                    	!- Zone volume
+	CBEKwang;                               		!- Zone inside convection algorithm
+	
+	
+	! ========== MIDDLE FLOOR SUPPLY PLENUM ==========
+	##if #[Supply_Plenum[] EQS Single_Plenum ]
+
+	##else
+
+	! MiddleFloorSupplyPlenum - MFSPNorth
+	ZONE, 
+	MFSPNorth,                                      	!- Zone Name
+	0,                                            	 	!- Relative North (to building)
+	0,                                             		!- X Origin (M)
+	0,                                             		!- Y Origin (M)
+	0,                                             		!- Z Origin (M)
+	1,                                            		!- Zone Type
+	Floor_Multiplier[],                                            		!- Zone multiplier
+	,                                              		!- Zone ceiling height - Let EnergyPlus work it out
+	autocalculate,                                      	!- Zone volume
+	CBEKwang;                               		!- Zone inside convection algorithm
+	
+	! MiddleFloorSupplyPlenum - MFSPEast
+	ZONE, 
+	MFSPEast,                                      		!- Zone Name
+	0,                                             		!- Relative North (to building)
+	0,                                             		!- X Origin (M)
+	0,                                             		!- Y Origin (M)
+	0,                                             		!- Z Origin (M)
+	1,                                            		!- Zone Type
+	Floor_Multiplier[],                                            		!- Zone multiplier
+	,                                              		!- Zone ceiling height - Let EnergyPlus work it out
+	autocalculate,                                     	!- Zone volume
+	CBEKwang;                               		!- Zone inside convection algorithm
+	
+	! MiddleFloorSupplyPlenum - MFSPSouth
+	ZONE, 
+	MFSPSouth,                                      	!- Zone Name
+	0,                                             		!- Relative North (to building)
+	0,                                             		!- X Origin (M)
+	0,                                             		!- Y Origin (M)
+	0,                                             		!- Z Origin (M)
+	1,                                            		!- Zone Type
+	Floor_Multiplier[],                                            		!- Zone multiplier
+	,                                              		!- Zone ceiling height - Let EnergyPlus work it out
+	autocalculate,                                      	!- Zone volume
+	CBEKwang;                               		!- Zone inside convection algorithm
+	
+	! MiddleFloorSupplyPlenum - MFSPWest
+	ZONE, 
+	MFSPWest,                                      		!- Zone Name
+	0,                                             		!- Relative North (to building)
+	0,                                             		!- X Origin (M)
+	0,                                             		!- Y Origin (M)
+	0,                                             		!- Z Origin (M)
+	1,                                            		!- Zone Type
+	Floor_Multiplier[],                                            		!- Zone multiplier
+	,                                              		!- Zone ceiling height - Let EnergyPlus work it out
+	autocalculate,                                      	!- Zone volume
+	CBEKwang;                               		!- Zone inside convection algorithm
+
+	##endif
+	
+	! MiddleFloorSupplyPlenum - MFSPCore
+	ZONE, 
+	MFSPCore,                                      		!- Zone Name
+	0,                                             		!- Relative North (to building)
+	0,                                             		!- X Origin (M)
+	0,                                             		!- Y Origin (M)
+	0,                                             		!- Z Origin (M)
+	1,                                            		!- Zone Type
+	Floor_Multiplier[],                                            		!- Zone multiplier
+	,                                              		!- Zone ceiling height - Let EnergyPlus work it out
+	autocalculate,                                     	!- Zone volume
+	CBEKwang;                               		!- Zone inside convection algorithm
+	
+	
+	! ========== TOP FLOOR SUPPLY PLENUM ==========
+
+	##if #[Supply_Plenum[] EQS Single_Plenum ]
+
+	##else
+
+	! TopFloorSupplyPlenum - TFSPNorth
+	ZONE, 
+	TFSPNorth,                                            !- Zone Name
+	0,                                             		!- Relative North (to building)
+	0,                                             		!- X Origin (M)
+	0,                                             		!- Y Origin (M)
+	0,                                             		!- Z Origin (M)
+	1,                                            		!- Zone Type
+	1,                                            		!- Zone multiplier
+	,                                              		!- Zone ceiling height - Let EnergyPlus work it out
+	autocalculate,                                      	!- Zone volume
+	CBEKwang;                               		!- Zone inside convection algorithm
+	
+	! TopFloorSupplyPlenum - TFSPEast
+	ZONE, 
+	TFSPEast,                                      		!- Zone Name
+	0,                                             		!- Relative North (to building)
+	0,                                             		!- X Origin (M)
+	0,                                             		!- Y Origin (M)
+	0,                                             		!- Z Origin (M)
+	1,                                            		!- Zone Type
+	1,                                            		!- Zone multiplier
+	,                                              		!- Zone ceiling height - Let EnergyPlus work it out
+	autocalculate,                                      	!- Zone volume
+	CBEKwang;                               		!- Zone inside convection algorithm
+	
+	! TopFloorSupplyPlenum - TFSPSouth
+	ZONE, 
+	TFSPSouth,                                      	!- Zone Name
+	0,                                             		!- Relative North (to building)
+	0,                                             		!- X Origin (M)
+	0,                                             		!- Y Origin (M)
+	0,                                             		!- Z Origin (M)
+	1,                                            		!- Zone Type
+	1,                                            		!- Zone multiplier
+	,                                              		!- Zone ceiling height - Let EnergyPlus work it out
+	autocalculate,                                      	!- Zone volume
+	CBEKwang;                               		!- Zone inside convection algorithm
+	
+	
+	! TopFloorSupplyPlenum - TFSPWest
+	ZONE, 
+	TFSPWest,                                      		!- Zone Name
+	0,                                             		!- Relative North (to building)
+	0,                                             		!- X Origin (M)
+	0,                                             		!- Y Origin (M)
+	0,                                             		!- Z Origin (M)
+	1,                                            		!- Zone Type
+	1,                                            		!- Zone multiplier
+	,                                              		!- Zone ceiling height - Let EnergyPlus work it out
+	autocalculate,                                      	!- Zone volume
+	CBEKwang;                               		!- Zone inside convection algorithm
+
+	##endif
+	
+	! TopFloorSupplyPlenum - TFSPCore
+	ZONE, 
+	TFSPCore,                                      		!- Zone Name
+	0,                                             		!- Relative North (to building)
+	0,                                             		!- X Origin (M)
+	0,                                             		!- Y Origin (M)
+	0,                                             		!- Z Origin (M)
+	1,                                            		!- Zone Type
+	1,                                            		!- Zone multiplier
+	,                                              		!- Zone ceiling height - Let EnergyPlus work it out
+	autocalculate,                                     	!- Zone volume
+	CBEKwang;                               		!- Zone inside convection algorithm
+	
+##endif
+
+
+
+
