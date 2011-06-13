@@ -1,0 +1,60 @@
+! Whole-Building Overhead VAVR System EnergyPlus Input File
+! Developed by the Center for the Built Environment, UC Berkeley, www.cbe.berkeley.edu
+! and UC San Diego, www.ucsd.edu
+! and Taylor Engineering, www.taylor-engineering.com
+! and Lawrence Berkeley National Laboratory, www.lbl.gov
+!
+! ===== Center for the Built Environment, UC Berkeley =====
+! Author: Tom Webster, Center for the Built Environment, UC Berkeley, tomweb2@pacbell.net
+! Author: Fred Bauman, Center for the Built Environment, UC Berkeley, fbauman@berkeley.edu
+! Author: Hui Jin, Center for the Built Environment, UC Berkeley, hjin@berkeley.edu
+! Author: Phan Truong, Center for the Built Environment, UC Berkeley, ptruong2@gmail.com
+! Author: Kwang Ho Lee, Center for the Built Environment, UC Berkeley, kwhlee@berkeley.edu
+!
+! ===== Mechanical Engineering Department, UC San Diego =====
+! Author: Paul Linden, Mechanical Engineering Department, UC San Diego, pflinden@ucsd.edu
+! Author: Jong Keun Yu, Mechanical Engineering Department, UC San Diego, j1yu@ucsd.edu
+! Author: Benjamin Welle, Mechanical Engineering Department, UC San Diego
+!
+! ==== Taylor Engineering =====
+! Author: Allan Daly, Taylor Engineering, adaly@taylor-engineering.com
+!
+! ==== Lawrence Berkeley National Laboratory =====
+! Author: Paul Raftery, Lawrence Berkeley National Laboratory, pkraftery@lbl.gov or p.raftery@gmail.com
+!
+! ========== NAMING CONVENTIONS ==========
+!
+! GF        = ground floor
+! MF        = middle floor
+! TF        = top floor
+!
+! SP        = supply plenum
+! RP        = return plenum
+!
+! HW        = Hot Water
+! ChW       = Chilled Water
+! CndW      = Condenser Water
+! 
+! AHU       = Air Handling Unit
+
+! ============ INCLUDES =================
+
+##fileprefix C:\EnergyPlusV6-0-0\CBE\CBE_Model\
+
+##include 002_parameters.imf
+##include 010_simulation.imf
+##include 020_building.imf
+##include 030_zones.imf
+##include 032_zones_UFAD.imf
+##include 040_internal_loads.imf
+##include 050_surfaces_OH.imf
+##include 052_surfaces_YesRP.imf
+##include 060_systems.imf
+##include 062_systems_UFAD.imf
+##include 070_plant.imf
+##include 080_materials_constructions.imf
+##include 090_schedules.imf
+##include 100_reports.imf
+
+
+
