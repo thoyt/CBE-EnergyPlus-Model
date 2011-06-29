@@ -1,0 +1,130 @@
+! WeatherFileName=USA_AZ_Phoenix_TMY2.epw
+Site:Location,
+  USA AZ-PHOENIX,  !- Name
+  33.42,       !- Latitude {deg}
+  -112.02,       !- Longitude {deg}
+  -7.00,       !- Time Zone {hr}
+  339; !- Elevation {m}
+
+ ! PHOENIX_AZ_USA Annual Heating 99.6%, MaxDB=2.9°C
+ SizingPeriod:DesignDay,
+  PHOENIX Ann Htg 99.6% Condns DB,     !- Name
+        2.9,      !- Maximum Dry-Bulb Temperature {C}
+        0.0,      !- Daily Temp Range {C}
+        2.9,      !- Humidity Indicating Conditions at Maximum Dry-Bulb
+     97318.,      !- Barometric Pressure {Pa}
+          2,      !- Wind Speed {m/s} design conditions vs. traditional 6.71 m/s (15 mph)
+        120,      !- Wind Direction {Degrees; N=0, S=180}
+       0.00,      !- Clearness {0.0 to 1.1}
+          0,      !- Rain {0-no,1-yes}
+          0,      !- Snow on ground {0-no,1-yes}
+         21,      !- Day of Month
+         12,      !- Month
+  WinterDesignDay,!- Day Type
+          0,      !- Daylight Savings Time Indicator
+   WetBulb;      !- Humidity Indicating Type
+
+
+ ! PHOENIX_AZ_USA Annual Cooling (WB=>MDB) .4%, MDB=36°C WB=24.5°C
+ SizingPeriod:DesignDay,
+  PHOENIX Ann Clg .4% Condns WB=>MDB,     !- Name
+         36,      !- Maximum Dry-Bulb Temperature {C}
+       12.3,      !- Daily Temp Range {C}
+       24.5,      !- Humidity Indicating Conditions at Maximum Dry-Bulb
+     97318.,      !- Barometric Pressure {Pa}
+        4.1,      !- Wind Speed {m/s} design conditions vs. traditional 3.35 m/s (7mph)
+        270,      !- Wind Direction {Degrees; N=0, S=180}
+       1.00,      !- Clearness {0.0 to 1.1}
+          0,      !- Rain {0-no,1-yes}
+          0,      !- Snow on ground {0-no,1-yes}
+         21,      !- Day of Month
+          7,      !- Month
+  SummerDesignDay,!- Day Type
+          0,      !- Daylight Savings Time Indicator
+   WetBulb;      !- Humidity Indicating Type
+
+
+##if #[RunType[] EQS OH]
+Site:GroundTemperature:BuildingSurface,
+  19.266,  !- January Ground Temperature {C}
+  19.196,  !- February Ground Temperature {C}
+  20.396,  !- March Ground Temperature {C}
+  21.375,  !- April Ground Temperature {C}
+  21.525,  !- May Ground Temperature {C}
+  21.180,  !- June Ground Temperature {C}
+  21.067,  !- July Ground Temperature {C}
+  21.286,  !- August Ground Temperature {C}
+  21.442,  !- September Ground Temperature {C}
+  21.586,  !- October Ground Temperature {C}
+  20.307,  !- November Ground Temperature {C}
+  19.387;  !- December Ground Temperature {C}
+##endif
+  
+Site:WaterMainsTemperature,
+  CORRELATION,             !- Calculation Method
+  ,                        !- Temperature Schedule Name
+  22.47,               !- Annual Average Outdoor Air Temperature {C}
+  21.90;              !- Maximum Difference In Monthly Average Outdoor Air Temperatures {deltaC}
+
+  ! Exterior Walls
+Construction,
+    Exterior_wall, !- Name
+    Wood Siding,             !- Outside Layer
+    Steel Frame NonRes Wall Insulation, !- Layer 2
+    1/2IN Gypsum;            !- Layer 3
+
+
+Material,
+    Steel Frame NonRes Wall Insulation, !- Name
+    MediumRough,             !- Roughness
+    0.0539159052450989, !- Thickness {m}
+    0.049, !- Conductivity {W/m-K}
+    265.0000,                !- Density {kg/m3}
+    836.8000,                !- Specific Heat {J/kg-K}
+    0.9000,                  !- Thermal Absorptance
+    0.7000,                  !- Solar Absorptance
+    0.7000;                  !- Visible Absorptance
+
+	! Roof
+Construction,
+    Roof,        !- Name
+    Roof Membrane,           !- Layer 1
+    IEAD NonRes Roof Insulation, !- Layer 2
+    Metal Decking;           !- Layer 3
+
+Material,
+    IEAD NonRes Roof Insulation,  !- Name
+    MediumRough,             !- Roughness
+    0.124663450809702,   !- Thickness {m}
+    0.049,  !- Conductivity {W/m-K}
+    265.0000,                !- Density
+    836.8000,                !- Specific Heat
+    0.9000,                  !- Thermal Absorptance
+    0.7000,                  !- Solar Absorptance
+    0.7000;                  !- Visible Absorptance
+	
+Construction,
+  Window,  !- Name
+  Theoretical Glass (58);  !- Layer 1
+  
+Construction,
+  N_Window,  !- Name
+  Theoretical Glass (58);  !- Layer 1
+	
+WindowMaterial:Glazing,
+  Theoretical Glass (58),  !- Name
+  SpectralAverage,  !- Optical Data Type
+  ,  !- Window Glass Spectral Data Set Name
+  0.0030,  !- Thickness
+  0.2374,  !- Solar Transmittance at Normal Incidence
+  0.7126,  !- Front Side Solar Reflectance at Normal Incidence
+  0.7126,  !- Back Side Solar Reflectance at Normal Incidence
+  0.2512,  !- Visible Transmittance at Normal Incidence
+  0.6988,  !- Front Side Visible Reflectance at Normal Incidence
+  0.6988,  !- Back Side Visible Reflectance at Normal Incidence
+  0.0000,  !- Infrared Transmittance at Normal Incidence
+  0.9990,  !- Front Side Infrared Hemispherical Emissivity
+  0.9990,  !- Back Side Infrared Hemispherical Emissivity
+  3.3687,  !- Conductivity
+  1.0000,  !- Dirt Correction Factor for Solar and Visible Transmittance
+  No;  !- Solar Diffusing

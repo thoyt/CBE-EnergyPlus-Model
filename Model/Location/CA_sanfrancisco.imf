@@ -1,0 +1,147 @@
+ Site:Location,
+  Climate Zone 3_CA_USA Design_Conditions,     !- Location Name
+      37.70,     !- Latitude {N+ S-}
+    -122.20,     !- Longitude {W- E+}
+      -8.00,     !- Time Zone Relative to GMT {GMT+/-}
+       2.00;     !- Elevation {m}
+	   ! Climate Zone 3_CA_USA Annual Heating Design Conditions Wind Speed=2.2m/s Wind Dir=50
+ ! Coldest Month=JAN
+ ! Climate Zone 3_CA_USA Annual Heating 99.6%, MaxDB=2.9°C
+ SizingPeriod:DesignDay,
+  Climate Zone 3 Ann Htg 99.6% Condns DB,     !- Name
+        0.0,      !- Maximum Dry-Bulb Temperature {C}
+        0.0,      !- Daily Temp Range {C}
+        0.0,      !- Humidity Indicating Conditions at Maximum Dry-Bulb
+    101301.,      !- Barometric Pressure {Pa}
+        2.2,      !- Wind Speed {m/s} design conditions vs. traditional 6.71 m/s (15 mph)
+         50,      !- Wind Direction {Degrees; N=0, S=180}
+       0.00,      !- Clearness {0.0 to 1.1}
+          0,      !- Rain {0-no,1-yes}
+          0,      !- Snow on ground {0-no,1-yes}
+         21,      !- Day of Month
+          1,      !- Month
+  WinterDesignDay,!- Day Type
+          0,      !- Daylight Savings Time Indicator
+   WetBulb;       !- Humidity Indicating Type
+   
+    ! Climate Zone 3 Annual Cooling Design Conditions Wind Speed=4.9m/s Wind Dir=290
+ ! Hottest Month=AUG
+ ! Climate Zone 3_CA_USA Annual Cooling (DB=>MWB) .4%, MaxDB=27.7°C MWB=18.3°C
+ SizingPeriod:DesignDay,
+  Climate Zone 3 Ann Clg .4% Condns DB=>MWB,     !- Name
+       28.89,      !- Maximum Dry-Bulb Temperature {C}
+        11.11,      !- Daily Temp Range {C}
+       17.78,      !- Humidity Indicating Conditions at Maximum Dry-Bulb
+    101301.,      !- Barometric Pressure {Pa}
+        4.9,      !- Wind Speed {m/s} design conditions vs. traditional 3.35 m/s (7mph)
+        290,      !- Wind Direction {Degrees; N=0, S=180}
+       1.00,      !- Clearness {0.0 to 1.1}
+          0,      !- Rain {0-no,1-yes}
+          0,      !- Snow on ground {0-no,1-yes}
+         21,      !- Day of Month
+          8,      !- Month
+  SummerDesignDay,!- Day Type
+          0,      !- Daylight Savings Time Indicator
+   WetBulb;       !- Humidity Indicating Type
+   
+     ! Climate Zone 3 Annual Cooling Design Conditions Wind Speed=4.9m/s Wind Dir=290
+ ! Hottest Month=AUG
+ ! Climate Zone 3_CA_USA Annual Cooling (DB=>MWB) .4%, MaxDB=27.7°C MWB=18.3°C
+ SizingPeriod:DesignDay,
+  Climate Zone 3 Ann Clg .4% Condns DB=>MWB2,     !- Name
+       40,      !- Maximum Dry-Bulb Temperature {C}
+        11.11,      !- Daily Temp Range {C}
+       17.78,      !- Humidity Indicating Conditions at Maximum Dry-Bulb
+    101301.,      !- Barometric Pressure {Pa}
+        4.9,      !- Wind Speed {m/s} design conditions vs. traditional 3.35 m/s (7mph)
+        290,      !- Wind Direction {Degrees; N=0, S=180}
+       1.00,      !- Clearness {0.0 to 1.1}
+          0,      !- Rain {0-no,1-yes}
+          0,      !- Snow on ground {0-no,1-yes}
+         21,      !- Day of Month
+          1,      !- Month
+  SummerDesignDay,!- Day Type
+          0,      !- Daylight Savings Time Indicator
+   WetBulb;       !- Humidity Indicating Type
+   
+##if #[RunType[] EQS OH]
+Site:GroundTemperature:BuildingSurface,
+  19.905,  !- January Ground Temperature {C}
+  19.922,  !- February Ground Temperature {C}
+  19.910,  !- March Ground Temperature {C}
+  19.932,  !- April Ground Temperature {C}
+  19.949,  !- May Ground Temperature {C}
+  20.038,  !- June Ground Temperature {C}
+  20.327,  !- July Ground Temperature {C}
+  20.062,  !- August Ground Temperature {C}
+  20.443,  !- September Ground Temperature {C}
+  20.088,  !- October Ground Temperature {C}
+  19.986,  !- November Ground Temperature {C}
+  19.948;  !- December Ground Temperature {C}
+##endif
+	
+! Exterior Wall San Francisco
+CONSTRUCTION,
+	Exterior_wall,
+	Stone,                                            !- Stone (.0254m)
+	Insulation_Wall_SF,                               !- Wall Insulation
+	AirLayer_Vertical,                                !- Air Layer Vertical Wall
+	Gypsum;                                           !- Gypsum (.0159m)
+	
+! Window San Francisco Non-North
+CONSTRUCTION,
+	Window,               !- Name         
+	NonN_WindowMaterial;              !- Layer #3     
+
+! Window Los Angeles North
+CONSTRUCTION,
+	N_Window,                   !- Name         
+	N_WindowMaterial;              !- Layer #3     
+
+##if #[WWR_Text[] EQS Twenty]
+
+WindowMaterial:SimpleGlazingSystem,
+        NonN_WindowMaterial,    !- Name
+        0.77,                   !- U-factor
+        0.55;                   !- SHGC
+
+WindowMaterial:SimpleGlazingSystem,
+        N_WindowMaterial,    !- Name
+        0.77,                   !- U-factor
+        0.61;                   !- SHGC
+
+##endif
+
+##if #[WWR_Text[] EQS Thirty]
+
+WindowMaterial:SimpleGlazingSystem,
+        NonN_WindowMaterial,    !- Name
+        0.77,                   !- U-factor
+        0.41;                   !- SHGC
+
+WindowMaterial:SimpleGlazingSystem,
+        N_WindowMaterial,    !- Name
+        0.77,                   !- U-factor
+        0.61;                   !- SHGC
+
+##endif
+
+##if #[WWR_Text[] EQS Forty]
+
+WindowMaterial:SimpleGlazingSystem,
+        NonN_WindowMaterial,    !- Name
+        0.77,                   !- U-factor
+        0.41;                   !- SHGC
+
+WindowMaterial:SimpleGlazingSystem,
+        N_WindowMaterial,    !- Name
+        0.77,                   !- U-factor
+        0.61;                   !- SHGC
+
+##endif
+
+CONSTRUCTION,
+	Roof,
+	BltupRoofing_0375in,                                  !- Built-up Roofing 3/8" (.0095m)
+    Insulation_Roof_SF,
+    Concrete_LW80lb_6in;                          !- Concrete 8" Heavy Weight Undried Aggregate 140lb (.2032m)

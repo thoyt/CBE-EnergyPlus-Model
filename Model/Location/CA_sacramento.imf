@@ -1,0 +1,127 @@
+ Site:Location,
+  Climate Zone 12_CA_USA Design_Conditions,     !- Location Name
+      38.50,     !- Latitude {N+ S-}
+    -121.50,     !- Longitude {W- E+}
+      -8.00,     !- Time Zone Relative to GMT {GMT+/-}
+       5.00;     !- Elevation {m}
+
+ ! Climate Zone 12_CA_USA Annual Heating 99.6%, MaxDB=-0.4°C
+ SizingPeriod:DesignDay,
+  Climate Zone 12 Ann Htg 99.6% Condns DB,     !- Name
+       -3.33,      !- Maximum Dry-Bulb Temperature {C}
+        0.0,      !- Daily Temp Range {C}
+       -3.33,      !- Humidity Indicating Conditions at Maximum Dry-Bulb
+    101265.,      !- Barometric Pressure {Pa}
+        0.9,      !- Wind Speed {m/s} design conditions vs. traditional 6.71 m/s (15 mph)
+        320,      !- Wind Direction {Degrees; N=0, S=180}
+       0.00,      !- Clearness {0.0 to 1.1}
+          0,      !- Rain {0-no,1-yes}
+          0,      !- Snow on ground {0-no,1-yes}
+         21,      !- Day of Month
+         12,      !- Month
+  WinterDesignDay,!- Day Type
+          0,      !- Daylight Savings Time Indicator
+   WetBulb;       !- Humidity Indicating Type
+	
+ ! Climate Zone 12 Annual Cooling Design Conditions Wind Speed=3.4m/s Wind Dir=220
+ ! Hottest Month=JUL
+ ! Climate Zone 12_CA_USA Annual Cooling (DB=>MWB) .4%, MaxDB=37.9°C MWB=21.3°C
+ SizingPeriod:DesignDay,
+  Climate Zone 12 Ann Clg .4% Condns DB=>MWB,     !- Name
+       37.78,      !- Maximum Dry-Bulb Temperature {C}
+       19.44,      !- Daily Temp Range {C}
+       21.11,      !- Humidity Indicating Conditions at Maximum Dry-Bulb
+    101265.,      !- Barometric Pressure {Pa}
+        3.4,      !- Wind Speed {m/s} design conditions vs. traditional 3.35 m/s (7mph)
+        220,      !- Wind Direction {Degrees; N=0, S=180}
+       1.00,      !- Clearness {0.0 to 1.1}
+          0,      !- Rain {0-no,1-yes}
+          0,      !- Snow on ground {0-no,1-yes}
+         21,      !- Day of Month
+          7,      !- Month
+  SummerDesignDay,!- Day Type
+          0,      !- Daylight Savings Time Indicator
+   WetBulb;       !- Humidity Indicating Type
+
+##if #[RunType[] EQS OH]
+Site:GroundTemperature:BuildingSurface,
+  20.133,  !- January Ground Temperature {C}
+  20.114,  !- February Ground Temperature {C}
+  20.098,  !- March Ground Temperature {C}
+  20.195,  !- April Ground Temperature {C}
+  20.555,  !- May Ground Temperature {C}
+  20.958,  !- June Ground Temperature {C}
+  22.367,  !- July Ground Temperature {C}
+  22.700,  !- August Ground Temperature {C}
+  22.775,  !- September Ground Temperature {C}
+  21.957,  !- October Ground Temperature {C}
+  20.592,  !- November Ground Temperature {C}
+  20.216;  !- December Ground Temperature {C}
+##endif	
+	
+! Window Sacramento Non-North
+CONSTRUCTION,
+	Window,               !- Name         
+	NonN_WindowMaterial;              !- Layer #3     
+
+! Window Los Angeles North
+CONSTRUCTION,
+	N_Window,                   !- Name         
+	N_WindowMaterial;              !- Layer #3     
+
+##if #[WWR_Text[] EQS Twenty]
+
+WindowMaterial:SimpleGlazingSystem,
+        NonN_WindowMaterial,    !- Name
+        0.47,                   !- U-factor
+        0.36;                   !- SHGC
+
+WindowMaterial:SimpleGlazingSystem,
+        N_WindowMaterial,    !- Name
+        0.47,                   !- U-factor
+        0.51;                   !- SHGC
+
+##endif
+
+##if #[WWR_Text[] EQS Thirty]
+
+WindowMaterial:SimpleGlazingSystem,
+        NonN_WindowMaterial,    !- Name
+        0.47,                   !- U-factor
+        0.36;                   !- SHGC
+
+WindowMaterial:SimpleGlazingSystem,
+        N_WindowMaterial,    !- Name
+        0.47,                   !- U-factor
+        0.47;                   !- SHGC
+
+##endif
+
+##if #[WWR_Text[] EQS Forty]
+
+WindowMaterial:SimpleGlazingSystem,
+        NonN_WindowMaterial,    !- Name
+        0.47,                   !- U-factor
+        0.31;                   !- SHGC
+
+WindowMaterial:SimpleGlazingSystem,
+        N_WindowMaterial,    !- Name
+        0.47,                   !- U-factor
+        0.47;                   !- SHGC
+
+##endif
+
+! Exterior Wall Sacramento
+CONSTRUCTION,
+Exterior_wall,                                      !- Stone (.0254m)         
+Stone,                                            !- Wall Insulation        
+Insulation_Wall_Sac,                              !- Air Layer Vertical Wall
+AirLayer_Vertical,                                !- Gypsum (.0159m)        
+Gypsum;     
+
+! Roof Sacramento
+CONSTRUCTION,
+	Roof,
+	BltupRoofing_0375in,                                  !- Built-up Roofing 3/8" (.0095m)
+    Insulation_Roof_Sac,
+    Concrete_LW80lb_6in;         !- Concrete 8" Heavy Weight Undried Aggregate 140lb (.2032m)
