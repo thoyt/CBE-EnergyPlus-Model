@@ -39,22 +39,21 @@
 
 ! ============ INCLUDES =================
 
-##fileprefix C:\EnergyPlusV6-0-0\CBE\CBE_Model\
-
-##include 002_parameters.imf
-##include 010_simulation.imf
-##include 020_building.imf
-##include 030_zones.imf
-##include 032_zones_UFAD.imf
-##include 040_internal_loads.imf
-##include 050_surfaces_OH.imf
-##include 052_surfaces_YesRP.imf
-##include 060_systems.imf
-##include 062_systems_UFAD.imf
-##include 070_plant.imf
-##include 080_materials_constructions.imf
-##include 090_schedules.imf
-##include 100_reports.imf
+##include C:\EnergyPlusV6-0-0\CBE\Mass\002_parameters.imf
+##include C:\EnergyPlusV6-0-0\CBE\Mass\010_simulation.imf
+##include C:\EnergyPlusV6-0-0\CBE\Mass\020_building.imf
+##include C:\EnergyPlusV6-0-0\CBE\Mass\030_zones.imf
+##include C:\EnergyPlusV6-0-0\CBE\Mass\032_zones_UFAD.imf
+##include C:\EnergyPlusV6-0-0\CBE\Mass\040_internal_loads.imf
+##include C:\EnergyPlusV6-0-0\CBE\Mass\050_surfaces_OH.imf
+##include C:\EnergyPlusV6-0-0\CBE\Mass\052_surfaces_YesRP.imf
+! ##include C:\EnergyPlusV6-0-0\CBE\Mass\054_surfaces_NoRP.imf
+##include C:\EnergyPlusV6-0-0\CBE\Mass\060_systems.imf
+##include C:\EnergyPlusV6-0-0\CBE\Mass\062_systems_UFAD.imf
+##include C:\EnergyPlusV6-0-0\CBE\Mass\070_plant.imf
+##include C:\EnergyPlusV6-0-0\CBE\Mass\080_materials_constructions.imf
+##include C:\EnergyPlusV6-0-0\CBE\Mass\090_schedules.imf
+##include C:\EnergyPlusV6-0-0\CBE\Mass\100_reports.imf
 
 
 
