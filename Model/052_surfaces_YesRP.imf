@@ -1,6 +1,6 @@
 ##if #[RunType[] EQS UFAD]
 	##if #[Return_Plenum[] EQS Yes ]
-	##if #[Supply_Plenum[] EQS Single_Plenum ]
+	##if #[#[Supply_Plenum[] EQS Single_Plenum ] or #[Supply_Plenum[] EQS DuctedPerimeter ]]
 
 			! ========== GROUND FLOOR SUPPLY PLENUM GFSPNorth ==========
 		! GroundFloorSupplyPlenum, GFSPNorth, Ground floor (Ground), Surface Area: 2362.83 ft2 (219.5145 m2)
@@ -5339,7 +5339,7 @@
 		Perimeter_Ground_UFAD_Sched;    ! Name of schedule defining additional ground temperature.	
 
 
-	##else     ! ##if #[Supply_Plenum[] EQS Single_Plenum ]
+	##else     ! ##if #[#[Supply_Plenum[] EQS Single_Plenum ] or #[Supply_Plenum[] EQS DuctedPerimeter ]]
 		
 		! ============ SURFACES INPUT DATA ====================
 		!
@@ -11427,6 +11427,6 @@
 		0,                      !- OSC ZoneAirTemp
 		Perimeter_Ground_UFAD_Sched;    ! Name of schedule defining additional ground temperature.	
 
-	##endif	    ! ##if #[Supply_Plenum[] EQS Single_Plenum ]
+	##endif	    ! ##if #[#[Supply_Plenum[] EQS Single_Plenum ] or #[Supply_Plenum[] EQS DuctedPerimeter ]]
 	##endif     ! ##if #[Return_Plenum[] EQS Yes ]
 ##endif

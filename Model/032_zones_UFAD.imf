@@ -25,7 +25,7 @@
 	!
 	!
 	! ========== GROUND FLOOR SUPPLY PLENUM ==========
-	##if #[Supply_Plenum[] EQS Single_Plenum ]
+	##if #[#[Supply_Plenum[] EQS Single_Plenum ] or #[Supply_Plenum[] EQS DuctedPerimeter ]]
 
 	##else
 
@@ -99,7 +99,7 @@
 	
 	
 	! ========== MIDDLE FLOOR SUPPLY PLENUM ==========
-	##if #[Supply_Plenum[] EQS Single_Plenum ]
+	##if #[#[Supply_Plenum[] EQS Single_Plenum ] or #[Supply_Plenum[] EQS DuctedPerimeter ]]
 
 	##else
 
@@ -173,7 +173,7 @@
 	
 	! ========== TOP FLOOR SUPPLY PLENUM ==========
 
-	##if #[Supply_Plenum[] EQS Single_Plenum ]
+	##if #[#[Supply_Plenum[] EQS Single_Plenum ] or #[Supply_Plenum[] EQS DuctedPerimeter ]]
 
 	##else
 

@@ -747,6 +747,66 @@
 
 		##endif     ! ##if #[Supply_Plenum[] EQS Single_Plenum ]
 
+		##if #[Supply_Plenum[] EQS DuctedPerimeter ]
+			
+			AirLoopHVAC:SupplyPath,
+			Zones SA Path,           !- Supply Air Path Name
+			Zones SA Path Inlet,     !- Supply Air Path Inlet Node
+			AirLoopHVAC:ZONESPLITTER,           !- KEY--System Component Type 1
+			Zones Main SA Splitter,  !- Component Name 1
+			AirLoopHVAC:SupplyPlenum,      !- KEY--System Component Type 2
+			GFCore Supply Plenum,    !- Component Name 2
+			AirLoopHVAC:SupplyPlenum,      !- KEY--System Component Type 2
+			MFCore Supply Plenum,    !- Component Name 2
+			AirLoopHVAC:SupplyPlenum,      !- KEY--System Component Type 2
+			TFCore Supply Plenum;    !- Component Name 2
+			
+				!-   ===========  ALL OBJECTS IN CLASS: AirLoopHVAC:SupplyPlenum ===========
+				
+				AirLoopHVAC:SupplyPlenum,
+				GFCore Supply Plenum,    !- Zone Plenum Name
+				GFSPCore,                !- Zone Name
+				GFSPCore Zone Node,      !- Zone Node Name
+				GFSPCore Inlet Node,     !- Inlet_Node
+				GFCore ATU Inlet Node;    !- Outlet_Node_1
+				
+				AirLoopHVAC:SupplyPlenum,
+				MFCore Supply Plenum,    !- Zone Plenum Name
+				MFSPCore,                !- Zone Name
+				MFSPCore Zone Node,      !- Zone Node Name
+				MFSPCore Inlet Node,     !- Inlet_Node
+				MFCore ATU Inlet Node;    !- Outlet_Node_1
+				
+				AirLoopHVAC:SupplyPlenum,
+				TFCore Supply Plenum,    !- Zone Plenum Name
+				TFSPCore,                !- Zone Name
+				TFSPCore Zone Node,      !- Zone Node Name
+				TFSPCore Inlet Node,     !- Inlet_Node
+				TFCore ATU Inlet Node;    !- Outlet_Node_1
+				
+				!-   ===========  ALL OBJECTS IN CLASS: AirLoopHVAC:ZONESPLITTER ===========
+				
+				AirLoopHVAC:ZONESPLITTER,
+				Zones Main SA Splitter,  !- Splitter Name
+				Zones SA Path Inlet,     !- Inlet_Node
+				GFSPCore Inlet Node,     !- Outlet_Node_1
+				MFSPCore Inlet Node,     !- Outlet_Node_2
+				TFSPCore Inlet Node,     !- Outlet_Node_3
+				GFEast ATU Inlet Node, 
+				GFWest ATU Inlet Node,
+				GFSouth ATU Inlet Node,
+				GFNorth ATU Inlet Node,
+				MFEast ATU Inlet Node, 
+				MFWest ATU Inlet Node,
+				MFSouth ATU Inlet Node,
+				MFNorth ATU Inlet Node,
+				TFEast ATU Inlet Node, 
+				TFWest ATU Inlet Node,
+				TFSouth ATU Inlet Node,
+				TFNorth ATU Inlet Node;
+
+		##endif     ! ##if #[Supply_Plenum[] EQS DuctedPerimeter ]
+
 		
 		##if #[Return_Plenum[] EQS No ]
 			AirLoopHVAC:ReturnPath,
@@ -997,7 +1057,11 @@
 			MFEast FCU Fan,          !- Fan Name
 			Sch_Always_On,                      !- Available Schedule
 			0.15,                     !- Fan Total Efficiency
+			##if #[Supply_Plenum[] EQS DuctedPerimeter ]
+			0,
+			##else
 			125,                     !- Delta Pressure {Pa}
+			##endif
 			FSFan_Max_CoolingAir_MFEast[],                !- Max Flow Rate {m3/s}
 			FixedFlowRate,
 			,
@@ -1016,7 +1080,11 @@
 			MFWest FCU Fan,          !- Fan Name
 			Sch_Always_On,                      !- Available Schedule
 			0.15,                     !- Fan Total Efficiency
+			##if #[Supply_Plenum[] EQS DuctedPerimeter ]
+			0,
+			##else
 			125,                     !- Delta Pressure {Pa}
+			##endif
 			FSFan_Max_CoolingAir_MFWest[],                !- Max Flow Rate {m3/s}
 			FixedFlowRate,
 			,
@@ -1035,7 +1103,11 @@
 			MFSouth FCU Fan,          !- Fan Name
 			Sch_Always_On,                      !- Available Schedule
 			0.15,                     !- Fan Total Efficiency
+			##if #[Supply_Plenum[] EQS DuctedPerimeter ]
+			0,
+			##else
 			125,                     !- Delta Pressure {Pa}
+			##endif
 			FSFan_Max_CoolingAir_MFSouth[],                !- Max Flow Rate {m3/s}
 			FixedFlowRate,
 			,
@@ -1054,7 +1126,11 @@
 			MFNorth FCU Fan,          !- Fan Name
 			Sch_Always_On,                      !- Available Schedule
 			0.15,                     !- Fan Total Efficiency
+			##if #[Supply_Plenum[] EQS DuctedPerimeter ]
+			0,
+			##else
 			125,                     !- Delta Pressure {Pa}
+			##endif
 			FSFan_Max_CoolingAir_MFNorth[],                !- Max Flow Rate {m3/s}
 			FixedFlowRate,
 			,
@@ -1073,7 +1149,11 @@
 			TFEast FCU Fan,          !- Fan Name
 			Sch_Always_On,                      !- Available Schedule
 			0.15,                     !- Fan Total Efficiency
+			##if #[Supply_Plenum[] EQS DuctedPerimeter ]
+			0,
+			##else
 			125,                     !- Delta Pressure {Pa}
+			##endif
 			FSFan_Max_CoolingAir_TFEast[],                !- Max Flow Rate {m3/s}
 			FixedFlowRate,
 			,
@@ -1092,7 +1172,11 @@
 			TFWest FCU Fan,          !- Fan Name
 			Sch_Always_On,                      !- Available Schedule
 			0.15,                     !- Fan Total Efficiency
+			##if #[Supply_Plenum[] EQS DuctedPerimeter ]
+			0,
+			##else
 			125,                     !- Delta Pressure {Pa}
+			##endif
 			FSFan_Max_CoolingAir_TFWest[],                !- Max Flow Rate {m3/s}
 			FixedFlowRate,
 			,
@@ -1111,7 +1195,11 @@
 			TFSouth FCU Fan,          !- Fan Name
 			Sch_Always_On,                      !- Available Schedule
 			0.15,                     !- Fan Total Efficiency
+			##if #[Supply_Plenum[] EQS DuctedPerimeter ]
+			0,
+			##else
 			125,                     !- Delta Pressure {Pa}
+			##endif
 			FSFan_Max_CoolingAir_TFSouth[],                !- Max Flow Rate {m3/s}
 			FixedFlowRate,
 			,
@@ -1130,7 +1218,11 @@
 			TFNorth FCU Fan,          !- Fan Name
 			Sch_Always_On,                      !- Available Schedule
 			0.15,                     !- Fan Total Efficiency
+			##if #[Supply_Plenum[] EQS DuctedPerimeter ]
+			0,
+			##else
 			125,                     !- Delta Pressure {Pa}
+			##endif
 			FSFan_Max_CoolingAir_TFNorth[],                !- Max Flow Rate {m3/s}
 			FixedFlowRate,
 			,
@@ -1149,7 +1241,11 @@
 			GFEast FCU Fan,          !- Fan Name
 			Sch_Always_On,                      !- Available Schedule
 			0.15,                     !- Fan Total Efficiency
+			##if #[Supply_Plenum[] EQS DuctedPerimeter ]
+			0,
+			##else
 			125,                     !- Delta Pressure {Pa}
+			##endif
 			FSFan_Max_CoolingAir_GFEast[],                !- Max Flow Rate {m3/s}
 			FixedFlowRate,
 			,
@@ -1168,7 +1264,11 @@
 			GFWest FCU Fan,          !- Fan Name
 			Sch_Always_On,                      !- Available Schedule
 			0.15,                     !- Fan Total Efficiency
+			##if #[Supply_Plenum[] EQS DuctedPerimeter ]
+			0,
+			##else
 			125,                     !- Delta Pressure {Pa}
+			##endif
 			FSFan_Max_CoolingAir_GFWest[],                !- Max Flow Rate {m3/s}
 			FixedFlowRate,
 			,
@@ -1187,7 +1287,11 @@
 			GFSouth FCU Fan,          !- Fan Name
 			Sch_Always_On,                      !- Available Schedule
 			0.15,                     !- Fan Total Efficiency
+			##if #[Supply_Plenum[] EQS DuctedPerimeter ]
+			0,
+			##else
 			125,                     !- Delta Pressure {Pa}
+			##endif
 			FSFan_Max_CoolingAir_GFSouth[],                !- Max Flow Rate {m3/s}
 			FixedFlowRate,
 			,
@@ -1206,7 +1310,11 @@
 			GFNorth FCU Fan,          !- Fan Name
 			Sch_Always_On,                      !- Available Schedule
 			0.15,                     !- Fan Total Efficiency
+			##if #[Supply_Plenum[] EQS DuctedPerimeter ]
+			0,
+			##else
 			125,                     !- Delta Pressure {Pa}
+			##endif
 			FSFan_Max_CoolingAir_GFNorth[],                !- Max Flow Rate {m3/s}
 			FixedFlowRate,
 			,
@@ -2201,188 +2309,4 @@
 			
 		##endif    ! ##if #[UFAD_SysType[] EQS YORK ]
 	   
-##endif
-
-			
-			##if #[Supply_Plenum[] EQS Reverse_Series ]
-				
-				
-			AirLoopHVAC:SupplyPath,
-			Zones SA Path,           !- Supply Air Path Name
-			Zones SA Path Inlet,     !- Supply Air Path Inlet Node
-			AirLoopHVAC:ZONESPLITTER,           !- KEY--System Component Type 1
-			Zones Main SA Splitter,  !- Component Name 1
-			AirLoopHVAC:ReturnPlenum,      !- KEY--System Component Type 2
-			GFCore Supply Plenum,    !- Component Name 2
-			AirLoopHVAC:SupplyPlenum,      !- KEY--System Component Type 2
-			GFEast Supply Plenum,    !- Component Name 2
-			AirLoopHVAC:SupplyPlenum,      !- KEY--System Component Type 2
-			GFWest Supply Plenum,    !- Component Name 2
-			AirLoopHVAC:SupplyPlenum,      !- KEY--System Component Type 2
-			GFSouth Supply Plenum,    !- Component Name 2
-			AirLoopHVAC:SupplyPlenum,      !- KEY--System Component Type 2
-			GFNorth Supply Plenum,    !- Component Name 2
-			AirLoopHVAC:ReturnPlenum,      !- KEY--System Component Type 2
-			MFCore Supply Plenum,    !- Component Name 2
-			AirLoopHVAC:SupplyPlenum,      !- KEY--System Component Type 2
-			MFEast Supply Plenum,    !- Component Name 2
-			AirLoopHVAC:SupplyPlenum,      !- KEY--System Component Type 2
-			MFWest Supply Plenum,    !- Component Name 2
-			AirLoopHVAC:SupplyPlenum,      !- KEY--System Component Type 2
-			MFSouth Supply Plenum,    !- Component Name 2
-			AirLoopHVAC:SupplyPlenum,      !- KEY--System Component Type 2
-			MFNorth Supply Plenum,    !- Component Name 2
-			AirLoopHVAC:ReturnPlenum,      !- KEY--System Component Type 2
-			TFCore Supply Plenum,    !- Component Name 2
-			AirLoopHVAC:SupplyPlenum,      !- KEY--System Component Type 2
-			TFEast Supply Plenum,    !- Component Name 2
-			AirLoopHVAC:SupplyPlenum,      !- KEY--System Component Type 2
-			TFWest Supply Plenum,    !- Component Name 2
-			AirLoopHVAC:SupplyPlenum,      !- KEY--System Component Type 2
-			TFSouth Supply Plenum,    !- Component Name 2
-			AirLoopHVAC:SupplyPlenum,      !- KEY--System Component Type 2
-			TFNorth Supply Plenum;    !- Component Name 2
-				
-				
-				!-   ===========  ALL OBJECTS IN CLASS: AirLoopHVAC:SupplyPlenum ===========
-				
-				AirLoopHVAC:ReturnPlenum,
-				GFCore Supply Plenum,    !- Zone Plenum Name
-				GFSPCore,                !- Zone Name
-				GFSPCore Zone Node,      !- Zone Node Name
- 				GFCore ATU Inlet Node,    !- Outlet node name
-					!The inlet nodes would be the outlet nodes of the perimeter plenums
-	!			GFSPCore ATU Inlet Node,     !- Inlet_Node_Names
-				GFSPWest ATU Inlet Node, 
-				GFSPEast ATU Inlet Node,
-				GFSPSouth ATU Inlet Node,
-				GFSPNorth ATU Inlet Node;
-				
-				AirLoopHVAC:SupplyPlenum,
-				GFEast Supply Plenum,    !- Zone Plenum Name
-				GFSPEast,                !- Zone Name
-				GFSPEast Zone Node,      !- Zone Node Name
-				GFSPEast Inlet Node,     !- Inlet_Node
-				GFEast ATU Inlet Node;    !- Outlet_Node_1
-				
-				AirLoopHVAC:SupplyPlenum,
-				GFWest Supply Plenum,    !- Zone Plenum Name
-				GFSPWest,                !- Zone Name
-				GFSPWest Zone Node,      !- Zone Node Name
-				GFSPWest Inlet Node,     !- Inlet_Node
-				GFWest ATU Inlet Node;    !- Outlet_Node_1
-				
-				AirLoopHVAC:SupplyPlenum,
-				GFSouth Supply Plenum,    !- Zone Plenum Name
-				GFSPSouth,                !- Zone Name
-				GFSPSouth Zone Node,      !- Zone Node Name
-				GFSPSouth Inlet Node,     !- Inlet_Node
-				GFSouth ATU Inlet Node;    !- Outlet_Node_1
-				
-				AirLoopHVAC:SupplyPlenum,
-				GFNorth Supply Plenum,    !- Zone Plenum Name
-				GFSPNorth,                !- Zone Name
-				GFSPNorth Zone Node,      !- Zone Node Name
-				GFSPNorth Inlet Node,     !- Inlet_Node
-				GFNorth ATU Inlet Node;    !- Outlet_Node_1
-				
-				AirLoopHVAC:ReturnPlenum,
-				MFCore Supply Plenum,    !- Zone Plenum Name
-				MFSPCore,                !- Zone Name
-				MFSPCore Zone Node,      !- Zone Node Name
- 				MFCore ATU Inlet Node,    !- Outlet node name
-					!The inlet nodes would be the outlet nodes of the perimeter plenums
-!				MFSPCore ATU Inlet Node,     !- Inlet_Node_Names
-				MFSPWest ATU Inlet Node, 
-				MFSPEast ATU Inlet Node,
-				MFSPSouth ATU Inlet Node,
-				MFSPNorth ATU Inlet Node;
-				
-				AirLoopHVAC:SupplyPlenum,
-				MFEast Supply Plenum,    !- Zone Plenum Name
-				MFSPEast,                !- Zone Name
-				MFSPEast Zone Node,      !- Zone Node Name
-				MFSPEast Inlet Node,     !- Inlet_Node
-				MFEast ATU Inlet Node;    !- Outlet_Node_1
-				
-				AirLoopHVAC:SupplyPlenum,
-				MFWest Supply Plenum,    !- Zone Plenum Name
-				MFSPWest,                !- Zone Name
-				MFSPWest Zone Node,      !- Zone Node Name
-				MFSPWest Inlet Node,     !- Inlet_Node
-				MFWest ATU Inlet Node;    !- Outlet_Node_1
-				
-				AirLoopHVAC:SupplyPlenum,
-				MFSouth Supply Plenum,    !- Zone Plenum Name
-				MFSPSouth,                !- Zone Name
-				MFSPSouth Zone Node,      !- Zone Node Name
-				MFSPSouth Inlet Node,     !- Inlet_Node
-				MFSouth ATU Inlet Node;    !- Outlet_Node_1
-				
-				AirLoopHVAC:SupplyPlenum,
-				MFNorth Supply Plenum,    !- Zone Plenum Name
-				MFSPNorth,                !- Zone Name
-				MFSPNorth Zone Node,      !- Zone Node Name
-				MFSPNorth Inlet Node,     !- Inlet_Node
-				MFNorth ATU Inlet Node;    !- Outlet_Node_1
-				
-				AirLoopHVAC:ReturnPlenum,
-				TFCore Supply Plenum,    !- Zone Plenum Name
-				TFSPCore,                !- Zone Name
-				TFSPCore Zone Node,      !- Zone Node Name
- 				TFCore ATU Inlet Node,    !- Outlet node name
-					!The inlet nodes would be the outlet nodes of the perimeter plenums
-		!		TFSPCore ATU Inlet Node,     !- Inlet_Node_Names
-				TFSPWest ATU Inlet Node, 
-				TFSPEast ATU Inlet Node,
-				TFSPSouth ATU Inlet Node,
-				TFSPNorth ATU Inlet Node;
-				
-				AirLoopHVAC:SupplyPlenum,
-				TFEast Supply Plenum,    !- Zone Plenum Name
-				TFSPEast,                !- Zone Name
-				TFSPEast Zone Node,      !- Zone Node Name
-				TFSPEast Inlet Node,     !- Inlet_Node
-				TFEast ATU Inlet Node;    !- Outlet_Node_1
-				
-				AirLoopHVAC:SupplyPlenum,
-				TFWest Supply Plenum,    !- Zone Plenum Name
-				TFSPWest,                !- Zone Name
-				TFSPWest Zone Node,      !- Zone Node Name
-				TFSPWest Inlet Node,     !- Inlet_Node
-				TFWest ATU Inlet Node;    !- Outlet_Node_1
-				
-				AirLoopHVAC:SupplyPlenum,
-				TFSouth Supply Plenum,    !- Zone Plenum Name
-				TFSPSouth,                !- Zone Name
-				TFSPSouth Zone Node,      !- Zone Node Name
-				TFSPSouth Inlet Node,     !- Inlet_Node
-				TFSouth ATU Inlet Node;    !- Outlet_Node_1
-				
-				AirLoopHVAC:SupplyPlenum,
-				TFNorth Supply Plenum,    !- Zone Plenum Name
-				TFSPNorth,                !- Zone Name
-				TFSPNorth Zone Node,      !- Zone Node Name
-				TFSPNorth Inlet Node,     !- Inlet_Node
-				TFNorth ATU Inlet Node;    !- Outlet_Node_1
-				
-				!-   ===========  ALL OBJECTS IN CLASS: AirLoopHVAC:ZONESPLITTER ===========
-				
-				AirLoopHVAC:ZONESPLITTER,
-				Zones Main SA Splitter,  !- Splitter Name
-				Zones SA Path Inlet,     !- Inlet_Node
-				GFSPEast Inlet Node,     !- Outlet_Node_1
-				GFSPWest Inlet Node,     !- Outlet_Node_2
-				GFSPNorth Inlet Node,     !- Outlet_Node_3
-				GFSPSouth Inlet Node,     !- Outlet_Node_4
-				MFSPEast Inlet Node,     !- Outlet_Node_5
-				MFSPWest Inlet Node,     !- Outlet_Node_6
-				MFSPNorth Inlet Node,     !- Outlet_Node_7
-				MFSPSouth Inlet Node,     !- Outlet_Node_8
-				TFSPEast Inlet Node,     !- Outlet_Node_9
-				TFSPWest Inlet Node,     !- Outlet_Node_10
-				TFSPNorth Inlet Node,     !- Outlet_Node_11
-				TFSPSouth Inlet Node,     !- Outlet_Node_12
-
-				
 ##endif

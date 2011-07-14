@@ -595,23 +595,6 @@ Concrete_LW80lb_6in,
 ##endif
 Carpet_FibrPad;                               !- Carpet with Fibrous Pad
 
-! Interior Slab Reversed
-CONSTRUCTION,
-IntSlab_Reversed_Mass,
-##if #[Slab_Insulation[] EQS Below]
-Insulation_Slab,
-Concrete_LW80lb_6in,                          !- Concrete 8" Heavy Weight Undried Aggregate 140lb (.2032m)
-##endif
-##if #[Slab_Insulation[] EQS Above]
-Concrete_LW80lb_6in,                          !- Concrete 8" Heavy Weight Undried Aggregate 140lb (.2032m)
-Insulation_Slab,
-##endif
-##if #[Slab_Insulation[] EQS None]
-Concrete_LW80lb_6in,
-##endif
-Carpet_FibrPad,
-FurnitureInsulation,
-G05 25mm wood;                                  !- Carpet with Fibrous Pad
 
 ! Interior Slab
 CONSTRUCTION,
@@ -629,23 +612,6 @@ Concrete_LW80lb_6in;                          !- Concrete 8" Heavy Weight Undrie
 Concrete_LW80lb_6in;
 ##endif
 
-! Interior Slab
-CONSTRUCTION,
-IntSlab_Mass,
-G05 25mm wood,
-FurnitureInsulation,
-Carpet_FibrPad,                                       !- Carpet with Fibrous Pad
-##if #[Slab_Insulation[] EQS Below]
-Concrete_LW80lb_6in,                          !- Concrete 8" Heavy Weight Undried Aggregate 140lb (.2032m)
-Insulation_Slab;
-##endif
-##if #[Slab_Insulation[] EQS Above]
-Insulation_Slab,
-Concrete_LW80lb_6in;                          !- Concrete 8" Heavy Weight Undried Aggregate 140lb (.2032m)
-##endif
-##if #[Slab_Insulation[] EQS None]
-Concrete_LW80lb_6in;
-##endif
 
 ! Interior Partition Lightweight
 CONSTRUCTION,
