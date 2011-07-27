@@ -1,3 +1,24 @@
-Changed the contents of the README
+						####### QuickStart Guide ######
 
-Added a new line.
+This short guide will help you get up and running with the excel interface and CBE Model.
+
+1. The model is compatible only with the CBE development version of EnergyPlus. The best
+   way to work in this environment is to download the latest version of EnergyPlus from 
+   http://energyplus.gov, and install it in your C: directory.
+   
+2. Replace EnergyPlus.exe with the CBE development version of the EnergyPlus executable.
+
+3. Replace EnergyPlus.idd with the CBE version of the idd. This file defines the input
+   structure of EnergyPlus, which we have augmented to implement special features.
+   
+4. Create a folder in C:\EnergyPlusVxxxxx called CBE. This folder can serve as a place
+   to store different models.
+   
+5. Copy CBE-EnergyPlus-Model to this directory. This is found at
+   https://github.com/thoyt/CBE-EnergyPlus-Model. This README is itself contained in
+   this folder as well.
+   
+6. Populate C:\EnergyPlusVxxxxx\WeatherData with the required weather files, bundled
+   here in CBE-WeatherData.zip
+   
+7. Launch the excel interface found in the Interfaces\ folder. Hit go, and see if it works!
