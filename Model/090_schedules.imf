@@ -33,7 +33,7 @@ DISCRETE;
 	  Sch_HVAC_System_Availability,       !- Name
 	  On/Off,                  !- Schedule Type Limits Name
 	  Through: 12/31,          !- Field 1
-	  For: SummerDesignDay, WinterDesignDay,
+	  For: SummerDesignDay WinterDesignDay,
 	  Until: 24:00,
 	  1.00,
 	  For: Weekdays,  !- Field 2
