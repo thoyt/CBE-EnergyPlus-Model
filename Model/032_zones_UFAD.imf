@@ -40,7 +40,7 @@
 	1,                                            		!- Zone multiplier
 	,                                             		!- Zone ceiling height - Let EnergyPlus work it out
 	autocalculate,                                      	!- Zone volume
-	CBEKwang;                               		!- Zone inside convection algorithm
+	Detailed;                               		!- Zone inside convection algorithm
 	
 	! GroundFloorSupplyPlenum - GFSPEast
 	ZONE, 
@@ -53,7 +53,7 @@
 	1,                                            		!- Zone multiplier
 	,                                              		!- Zone ceiling height - Let EnergyPlus work it out
 	autocalculate,                                      	!- Zone volume
-	CBEKwang;                               		!- Zone inside convection algorithm
+	Detailed;                               		!- Zone inside convection algorithm
 	
 	! GroundFloorSupplyPlenum - GFSPSouth
 	ZONE, 
@@ -66,7 +66,7 @@
 	1,                                            		!- Zone multiplier
 	,                                              		!- Zone ceiling height - Let EnergyPlus work it out
 	autocalculate,                                      	!- Zone volume
-	CBEKwang;                               		!- Zone inside convection algorithm
+	Detailed;                               		!- Zone inside convection algorithm
 	
 	
 	! GroundFloorSupplyPlenum - GFSPWest
@@ -80,7 +80,7 @@
 	1,                                            		!- Zone multiplier
 	,                                              		!- Zone ceiling height - Let EnergyPlus work it out
 	autocalculate,                                      	!- Zone volume
-	CBEKwang;                               		!- Zone inside convection algorithm
+	Detailed;                               		!- Zone inside convection algorithm
 
 	##endif
 	
@@ -95,7 +95,7 @@
 	1,                                            		!- Zone multiplier
 	,                                              		!- Zone ceiling height - Let EnergyPlus work it out
 	autocalculate,                                    	!- Zone volume
-	CBEKwang;                               		!- Zone inside convection algorithm
+	Detailed;                               		!- Zone inside convection algorithm
 	
 	
 	! ========== MIDDLE FLOOR SUPPLY PLENUM ==========
@@ -114,7 +114,7 @@
 	Floor_Multiplier[],                                            		!- Zone multiplier
 	,                                              		!- Zone ceiling height - Let EnergyPlus work it out
 	autocalculate,                                      	!- Zone volume
-	CBEKwang;                               		!- Zone inside convection algorithm
+	Detailed;                               		!- Zone inside convection algorithm
 	
 	! MiddleFloorSupplyPlenum - MFSPEast
 	ZONE, 
@@ -127,7 +127,7 @@
 	Floor_Multiplier[],                                            		!- Zone multiplier
 	,                                              		!- Zone ceiling height - Let EnergyPlus work it out
 	autocalculate,                                     	!- Zone volume
-	CBEKwang;                               		!- Zone inside convection algorithm
+	Detailed;                               		!- Zone inside convection algorithm
 	
 	! MiddleFloorSupplyPlenum - MFSPSouth
 	ZONE, 
@@ -140,7 +140,7 @@
 	Floor_Multiplier[],                                            		!- Zone multiplier
 	,                                              		!- Zone ceiling height - Let EnergyPlus work it out
 	autocalculate,                                      	!- Zone volume
-	CBEKwang;                               		!- Zone inside convection algorithm
+	Detailed;                               		!- Zone inside convection algorithm
 	
 	! MiddleFloorSupplyPlenum - MFSPWest
 	ZONE, 
@@ -153,7 +153,7 @@
 	Floor_Multiplier[],                                            		!- Zone multiplier
 	,                                              		!- Zone ceiling height - Let EnergyPlus work it out
 	autocalculate,                                      	!- Zone volume
-	CBEKwang;                               		!- Zone inside convection algorithm
+	Detailed;                               		!- Zone inside convection algorithm
 
 	##endif
 	
@@ -168,7 +168,7 @@
 	Floor_Multiplier[],                                            		!- Zone multiplier
 	,                                              		!- Zone ceiling height - Let EnergyPlus work it out
 	autocalculate,                                     	!- Zone volume
-	CBEKwang;                               		!- Zone inside convection algorithm
+	Detailed;                               		!- Zone inside convection algorithm
 	
 	
 	! ========== TOP FLOOR SUPPLY PLENUM ==========
@@ -188,7 +188,7 @@
 	1,                                            		!- Zone multiplier
 	,                                              		!- Zone ceiling height - Let EnergyPlus work it out
 	autocalculate,                                      	!- Zone volume
-	CBEKwang;                               		!- Zone inside convection algorithm
+	Detailed;                               		!- Zone inside convection algorithm
 	
 	! TopFloorSupplyPlenum - TFSPEast
 	ZONE, 
@@ -201,7 +201,7 @@
 	1,                                            		!- Zone multiplier
 	,                                              		!- Zone ceiling height - Let EnergyPlus work it out
 	autocalculate,                                      	!- Zone volume
-	CBEKwang;                               		!- Zone inside convection algorithm
+	Detailed;                               		!- Zone inside convection algorithm
 	
 	! TopFloorSupplyPlenum - TFSPSouth
 	ZONE, 
@@ -214,7 +214,7 @@
 	1,                                            		!- Zone multiplier
 	,                                              		!- Zone ceiling height - Let EnergyPlus work it out
 	autocalculate,                                      	!- Zone volume
-	CBEKwang;                               		!- Zone inside convection algorithm
+	Detailed;                               		!- Zone inside convection algorithm
 	
 	
 	! TopFloorSupplyPlenum - TFSPWest
@@ -228,7 +228,7 @@
 	1,                                            		!- Zone multiplier
 	,                                              		!- Zone ceiling height - Let EnergyPlus work it out
 	autocalculate,                                      	!- Zone volume
-	CBEKwang;                               		!- Zone inside convection algorithm
+	Detailed;                               		!- Zone inside convection algorithm
 
 	##endif
 	
@@ -243,7 +243,7 @@
 	1,                                            		!- Zone multiplier
 	,                                              		!- Zone ceiling height - Let EnergyPlus work it out
 	autocalculate,                                     	!- Zone volume
-	CBEKwang;                               		!- Zone inside convection algorithm
+	Detailed;                               		!- Zone inside convection algorithm
 	
 ##endif
 
