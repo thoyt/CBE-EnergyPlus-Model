@@ -29,7 +29,8 @@
 	Sch_PMV_Air_Velocity,                                 !- Air Velocity SCHEDULE Name (units m/s, real)
 	Fanger,                                               !- Thermal Comfort Report Type
 	,                                                     !- Thermal Comfort Report Type
-	;                                                     !- Thermal Comfort Report Type
+	,                                                     !- Thermal Comfort Report Type
+	StefanoSecond;
 ##enddef
 
 ##def Subroutine_Equipment[]
@@ -115,7 +116,8 @@
 	Sch_PMV_Air_Velocity,                                 !- Air Velocity SCHEDULE Name (units m/s, real)
 	Fanger,                                               !- Thermal Comfort Report Type
 	,                                                     !- Thermal Comfort Report Type
-	;                                                     !- Thermal Comfort Report Type
+	,
+	StefanoSecond;                                                     !- Thermal Comfort Report Type
 ##enddef
 
 ##def Subroutine_ReturnEquipment[]
