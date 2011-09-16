@@ -80,13 +80,84 @@ Site:GroundTemperature:BuildingSurface,
   19.948;  !- December Ground Temperature {C}
 ##endif
 	
-! Exterior Wall San Francisco
-CONSTRUCTION,
-	Exterior_wall,
-	Stone,                                            !- Stone (.0254m)
-	Insulation_Wall_SF,                               !- Wall Insulation
-	AirLayer_Vertical,                                !- Air Layer Vertical Wall
-	Gypsum;                                           !- Gypsum (.0159m)
+ 
+!-   ===========  ALL OBJECTS IN CLASS: MATERIAL:REGULAR ===========
+  Material,
+    F13 Built-up roofing,    !- Name
+    Rough,                   !- Roughness
+    0.0095,                  !- Thickness {m}
+    0.16,                    !- Conductivity {W/m-K}
+    1120,                    !- Density {kg/m3}
+    1460,                    !- Specific Heat {J/kg-K}
+    0.9,                     !- Absorptance:Thermal
+    0.7;                     !- Absorptance:Solar
+	
+ Material,
+    F08 Metal surface,       !- Name
+    Smooth,                  !- Roughness
+    0.0008,                  !- Thickness {m}
+    45.28,                   !- Conductivity {W/m-K}
+    7824,                    !- Density {kg/m3}
+    500;                     !- Specific Heat {J/kg-K}
+	
+ 
+  Material,
+    F07 25mm stucco,         !- Name
+    Smooth,                  !- Roughness
+    0.0254,                  !- Thickness {m}
+    0.72,                    !- Conductivity {W/m-K}
+    1856,                    !- Density {kg/m3}
+    840,                     !- Specific Heat {J/kg-K}
+    0.9,                     !- Thermal Absorptance
+    0.7,                     !- Solar Absorptance
+    0.7;                     !- Visible Absorptance
+	
+	Material,
+    G01 16mm gypsum board,   !- Name
+    MediumSmooth,            !- Roughness
+    0.0159,                  !- Thickness {m}
+    0.16,                    !- Conductivity {W/m-K}
+    800,                     !- Density {kg/m3}
+    1090;                    !- Specific Heat {J/kg-K}
+ 
+!-   ===========  ALL OBJECTS IN CLASS: MATERIAL:REGULAR-R =========== 
+
+
+
+
+  Material:NoMass,
+    Nonres_Roof_Insulation,  !- Name
+    MediumSmooth,            !- Roughness
+    3.47220376108688,        !- Thermal Resistance {m2-K/W}
+    0.9,                     !- Absorptance:Thermal
+    0.7,                     !- Absorptance:Solar
+    0.7;                     !- Absorptance:Visible
+ 
+ 
+  Material:NoMass,
+    Nonres_Exterior_Wall_Insulation,  !- Name
+    MediumSmooth,            !- Roughness
+    1.71282848878858,
+            !- Thermal Resistance {m2-K/W}
+    0.9,                     !- Thermal Absorptance
+    0.7,                     !- Solar Absorptance
+    0.7;                     !- Visible Absorptance 
+ 
+ 
+ !-   ===========  ALL OBJECTS IN CLASS: CONSTRUCTION ===========
+ Construction,
+    Roof,                   !- Name
+    F13 Built-up roofing,   !- Outside Layer
+   	Nonres_Roof_Insulation,  	!- Layer #2
+    F08 Metal surface;      !- Layer #3
+
+  Construction,
+    Exterior_wall,               !- Name
+	F07 25mm stucco,               !- Outside Layer
+	G01 16mm gypsum board,         !- Layer #2
+	Nonres_Exterior_Wall_Insulation,      !- Layer #3
+	G01 16mm gypsum board;         !- Layer #4
+
 	
 ! Window San Francisco Non-North
 CONSTRUCTION,
@@ -140,8 +211,3 @@ WindowMaterial:SimpleGlazingSystem,
 
 ##endif
 
-CONSTRUCTION,
-	Roof,
-	BltupRoofing_0375in,                                  !- Built-up Roofing 3/8" (.0095m)
-    Insulation_Roof_SF,
-    Concrete_LW80lb_6in;                          !- Concrete 8" Heavy Weight Undried Aggregate 140lb (.2032m)

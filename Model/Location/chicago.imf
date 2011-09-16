@@ -102,7 +102,7 @@ Material,
     0.9000,                  !- Thermal Absorptance
     0.7000,                  !- Solar Absorptance
     0.7000;                  !- Visible Absorptance
-	
+
 Construction,
     Window, !- Name
     Theoretical Glass (66);  !- Layer 1
