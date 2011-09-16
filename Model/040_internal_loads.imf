@@ -336,7 +336,7 @@ Subroutine_Return[]
 		ZoneName[]_InternalMass,                !- User Supplied Surface Name
 		Light Furnishings,                      !- Construction Name of the Surface
 		ZoneName[],                             !- Zone Name
-		# [ 0.85 * Area[] ];                     !- Surface area {m2} equal to double (see EnergyPlus documentation) the 50% of floor area (see ASHRAE 2005 Handbook of Fundamentals included in EnergyPlus datasets).    
+		# [ 0.85 * Area[] ];                     !- Surface area exposed to the zone {m2}    
 		
 	##enddef
 	
