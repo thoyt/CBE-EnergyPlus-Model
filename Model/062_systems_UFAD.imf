@@ -747,7 +747,7 @@
 
 		##endif     ! ##if #[Supply_Plenum[] EQS Single_Plenum ]
 
-		##if #[Supply_Plenum[] EQS DuctedPerimeter ]
+		##if #[Supply_Plenum[] EQS DuctedPerimeterSingle ]
 			
 			AirLoopHVAC:SupplyPath,
 			Zones SA Path,           !- Supply Air Path Name
@@ -805,7 +805,67 @@
 				TFSouth ATU Inlet Node,
 				TFNorth ATU Inlet Node;
 
-		##endif     ! ##if #[Supply_Plenum[] EQS DuctedPerimeter ]
+		##endif     ! ##if #[Supply_Plenum[] EQS DuctedPerimeterSingle ]
+
+		##if #[Supply_Plenum[] EQS DuctedPerimeterParallel ]
+			
+			AirLoopHVAC:SupplyPath,
+			Zones SA Path,           !- Supply Air Path Name
+			Zones SA Path Inlet,     !- Supply Air Path Inlet Node
+			AirLoopHVAC:ZONESPLITTER,           !- KEY--System Component Type 1
+			Zones Main SA Splitter,  !- Component Name 1
+			AirLoopHVAC:SupplyPlenum,      !- KEY--System Component Type 2
+			GFCore Supply Plenum,    !- Component Name 2
+			AirLoopHVAC:SupplyPlenum,      !- KEY--System Component Type 2
+			MFCore Supply Plenum,    !- Component Name 2
+			AirLoopHVAC:SupplyPlenum,      !- KEY--System Component Type 2
+			TFCore Supply Plenum;    !- Component Name 2
+				
+				!-   ===========  ALL OBJECTS IN CLASS: AirLoopHVAC:SupplyPlenum ===========
+				
+				AirLoopHVAC:SupplyPlenum,
+				GFCore Supply Plenum,    !- Zone Plenum Name
+				GFSPCore,                !- Zone Name
+				GFSPCore Zone Node,      !- Zone Node Name
+				GFSPCore Inlet Node,     !- Inlet_Node
+				GFCore ATU Inlet Node;    !- Outlet_Node_1
+				
+				AirLoopHVAC:SupplyPlenum,
+				MFCore Supply Plenum,    !- Zone Plenum Name
+				MFSPCore,                !- Zone Name
+				MFSPCore Zone Node,      !- Zone Node Name
+				MFSPCore Inlet Node,     !- Inlet_Node
+				MFCore ATU Inlet Node;    !- Outlet_Node_1
+				
+				AirLoopHVAC:SupplyPlenum,
+				TFCore Supply Plenum,    !- Zone Plenum Name
+				TFSPCore,                !- Zone Name
+				TFSPCore Zone Node,      !- Zone Node Name
+				TFSPCore Inlet Node,     !- Inlet_Node
+				TFCore ATU Inlet Node;    !- Outlet_Node_1
+				
+				!-   ===========  ALL OBJECTS IN CLASS: AirLoopHVAC:ZONESPLITTER ===========
+				
+				AirLoopHVAC:ZONESPLITTER,
+				Zones Main SA Splitter,  !- Splitter Name
+				Zones SA Path Inlet,     !- Inlet_Node
+				GFSPCore Inlet Node,     !- Outlet_Node_1
+				MFSPCore Inlet Node,     !- Outlet_Node_2
+				TFSPCore Inlet Node,     !- Outlet_Node_3
+				GFEast ATU Inlet Node, 
+				GFWest ATU Inlet Node,
+				GFSouth ATU Inlet Node,
+				GFNorth ATU Inlet Node,
+				MFEast ATU Inlet Node, 
+				MFWest ATU Inlet Node,
+				MFSouth ATU Inlet Node,
+				MFNorth ATU Inlet Node,
+				TFEast ATU Inlet Node, 
+				TFWest ATU Inlet Node,
+				TFSouth ATU Inlet Node,
+				TFNorth ATU Inlet Node;
+
+		##endif     ! ##if #[Supply_Plenum[] EQS DuctedPerimeterParallel ]
 
 		
 		##if #[Return_Plenum[] EQS No ]
@@ -1057,7 +1117,7 @@
 			MFEast FCU Fan,          !- Fan Name
 			Sch_Always_On,                      !- Available Schedule
 			0.15,                     !- Fan Total Efficiency
-			##if #[Supply_Plenum[] EQS DuctedPerimeter ]
+			##if #[#[Supply_Plenum[] EQS DuctedPerimeterParallel ] or #[Supply_Plenum[] EQS DuctedPerimeterSingle ]]
 			0,
 			##else
 			125,                     !- Delta Pressure {Pa}
@@ -1080,7 +1140,7 @@
 			MFWest FCU Fan,          !- Fan Name
 			Sch_Always_On,                      !- Available Schedule
 			0.15,                     !- Fan Total Efficiency
-			##if #[Supply_Plenum[] EQS DuctedPerimeter ]
+			##if #[#[Supply_Plenum[] EQS DuctedPerimeterParallel ] or #[Supply_Plenum[] EQS DuctedPerimeterSingle ]]
 			0,
 			##else
 			125,                     !- Delta Pressure {Pa}
@@ -1103,7 +1163,7 @@
 			MFSouth FCU Fan,          !- Fan Name
 			Sch_Always_On,                      !- Available Schedule
 			0.15,                     !- Fan Total Efficiency
-			##if #[Supply_Plenum[] EQS DuctedPerimeter ]
+			##if #[#[Supply_Plenum[] EQS DuctedPerimeterParallel ] or #[Supply_Plenum[] EQS DuctedPerimeterSingle ]]
 			0,
 			##else
 			125,                     !- Delta Pressure {Pa}
@@ -1126,7 +1186,7 @@
 			MFNorth FCU Fan,          !- Fan Name
 			Sch_Always_On,                      !- Available Schedule
 			0.15,                     !- Fan Total Efficiency
-			##if #[Supply_Plenum[] EQS DuctedPerimeter ]
+			##if #[#[Supply_Plenum[] EQS DuctedPerimeterParallel ] or #[Supply_Plenum[] EQS DuctedPerimeterSingle ]]
 			0,
 			##else
 			125,                     !- Delta Pressure {Pa}
@@ -1149,7 +1209,7 @@
 			TFEast FCU Fan,          !- Fan Name
 			Sch_Always_On,                      !- Available Schedule
 			0.15,                     !- Fan Total Efficiency
-			##if #[Supply_Plenum[] EQS DuctedPerimeter ]
+			##if #[#[Supply_Plenum[] EQS DuctedPerimeterParallel ] or #[Supply_Plenum[] EQS DuctedPerimeterSingle ]]
 			0,
 			##else
 			125,                     !- Delta Pressure {Pa}
@@ -1172,7 +1232,7 @@
 			TFWest FCU Fan,          !- Fan Name
 			Sch_Always_On,                      !- Available Schedule
 			0.15,                     !- Fan Total Efficiency
-			##if #[Supply_Plenum[] EQS DuctedPerimeter ]
+			##if #[#[Supply_Plenum[] EQS DuctedPerimeterParallel ] or #[Supply_Plenum[] EQS DuctedPerimeterSingle ]]
 			0,
 			##else
 			125,                     !- Delta Pressure {Pa}
@@ -1195,7 +1255,7 @@
 			TFSouth FCU Fan,          !- Fan Name
 			Sch_Always_On,                      !- Available Schedule
 			0.15,                     !- Fan Total Efficiency
-			##if #[Supply_Plenum[] EQS DuctedPerimeter ]
+			##if #[#[Supply_Plenum[] EQS DuctedPerimeterParallel ] or #[Supply_Plenum[] EQS DuctedPerimeterSingle ]]
 			0,
 			##else
 			125,                     !- Delta Pressure {Pa}
@@ -1218,7 +1278,7 @@
 			TFNorth FCU Fan,          !- Fan Name
 			Sch_Always_On,                      !- Available Schedule
 			0.15,                     !- Fan Total Efficiency
-			##if #[Supply_Plenum[] EQS DuctedPerimeter ]
+			##if #[#[Supply_Plenum[] EQS DuctedPerimeterParallel ] or #[Supply_Plenum[] EQS DuctedPerimeterSingle ]]
 			0,
 			##else
 			125,                     !- Delta Pressure {Pa}
@@ -1241,7 +1301,7 @@
 			GFEast FCU Fan,          !- Fan Name
 			Sch_Always_On,                      !- Available Schedule
 			0.15,                     !- Fan Total Efficiency
-			##if #[Supply_Plenum[] EQS DuctedPerimeter ]
+			##if #[#[Supply_Plenum[] EQS DuctedPerimeterParallel ] or #[Supply_Plenum[] EQS DuctedPerimeterSingle ]]
 			0,
 			##else
 			125,                     !- Delta Pressure {Pa}
@@ -1264,7 +1324,7 @@
 			GFWest FCU Fan,          !- Fan Name
 			Sch_Always_On,                      !- Available Schedule
 			0.15,                     !- Fan Total Efficiency
-			##if #[Supply_Plenum[] EQS DuctedPerimeter ]
+			##if #[#[Supply_Plenum[] EQS DuctedPerimeterParallel ] or #[Supply_Plenum[] EQS DuctedPerimeterSingle ]]
 			0,
 			##else
 			125,                     !- Delta Pressure {Pa}
@@ -1287,7 +1347,7 @@
 			GFSouth FCU Fan,          !- Fan Name
 			Sch_Always_On,                      !- Available Schedule
 			0.15,                     !- Fan Total Efficiency
-			##if #[Supply_Plenum[] EQS DuctedPerimeter ]
+			##if #[#[Supply_Plenum[] EQS DuctedPerimeterParallel ] or #[Supply_Plenum[] EQS DuctedPerimeterSingle ]]
 			0,
 			##else
 			125,                     !- Delta Pressure {Pa}
@@ -1310,7 +1370,7 @@
 			GFNorth FCU Fan,          !- Fan Name
 			Sch_Always_On,                      !- Available Schedule
 			0.15,                     !- Fan Total Efficiency
-			##if #[Supply_Plenum[] EQS DuctedPerimeter ]
+			##if #[#[Supply_Plenum[] EQS DuctedPerimeterParallel ] or #[Supply_Plenum[] EQS DuctedPerimeterSingle ]]
 			0,
 			##else
 			125,                     !- Delta Pressure {Pa}
