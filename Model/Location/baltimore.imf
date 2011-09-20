@@ -103,28 +103,65 @@ Material,
     0.7000,                  !- Solar Absorptance
     0.7000;                  !- Visible Absorptance	
 	
-Construction,
-  Window,  !- Name
-  Theoretical Glass (66);  !- Layer 1
+	
+!       Window Material/Construction file with spectral data in IDF format 
 
-Construction,
-  N_Window,  !- Name
-  Theoretical Glass (66);  !- Layer 1
+
+!----------------------------------------------------- 
+!       Window Glass Layers 
+!----------------------------------------------------- 
+
+
+  WindowMaterial:Glazing,
+    REF D CLEAR 6MM,         !- Name
+    SpectralAverage,         !- Optical Data Type
+    ,                        !- Window Glass Spectral Data Set Name
+    0.006,                   !- Thickness {m}
+    0.429,                   !- Solar Transmittance at Normal Incidence
+    0.308,                   !- Front Side Solar Reflectance at Normal Incidence
+    0.379,                   !- Back Side Solar Reflectance at Normal Incidence
+    0.334,                   !- Visible Transmittance at Normal Incidence
+    0.453,                   !- Front Side Visible Reflectance at Normal Incidence
+    0.505,                   !- Back Side Visible Reflectance at Normal Incidence
+    0.0,                     !- Infrared Transmittance at Normal Incidence
+    0.84,                    !- Front Side Infrared Hemispherical Emissivity
+    0.82,                    !- Back Side Infrared Hemispherical Emissivity
+    0.9;                     !- Conductivity {W/m-K}
+	
+	WindowMaterial:Glazing,
+    CLEAR 6MM,               !- Name
+    SpectralAverage,         !- Optical Data Type
+    ,                        !- Window Glass Spectral Data Set Name
+    0.006,                   !- Thickness {m}
+    0.775,                   !- Solar Transmittance at Normal Incidence
+    0.071,                   !- Front Side Solar Reflectance at Normal Incidence
+    0.071,                   !- Back Side Solar Reflectance at Normal Incidence
+    0.881,                   !- Visible Transmittance at Normal Incidence
+    0.080,                   !- Front Side Visible Reflectance at Normal Incidence
+    0.080,                   !- Back Side Visible Reflectance at Normal Incidence
+    0.0,                     !- Infrared Transmittance at Normal Incidence
+    0.84,                    !- Front Side Infrared Hemispherical Emissivity
+    0.84,                    !- Back Side Infrared Hemispherical Emissivity
+    0.9;                     !- Conductivity {W/m-K}
+	
+!-   ===========  ALL OBJECTS IN CLASS: MATERIAL:WINDOWGAS ===========
  
-WindowMaterial:Glazing,
-  Theoretical Glass (66),  !- Name
-  SpectralAverage,  !- Optical Data Type
-  ,  !- Window Glass Spectral Data Set Name
-  0.0030,  !- Thickness
-  0.3832,  !- Solar Transmittance at Normal Incidence
-  0.5668,  !- Front Side Solar Reflectance at Normal Incidence
-  0.5668,  !- Back Side Solar Reflectance at Normal Incidence
-  0.4950,  !- Visible Transmittance at Normal Incidence
-  0.4550,  !- Front Side Visible Reflectance at Normal Incidence
-  0.4550,  !- Back Side Visible Reflectance at Normal Incidence
-  0.0000,  !- Infrared Transmittance at Normal Incidence
-  0.9000,  !- Front Side Infrared Hemispherical Emissivity
-  0.9000,  !- Back Side Infrared Hemispherical Emissivity
-  0.0199,  !- Conductivity
-  1.0000,  !- Dirt Correction Factor for Solar and Visible Transmittance
-  No;  !- Solar Diffusing
+  WindowMaterial:Gas,
+    AIR 6MM,                 !- Name
+    Air,                     !- Gas Type
+    0.0063;                  !- Thickness {m}
+	
+ WindowMaterial:Gas,
+    AIR 13MM,                !- Name
+    Air,                     !- Gas Type
+    0.0127;                  !- Thickness {m}
+!----------------------------------------------------- 
+!       Window Construction 
+!----------------------------------------------------- 
+
+	Construction,
+    Window, !- Name
+    REF D CLEAR 6MM,         !- Outside Layer
+    AIR 13MM,                !- Layer 2
+    CLEAR 6MM;               !- Layer 3
+	

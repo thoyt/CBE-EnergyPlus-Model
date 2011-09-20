@@ -109,8 +109,6 @@ Site:WaterMainsTemperature,
 !-   ===========  ALL OBJECTS IN CLASS: MATERIAL:REGULAR-R =========== 
 
 
-
-
   Material:NoMass,
     Nonres_Roof_Insulation,  !- Name
     MediumSmooth,            !- Roughness
@@ -144,28 +142,36 @@ Site:WaterMainsTemperature,
 	G01 16mm gypsum board;         !- Layer #4
 
 	
-Construction,
-  Window,  !- Name
-  Theoretical Glass (58);  !- Layer 1
-  
-Construction,
-  N_Window,  !- Name
-  Theoretical Glass (58);  !- Layer 1
-	
-WindowMaterial:Glazing,
-  Theoretical Glass (58),  !- Name
-  SpectralAverage,  !- Optical Data Type
-  ,  !- Window Glass Spectral Data Set Name
-  0.0030,  !- Thickness
-  0.2374,  !- Solar Transmittance at Normal Incidence
-  0.7126,  !- Front Side Solar Reflectance at Normal Incidence
-  0.7126,  !- Back Side Solar Reflectance at Normal Incidence
-  0.2512,  !- Visible Transmittance at Normal Incidence
-  0.6988,  !- Front Side Visible Reflectance at Normal Incidence
-  0.6988,  !- Back Side Visible Reflectance at Normal Incidence
-  0.0000,  !- Infrared Transmittance at Normal Incidence
-  0.9990,  !- Front Side Infrared Hemispherical Emissivity
-  0.9990,  !- Back Side Infrared Hemispherical Emissivity
-  3.3687,  !- Conductivity
-  1.0000,  !- Dirt Correction Factor for Solar and Visible Transmittance
-  No;  !- Solar Diffusing
+!       Window Material/Construction file with spectral data in IDF format 
+
+
+!----------------------------------------------------- 
+!       Window Glass Layers 
+!----------------------------------------------------- 
+
+
+	WindowMaterial:Glazing,
+    REF B TINT MID 6MM,      !- Name
+    SpectralAverage,         !- Optical Data Type
+    ,                        !- Window Glass Spectral Data Set Name
+    0.006,                   !- Thickness {m}
+    0.100,                   !- Solar Transmittance at Normal Incidence
+    0.110,                   !- Front Side Solar Reflectance at Normal Incidence
+    0.410,                   !- Back Side Solar Reflectance at Normal Incidence
+    0.130,                   !- Visible Transmittance at Normal Incidence
+    0.100,                   !- Front Side Visible Reflectance at Normal Incidence
+    0.320,                   !- Back Side Visible Reflectance at Normal Incidence
+    0.0,                     !- Infrared Transmittance at Normal Incidence
+    0.84,                    !- Front Side Infrared Hemispherical Emissivity
+    0.45,                    !- Back Side Infrared Hemispherical Emissivity
+    0.9;                     !- Conductivity {W/m-K}
+
+
+!----------------------------------------------------- 
+!       Window Construction 
+!----------------------------------------------------- 
+
+  Construction,
+    Window, !- Name
+    REF B TINT MID 6MM;      !- Outside Layer
+

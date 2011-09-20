@@ -59,58 +59,6 @@ Site:GroundTemperature:BuildingSurface,
   20.216;  !- December Ground Temperature {C}
 ##endif	
 	
-! Window Sacramento Non-North
-CONSTRUCTION,
-	Window,               !- Name         
-	NonN_WindowMaterial;              !- Layer #3     
-
-! Window Los Angeles North
-CONSTRUCTION,
-	N_Window,                   !- Name         
-	N_WindowMaterial;              !- Layer #3     
-
-##if #[WWR_Text[] EQS Twenty]
-
-WindowMaterial:SimpleGlazingSystem,
-        NonN_WindowMaterial,    !- Name
-        0.47,                   !- U-factor
-        0.36;                   !- SHGC
-
-WindowMaterial:SimpleGlazingSystem,
-        N_WindowMaterial,    !- Name
-        0.47,                   !- U-factor
-        0.51;                   !- SHGC
-
-##endif
-
-##if #[WWR_Text[] EQS Thirty]
-
-WindowMaterial:SimpleGlazingSystem,
-        NonN_WindowMaterial,    !- Name
-        0.47,                   !- U-factor
-        0.36;                   !- SHGC
-
-WindowMaterial:SimpleGlazingSystem,
-        N_WindowMaterial,    !- Name
-        0.47,                   !- U-factor
-        0.47;                   !- SHGC
-
-##endif
-
-##if #[WWR_Text[] EQS Forty]
-
-WindowMaterial:SimpleGlazingSystem,
-        NonN_WindowMaterial,    !- Name
-        0.47,                   !- U-factor
-        0.31;                   !- SHGC
-
-WindowMaterial:SimpleGlazingSystem,
-        N_WindowMaterial,    !- Name
-        0.47,                   !- U-factor
-        0.47;                   !- SHGC
-
-##endif
-
  
 !-   ===========  ALL OBJECTS IN CLASS: MATERIAL:REGULAR ===========
   Material,
@@ -189,3 +137,65 @@ WindowMaterial:SimpleGlazingSystem,
 	Nonres_Exterior_Wall_Insulation,      !- Layer #3
 	G01 16mm gypsum board;         !- Layer #4
 
+	!       Window Material/Construction file with spectral data in IDF format 
+
+
+!----------------------------------------------------- 
+!       Window Glass Layers 
+!----------------------------------------------------- 
+
+
+  WindowMaterial:Glazing,
+    REF C CLEAR HI 6MM,      !- Name
+    SpectralAverage,         !- Optical Data Type
+    ,                        !- Window Glass Spectral Data Set Name
+    0.006,                   !- Thickness {m}
+    0.200,                   !- Solar Transmittance at Normal Incidence
+    0.160,                   !- Front Side Solar Reflectance at Normal Incidence
+    0.390,                   !- Back Side Solar Reflectance at Normal Incidence
+    0.220,                   !- Visible Transmittance at Normal Incidence
+    0.170,                   !- Front Side Visible Reflectance at Normal Incidence
+    0.350,                   !- Back Side Visible Reflectance at Normal Incidence
+    0.0,                     !- Infrared Transmittance at Normal Incidence
+    0.84,                    !- Front Side Infrared Hemispherical Emissivity
+    0.55,                    !- Back Side Infrared Hemispherical Emissivity
+    0.9;                     !- Conductivity {W/m-K}
+	
+	WindowMaterial:Glazing,
+    CLEAR 6MM,               !- Name
+    SpectralAverage,         !- Optical Data Type
+    ,                        !- Window Glass Spectral Data Set Name
+    0.006,                   !- Thickness {m}
+    0.775,                   !- Solar Transmittance at Normal Incidence
+    0.071,                   !- Front Side Solar Reflectance at Normal Incidence
+    0.071,                   !- Back Side Solar Reflectance at Normal Incidence
+    0.881,                   !- Visible Transmittance at Normal Incidence
+    0.080,                   !- Front Side Visible Reflectance at Normal Incidence
+    0.080,                   !- Back Side Visible Reflectance at Normal Incidence
+    0.0,                     !- Infrared Transmittance at Normal Incidence
+    0.84,                    !- Front Side Infrared Hemispherical Emissivity
+    0.84,                    !- Back Side Infrared Hemispherical Emissivity
+    0.9;                     !- Conductivity {W/m-K}
+
+!-   ===========  ALL OBJECTS IN CLASS: MATERIAL:WINDOWGAS ===========
+ 
+  WindowMaterial:Gas,
+    AIR 6MM,                 !- Name
+    Air,                     !- Gas Type
+    0.0063;                  !- Thickness {m}
+	
+ WindowMaterial:Gas,
+    AIR 13MM,                !- Name
+    Air,                     !- Gas Type
+    0.0127;                  !- Thickness {m}
+	
+	
+!----------------------------------------------------- 
+!       Window Construction 
+!----------------------------------------------------- 
+
+  Construction,
+    Window, !- Name
+    REF C CLEAR HI 6MM,      !- Outside Layer
+    AIR 6MM,                 !- Layer 2
+    CLEAR 6MM;               !- Layer 3
