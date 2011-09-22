@@ -207,7 +207,7 @@ Subroutine_Core[]
 ##set1 ZoneName[] = TFCore
 Subroutine_Core[]
 
-##if #[#[Supply_Plenum[] EQS Single_Plenum ] or #[Supply_Plenum[] EQS DuctedPerimeter ]]
+##if #[#[Supply_Plenum[] EQS Single_Plenum ] or #[#[Supply_Plenum[] EQS DuctedPerimeterParallel ] or #[Supply_Plenum[] EQS DuctedPerimeterSingle ]]]
 
 ##else
 
