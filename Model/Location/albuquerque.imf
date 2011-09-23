@@ -106,10 +106,6 @@ Material,
 Construction,
   Window,  !- Name
   Theoretical Glass (66);  !- Layer 1	
-
-Construction,
-  N_Window,  !- Name
-  Theoretical Glass (66);  !- Layer 1
   
 WindowMaterial:Glazing,
   Theoretical Glass (66),  !- Name

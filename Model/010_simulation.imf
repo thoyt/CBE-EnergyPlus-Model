@@ -131,7 +131,7 @@ EnergyManagementSystem:Sensor,
     TFAirflow,          !- Name
     TFSPCore Inlet Node,     !- Output:Variable or Output:Meter Index Key Name
     System Node Volume Flow Rate Standard Density;  !- Output:Variable or Output:Meter Name
-
+	
 EnergyManagementSystem:Actuator,
     MFCoreCoeff_Ceiling,    !- Name
     MFSPCore_Ceiling,     !- Actuated Component Unique Name

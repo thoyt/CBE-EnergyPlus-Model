@@ -361,28 +361,28 @@ SpectralAverage,                      !- Optical Data Type
 0.040,                                !- IR Hemispherical Emissivity: Back Side             
 1.000;                                !- Conductivity {W/m-K}                               
 
-WindowMATERIAL:Glazing,
-CLEAR 6MM,                            !- Name                                               
-SpectralAverage,                      !- Optical Data Type                                  
-,                                     !- Name of Window Glass Spectral Data Set             
-0.0057,                               !- Thickness {m}                                      
-0.771,                                !- Solar Transmittance at Normal Incidence            
-0.070,                                !- Solar Reflectance at Normal Incidence: Front Side  
-0.070,                                !- Solar Reflectance at Normal Incidence: Back Side   
-0.884,                                !- Visible Transmittance at Normal Incidence          
-0.080,                                !- Visible Reflectance at Normal Incidence: Front Side
-0.080,                                !- Visible Reflectance at Normal Incidence: Back Side 
-0.000,                                !- IR Transmittance at Normal Incidence               
-0.840,                                !- IR Hemispherical Emissivity: Front Side            
-0.840,                                !- IR Hemispherical Emissivity: Back Side             
-1.000;                                !- Conductivity {W/m-K}                               
+!WindowMATERIAL:Glazing,
+!CLEAR 6MM,                            !- Name                                               
+!SpectralAverage,                      !- Optical Data Type                                  
+!,                                     !- Name of Window Glass Spectral Data Set             
+!0.0057,                               !- Thickness {m}                                      
+!0.771,                                !- Solar Transmittance at Normal Incidence            
+!0.070,                                !- Solar Reflectance at Normal Incidence: Front Side  
+!0.070,                                !- Solar Reflectance at Normal Incidence: Back Side   
+!0.884,                                !- Visible Transmittance at Normal Incidence          
+!0.080,                                !- Visible Reflectance at Normal Incidence: Front Side
+!0.080,                                !- Visible Reflectance at Normal Incidence: Back Side 
+!0.000,                                !- IR Transmittance at Normal Incidence               
+!0.840,                                !- IR Hemispherical Emissivity: Front Side            
+!0.840,                                !- IR Hemispherical Emissivity: Back Side             
+!1.000;                                !- Conductivity {W/m-K}                               
 
 !-   ===========  ALL OBJECTS IN CLASS: WindowMATERIAL:GAS ===========
 
-WindowMATERIAL:GAS,
-AIR 13MM,                             !- Name
-Air,                                  !- Gas Type
-0.0127;                               !- Thickness {m}
+!WindowMATERIAL:GAS,
+!AIR 13MM,                             !- Name
+!Air,                                  !- Gas Type
+!0.0127;                               !- Thickness {m}
 
 
 !-   ===========  ALL OBJECTS IN CLASS: WindowMATERIAL:Blind ===========
