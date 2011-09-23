@@ -2794,50 +2794,26 @@ AHU Supply Fan Outlet;                                !- Name of the set point N
 ##endif
 
 ##if #[SAT_Reset[] EQS Yes ]
-SetpointManager:Warmest,
-	AHU Cooling Supply Air Temp Manager, !- Name
-	Temperature, !- Control Variable
-	AHU, !- HVAC Air Loop Name
-	AHU_SAT_SPT[], !- Minimum Setpoint Temperature
-	High_AHU_SAT[], !- Maximum Setpoint Temperature
-	MaximumTemperature, !- Strategy
-	AHU Supply Fan Outlet; !- Setpoint Node
 	
 SetpointManager:OutdoorAirReset,
- 
-AHU Cooling Supply Air Temp Manager,   !- Name
-   
-Temperature,              !- Control Variable
-    
-AHU_SAT_SPT[],                        !- Setpoint at Outdoor Low Temperature {C}
-    
-10,                      !- Outdoor Low Temperature {C}
-    
-High_AHU_SAT[],                    !- Setpoint at Outdoor High Temperature {C}
-    
-21.1,                    !- Outdoor High Temperature {C}
-    
-AHU Supply Fan Outlet;  !- Setpoint Node or NodeList Name
-
+	AHU Cooling Supply Air Temp Manager,   !- Name
+	Temperature,              !- Control Variable
+	AHU_SAT_SPT[],                        !- Setpoint at Outdoor Low Temperature {C}
+	10,                      !- Outdoor Low Temperature {C}
+	High_AHU_SAT[],                    !- Setpoint at Outdoor High Temperature {C}
+	21.1,                    !- Outdoor High Temperature {C}
+	AHU Supply Fan Outlet;  !- Setpoint Node or NodeList Name
 
 ##endif
 
 SetpointManager:OutdoorAirReset,
- 
 PACU_VAV_top Supply Air Temperature Manager,   !- Name
-   
 Temperature,              !- Control Variable
-    
 15.6,                        !- Setpoint at Outdoor Low Temperature {C}
-    
 10,                      !- Outdoor Low Temperature {C}
-    
 12.8,                    !- Setpoint at Outdoor High Temperature {C}
-    
 21.1,                    !- Outdoor High Temperature {C}
-    
 PACU_VAV_top Supply Equipment Outlet Node;  !- Setpoint Node or NodeList Name
-
 
 COIL:Cooling:Water,
 AHU Cooling Coil,                                     !- Coil Name
@@ -2964,7 +2940,7 @@ autosize,                                             !- Max Actuated Flow {m3/s
 	FixedFlowRate,
 	,
 	0.00000000001,                                             !- Min Flow Rate {m3/s}
-	0.9,                                                    !- Motor Efficiency
+	0.84,                                                    !- Motor Efficiency
 	1,                                                    !- Motor In Airstream Fraction
 	0.21976201,                                         !- FanCoefficient 1
 	-0.87478399,                                         !- FanCoefficient 2
@@ -2993,7 +2969,7 @@ autosize,                                             !- Max Actuated Flow {m3/s
 	FixedFlowRate,
 	,
 	0.00000000001,                                             !- Min Flow Rate {m3/s}
-	0.9,                                                    !- Motor Efficiency
+	0.84,                                                    !- Motor Efficiency
 	1,                                                    !- Motor In Airstream Fraction
 	0.0662,                                         !- FanCoefficient 1
 	0.1131,                                         !- FanCoefficient 2
@@ -3019,7 +2995,7 @@ autosize,                                             !- Max Actuated Flow {m3/s
 	FixedFlowRate,
 	,
 	0.00000000001,                                             !- Min Flow Rate {m3/s}
-	0.9,                                                    !- Motor Efficiency
+	0.84,                                                    !- Motor Efficiency
 	1,                                                    !- Motor In Airstream Fraction
 	0.0704,                                         !- FanCoefficient 1
     0.3853,                                         !- FanCoefficient 2
