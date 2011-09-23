@@ -84,12 +84,12 @@
 	Flow/ExteriorArea,                                    !- Design Flow Calculation Method
 	.048276,                                              !- Design Flow (m3/s)
 	,                                                     !- Flow per zone area
-	0.000017934,                                          !- Flow per exterior surface area
+	0.00056896,                                          !- Flow per exterior surface area
 	0.2000,                                               !- ACH
-	1,                                                    !- Constant Term Coefficient
-	0,                                                    !- Temperature Term Coefficient
-	0,                                                    !- Velocity Term Coefficient
-	0;                                                    !- Velocity Squared Term Coefficient
+	    0,                       !- Constant Term Coefficient
+    0.0000,                  !- Temperature Term Coefficient
+    0.2240,                  !- Velocity Term Coefficient
+    0.0000;                  !- Velocity Squared Term Coefficient
 ##enddef
 
 ##if #[Fake_UFAD[] EQS Yes ]
