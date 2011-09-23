@@ -2802,7 +2802,42 @@ SetpointManager:Warmest,
 	High_AHU_SAT[], !- Maximum Setpoint Temperature
 	MaximumTemperature, !- Strategy
 	AHU Supply Fan Outlet; !- Setpoint Node
+	
+SetpointManager:OutdoorAirReset,
+ 
+AHU Cooling Supply Air Temp Manager,   !- Name
+   
+Temperature,              !- Control Variable
+    
+AHU_SAT_SPT[],                        !- Setpoint at Outdoor Low Temperature {C}
+    
+10,                      !- Outdoor Low Temperature {C}
+    
+High_AHU_SAT[],                    !- Setpoint at Outdoor High Temperature {C}
+    
+21.1,                    !- Outdoor High Temperature {C}
+    
+AHU Supply Fan Outlet;  !- Setpoint Node or NodeList Name
+
+
 ##endif
+
+SetpointManager:OutdoorAirReset,
+ 
+PACU_VAV_top Supply Air Temperature Manager,   !- Name
+   
+Temperature,              !- Control Variable
+    
+15.6,                        !- Setpoint at Outdoor Low Temperature {C}
+    
+10,                      !- Outdoor Low Temperature {C}
+    
+12.8,                    !- Setpoint at Outdoor High Temperature {C}
+    
+21.1,                    !- Outdoor High Temperature {C}
+    
+PACU_VAV_top Supply Equipment Outlet Node;  !- Setpoint Node or NodeList Name
+
 
 COIL:Cooling:Water,
 AHU Cooling Coil,                                     !- Coil Name
@@ -2923,7 +2958,7 @@ autosize,                                             !- Max Actuated Flow {m3/s
 	FAN:VariableVolume,
 	AHU Supply Fan,                                       !- Fan Name
 	Sch_Always_On,                                                   !- Available Schedule
-	0.63,                                                  !- Fan Total Efficiency
+	0.65,                                                  !- Fan Total Efficiency
 	AHU_Design_SP[],                                                 !- Delta Pressure {Pa}
 	Central_SupplyFan_MaxFlow[],                                             !- Max Flow Rate {m3/s}
 	FixedFlowRate,
@@ -2952,7 +2987,7 @@ autosize,                                             !- Max Actuated Flow {m3/s
 	FAN:VariableVolume,
 	AHU Supply Fan,                                       !- Fan Name
 	Sch_Always_On,                                                   !- Available Schedule
-	0.63,                                                  !- Fan Total Efficiency
+	0.65,                                                  !- Fan Total Efficiency
 	AHU_Design_SP[],                                                 !- Delta Pressure {Pa}
 	Central_SupplyFan_MaxFlow[],                                             !- Max Flow Rate {m3/s}
 	FixedFlowRate,

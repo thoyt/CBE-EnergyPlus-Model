@@ -409,36 +409,35 @@ ACTIVE;                                               !- Comp1 Branch Control Ty
 !================================= Chilled Water Loop ==============================
 
 ##if #[Chiller_Model_Type[] EQS CBE_RegularEIR]
-	
-	CHILLER:ELECTRIC:EIR,
-	Chiller,                      !- Chiller Name
-	Chiller_Capacity[],           !- Reference Capacity {W}
-	5.5,                         !- Reference COP {W/W}
-	 5.56,                        !- Reference Leaving Chilled Water Temperature {C}
-	 21.11,                       !- Reference Entering Condenser Fluid Temperature {C}
-	autosize,                     !- Reference Evaporator Volumetric Water Flow Rate {m3/s}
-	autosize,                     !- Reference Condenser Volumetric Water Flow Rate {m3/s}
-	Chiller CentCapFT,            !- Cooling Capacity Function of Temperature Curve
-	Chiller CentEIRFT,            !- Electric Input to Cooling Output Ratio Function of Temperature Curve
-	Chiller CentEIRFPLR,          !- Electric Input to Cooling Output Ratio Function of Part Load Ratio Curve
-	0.1,                          !- Minimum Part Load Ratio
-	1,                            !- Maximum Part Load Ratio
+Chiller:Electric:EIR,
+    Chiller,  !- Name
+    Chiller_Capacity[],                  !- Reference Capacity {W}
+    4.83,                    !- Reference COP {W/W}
+    5.56,                    !- Reference Leaving Chilled Water Temperature {C}
+    23.89,                   !- Reference Entering Condenser Fluid Temperature {C}
+    0.0135,                  !- Reference Chilled Water Flow Rate {m3/s}
+    0.01577,                 !- Reference Condenser Water Flow Rate {m3/s}
+    ElectricEIRChiller Trane RTHB 531kW/4.83COP/Valve CAPFT,  !- Cooling Capacity Function of Temperature Curve Name
+    ElectricEIRChiller Trane RTHB 531kW/4.83COP/Valve EIRFT,  !- Electric Input to Cooling Output Ratio Function of Temperature Curve Name
+    ElectricEIRChiller Trane RTHB 531kW/4.83COP/Valve EIRFPLR,  !- Electric Input to Cooling Output Ratio Function of Part Load Ratio Curve Name
+    0.30,                    !- Minimum Part Load Ratio
+    1.01,                    !- Maximum Part Load Ratio
 	##if #[Chiller_Staging[] EQS No]
 	1,                            !- Optimum Part Load Ratio
 	##endif
 	##if #[Chiller_Staging[] EQS Yes]
 	0.9,                            !- Optimum Part Load Ratio
 	##endif
-	0.15,                         !- Minimum Unloading Ratio
+    0.30,                    !- Minimum Unloading Ratio
 	Chiller ChW Inlet,            !- Chilled Water Side Inlet Node
 	Chiller ChW Outlet,           !- Chilled Water Side Outlet Node
 	Chiller Cnd Inlet,            !- Condenser Side Inlet Node
 	Chiller Cnd Outlet,           !- Condenser Side Outlet Node
-	Watercooled,                  !- Condenser Type
-	0,                            !- Condenser Fan Power Ratio {W/W}
-	1,                            !- Compressor Motor Efficiency
-	5,                            !- Leaving Chilled Water Lower Temperature Limit {C}
-	VariableFlow,                 !- Chiller Flow Mode
+    WaterCooled,             !- Condenser Type
+    ,                        !- Condenser Fan Power Ratio {W/W}
+    1.0,                     !- Compressor Motor Efficiency
+    2.0,                     !- Leaving Chilled Water Lower Temperature Limit {C}
+    ConstantFlow,            !- Chiller Flow Mode
 	0.0000,                  !- Design Heat Recovery Water Flow Rate {m3/s}
     ,                        !- Heat Recovery Inlet Node Name
     ,                        !- Heat Recovery Outlet Node Name
@@ -449,31 +448,38 @@ ACTIVE;                                               !- Comp1 Branch Control Ty
 	# [ 0.5 * Chiller_SizingFactor[] ];                            !- Sizing Factor
 	##endif
 
+
 	##if #[Chiller_Staging[] EQS Yes]
-	CHILLER:ELECTRIC:EIR,
-	Chiller2,                      !- Chiller Name
-	Chiller_Capacity[],           !- Reference Capacity {W}
-	5.5,                         !- Reference COP {W/W}
-	 5.56,                        !- Reference Leaving Chilled Water Temperature {C}
-	 21.11,                       !- Reference Entering Condenser Fluid Temperature {C}
-	autosize,                     !- Reference Evaporator Volumetric Water Flow Rate {m3/s}
-	autosize,                     !- Reference Condenser Volumetric Water Flow Rate {m3/s}
-	Chiller CentCapFT,            !- Cooling Capacity Function of Temperature Curve
-	Chiller CentEIRFT,            !- Electric Input to Cooling Output Ratio Function of Temperature Curve
-	Chiller CentEIRFPLR,          !- Electric Input to Cooling Output Ratio Function of Part Load Ratio Curve
-	0.1,                          !- Minimum Part Load Ratio
-	1,                            !- Maximum Part Load Ratio
+	
+	Chiller:Electric:EIR,
+    Chiller2,  !- Name
+    Chiller_Capacity[],                  !- Reference Capacity {W}
+    4.83,                    !- Reference COP {W/W}
+    5.56,                    !- Reference Leaving Chilled Water Temperature {C}
+    23.89,                   !- Reference Entering Condenser Fluid Temperature {C}
+    0.0135,                  !- Reference Chilled Water Flow Rate {m3/s}
+    0.01577,                 !- Reference Condenser Water Flow Rate {m3/s}
+    ElectricEIRChiller Trane RTHB 531kW/4.83COP/Valve CAPFT,  !- Cooling Capacity Function of Temperature Curve Name
+    ElectricEIRChiller Trane RTHB 531kW/4.83COP/Valve EIRFT,  !- Electric Input to Cooling Output Ratio Function of Temperature Curve Name
+    ElectricEIRChiller Trane RTHB 531kW/4.83COP/Valve EIRFPLR,  !- Electric Input to Cooling Output Ratio Function of Part Load Ratio Curve Name
+    0.30,                    !- Minimum Part Load Ratio
+    1.01,                    !- Maximum Part Load Ratio
+	##if #[Chiller_Staging[] EQS No]
+	1,                            !- Optimum Part Load Ratio
+	##endif
+	##if #[Chiller_Staging[] EQS Yes]
 	0.9,                            !- Optimum Part Load Ratio
-	0.15,                         !- Minimum Unloading Ratio
+	##endif
+    0.30,                    !- Minimum Unloading Ratio
 	Chiller2 ChW Inlet,            !- Chilled Water Side Inlet Node
 	Chiller2 ChW Outlet,           !- Chilled Water Side Outlet Node
 	Chiller2 Cnd Inlet,            !- Condenser Side Inlet Node
 	Chiller2 Cnd Outlet,           !- Condenser Side Outlet Node
-	Watercooled,                  !- Condenser Type
-	0,                            !- Condenser Fan Power Ratio {W/W}
-	1,                            !- Compressor Motor Efficiency
-	5,                            !- Leaving Chilled Water Lower Temperature Limit {C}
-	VariableFlow,                 !- Chiller Flow Mode
+    WaterCooled,             !- Condenser Type
+    ,                        !- Condenser Fan Power Ratio {W/W}
+    1.0,                     !- Compressor Motor Efficiency
+    2.0,                     !- Leaving Chilled Water Lower Temperature Limit {C}
+    ConstantFlow,            !- Chiller Flow Mode
 	0.0000,                  !- Design Heat Recovery Water Flow Rate {m3/s}
     ,                        !- Heat Recovery Inlet Node Name
     ,                        !- Heat Recovery Outlet Node Name
@@ -577,6 +583,52 @@ ACTIVE;                                               !- Comp1 Branch Control Ty
 ##endif
 
 ##if #[Chiller_Model_Type[] EQS CBE_RegularEIR]
+! Curve set (3 Curves):
+!
+! Cooling Capacity Function of Temperature Curve
+! x = Leaving Chilled Water Temperature and y = Entering Condenser Water Temperature
+Curve:Biquadratic,
+    ElectricEIRChiller Trane RTHB 531kW/4.83COP/Valve CAPFT,  !- Name
+    9.434012E-01,            !- Coefficient1 Constant
+    1.630729E-02,            !- Coefficient2 x
+    8.621098E-04,            !- Coefficient3 x**2
+    3.242384E-03,            !- Coefficient4 y
+    -3.003973E-04,           !- Coefficient5 y**2
+    1.931126E-04,            !- Coefficient6 x*y
+    5.56,                    !- Minimum Value of x
+    10.00,                   !- Maximum Value of x
+    15.56,                   !- Minimum Value of y
+    23.89;                   !- Maximum Value of y
+
+!
+! Energy Input to Cooling Output Ratio Function of Temperature Curve
+! x = Leaving Chilled Water Temperature and y = Entering Condenser Water Temperature
+Curve:Biquadratic,
+    ElectricEIRChiller Trane RTHB 531kW/4.83COP/Valve EIRFT,  !- Name
+    4.524778E-01,            !- Coefficient1 Constant
+    1.045156E-04,            !- Coefficient2 x
+    6.932509E-05,            !- Coefficient3 x**2
+    2.044980E-02,            !- Coefficient4 y
+    3.672953E-04,            !- Coefficient5 y**2
+    -1.099051E-03,           !- Coefficient6 x*y
+    5.56,                    !- Minimum Value of x
+    10.00,                   !- Maximum Value of x
+    15.56,                   !- Minimum Value of y
+    23.89;                   !- Maximum Value of y
+
+!
+! Energy Input to Cooling Output Ratio Function of Part Load Ratio Curve
+! x = Part Load Ratio (load/capacity)
+Curve:Quadratic,
+    ElectricEIRChiller Trane RTHB 531kW/4.83COP/Valve EIRFPLR,  !- Name
+    1.980020E-01,            !- Coefficient1 Constant
+    2.733157E-01,            !- Coefficient2 x
+    5.277318E-01,            !- Coefficient3 x**2
+    0.30,                    !- Minimum Value of x
+    1.01;                    !- Maximum Value of x
+	
+	
+	
 	
 	CURVE:BIQUADRATIC,
 	! Cooling Capacity Function of Temperature Curve for open or hermetic water-cooled centrifugal chillers
