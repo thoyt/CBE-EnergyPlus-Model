@@ -2806,15 +2806,6 @@ SetpointManager:OutdoorAirReset,
 
 ##endif
 
-SetpointManager:OutdoorAirReset,
-PACU_VAV_top Supply Air Temperature Manager,   !- Name
-Temperature,              !- Control Variable
-15.6,                        !- Setpoint at Outdoor Low Temperature {C}
-10,                      !- Outdoor Low Temperature {C}
-12.8,                    !- Setpoint at Outdoor High Temperature {C}
-21.1,                    !- Outdoor High Temperature {C}
-PACU_VAV_top Supply Equipment Outlet Node;  !- Setpoint Node or NodeList Name
-
 COIL:Cooling:Water,
 AHU Cooling Coil,                                     !- Coil Name
 Sch_HVAC_System_Availability,                          !- Available Schedule
