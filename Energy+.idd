@@ -16823,10 +16823,10 @@ RoomAirSettings:UnderFloorAirDistributionExterior,
        \type choice
        \key Custom
        \key Swirl
-       \key VariableArea
+       \key MIT1
        \key HorizontalSwirl
-       \key LinearBarGrille
-	   \key LinearBarGrille_CBE
+       \key LIN1
+	   \key LIN2
        \key MIT2
        \default Swirl
   N8 , \field Transition Height
@@ -27490,10 +27490,18 @@ AirTerminal:SingleDuct:VAV:Reheat:VariableSpeedFan,
        \minimum 0.0
        \default 0.0
        \ip-units gal/min
-  N6;  \field Heating Convergence Tolerance
+  N6,  \field Heating Convergence Tolerance
        \type real
        \minimum> 0.0
        \default 0.001
+  N7,  \field First Minimum Fraction for Dual Minimum
+       \type real
+       \required-field
+       \note fraction of cooling air flow rate
+  N8;  \field Second Minimum Fraction for Dual Minimum
+       \type real
+       \required-field
+       \note fraction of cooling air flow rate
 
 AirTerminal:SingleDuct:VAV:HeatAndCool:NoReheat,
        \min-fields 6
