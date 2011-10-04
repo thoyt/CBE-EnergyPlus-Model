@@ -333,7 +333,7 @@ BOILER:HotWater,
 Boiler,                                               !- Boiler Name
 NaturalGas,                                           !- Fuel Type
 Boiler_Capacity[],                                    !- Nominal Capacity {W}
-.78,                                                   !- Theoretical Boiler Efficiency
+.8,                                                   !- Theoretical Boiler Efficiency
 BoilerEfficiencyCurve[],                                     !- Efficiency Curve Name
 81,                                                   !- Design Boiler Water Outlet Temp {C}
 autosize,                                             !- Max Design Boiler Water Flow Rate {m3/s}
@@ -362,7 +362,7 @@ BOILER:HotWater,
 Boiler2,                                               !- Boiler Name
 NaturalGas,                                           !- Fuel Type
 Boiler2_Capacity[],                                    !- Nominal Capacity {W}
-.78,                                                   !- Theoretical Boiler Efficiency
+.8,                                                   !- Theoretical Boiler Efficiency
 BoilerEfficiencyCurve[],                                     !- Efficiency Curve Name
 81,                                                   !- Design Boiler Water Outlet Temp {C}
 autosize,                                             !- Max Design Boiler Water Flow Rate {m3/s}
