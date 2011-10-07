@@ -913,9 +913,9 @@
 			MFEast Reheat Coil,      !- Heating coil name
 			autosize,                !- Max hot water flow {m3/s}
 			0.00000000001,                       !- Min hot water flow {m3/s}
-			0.01,                   !- Heating Convergence Tolerance
-			FirstDualMinFraction[],                   !- First Minimum Fraction for Dual Minimum
-			SecondDualMinFraction[];                   !- Second Minimum Fraction for Dual Minimum
+			0.01;                   !- Heating Convergence Tolerance
+!			FirstDualMinFraction[],                   !- First Minimum Fraction for Dual Minimum
+!			SecondDualMinFraction[];                   !- Second Minimum Fraction for Dual Minimum
 			
 			AirTerminal:SingleDuct:VAV:Reheat:VariableSpeedFan,
 			MFWest FCU Reheat,       !- Name of unit
@@ -933,9 +933,9 @@
 			MFWest Reheat Coil,      !- Heating coil name
 			autosize,                !- Max hot water flow {m3/s}
 			0.00000000001,                       !- Min hot water flow {m3/s}
-			0.01,                   !- Heating Convergence Tolerance
-			FirstDualMinFraction[],                   !- First Minimum Fraction for Dual Minimum
-			SecondDualMinFraction[];                   !- Second Minimum Fraction for Dual Minimum
+			0.01;                   !- Heating Convergence Tolerance
+!			FirstDualMinFraction[],                   !- First Minimum Fraction for Dual Minimum
+!			SecondDualMinFraction[];                   !- Second Minimum Fraction for Dual Minimum
 			
 			AirTerminal:SingleDuct:VAV:Reheat:VariableSpeedFan,
 			MFSouth FCU Reheat,       !- Name of unit
@@ -953,9 +953,9 @@
 			MFSouth Reheat Coil,      !- Heating coil name
 			autosize,                !- Max hot water flow {m3/s}
 			0.00000000001,                       !- Min hot water flow {m3/s}
-			0.01,                   !- Heating Convergence Tolerance
-			FirstDualMinFraction[],                   !- First Minimum Fraction for Dual Minimum
-			SecondDualMinFraction[];                   !- Second Minimum Fraction for Dual Minimum
+			0.01;                   !- Heating Convergence Tolerance
+!			FirstDualMinFraction[],                   !- First Minimum Fraction for Dual Minimum
+!			SecondDualMinFraction[];                   !- Second Minimum Fraction for Dual Minimum
 			
 			AirTerminal:SingleDuct:VAV:Reheat:VariableSpeedFan,
 			MFNorth FCU Reheat,       !- Name of unit
@@ -973,9 +973,9 @@
 			MFNorth Reheat Coil,      !- Heating coil name
 			autosize,                !- Max hot water flow {m3/s}
 			0.00000000001,                       !- Min hot water flow {m3/s}
-			0.01,                   !- Heating Convergence Tolerance
-			FirstDualMinFraction[],                   !- First Minimum Fraction for Dual Minimum
-			SecondDualMinFraction[];                   !- Second Minimum Fraction for Dual Minimum
+			0.01;                   !- Heating Convergence Tolerance
+!			FirstDualMinFraction[],                   !- First Minimum Fraction for Dual Minimum
+!			SecondDualMinFraction[];                   !- Second Minimum Fraction for Dual Minimum
 			
 			AirTerminal:SingleDuct:VAV:Reheat:VariableSpeedFan,
 			TFEast FCU Reheat,       !- Name of unit
@@ -993,9 +993,9 @@
 			TFEast Reheat Coil,      !- Heating coil name
 			autosize,                !- Max hot water flow {m3/s}
 			0.00000000001,                       !- Min hot water flow {m3/s}
-			0.01,                   !- Heating Convergence Tolerance
-			FirstDualMinFraction[],                   !- First Minimum Fraction for Dual Minimum
-			SecondDualMinFraction[];                   !- Second Minimum Fraction for Dual Minimum
+			0.01;                   !- Heating Convergence Tolerance
+!			FirstDualMinFraction[],                   !- First Minimum Fraction for Dual Minimum
+!			SecondDualMinFraction[];                   !- Second Minimum Fraction for Dual Minimum
 			
 			AirTerminal:SingleDuct:VAV:Reheat:VariableSpeedFan,
 			TFWest FCU Reheat,       !- Name of unit
@@ -1013,9 +1013,9 @@
 			TFWest Reheat Coil,      !- Heating coil name
 			autosize,                !- Max hot water flow {m3/s}
 			0.00000000001,                       !- Min hot water flow {m3/s}
-			0.01,                   !- Heating Convergence Tolerance
-			FirstDualMinFraction[],                   !- First Minimum Fraction for Dual Minimum
-			SecondDualMinFraction[];                   !- Second Minimum Fraction for Dual Minimum
+			0.01;                   !- Heating Convergence Tolerance
+!			FirstDualMinFraction[],                   !- First Minimum Fraction for Dual Minimum
+!			SecondDualMinFraction[];                   !- Second Minimum Fraction for Dual Minimum
 			
 			AirTerminal:SingleDuct:VAV:Reheat:VariableSpeedFan,
 			TFSouth FCU Reheat,       !- Name of unit
@@ -1033,9 +1033,9 @@
 			TFSouth Reheat Coil,      !- Heating coil name
 			autosize,                !- Max hot water flow {m3/s}
 			0.00000000001,                       !- Min hot water flow {m3/s}
-			0.01,                   !- Heating Convergence Tolerance
-			FirstDualMinFraction[],                   !- First Minimum Fraction for Dual Minimum
-			SecondDualMinFraction[];                   !- Second Minimum Fraction for Dual Minimum
+			0.01;                   !- Heating Convergence Tolerance
+!			FirstDualMinFraction[],                   !- First Minimum Fraction for Dual Minimum
+!			SecondDualMinFraction[];                   !- Second Minimum Fraction for Dual Minimum
 			
 			AirTerminal:SingleDuct:VAV:Reheat:VariableSpeedFan,
 			TFNorth FCU Reheat,       !- Name of unit
@@ -1053,9 +1053,9 @@
 			TFNorth Reheat Coil,      !- Heating coil name
 			autosize,                !- Max hot water flow {m3/s}
 			0.00000000001,                       !- Min hot water flow {m3/s}
-			0.01,                   !- Heating Convergence Tolerance
-			FirstDualMinFraction[],                   !- First Minimum Fraction for Dual Minimum
-			SecondDualMinFraction[];                   !- Second Minimum Fraction for Dual Minimum
+			0.01;                   !- Heating Convergence Tolerance
+!			FirstDualMinFraction[],                   !- First Minimum Fraction for Dual Minimum
+!			SecondDualMinFraction[];                   !- Second Minimum Fraction for Dual Minimum
 			
 			AirTerminal:SingleDuct:VAV:Reheat:VariableSpeedFan,
 			GFEast FCU Reheat,       !- Name of unit
@@ -1073,9 +1073,9 @@
 			GFEast Reheat Coil,      !- Heating coil name
 			autosize,                !- Max hot water flow {m3/s}
 			0.00000000001,                       !- Min hot water flow {m3/s}
-			0.01,                   !- Heating Convergence Tolerance
-			FirstDualMinFraction[],                   !- First Minimum Fraction for Dual Minimum
-			SecondDualMinFraction[];                   !- Second Minimum Fraction for Dual Minimum
+			0.01;                   !- Heating Convergence Tolerance
+!			FirstDualMinFraction[],                   !- First Minimum Fraction for Dual Minimum
+!			SecondDualMinFraction[];                   !- Second Minimum Fraction for Dual Minimum
 			
 			AirTerminal:SingleDuct:VAV:Reheat:VariableSpeedFan,
 			GFWest FCU Reheat,       !- Name of unit
@@ -1093,9 +1093,9 @@
 			GFWest Reheat Coil,      !- Heating coil name
 			autosize,                !- Max hot water flow {m3/s}
 			0.00000000001,                       !- Min hot water flow {m3/s}
-			0.01,                   !- Heating Convergence Tolerance
-			FirstDualMinFraction[],                   !- First Minimum Fraction for Dual Minimum
-			SecondDualMinFraction[];                   !- Second Minimum Fraction for Dual Minimum
+			0.01;                   !- Heating Convergence Tolerance
+!			FirstDualMinFraction[],                   !- First Minimum Fraction for Dual Minimum
+!			SecondDualMinFraction[];                   !- Second Minimum Fraction for Dual Minimum
 			
 			AirTerminal:SingleDuct:VAV:Reheat:VariableSpeedFan,
 			GFSouth FCU Reheat,       !- Name of unit
@@ -1113,9 +1113,9 @@
 			GFSouth Reheat Coil,      !- Heating coil name
 			autosize,                !- Max hot water flow {m3/s}
 			0.00000000001,                       !- Min hot water flow {m3/s}
-			0.01,                   !- Heating Convergence Tolerance
-			FirstDualMinFraction[],                   !- First Minimum Fraction for Dual Minimum
-			SecondDualMinFraction[];                   !- Second Minimum Fraction for Dual Minimum
+			0.01;                   !- Heating Convergence Tolerance
+!			FirstDualMinFraction[],                   !- First Minimum Fraction for Dual Minimum
+!			SecondDualMinFraction[];                   !- Second Minimum Fraction for Dual Minimum
 			
 			AirTerminal:SingleDuct:VAV:Reheat:VariableSpeedFan,
 			GFNorth FCU Reheat,       !- Name of unit
@@ -1133,9 +1133,9 @@
 			GFNorth Reheat Coil,      !- Heating coil name
 			autosize,                !- Max hot water flow {m3/s}
 			0.00000000001,                       !- Min hot water flow {m3/s}
-			0.01,                   !- Heating Convergence Tolerance
-			FirstDualMinFraction[],                   !- First Minimum Fraction for Dual Minimum
-			SecondDualMinFraction[];                   !- Second Minimum Fraction for Dual Minimum
+			0.01;                   !- Heating Convergence Tolerance
+!			FirstDualMinFraction[],                   !- First Minimum Fraction for Dual Minimum
+!			SecondDualMinFraction[];                   !- Second Minimum Fraction for Dual Minimum
 			
 			Fan:VariableVolume,
 			MFEast FCU Fan,          !- Fan Name
