@@ -275,40 +275,22 @@ Schedule:Compact,
     Until: 24:00,Heating_Setback[];       !- Field 28
      
 
-SCHEDULE:COMPACT,
-Sch_ASHRAE90.1-2010_Core_Thermostat_Heating_Setpoint,      
-Temperature,            
-Through: 12/31,         
-For: Weekdays, 
-Until: 5:00,       Heating_Setback[],                   
-Until: 18:00,      Heating_Setpoint[],       
-Until: 24:00,      Heating_Setback[],                   
-For: SummerDesignDay WinterDesignDay,
-  Until: 5:00,     Heating_Setpoint[],
-  Until: 18:00,    Heating_Setpoint[],
-  Until: 24:00,    Heating_Setpoint[],
-For: AllOtherDays,  
-Until: 5:00,       Heating_Setback[],                   
-Until: 18:00,      Heating_Setpoint[],       
-Until: 24:00,      Heating_Setback[];     
-                                                                                                                                    
-SCHEDULE:COMPACT,
-Sch_LBL_Perimeter_Thermostat_Heating_Setpoint,                       
-Temperature,                            
-Through: 12/31,
-For: Weekdays,
-  Until: 5:00,     Heating_Setback[],
-  Until: 18:00,    Heating_Setpoint[],
-  Until: 24:00,    Heating_Setback[],
-For: SummerDesignDay WinterDesignDay,
-  Until: 5:00,     Heating_Setpoint[],
-  Until: 18:00,    Heating_Setpoint[],
-  Until: 24:00,    Heating_Setpoint[],
-For: AllOtherDays,
-  Until: 5:00,     Heating_Setback[],
-  Until: 18:00,    Heating_Setpoint[],
-  Until: 24:00,    Heating_Setback[];
-  
+  SCHEDULE:COMPACT,
+    Sch_ASHRAE90.1-2010_Core_Thermostat_Heating_Setpoint,      
+    Temperature,             !- Schedule Type Limits Name
+    Through: 12/31,          !- Field 1
+    For: Weekdays WinterDesignDay, !- Field 2
+    Until: 07:00,Heating_Setback[],       !- Field 7
+    Until: 22:00,Heating_Setpoint[],       !- Field 9
+    Until: 24:00,Heating_Setback[],       !- Field 11
+    For SummerDesignDay,     !- Field 13
+    Until: 24:00,Heating_Setback[],       !- Field 14
+    For: Saturday,           !- Field 16
+    Until:  07:00,Heating_Setback[],      !- Field 21
+    Until: 17:00,Heating_Setpoint[],       !- Field 23
+    Until: 24:00,Heating_Setback[],       !- Field 25
+    For: Sunday Holidays AllOtherDays, !- Field 27
+    Until: 24:00,Heating_Setback[];       !- Field 28
 	 
 SCHEDULE:COMPACT,
 Sch_ThermostatControlType,                 

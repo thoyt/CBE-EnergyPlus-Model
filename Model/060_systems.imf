@@ -7,13 +7,13 @@ Sizing_Factor[],
 
 ThermostatSetpoint:DualSetpoint,
 Perimeter_Thermostat_Dual_Setpoint_Control,               !- Name
-Sch_LBL_Perimeter_Thermostat_Heating_Setpoint,                                   !- Heating Setpoint Temperature SCHEDULE Name
-Sch_LBL_Thermostat_Cooling_Setpoint;                                   !- Cooling Setpoint Temperature SCHEDULE Name
+Sch_ASHRAE90.1-2010_Perimeter_Thermostat_Heating_Setpoint,                                   !- Heating Setpoint Temperature SCHEDULE Name
+Sch_ASHRAE90.1-2010_Thermostat_Cooling_Setpoint;                                   !- Cooling Setpoint Temperature SCHEDULE Name
 
 ThermostatSetpoint:DualSetpoint,
 Core_Thermostat_Dual_Setpoint_Control,               !- Name
-Sch_LBL_Core_Thermostat_Heating_Setpoint,                                   !- Heating Setpoint Temperature SCHEDULE Name
-Sch_LBL_Thermostat_Cooling_Setpoint;                                   !- Cooling Setpoint Temperature SCHEDULE Name
+Sch_ASHRAE90.1-2010_Core_Thermostat_Heating_Setpoint,                                   !- Heating Setpoint Temperature SCHEDULE Name
+Sch_ASHRAE90.1-2010_Thermostat_Cooling_Setpoint;                                   !- Cooling Setpoint Temperature SCHEDULE Name
 
 ZoneControl:Thermostat,
 GFWest Thermostat,                                    !- Thermostat Name
@@ -24,7 +24,7 @@ Perimeter_Thermostat_Dual_Setpoint_Control;           !- Control Type Name
 
 Sizing:Zone,
 GFWest,                                               !- Name of a zone
-Zone_Cool_SAT_Perim[],                                     !- Zone cooling design supply air temperature {C}
+Zone_Cool_SAT_GF_Perim[],                                     !- Zone cooling design supply air temperature {C}
 50,                                                   !- Zone heating design supply air temperature {C}
 0.008,                                                !- Zone cooling design supply air humidity ratio {kg-H20/kg-air}
 0.008,                                                !- Zone heating design supply air humidity ratio {kg-H2O/kg-air}
@@ -207,7 +207,7 @@ Core_Thermostat_Dual_Setpoint_Control;               !- Control Type Name
 
 Sizing:Zone,
 GFCore,                                               !- Name of a zone
-Zone_Cool_SAT_Core[],                                     !- Zone cooling design supply air temperature {C}
+Zone_Cool_SAT_GF_Core[],                                     !- Zone cooling design supply air temperature {C}
 50,                                                   !- Zone heating design supply air temperature {C}
 0.008,                                                !- Zone cooling design supply air humidity ratio {kg-H20/kg-air}
 0.008,                                                !- Zone heating design supply air humidity ratio {kg-H2O/kg-air}
@@ -332,7 +332,7 @@ Perimeter_Thermostat_Dual_Setpoint_Control;               !- Control Type Name
 
 Sizing:Zone,
 GFEast,                                               !- Name of a zone
-Zone_Cool_SAT_Perim[],                                     !- Zone cooling design supply air temperature {C}
+Zone_Cool_SAT_GF_Perim[],                                     !- Zone cooling design supply air temperature {C}
 50,                                                   !- Zone heating design supply air temperature {C}
 0.008,                                                !- Zone cooling design supply air humidity ratio {kg-H20/kg-air}
 0.008,                                                !- Zone heating design supply air humidity ratio {kg-H2O/kg-air}
@@ -516,7 +516,7 @@ Perimeter_Thermostat_Dual_Setpoint_Control;              !- Control Type Name
 
 Sizing:Zone,
 GFNorth,                                              !- Name of a zone
-Zone_Cool_SAT_Perim[],                                     !- Zone cooling design supply air temperature {C}
+Zone_Cool_SAT_GF_Perim[],                                     !- Zone cooling design supply air temperature {C}
 50,                                                   !- Zone heating design supply air temperature {C}
 0.008,                                                !- Zone cooling design supply air humidity ratio {kg-H20/kg-air}
 0.008,                                                !- Zone heating design supply air humidity ratio {kg-H2O/kg-air}
@@ -699,7 +699,7 @@ Perimeter_Thermostat_Dual_Setpoint_Control;              !- Control Type Name
 
 Sizing:Zone,
 GFSouth,                                              !- Name of a zone
-Zone_Cool_SAT_Perim[],                                     !- Zone cooling design supply air temperature {C}
+Zone_Cool_SAT_GF_Perim[],                                     !- Zone cooling design supply air temperature {C}
 50,                                                   !- Zone heating design supply air temperature {C}
 0.008,                                                !- Zone cooling design supply air humidity ratio {kg-H20/kg-air}
 0.008,                                                !- Zone heating design supply air humidity ratio {kg-H2O/kg-air}

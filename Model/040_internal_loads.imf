@@ -7,7 +7,7 @@
 	PEOPLE,
 	ZoneName[] People,                                    !- Name
 	ZoneName[],                                           !- Zone Name
-	Sch_LBL_Occupancy,                                    !- Number of People SCHEDULE Name
+	Sch_ASHRAE90.1-2010_Occupancy,                                    !- Number of People SCHEDULE Name
 	Area/Person,                                          !- Number of People Calculation Method
 	,                                                     !- Number of People
 	,                                                     !- People per Floor Area
@@ -38,7 +38,7 @@
 	ELECTRICEQUIPMENT,
 	ZoneName[] Equipment,                                    !- Name
 	ZoneName[],                                              !- Zone Name
-	Sch_LBL_Equipment,                                       !- Equipment SCHEDULE Name
+	Sch_ASHRAE90.1-2010_Equipment,                                       !- Equipment SCHEDULE Name
 	Watts/Area,                                              !- Design Level Calculation Method
 	,                                                        !- Design Equipment Level (W)
 	##if #[Fake_UFAD[] EQS Yes ]
@@ -59,7 +59,7 @@
 	LIGHTS,
 	ZoneName[] General lighting,                          !- Name
 	ZoneName[],                                           !- Zone Name
-	Sch_LBL_Lighting,                                     !- Lighting SCHEDULE Name
+	Sch_ASHRAE90.1-2010_Lighting,                                     !- Lighting SCHEDULE Name
 	Watts/Area,                                           !- Design Level Calculation Level
 	,                                                     !- Design lighting Level (W)
 	##if #[Fake_UFAD[] EQS Yes ]
@@ -99,7 +99,7 @@
 	PEOPLE,
 	ZoneName[] People,                                    !- Name
 	ZoneName[],                                           !- Zone Name
-	Sch_LBL_Occupancy,                                    !- Number of People SCHEDULE Name
+	Sch_ASHRAE90.1-2010_Occupancy,                                    !- Number of People SCHEDULE Name
 	Area/Person,                                          !- Number of People Calculation Method
 	,                                                     !- Number of People
 	,                                                     !- People per Floor Area
@@ -125,7 +125,7 @@
 	ELECTRICEQUIPMENT,
 	ZoneName[] Equipment,                                    !- Name
 	ZoneName[],                                              !- Zone Name
-	Sch_LBL_Equipment,                                       !- Equipment SCHEDULE Name
+	Sch_ASHRAE90.1-2010_Equipment,                                       !- Equipment SCHEDULE Name
 	Watts/Area,                                              !- Design Level Calculation Method
 	,                                                        !- Design Equipment Level (W)
 	# [ Equipment_Level[] * Remainder_EquipmentRoom[] ],
@@ -141,7 +141,7 @@
 	LIGHTS,
 	ZoneName[] General lighting,                          !- Name
 	ZoneName[],                                           !- Zone Name
-	Sch_LBL_Lighting,                                     !- Lighting SCHEDULE Name
+	Sch_ASHRAE90.1-2010_Lighting,                                     !- Lighting SCHEDULE Name
 	Watts/Area,                                           !- Design Level Calculation Level
 	,                                                     !- Design lighting Level (W)
 	# [ Lighting_Level[] * Remainder_LightingRoom[] ],
