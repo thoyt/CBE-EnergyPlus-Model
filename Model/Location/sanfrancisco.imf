@@ -43,6 +43,319 @@ Site:Location,
           0,      !- Daylight Savings Time Indicator
    WetBulb;      !- Humidity Indicating Type
 
+
+!********New Design Day********
+SizingPeriod:DesignDay,
+  CoolingDesignDay129, !- Name
+  15.6875, !- Maximum Dry-Bulb Temperature
+  6.0625, !- Daily Temperature Range
+  15.6875, !- Humidity Indicating Conditions at Maximum Dry-Bulb
+  83328, !- Barometric Pressure
+  4.4, !- Wind Speed
+  260,   !- Wind Direction
+  1.0, !- Sky Clearness
+  0,   !- Rain Indicator
+  0,   !- Snow Indicator
+  21,  !- Day of Month
+  7,   !- Month
+  SummerDesignDay, !- Day Type
+  0,   !- Daylight Saving Time Indicator
+  WetBulb, !- Humidity Indicating Type
+  ,    !- Relative Humidity Day Schedule Name
+  MultiplierSchedule,  !- Dry-Bulb Temperature Range Modifier Type
+  DryBulbModifiers129, !- Dry-Bulb Temperature Range Modifier Schedule Name
+  Schedule, !- Solar Model Indicator
+  DirectRadiation129, !- Beam Solar Day Schedule Name
+  DiffuseRadiation129; !- Diffuse Solar Day Schedule Name
+
+Schedule:Day:Hourly,
+  DryBulbModifiers129,
+  Any Number,
+  0.756701030927835,
+  0.808247422680412,
+  0.901030927835052,
+  0.938144329896907,
+  0.938144329896907,
+  0.938144329896907,
+  0.711340206185567,
+  0.348453608247423,
+  0.0886597938144329,
+  0.0762886597938145,
+  0.11340206185567,
+  0,
+  0.0453608247422681,
+  0.11340206185567,
+  0.175257731958763,
+  0.212371134020618,
+  0.325773195876289,
+  0.507216494845361,
+  0.688659793814433,
+  0.808247422680412,
+  0.901030927835052,
+  0.938144329896907,
+  0.938144329896907,
+  1;
+
+Schedule:Day:Hourly,
+  DirectRadiation129,
+  Any Number,
+  0,0,0,0,0,188.0625,515.375,701.9375,799.4375,851.875,886.4375,901,903.8125,891.75,862.4375,806.8125,703.4375,505.3125,188.3125,0,0,0,0,0;
+
+Schedule:Day:Hourly,
+  DiffuseRadiation129,
+  Any Number,
+  0,0,0,0,0,29.625,61.1875,88.5625,110.75,127,137.25,141.875,142,136.625,126.5625,109.875,87.3125,59.5,27.4375,0,0,0,0,0;
+
+!********New Design Day********
+SizingPeriod:DesignDay,
+  CoolingDesignDay136, !- Name
+  25.4625, !- Maximum Dry-Bulb Temperature
+  15.2375, !- Daily Temperature Range
+  25.4625, !- Humidity Indicating Conditions at Maximum Dry-Bulb
+  83328, !- Barometric Pressure
+  4.4, !- Wind Speed
+  260,   !- Wind Direction
+  1.0, !- Sky Clearness
+  0,   !- Rain Indicator
+  0,   !- Snow Indicator
+  21,  !- Day of Month
+  7,   !- Month
+  SummerDesignDay, !- Day Type
+  0,   !- Daylight Saving Time Indicator
+  WetBulb, !- Humidity Indicating Type
+  ,    !- Relative Humidity Day Schedule Name
+  MultiplierSchedule,  !- Dry-Bulb Temperature Range Modifier Type
+  DryBulbModifiers136, !- Dry-Bulb Temperature Range Modifier Schedule Name
+  Schedule, !- Solar Model Indicator
+  DirectRadiation136, !- Beam Solar Day Schedule Name
+  DiffuseRadiation136; !- Diffuse Solar Day Schedule Name
+
+Schedule:Day:Hourly,
+  DryBulbModifiers136,
+  Any Number,
+  0.954881050041017,
+  0.963084495488105,
+  0.975389663658737,
+  0.975389663658737,
+  1,
+  0.990155865463495,
+  0.819524200164069,
+  0.611156685808039,
+  0.497128794093519,
+  0.424938474159147,
+  0.283018867924528,
+  0.214109926168991,
+  0.123872026251025,
+  0,
+  0.073010664479081,
+  0.277276456111567,
+  0.448728465955701,
+  0.593109105824446,
+  0.716981132075472,
+  0.828547990155865,
+  0.915504511894996,
+  0.942575881870386,
+  0.942575881870386,
+  0.987694831829368;
+
+Schedule:Day:Hourly,
+  DirectRadiation136,
+  Any Number,
+  0,0,0,0,0,54.1875,234.875,369.5,467.0625,584.125,580.0625,496.1875,566.5,587.5,533.9375,368.375,315.3125,219.125,40.0625,0,0,0,0,0;
+
+Schedule:Day:Hourly,
+  DiffuseRadiation136,
+  Any Number,
+  0,0,0,0,0,40.875,109.8125,175.5,231,260.375,300.0625,351.9375,325.125,294.875,276,260.75,195.5625,113.4375,37.75,0,0,0,0,0;
+
+!********New Design Day********
+SizingPeriod:DesignDay,
+  CoolingDesignDay206, !- Name
+  21.45, !- Maximum Dry-Bulb Temperature
+  8.525, !- Daily Temperature Range
+  21.45, !- Humidity Indicating Conditions at Maximum Dry-Bulb
+  83328, !- Barometric Pressure
+  4.4, !- Wind Speed
+  260,   !- Wind Direction
+  1.0, !- Sky Clearness
+  0,   !- Rain Indicator
+  0,   !- Snow Indicator
+  21,  !- Day of Month
+  7,   !- Month
+  SummerDesignDay, !- Day Type
+  0,   !- Daylight Saving Time Indicator
+  WetBulb, !- Humidity Indicating Type
+  ,    !- Relative Humidity Day Schedule Name
+  MultiplierSchedule,  !- Dry-Bulb Temperature Range Modifier Type
+  DryBulbModifiers206, !- Dry-Bulb Temperature Range Modifier Schedule Name
+  Schedule, !- Solar Model Indicator
+  DirectRadiation206, !- Beam Solar Day Schedule Name
+  DiffuseRadiation206; !- Diffuse Solar Day Schedule Name
+
+Schedule:Day:Hourly,
+  DryBulbModifiers206,
+  Any Number,
+  0.99266862170088,
+  1,
+  0.983870967741936,
+  0.964809384164223,
+  0.941348973607038,
+  0.917888563049853,
+  0.894428152492669,
+  0.775659824046921,
+  0.607038123167156,
+  0.435483870967742,
+  0.288856304985337,
+  0.152492668621701,
+  0.0190615835777124,
+  0,
+  0.0395894428152491,
+  0.0821114369501466,
+  0.195014662756598,
+  0.347507331378299,
+  0.5,
+  0.62316715542522,
+  0.736070381231671,
+  0.846041055718475,
+  0.900293255131965,
+  0.92375366568915;
+
+Schedule:Day:Hourly,
+  DirectRadiation206,
+  Any Number,
+  0,0,0,0,0,0.5625,28.125,195.375,520.5,763.6875,814.5,830.3125,834.875,823.875,796.125,745.0625,650.375,476.5625,211.1875,15.75,0,0,0,0;
+
+Schedule:Day:Hourly,
+  DiffuseRadiation206,
+  Any Number,
+  0,0,0,0,0,26.4375,69.125,125.5,169.1875,159.1875,170.375,176.9375,178.125,173.1875,161.3125,142.25,115.4375,81.9375,43.6875,4.5625,0,0,0,0;
+
+!********New Design Day********
+SizingPeriod:DesignDay,
+  CoolingDesignDay227, !- Name
+  19.4, !- Maximum Dry-Bulb Temperature
+  8.075, !- Daily Temperature Range
+  19.4, !- Humidity Indicating Conditions at Maximum Dry-Bulb
+  83328, !- Barometric Pressure
+  4.4, !- Wind Speed
+  260,   !- Wind Direction
+  1.0, !- Sky Clearness
+  0,   !- Rain Indicator
+  0,   !- Snow Indicator
+  21,  !- Day of Month
+  7,   !- Month
+  SummerDesignDay, !- Day Type
+  0,   !- Daylight Saving Time Indicator
+  WetBulb, !- Humidity Indicating Type
+  ,    !- Relative Humidity Day Schedule Name
+  MultiplierSchedule,  !- Dry-Bulb Temperature Range Modifier Type
+  DryBulbModifiers227, !- Dry-Bulb Temperature Range Modifier Schedule Name
+  Schedule, !- Solar Model Indicator
+  DirectRadiation227, !- Beam Solar Day Schedule Name
+  DiffuseRadiation227; !- Diffuse Solar Day Schedule Name
+
+Schedule:Day:Hourly,
+  DryBulbModifiers227,
+  Any Number,
+  0.930340557275542,
+  0.953560371517028,
+  0.953560371517028,
+  1,
+  0.981424148606811,
+  0.953560371517028,
+  0.829721362229102,
+  0.577399380804953,
+  0.431888544891641,
+  0.323529411764706,
+  0.102167182662539,
+  0,
+  0,
+  0.0851393188854489,
+  0.136222910216718,
+  0.174922600619195,
+  0.28328173374613,
+  0.46594427244582,
+  0.630030959752322,
+  0.727554179566563,
+  0.755417956656347,
+  0.794117647058823,
+  0.778637770897833,
+  0.794117647058823;
+
+Schedule:Day:Hourly,
+  DirectRadiation227,
+  Any Number,
+  0,0,0,0,0,124.3125,467.3125,698.8125,712.9375,856.4375,892.125,921.5,928.9375,919.1875,894.3125,850.3125,754.1875,532.9375,181.6875,0,0,0,0,0;
+
+Schedule:Day:Hourly,
+  DiffuseRadiation227,
+  Any Number,
+  0,0,0,0,0,15.375,45.75,62.875,92.375,91.875,98.4375,102.875,103.375,99.875,92.375,80.6875,65,47.5,20.0625,0,0,0,0,0;
+
+!********New Design Day********
+SizingPeriod:DesignDay,
+  CoolingDesignDay269, !- Name
+  30, !- Maximum Dry-Bulb Temperature
+  18.1125, !- Daily Temperature Range
+  30, !- Humidity Indicating Conditions at Maximum Dry-Bulb
+  83328, !- Barometric Pressure
+  4.4, !- Wind Speed
+  260,   !- Wind Direction
+  1.0, !- Sky Clearness
+  0,   !- Rain Indicator
+  0,   !- Snow Indicator
+  21,  !- Day of Month
+  7,   !- Month
+  SummerDesignDay, !- Day Type
+  0,   !- Daylight Saving Time Indicator
+  WetBulb, !- Humidity Indicating Type
+  ,    !- Relative Humidity Day Schedule Name
+  MultiplierSchedule,  !- Dry-Bulb Temperature Range Modifier Type
+  DryBulbModifiers269, !- Dry-Bulb Temperature Range Modifier Schedule Name
+  Schedule, !- Solar Model Indicator
+  DirectRadiation269, !- Beam Solar Day Schedule Name
+  DiffuseRadiation269; !- Diffuse Solar Day Schedule Name
+
+Schedule:Day:Hourly,
+  DryBulbModifiers269,
+  Any Number,
+  0.909592822636301,
+  0.922015182884748,
+  0.959972394755003,
+  1,
+  0.917184265010352,
+  0.70600414078675,
+  0.536922015182885,
+  0.415458937198068,
+  0.290545203588682,
+  0.225672877846791,
+  0.156659765355417,
+  0.159420289855072,
+  0.0890269151138717,
+  0.0124223602484473,
+  0,
+  0.0759144237405107,
+  0.197377501725328,
+  0.339544513457557,
+  0.456176673567978,
+  0.470669427191166,
+  0.478951000690131,
+  0.550034506556246,
+  0.623188405797102,
+  0.701173222912353;
+
+Schedule:Day:Hourly,
+  DirectRadiation269,
+  Any Number,
+  0,0,0,0,0,0,213.1875,521.6875,699.5,787,827.9375,848.5,847.1875,827.6875,778.375,682.4375,476.875,125.625,0,0,0,0,0,0;
+
+Schedule:Day:Hourly,
+  DiffuseRadiation269,
+  Any Number,
+  0,0,0,0,0,0,34.6875,67.875,94.0625,113.1875,125.5,131.5625,130.6875,123,109.0625,88.1875,59.9375,22.1875,0,0,0,0,0,0;
+
+
+
 ##if #[RunType[] EQS OH]
 Site:GroundTemperature:BuildingSurface,
   19.905,  !- January Ground Temperature {C}
