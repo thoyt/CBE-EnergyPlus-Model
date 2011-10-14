@@ -5,7 +5,7 @@
       -8.00,     !- Time Zone Relative to GMT {GMT+/-}
        5.00;     !- Elevation {m}
 
- ! Climate Zone 12_CA_USA Annual Heating 99.6%, MaxDB=-0.4°C
+ ! Climate Zone 12_CA_USA Annual Heating 99.6%, MaxDB=-0.4ï¿½C
  SizingPeriod:DesignDay,
   Climate Zone 12 Ann Htg 99.6% Condns DB,     !- Name
        -3.33,      !- Maximum Dry-Bulb Temperature {C}
@@ -25,7 +25,7 @@
 	
  ! Climate Zone 12 Annual Cooling Design Conditions Wind Speed=3.4m/s Wind Dir=220
  ! Hottest Month=JUL
- ! Climate Zone 12_CA_USA Annual Cooling (DB=>MWB) .4%, MaxDB=37.9°C MWB=21.3°C
+ ! Climate Zone 12_CA_USA Annual Cooling (DB=>MWB) .4%, MaxDB=37.9ï¿½C MWB=21.3ï¿½C
  SizingPeriod:DesignDay,
   Climate Zone 12 Ann Clg .4% Condns DB=>MWB,     !- Name
        37.78,      !- Maximum Dry-Bulb Temperature {C}
@@ -64,11 +64,7 @@ SizingPeriod:DesignDay,
   MultiplierSchedule,  !- Dry-Bulb Temperature Range Modifier Type
   DryBulbModifiers59, !- Dry-Bulb Temperature Range Modifier Schedule Name
   Schedule, !- Solar Model Indicator
-<<<<<<< HEAD
   DirectRadiation59, !- Beam Solar Day Schedule Name
-=======
-  DirectRadiation59, \field Beam Solar Day Schedule Name
->>>>>>> 8ab4a20eb5071428270bed2ce676dfb0856b3a55
   DiffuseRadiation59; !- Diffuse Solar Day Schedule Name
 
 Schedule:Day:Hourly,
