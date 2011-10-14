@@ -64,7 +64,11 @@ SizingPeriod:DesignDay,
   MultiplierSchedule,  !- Dry-Bulb Temperature Range Modifier Type
   DryBulbModifiers59, !- Dry-Bulb Temperature Range Modifier Schedule Name
   Schedule, !- Solar Model Indicator
+<<<<<<< HEAD
   DirectRadiation59, !- Beam Solar Day Schedule Name
+=======
+  DirectRadiation59, \field Beam Solar Day Schedule Name
+>>>>>>> 8ab4a20eb5071428270bed2ce676dfb0856b3a55
   DiffuseRadiation59; !- Diffuse Solar Day Schedule Name
 
 Schedule:Day:Hourly,
