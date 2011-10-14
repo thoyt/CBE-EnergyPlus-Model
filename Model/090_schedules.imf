@@ -23,6 +23,9 @@ Control_Type,
 DISCRETE;
 
 ScheduleTypeLimits,
+Any Number;
+
+ScheduleTypeLimits,
 On/Off,
 0,
 1,

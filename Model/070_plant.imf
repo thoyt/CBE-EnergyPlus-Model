@@ -351,10 +351,10 @@ Boiler HW Outlet,                                     !- Boiler_Water_Outlet_Nod
 VariableFlow,                                         !- Boiler Flow Mode
 0,                                                    !- Parasitic Electric Load {W}
 ##if #[Boiler_Staging[] EQS No]
-1.0;                                                    !- Sizing Factor
+Boiler_SizingFactor[];                                                    !- Sizing Factor
 ##endif
 ##if #[Boiler_Staging[] EQS Yes]
-BoilerFirstStageRatio[];                                                    !- Sizing Factor
+#[Boiler_SizingFactor[] * BoilerFirstStageRatio[]];                                                    !- Sizing Factor
 ##endif
 
 ##if #[Boiler_Staging[] EQS Yes]
@@ -374,7 +374,7 @@ Boiler2 HW Outlet,                                     !- Boiler_Water_Outlet_No
 100,                                                  !- Temp Upper Limit Water Outlet {C}
 VariableFlow,                                         !- Boiler Flow Mode
 0,                                                    !- Parasitic Electric Load {W}
-#[1 - BoilerFirstStageRatio[]];                                                    !- Sizing Factor
+#[Boiler_SizingFactor[] * #[1 - BoilerFirstStageRatio[]]];                                                    !- Sizing Factor
 ##endif
 
 Curve:Linear,
