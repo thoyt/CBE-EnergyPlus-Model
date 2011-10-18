@@ -2798,9 +2798,9 @@ AHU Supply Fan Outlet;                                !- Name of the set point N
 SetpointManager:OutdoorAirReset,
 	AHU Cooling Supply Air Temp Manager,   !- Name
 	Temperature,              !- Control Variable
-	AHU_SAT_SPT[],                        !- Setpoint at Outdoor Low Temperature {C}
-	10,                      !- Outdoor Low Temperature {C}
-	High_AHU_SAT[],                    !- Setpoint at Outdoor High Temperature {C}
+	High_AHU_SAT[],                        !- Setpoint at Outdoor Low Temperature {C}
+	18.3333333,                      !- Outdoor Low Temperature {C}
+	AHU_SAT_SPT[],                    !- Setpoint at Outdoor High Temperature {C}
 	21.1,                    !- Outdoor High Temperature {C}
 	AHU Supply Fan Outlet;  !- Setpoint Node or NodeList Name
 

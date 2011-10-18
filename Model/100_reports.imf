@@ -373,7 +373,6 @@ Chilled water loop ChW Supply Outlet,     !- Key_Value
 System Node Volume Flow Rate Standard Density ,        !- Variable_Name
 hourly;                  !- Reporting_Frequency
 
-##if #[DetailedReportTwo[] EQS Yes ]
 ##if #[DetailedReport[] EQS Yes ]
 
 Output:Variable,
@@ -5374,4 +5373,3 @@ hourly;
 ##endif     ! ##if #[RunType[] EQS Thermal_Decay_Analysis ]
 
 ##endif     ! ##if #[DetailedReport[] EQS Yes ]
-##endif     ! ##if #[DetailedReportTwo[] EQS Yes ]

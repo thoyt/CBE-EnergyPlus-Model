@@ -1,6 +1,6 @@
 ##if #[RunType[] EQS UFAD]
 	##if #[Return_Plenum[] EQS Yes ]
-	##if #[#[Supply_Plenum[] EQS Single_Plenum ] or #[Supply_Plenum[] EQS DuctedPerimeterSingle ]]
+	##if #[#[#[Supply_Plenum[] EQS Single_Plenum ] or #[Supply_Plenum[] EQS DuctedPerimeterSingle ]] or #[Supply_Plenum[] EQS DuctedPerimeterParallel]]
 
 			! ========== GROUND FLOOR SUPPLY PLENUM GFSPNorth ==========
 		! GroundFloorSupplyPlenum, GFSPNorth, Ground floor (Ground), Surface Area: 2362.83 ft2 (219.5145 m2)
