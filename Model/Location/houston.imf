@@ -45,15 +45,18 @@ Site:Location,
 
 SizingPeriod:WeatherFileDays, Day185,
 7, 4,
-7, 4;
+7, 4,
+SummerDesignDay;
 
 SizingPeriod:WeatherFileDays, Day269,
 9, 26,
-9, 26;
+9, 26,
+SummerDesignDay;
 
 SizingPeriod:WeatherFileDays, Day199,
 7, 18,
-7, 18;
+7, 18,
+SummerDesignDay;
 
 
 ##if #[RunType[] EQS OH]

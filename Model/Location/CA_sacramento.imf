@@ -45,19 +45,23 @@
 
 SizingPeriod:WeatherFileDays, Day192,
 7, 11,
-7, 11;
+7, 11,
+SummerDesignDay;
 
 SizingPeriod:WeatherFileDays, Day59,
 2, 28,
-2, 28;
+2, 28,
+SummerDesignDay;
 
 SizingPeriod:WeatherFileDays, Day220,
 8, 8,
-8, 8;
+8, 8,
+SummerDesignDay;
 
 SizingPeriod:WeatherFileDays, Day269,
 9, 26,
-9, 26;
+9, 26,
+SummerDesignDay;
 
 
 
