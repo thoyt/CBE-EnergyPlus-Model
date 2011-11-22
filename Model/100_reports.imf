@@ -2299,7 +2299,7 @@ Surface Int Convection Heat Rate,
 hourly;
 
 Output:Variable,
-TFSPCore,                              
+*,                              
 Zone Mean Air Temperature,
 hourly;
 
