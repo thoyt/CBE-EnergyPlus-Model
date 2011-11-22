@@ -134,7 +134,7 @@
 	FenestrationSurface:Detailed,
 	GFNorth_Win_N,                                      	!- Window name
 	Window,
-	N_Window,                                                 !- Class and Construction Name
+	Window,                                                 !- Class and Construction Name
 	GFNorth_Wall_N,                                       !- Base surface
 	,                                                     !- corresponding other window subsurface
 	.5,                                                   !- View Factor to Ground
@@ -1620,7 +1620,7 @@
 	FenestrationSurface:Detailed,
 	MFNorth_Win_N,                                      	!- Window name
 	Window,
-	N_Window,                                                 !- Class and Construction Name
+	Window,                                                 !- Class and Construction Name
 	MFNorth_Wall_N,                                       !- Base surface
 	,                                                     !- corresponding other window subsurface
 	.5,                                                   !- View Factor to Ground
@@ -2764,7 +2764,7 @@
 	FenestrationSurface:Detailed,
 	TFNorth_Win_N,                                      	!- Window name
 	Window,
-	N_Window,                                                 !- Class and Construction Name
+	Window,                                                 !- Class and Construction Name
 	TFNorth_Wall_N,                                          !- Base surface
 	,                                                     !- corresponding other window subsurface
 	.5,                                                   !- View Factor to Ground
@@ -3814,7 +3814,7 @@ SurfaceProperty:OtherSideCoefficients,
 		FenestrationSurface:Detailed,
 		GFNorth_SecondWin_N,                                  	!- Window name
 		Window,
-		N_Window,                                                 !- Class and Construction Name
+		Window,                                                 !- Class and Construction Name
 		GFRPNorth_Wall_N,                                       !- Base surface
 		,                                                     !- corresponding other window subsurface
 		.5,                                                   !- View Factor to Ground
@@ -3922,7 +3922,7 @@ SurfaceProperty:OtherSideCoefficients,
 		FenestrationSurface:Detailed,
 		MFNorth_SecondWin_N,                                  	!- Window name
 		Window,
-		N_Window,                                                 !- Class and Construction Name
+		Window,                                                 !- Class and Construction Name
 		MFRPNorth_Wall_N,                                       !- Base surface
 		,                                                     !- corresponding other window subsurface
 		.5,                                                   !- View Factor to Ground
@@ -4030,7 +4030,7 @@ SurfaceProperty:OtherSideCoefficients,
 		FenestrationSurface:Detailed,
 		TFNorth_SecondWin_N,                                  	!- Window name
 		Window,
-		N_Window,                                                 !- Class and Construction Name
+		Window,                                                 !- Class and Construction Name
 		TFRPNorth_Wall_N,                                      	!- Base surface
 		,                                                     !- corresponding other window subsurface
 		.5,                                                   !- View Factor to Ground

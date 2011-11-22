@@ -7,7 +7,7 @@
 	PEOPLE,
 	ZoneName[] People,                                    !- Name
 	ZoneName[],                                           !- Zone Name
-	Sch_LBL_Occupancy,                                    !- Number of People SCHEDULE Name
+	Sch_ASHRAE90.1-2010_Occupancy,                                    !- Number of People SCHEDULE Name
 	Area/Person,                                          !- Number of People Calculation Method
 	,                                                     !- Number of People
 	,                                                     !- People per Floor Area
@@ -29,7 +29,8 @@
 	Sch_PMV_Air_Velocity,                                 !- Air Velocity SCHEDULE Name (units m/s, real)
 	Fanger,                                               !- Thermal Comfort Report Type
 	,                                                     !- Thermal Comfort Report Type
-	;                                                     !- Thermal Comfort Report Type
+	,                                                     !- Thermal Comfort Report Type
+	StefanoSecond;
 ##enddef
 
 ##def Subroutine_Equipment[]
@@ -37,7 +38,7 @@
 	ELECTRICEQUIPMENT,
 	ZoneName[] Equipment,                                    !- Name
 	ZoneName[],                                              !- Zone Name
-	Sch_LBL_Equipment,                                       !- Equipment SCHEDULE Name
+	Sch_ASHRAE90.1-2010_Equipment,                                       !- Equipment SCHEDULE Name
 	Watts/Area,                                              !- Design Level Calculation Method
 	,                                                        !- Design Equipment Level (W)
 	##if #[Fake_UFAD[] EQS Yes ]
@@ -58,7 +59,7 @@
 	LIGHTS,
 	ZoneName[] General lighting,                          !- Name
 	ZoneName[],                                           !- Zone Name
-	Sch_LBL_Lighting,                                     !- Lighting SCHEDULE Name
+	Sch_ASHRAE90.1-2010_Lighting,                                     !- Lighting SCHEDULE Name
 	Watts/Area,                                           !- Design Level Calculation Level
 	,                                                     !- Design lighting Level (W)
 	##if #[Fake_UFAD[] EQS Yes ]
@@ -83,12 +84,12 @@
 	Flow/ExteriorArea,                                    !- Design Flow Calculation Method
 	.048276,                                              !- Design Flow (m3/s)
 	,                                                     !- Flow per zone area
-	0.000017934,                                          !- Flow per exterior surface area
+	0.00056896,                                          !- Flow per exterior surface area
 	0.2000,                                               !- ACH
-	1,                                                    !- Constant Term Coefficient
-	0,                                                    !- Temperature Term Coefficient
-	0,                                                    !- Velocity Term Coefficient
-	0;                                                    !- Velocity Squared Term Coefficient
+	    0,                       !- Constant Term Coefficient
+    0.0000,                  !- Temperature Term Coefficient
+    0.2240,                  !- Velocity Term Coefficient
+    0.0000;                  !- Velocity Squared Term Coefficient
 ##enddef
 
 ##if #[Fake_UFAD[] EQS Yes ]
@@ -98,7 +99,7 @@
 	PEOPLE,
 	ZoneName[] People,                                    !- Name
 	ZoneName[],                                           !- Zone Name
-	Sch_LBL_Occupancy,                                    !- Number of People SCHEDULE Name
+	Sch_ASHRAE90.1-2010_Occupancy,                                    !- Number of People SCHEDULE Name
 	Area/Person,                                          !- Number of People Calculation Method
 	,                                                     !- Number of People
 	,                                                     !- People per Floor Area
@@ -115,7 +116,8 @@
 	Sch_PMV_Air_Velocity,                                 !- Air Velocity SCHEDULE Name (units m/s, real)
 	Fanger,                                               !- Thermal Comfort Report Type
 	,                                                     !- Thermal Comfort Report Type
-	;                                                     !- Thermal Comfort Report Type
+	,
+	StefanoSecond;                                                     !- Thermal Comfort Report Type
 ##enddef
 
 ##def Subroutine_ReturnEquipment[]
@@ -123,7 +125,7 @@
 	ELECTRICEQUIPMENT,
 	ZoneName[] Equipment,                                    !- Name
 	ZoneName[],                                              !- Zone Name
-	Sch_LBL_Equipment,                                       !- Equipment SCHEDULE Name
+	Sch_ASHRAE90.1-2010_Equipment,                                       !- Equipment SCHEDULE Name
 	Watts/Area,                                              !- Design Level Calculation Method
 	,                                                        !- Design Equipment Level (W)
 	# [ Equipment_Level[] * Remainder_EquipmentRoom[] ],
@@ -139,7 +141,7 @@
 	LIGHTS,
 	ZoneName[] General lighting,                          !- Name
 	ZoneName[],                                           !- Zone Name
-	Sch_LBL_Lighting,                                     !- Lighting SCHEDULE Name
+	Sch_ASHRAE90.1-2010_Lighting,                                     !- Lighting SCHEDULE Name
 	Watts/Area,                                           !- Design Level Calculation Level
 	,                                                     !- Design lighting Level (W)
 	# [ Lighting_Level[] * Remainder_LightingRoom[] ],
@@ -205,7 +207,7 @@ Subroutine_Core[]
 ##set1 ZoneName[] = TFCore
 Subroutine_Core[]
 
-##if #[#[Supply_Plenum[] EQS Single_Plenum ] or #[Supply_Plenum[] EQS DuctedPerimeter ]]
+##if #[#[Supply_Plenum[] EQS Single_Plenum ] or #[#[Supply_Plenum[] EQS DuctedPerimeterParallel ] or #[Supply_Plenum[] EQS DuctedPerimeterSingle ]]]
 
 ##else
 
@@ -334,7 +336,7 @@ Subroutine_Return[]
 		ZoneName[]_InternalMass,                !- User Supplied Surface Name
 		Light Furnishings,                      !- Construction Name of the Surface
 		ZoneName[],                             !- Zone Name
-		# [ 0.85 * Area[] ];                     !- Surface area {m2} equal to double (see EnergyPlus documentation) the 50% of floor area (see ASHRAE 2005 Handbook of Fundamentals included in EnergyPlus datasets).    
+		# [ 0.85 * Area[] ];                     !- Surface area exposed to the zone {m2}    
 		
 	##enddef
 	

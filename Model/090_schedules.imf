@@ -23,55 +23,32 @@ Control_Type,
 DISCRETE;
 
 ScheduleTypeLimits,
+Any Number;
+
+ScheduleTypeLimits,
 On/Off,
 0,
 1,
 DISCRETE;
 
-##if #[HVAC_Schedule[] EQS ASHRAE_90.1 ]
-	Schedule:Compact,
-	  Sch_HVAC_System_Availability,       !- Name
-	  On/Off,                  !- Schedule Type Limits Name
-	  Through: 12/31,          !- Field 1
-	  For: SummerDesignDay WinterDesignDay,
-	  Until: 24:00,
-	  1.00,
-	  For: Weekdays,  !- Field 2
-	  Until: 05:00,            !- Field 3
-	  0.0,                     !- Field 4
-	  Until: 20:00,            !- Field 5
-	  1.0,                     !- Field 6
-	  Until: 24:00,            !- Field 7
-	  0.0,                     !- Field 8
-	  For: Saturday,  !- Field 9
-	  Until: 05:00,            !- Field 10
-	  0.0,                     !- Field 11
-	  Until: 15:00,            !- Field 12
-	  1.0,                     !- Field 13
-	  Until: 24:00,            !- Field 14
-	  0.0,                     !- Field 15
-	  For: Sunday Holidays AllOtherDays,  !- Field 16
-	  Until: 24:00,            !- Field 17
-	  0.0;                     !- Field 18
-##endif        
+  Schedule:Compact,
+    Sch_HVAC_System_Availability,       !- Name
+    on/off,                  !- Schedule Type Limits Name
+    Through: 12/31,          !- Field 1
+    For: Weekdays SummerDesignDay, !- Field 2
+    Until: 06:00,0.0,        !- Field 3
+    Until: 22:00,1.0,        !- Field 5
+    Until: 24:00,0.0,        !- Field 7
+    For: Saturday WinterDesignDay, !- Field 9
+    Until: 06:00,0.0,        !- Field 10
+    Until: 18:00,1.0,        !- Field 12
+    Until: 24:00,0.0,        !- Field 14
+    For: Sunday Holidays AllOtherDays, !- Field 16
+    Until: 24:00,0.0;        !- Field 17
 
-##if #[HVAC_Schedule[] EQS LBL ]
-	SCHEDULE:COMPACT,
-	Sch_HVAC_System_Availability,        
-	On/Off,                  
-	Through: 12/31,          
-	For: Weekdays SummerDesignDay WinterDesignDay,  
-	  Until: 5:00,      0.0,                     
-	  Until: 19:00,     1.0,                     
-	  Until: 24:00,     0.0,                     
-	For: AllOtherDays,
-	  Until: 6:00,      0.0,                     
-	  Until: 13:00,     1.0,                     
-	  Until: 24:00,     0.0; 
-##endif  
-           
+  
 
-	
+
 	! This schedule controls RH coil availability for all perimeter zones
 	! It is currently set to the same availability periods as the LBL HVAC_Schedule
 	SCHEDULE:COMPACT,
@@ -162,286 +139,162 @@ Through: 12/31,
 For: AllDays,                                         
   Until: 24:00,   1;   
 
-##if #[Internal_Schedule[] EQS LBL ]
-SCHEDULE:COMPACT,
-Sch_LBL_Occupancy,                        
-Fraction,                                 
-Through: 12/31,
-For: Weekdays SummerDesignDay WinterDesignDay,
-  Until: 7:00,     0,
-  Until: 8:00,     0.33,
-  Until: 9:00,     0.67,
-  Until: 17:00,    1.00,
-  Until: 18:00,    0.50,
-  Until: 24:00,    0,
-For: AllOtherDays,
-  Until: 7:00,     0,
-  Until: 8:00,     0.07,
-  Until: 9:00,     0.13,
-  Until: 12:00,    0.20,
-  Until: 13:00,    0.10,
-  Until: 24:00,    0;
-
-SCHEDULE:COMPACT,
-Sch_LBL_Lighting,                        
-Fraction,                                
-Through: 12/31,
-For: Weekdays SummerDesignDay WinterDesignDay,
-  Until: 7:00,     0.30,
-  Until: 17:00,    0.90,
-  Until: 24:00,    0.30,
-For: AllOtherDays,
-  Until: 24:00,    0.30;
-
-SCHEDULE:COMPACT,
-Sch_LBL_Equipment,                        
-Fraction,                                 
-Through: 12/31,
-For: Weekdays SummerDesignDay WinterDesignDay,
-  Until: 7:00,     0.17,
-  Until: 17:00,    1.00,
-  Until: 24:00,    0.17,
-For: AllOtherDays,
-  Until: 24:00,    0.17;
-
-##endif
-
-##if #[Internal_Schedule[] EQS ASHRAE_90.1 ]
-Schedule:Compact,
-  Sch_LBL_Equipment,          !- Name
-  Fraction,                !- Schedule Type Limits Name
-  Through: 12/31,          !- Field 1
-  For: Weekdays,           !- Field 2
-  Until: 05:00,            !- Field 3
-  0.15,                    !- Field 4
-  Until: 06:00,            !- Field 5
-  0.20,                    !- Field 6
-  Until: 7:00,            !- Field 7
-  0.35,                    !- Field 8
-  Until: 8:00,            !- Field 7
-  0.60,                    !- Field 8
-  Until: 16:00,            !- Field 9
-  0.70,                    !- Field 10
-  Until: 17:00,            !- Field 11
-  0.65,                    !- Field 12
-  Until: 18:00,            !- Field 11
-  0.45,                    !- Field 12
-  Until: 19:00,            !- Field 11
-  0.30,                    !- Field 12
-  Until: 21:00,            !- Field 11
-  0.20,                    !- Field 12
-  Until: 24:00,            !- Field 13
-  0.15,                    !- Field 14
-  For: SummerDesignDay,    !- Field 15
-  Until: 24:00,            !- Field 16
-  0.63,                     !- Field 17
-  For: Saturday,           !- Field 18
-  Until: 07:00,            !- Field 19
-  0.15,                    !- Field 20
-  Until: 08:00,            !- Field 21
-  0.20,                     !- Field 22
-  Until: 14:00,            !- Field 23
-  0.25,                     !- Field 24
-  Until: 17:00,            !- Field 25
-  0.20,                    !- Field 26
-  Until: 24:00,            !- Field 27
-  0.15,                    !- Field 28
-  For: WinterDesignDay,    !- Field 29
-  Until: 24:00,            !- Field 30
-  0.0,                     !- Field 31
-  For: Sunday Holidays AllOtherDays,  !- Field 32
-  Until: 07:00,            !- Field 33
-  0.15,
-  Until: 17:00,            !- Field 33
-  0.30,
-  Until: 24:00,            !- Field 33
-  0.15;                    !- Field 34
-
-Schedule:Compact,
-  Sch_LBL_Lighting,          !- Name
-  Fraction,                !- Schedule Type Limits Name
-  Through: 12/31,          !- Field 1
-  For: Weekdays WinterDesignDay,           !- Field 2
-  Until: 04:00,            !- Field 3
-  0.05,                    !- Field 4
-  Until: 05:00,            !- Field 5
-  0.1,                     !- Field 6
-  Until: 06:00,            !- Field 7
-  0.2,                     !- Field 8
-  Until: 07:00,            !- Field 7
-  0.4,                     !- Field 8
-  Until: 08:00,            !- Field 7
-  0.7,                     !- Field 8
-  Until: 09:00,            !- Field 7
-  0.8,                     !- Field 8
-  Until: 17:00,            !- Field 9
-  0.85,                     !- Field 10
-  Until: 18:00,            !- Field 11
-  0.80,                     !- Field 12
-  Until: 19:00,            !- Field 13
-  0.35,                     !- Field 14
-  Until: 24:00,            !- Field 19
-  0.10,                    !- Field 20
-  For: SummerDesignDay,    !- Field 21
-  Until: 24:00,            !- Field 22
-  0.765,                     !- Field 23
-  For: Saturday,           !- Field 18
-  Until: 05:00,            !- Field 19
-  0.05,                    !- Field 20
-  Until: 06:00,            !- Field 21
-  0.10,                     !- Field 22
-  Until: 07:00,            !- Field 21
-  0.15,                     !- Field 22
-  Until: 14:00,            !- Field 23
-  0.25,                     !- Field 24
-  Until: 17:00,            !- Field 25
-  0.20,                    !- Field 26
-  Until: 18:00,            !- Field 21
-  0.15,                     !- Field 22
-  Until: 24:00,            !- Field 27
-  0.10,                    !- Field 28
-  For: Sunday Holidays AllOtherDays,  !- Field 38
-  Until: 05:00,            !- Field 21
-  0.05,                     !- Field 22
-  Until: 07:00,            !- Field 21
-  0.10,                     !- Field 22
-  Until: 17:00,            !- Field 21
-  0.15,                     !- Field 22
-  Until: 20:00,            !- Field 21
-  0.10,                     !- Field 22
-  Until: 24:00,            !- Field 39
-  0.05;                    !- Field 40
-
-Schedule:Compact,
-  Sch_LBL_Occupancy,            !- Name
-  Fraction,                !- Schedule Type Limits Name
-  Through: 12/31,          !- Field 1
-  For: Weekdays,           !- Field 2
-  Until: 04:00,            !- Field 3
-  0.0,                     !- Field 4
-  Until: 05:00,            !- Field 5
-  0.05,                     !- Field 6
-  Until: 06:00,            !- Field 7
-  0.10,                     !- Field 8
-  Until: 07:00,            !- Field 21
-  0.25,                     !- Field 22
-  Until: 11:00,            !- Field 9
-  0.65,                    !- Field 10
-  Until: 13:00,            !- Field 11
-  0.60,                     !- Field 12
-  Until: 17:00,            !- Field 13
-  0.65,                    !- Field 14
-  Until: 18:00,            !- Field 15
-  0.4,                     !- Field 16
-  Until: 19:00,            !- Field 17
-  0.25,                     !- Field 18
-  Until: 20:00,            !- Field 21
-  0.10,                     !- Field 22
-  Until: 23:00,            !- Field 21
-  0.05,                     !- Field 22
-  Until: 24:00,            !- Field 19
-  0.0,                    !- Field 20
-  For: SummerDesignDay,    !- Field 21
-  Until: 24:00,            !- Field 26
-  0.585,                    !- Field 27
-  For: Saturday,           !- Field 28
-  Until: 06:00,            !- Field 29
-  0.0,                     !- Field 30
-  Until: 07:00,            !- Field 31
-  0.05,                     !- Field 32
-  Until: 17:00,            !- Field 33
-  0.15,                     !- Field 34
-  Until: 20:00,            !- Field 35
-  0.05,                     !- Field 36
-  Until: 24:00,            !- Field 39
-  0.0,                     !- Field 40
-  For: WinterDesignDay,    !- Field 41
-  Until: 24:00,            !- Field 42
-  0.0,                     !- Field 43
-  For: Sunday Holidays AllOtherDays,  !- Field 44
-  Until: 07:00,            !- Field 45
-  0.0,                     !- Field 46
-  Until: 20:00,            !- Field 47
-  0.05,                     !- Field 48
-  Until: 24:00,            !- Field 49
-  0.0;                     !- Field 50
-##endif
-
-Schedule:Compact,
-  Sch_Infiltration,          !- Name
-  Fraction,                !- Schedule Type Limits Name
-  Through: 12/31,          !- Field 1
-  For: Weekdays SummerDesignDay WinterDesignDay,           !- Field 2
-  Until: 05:00,            !- Field 3
-  1.0,                    !- Field 4
-  Until: 20:00,            !- Field 11
-  0.00,                    !- Field 12
-  Until: 24:00,            !- Field 13
-  1.0,                    !- Field 14
-  For: Saturday,           !- Field 18
-  Until: 05:00,            !- Field 19
-  1.0,                    !- Field 20
-  Until: 15:00,            !- Field 23
-  0.00,                     !- Field 24
-  Until: 24:00,            !- Field 27
-  1.0,                    !- Field 28
-  For: Sunday Holidays AllOtherDays,  !- Field 32
-  Until: 24:00,            !- Field 33
-  1.0;                    !- Field 34
-
-	
-	SCHEDULE:COMPACT,
-	Sch_LBL_Thermostat_Cooling_Setpoint,    
-	Temperature,                            
-	Through: 12/31,
-	For: Weekdays,
-	  Until: 5:00,     Cooling_Setback[],
-	  Until: 18:00,    Cooling_Setpoint[],
-	  Until: 24:00,    Cooling_Setback[],
-	For: SummerDesignDay WinterDesignDay,
-	  Until: 5:00,     Cooling_Setpoint[],
-	  Until: 18:00,    Cooling_Setpoint[],
-	  Until: 24:00,    Cooling_Setpoint[],
-	For: AllOtherDays,
-	  Until: 5:00,     Cooling_Setback[],
-	  Until: 18:00,    Cooling_Setpoint[],
-	  Until: 24:00,    Cooling_Setback[];
-	             
-
-SCHEDULE:COMPACT,
-Sch_LBL_Core_Thermostat_Heating_Setpoint,      
-Temperature,            
-Through: 12/31,         
-For: Weekdays, 
-Until: 5:00,       Heating_Setback[],                   
-Until: 18:00,      Heating_Setpoint[],       
-Until: 24:00,      Heating_Setback[],                   
-For: SummerDesignDay WinterDesignDay,
-  Until: 5:00,     Heating_Setpoint[],
-  Until: 18:00,    Heating_Setpoint[],
-  Until: 24:00,    Heating_Setpoint[],
-For: AllOtherDays,  
-Until: 5:00,       Heating_Setback[],                   
-Until: 18:00,      Heating_Setpoint[],       
-Until: 24:00,      Heating_Setback[];     
-                                                                                                                                    
-SCHEDULE:COMPACT,
-Sch_LBL_Perimeter_Thermostat_Heating_Setpoint,                       
-Temperature,                            
-Through: 12/31,
-For: Weekdays,
-  Until: 5:00,     Heating_Setback[],
-  Until: 18:00,    Heating_Setpoint[],
-  Until: 24:00,    Heating_Setback[],
-For: SummerDesignDay WinterDesignDay,
-  Until: 5:00,     Heating_Setpoint[],
-  Until: 18:00,    Heating_Setpoint[],
-  Until: 24:00,    Heating_Setpoint[],
-For: AllOtherDays,
-  Until: 5:00,     Heating_Setback[],
-  Until: 18:00,    Heating_Setpoint[],
-  Until: 24:00,    Heating_Setback[];
   
+    Schedule:Compact,
+    Sch_ASHRAE90.1-2010_Equipment,     !- Name
+    Fraction,                !- Schedule Type Limits Name
+    Through: 12/31,          !- Field 1
+    For: Weekdays,           !- Field 2
+    Until: 08:00,0.40,       !- Field 3
+    Until: 12:00,0.90,       !- Field 5
+    Until: 13:00,0.80,       !- Field 7
+    Until: 17:00,0.90,       !- Field 9
+    Until: 18:00,0.50,       !- Field 11
+    Until: 24:00,0.40,       !- Field 13
+    For: SummerDesignDay,    !- Field 15
+    Until: 24:00,1.0,        !- Field 16
+    For: Saturday,           !- Field 18
+    Until: 06:00,0.30,       !- Field 19
+    Until: 08:00,0.4,        !- Field 21
+    Until: 12:00,0.5,        !- Field 23
+    Until: 17:00,0.35,       !- Field 25
+    Until: 24:00,0.30,       !- Field 27
+    For: WinterDesignDay,    !- Field 29
+    Until: 24:00,0.0,        !- Field 30
+    For: Sunday Holidays AllOtherDays, !- Field 32
+    Until: 24:00,0.30;       !- Field 33
+
+
+
+  Schedule:Compact,
+    Sch_ASHRAE90.1-2010_Lighting,          !- Name
+    Fraction,                !- Schedule Type Limits Name
+    Through: 12/31,          !- Field 1
+    For: Weekdays,           !- Field 2
+    Until: 05:00,0.05,       !- Field 3
+    Until: 07:00,0.1,        !- Field 5
+    Until: 08:00,0.3,        !- Field 7
+    Until: 17:00,0.9,        !- Field 9
+    Until: 18:00,0.5,        !- Field 11
+    Until: 20:00,0.3,        !- Field 13
+    Until: 22:00,0.2,        !- Field 15
+    Until: 23:00,0.1,        !- Field 17
+    Until: 24:00,0.05,       !- Field 19
+    For: SummerDesignDay,    !- Field 21
+    Until: 24:00,1.0,        !- Field 22
+    For: Saturday,           !- Field 24
+    Until: 06:00,0.05,       !- Field 25
+    Until: 08:00,0.1,        !- Field 27
+    Until: 12:00,0.3,        !- Field 29
+    Until: 17:00,0.15,       !- Field 31
+    Until: 24:00,0.05,       !- Field 33
+    For: WinterDesignDay,    !- Field 35
+    Until: 24:00,0.0,        !- Field 36
+    For: Sunday Holidays AllOtherDays, !- Field 38
+    Until: 24:00,0.05;       !- Field 39
+    
+Schedule:Compact,
+    Sch_ASHRAE90.1-2010_Occupancy,            !- Name
+    Fraction,                !- Schedule Type Limits Name
+    Through: 12/31,          !- Field 1
+    For: Weekdays,           !- Field 2
+    Until: 06:00,0.0,        !- Field 3
+    Until: 07:00,0.1,        !- Field 5
+    Until: 08:00,0.2,        !- Field 7
+    Until: 12:00,0.95,       !- Field 9
+    Until: 13:00,0.5,        !- Field 11
+    Until: 17:00,0.95,       !- Field 13
+    Until: 18:00,0.3,        !- Field 15
+    Until: 22:00,0.1,        !- Field 17
+    Until: 24:00,0.05,       !- Field 19
+    For: SummerDesignDay,    !- Field 21
+    Until: 06:00,0.0,        !- Field 22
+    Until: 22:00,1.0,        !- Field 24
+    Until: 24:00,0.05,       !- Field 26
+    For: Saturday,           !- Field 28
+    Until: 06:00,0.0,        !- Field 29
+    Until: 08:00,0.1,        !- Field 31
+    Until: 12:00,0.3,        !- Field 33
+    Until: 17:00,0.1,        !- Field 35
+    Until: 19:00,0.05,       !- Field 37
+    Until: 24:00,0.0,        !- Field 39
+    For: WinterDesignDay,    !- Field 41
+    Until: 24:00,0.0,        !- Field 42
+    For: Sunday Holidays AllOtherDays, !- Field 44
+    Until: 06:00,0.0,        !- Field 45
+    Until: 18:00,0.05,       !- Field 47
+    Until: 24:00,0.0;        !- Field 49
+
+
+  Schedule:Compact,
+    Sch_Infiltration,          !- Name
+    fraction,                !- Schedule Type Limits Name
+    Through: 12/31,          !- Field 1
+    For: Weekdays SummerDesignDay, !- Field 2
+    Until: 06:00,1.0,        !- Field 3
+    Until: 22:00,0.25,       !- Field 5
+    Until: 24:00,1.0,        !- Field 7
+    For: Saturday WinterDesignDay, !- Field 9
+    Until: 06:00,1.0,        !- Field 10
+    Until: 18:00,0.25,       !- Field 12
+    Until: 24:00,1.0,        !- Field 14
+    For: Sunday Holidays AllOtherDays, !- Field 16
+    Until: 24:00,1.0;        !- Field 17
+
+
+
+  Schedule:Compact,
+    Sch_ASHRAE90.1-2010_Thermostat_Cooling_Setpoint,             !- Name
+    Temperature,             !- Schedule Type Limits Name
+    Through: 12/31,          !- Field 1
+    For: Weekdays SummerDesignDay, !- Field 2
+    Until: 07:00,Cooling_Setback[],       !- Field 7
+    Until: 22:00,Cooling_Setpoint[],       !- Field 9
+    Until: 24:00,Cooling_Setback[],       !- Field 11
+    For WinterDesignDay,     !- Field 13
+    Until: 24:00,Cooling_Setback[],       !- Field 14
+    For: Saturday,           !- Field 16
+    Until:  07:00,Cooling_Setback[],      !- Field 21
+    Until: 17:00,Cooling_Setpoint[],       !- Field 23
+    Until: 24:00,Cooling_Setback[],       !- Field 25
+    For: Sunday Holidays AllOtherDays, !- Field 27
+    Until: 24:00,Cooling_Setback[];       !- Field 28
+    
+  Schedule:Compact,
+    Sch_ASHRAE90.1-2010_Perimeter_Thermostat_Heating_Setpoint,             !- Name
+    Temperature,             !- Schedule Type Limits Name
+    Through: 12/31,          !- Field 1
+    For: Weekdays WinterDesignDay, !- Field 2
+    Until: 07:00,Heating_Setback[],       !- Field 7
+    Until: 22:00,Heating_Setpoint[],       !- Field 9
+    Until: 24:00,Heating_Setback[],       !- Field 11
+    For SummerDesignDay,     !- Field 13
+    Until: 24:00,Heating_Setback[],       !- Field 14
+    For: Saturday,           !- Field 16
+    Until:  07:00,Heating_Setback[],      !- Field 21
+    Until: 17:00,Heating_Setpoint[],       !- Field 23
+    Until: 24:00,Heating_Setback[],       !- Field 25
+    For: Sunday Holidays AllOtherDays, !- Field 27
+    Until: 24:00,Heating_Setback[];       !- Field 28
+     
+
+  SCHEDULE:COMPACT,
+    Sch_ASHRAE90.1-2010_Core_Thermostat_Heating_Setpoint,      
+    Temperature,             !- Schedule Type Limits Name
+    Through: 12/31,          !- Field 1
+    For: Weekdays WinterDesignDay, !- Field 2
+    Until: 07:00,Heating_Setback[],       !- Field 7
+    Until: 22:00,Heating_Setpoint[],       !- Field 9
+    Until: 24:00,Heating_Setback[],       !- Field 11
+    For SummerDesignDay,     !- Field 13
+    Until: 24:00,Heating_Setback[],       !- Field 14
+    For: Saturday,           !- Field 16
+    Until:  07:00,Heating_Setback[],      !- Field 21
+    Until: 17:00,Heating_Setpoint[],       !- Field 23
+    Until: 24:00,Heating_Setback[],       !- Field 25
+    For: Sunday Holidays AllOtherDays, !- Field 27
+    Until: 24:00,Heating_Setback[];       !- Field 28
+	 
 SCHEDULE:COMPACT,
 Sch_ThermostatControlType,                 
 Control_Type,                              

@@ -7,13 +7,13 @@ Sizing_Factor[],
 
 ThermostatSetpoint:DualSetpoint,
 Perimeter_Thermostat_Dual_Setpoint_Control,               !- Name
-Sch_LBL_Perimeter_Thermostat_Heating_Setpoint,                                   !- Heating Setpoint Temperature SCHEDULE Name
-Sch_LBL_Thermostat_Cooling_Setpoint;                                   !- Cooling Setpoint Temperature SCHEDULE Name
+Sch_ASHRAE90.1-2010_Perimeter_Thermostat_Heating_Setpoint,                                   !- Heating Setpoint Temperature SCHEDULE Name
+Sch_ASHRAE90.1-2010_Thermostat_Cooling_Setpoint;                                   !- Cooling Setpoint Temperature SCHEDULE Name
 
 ThermostatSetpoint:DualSetpoint,
 Core_Thermostat_Dual_Setpoint_Control,               !- Name
-Sch_LBL_Core_Thermostat_Heating_Setpoint,                                   !- Heating Setpoint Temperature SCHEDULE Name
-Sch_LBL_Thermostat_Cooling_Setpoint;                                   !- Cooling Setpoint Temperature SCHEDULE Name
+Sch_ASHRAE90.1-2010_Core_Thermostat_Heating_Setpoint,                                   !- Heating Setpoint Temperature SCHEDULE Name
+Sch_ASHRAE90.1-2010_Thermostat_Cooling_Setpoint;                                   !- Cooling Setpoint Temperature SCHEDULE Name
 
 ZoneControl:Thermostat,
 GFWest Thermostat,                                    !- Thermostat Name
@@ -24,7 +24,7 @@ Perimeter_Thermostat_Dual_Setpoint_Control;           !- Control Type Name
 
 Sizing:Zone,
 GFWest,                                               !- Name of a zone
-Zone_Cool_SAT_Perim[],                                     !- Zone cooling design supply air temperature {C}
+Zone_Cool_SAT_GF_Perim[],                                     !- Zone cooling design supply air temperature {C}
 50,                                                   !- Zone heating design supply air temperature {C}
 0.008,                                                !- Zone cooling design supply air humidity ratio {kg-H20/kg-air}
 0.008,                                                !- Zone heating design supply air humidity ratio {kg-H2O/kg-air}
@@ -207,7 +207,7 @@ Core_Thermostat_Dual_Setpoint_Control;               !- Control Type Name
 
 Sizing:Zone,
 GFCore,                                               !- Name of a zone
-Zone_Cool_SAT_Core[],                                     !- Zone cooling design supply air temperature {C}
+Zone_Cool_SAT_GF_Core[],                                     !- Zone cooling design supply air temperature {C}
 50,                                                   !- Zone heating design supply air temperature {C}
 0.008,                                                !- Zone cooling design supply air humidity ratio {kg-H20/kg-air}
 0.008,                                                !- Zone heating design supply air humidity ratio {kg-H2O/kg-air}
@@ -332,7 +332,7 @@ Perimeter_Thermostat_Dual_Setpoint_Control;               !- Control Type Name
 
 Sizing:Zone,
 GFEast,                                               !- Name of a zone
-Zone_Cool_SAT_Perim[],                                     !- Zone cooling design supply air temperature {C}
+Zone_Cool_SAT_GF_Perim[],                                     !- Zone cooling design supply air temperature {C}
 50,                                                   !- Zone heating design supply air temperature {C}
 0.008,                                                !- Zone cooling design supply air humidity ratio {kg-H20/kg-air}
 0.008,                                                !- Zone heating design supply air humidity ratio {kg-H2O/kg-air}
@@ -516,7 +516,7 @@ Perimeter_Thermostat_Dual_Setpoint_Control;              !- Control Type Name
 
 Sizing:Zone,
 GFNorth,                                              !- Name of a zone
-Zone_Cool_SAT_Perim[],                                     !- Zone cooling design supply air temperature {C}
+Zone_Cool_SAT_GF_Perim[],                                     !- Zone cooling design supply air temperature {C}
 50,                                                   !- Zone heating design supply air temperature {C}
 0.008,                                                !- Zone cooling design supply air humidity ratio {kg-H20/kg-air}
 0.008,                                                !- Zone heating design supply air humidity ratio {kg-H2O/kg-air}
@@ -699,7 +699,7 @@ Perimeter_Thermostat_Dual_Setpoint_Control;              !- Control Type Name
 
 Sizing:Zone,
 GFSouth,                                              !- Name of a zone
-Zone_Cool_SAT_Perim[],                                     !- Zone cooling design supply air temperature {C}
+Zone_Cool_SAT_GF_Perim[],                                     !- Zone cooling design supply air temperature {C}
 50,                                                   !- Zone heating design supply air temperature {C}
 0.008,                                                !- Zone cooling design supply air humidity ratio {kg-H20/kg-air}
 0.008,                                                !- Zone heating design supply air humidity ratio {kg-H2O/kg-air}
@@ -2794,14 +2794,16 @@ AHU Supply Fan Outlet;                                !- Name of the set point N
 ##endif
 
 ##if #[SAT_Reset[] EQS Yes ]
-SetpointManager:Warmest,
-	AHU Cooling Supply Air Temp Manager, !- Name
-	Temperature, !- Control Variable
-	AHU, !- HVAC Air Loop Name
-	AHU_SAT_SPT[], !- Minimum Setpoint Temperature
-	High_AHU_SAT[], !- Maximum Setpoint Temperature
-	MaximumTemperature, !- Strategy
-	AHU Supply Fan Outlet; !- Setpoint Node
+	
+SetpointManager:OutdoorAirReset,
+	AHU Cooling Supply Air Temp Manager,   !- Name
+	Temperature,              !- Control Variable
+	High_AHU_SAT[],                        !- Setpoint at Outdoor Low Temperature {C}
+	18.3333333,                      !- Outdoor Low Temperature {C}
+	AHU_SAT_SPT[],                    !- Setpoint at Outdoor High Temperature {C}
+	21.1,                    !- Outdoor High Temperature {C}
+	AHU Supply Fan Outlet;  !- Setpoint Node or NodeList Name
+
 ##endif
 
 COIL:Cooling:Water,
@@ -2923,13 +2925,13 @@ autosize,                                             !- Max Actuated Flow {m3/s
 	FAN:VariableVolume,
 	AHU Supply Fan,                                       !- Fan Name
 	Sch_Always_On,                                                   !- Available Schedule
-	0.63,                                                  !- Fan Total Efficiency
+	0.65,                                                  !- Fan Total Efficiency
 	AHU_Design_SP[],                                                 !- Delta Pressure {Pa}
 	Central_SupplyFan_MaxFlow[],                                             !- Max Flow Rate {m3/s}
 	FixedFlowRate,
 	,
 	0.00000000001,                                             !- Min Flow Rate {m3/s}
-	0.9,                                                    !- Motor Efficiency
+	0.84,                                                    !- Motor Efficiency
 	1,                                                    !- Motor In Airstream Fraction
 	0.21976201,                                         !- FanCoefficient 1
 	-0.87478399,                                         !- FanCoefficient 2
@@ -2952,13 +2954,13 @@ autosize,                                             !- Max Actuated Flow {m3/s
 	FAN:VariableVolume,
 	AHU Supply Fan,                                       !- Fan Name
 	Sch_Always_On,                                                   !- Available Schedule
-	0.63,                                                  !- Fan Total Efficiency
+	0.65,                                                  !- Fan Total Efficiency
 	AHU_Design_SP[],                                                 !- Delta Pressure {Pa}
 	Central_SupplyFan_MaxFlow[],                                             !- Max Flow Rate {m3/s}
 	FixedFlowRate,
 	,
 	0.00000000001,                                             !- Min Flow Rate {m3/s}
-	0.9,                                                    !- Motor Efficiency
+	0.84,                                                    !- Motor Efficiency
 	1,                                                    !- Motor In Airstream Fraction
 	0.0662,                                         !- FanCoefficient 1
 	0.1131,                                         !- FanCoefficient 2
@@ -2984,7 +2986,7 @@ autosize,                                             !- Max Actuated Flow {m3/s
 	FixedFlowRate,
 	,
 	0.00000000001,                                             !- Min Flow Rate {m3/s}
-	0.9,                                                    !- Motor Efficiency
+	0.84,                                                    !- Motor Efficiency
 	1,                                                    !- Motor In Airstream Fraction
 	0.0704,                                         !- FanCoefficient 1
     0.3853,                                         !- FanCoefficient 2

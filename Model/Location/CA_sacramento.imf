@@ -5,7 +5,7 @@
       -8.00,     !- Time Zone Relative to GMT {GMT+/-}
        5.00;     !- Elevation {m}
 
- ! Climate Zone 12_CA_USA Annual Heating 99.6%, MaxDB=-0.4°C
+ ! Climate Zone 12_CA_USA Annual Heating 99.6%, MaxDB=-0.4ï¿½C
  SizingPeriod:DesignDay,
   Climate Zone 12 Ann Htg 99.6% Condns DB,     !- Name
        -3.33,      !- Maximum Dry-Bulb Temperature {C}
@@ -25,7 +25,7 @@
 	
  ! Climate Zone 12 Annual Cooling Design Conditions Wind Speed=3.4m/s Wind Dir=220
  ! Hottest Month=JUL
- ! Climate Zone 12_CA_USA Annual Cooling (DB=>MWB) .4%, MaxDB=37.9°C MWB=21.3°C
+ ! Climate Zone 12_CA_USA Annual Cooling (DB=>MWB) .4%, MaxDB=37.9ï¿½C MWB=21.3ï¿½C
  SizingPeriod:DesignDay,
   Climate Zone 12 Ann Clg .4% Condns DB=>MWB,     !- Name
        37.78,      !- Maximum Dry-Bulb Temperature {C}
@@ -43,6 +43,29 @@
           0,      !- Daylight Savings Time Indicator
    WetBulb;       !- Humidity Indicating Type
 
+SizingPeriod:WeatherFileDays, Day192,
+7, 11,
+7, 11,
+SummerDesignDay;
+
+SizingPeriod:WeatherFileDays, Day59,
+2, 28,
+2, 28,
+SummerDesignDay;
+
+SizingPeriod:WeatherFileDays, Day220,
+8, 8,
+8, 8,
+SummerDesignDay;
+
+SizingPeriod:WeatherFileDays, Day269,
+9, 26,
+9, 26,
+SummerDesignDay;
+
+
+
+
 ##if #[RunType[] EQS OH]
 Site:GroundTemperature:BuildingSurface,
   20.133,  !- January Ground Temperature {C}
@@ -59,69 +82,143 @@ Site:GroundTemperature:BuildingSurface,
   20.216;  !- December Ground Temperature {C}
 ##endif	
 	
-! Window Sacramento Non-North
-CONSTRUCTION,
-	Window,               !- Name         
-	NonN_WindowMaterial;              !- Layer #3     
+ 
+!-   ===========  ALL OBJECTS IN CLASS: MATERIAL:REGULAR ===========
+  Material,
+    F13 Built-up roofing,    !- Name
+    Rough,                   !- Roughness
+    0.0095,                  !- Thickness {m}
+    0.16,                    !- Conductivity {W/m-K}
+    1120,                    !- Density {kg/m3}
+    1460,                    !- Specific Heat {J/kg-K}
+    0.9,                     !- Absorptance:Thermal
+    0.7;                     !- Absorptance:Solar
+	
+ Material,
+    F08 Metal surface,       !- Name
+    Smooth,                  !- Roughness
+    0.0008,                  !- Thickness {m}
+    45.28,                   !- Conductivity {W/m-K}
+    7824,                    !- Density {kg/m3}
+    500;                     !- Specific Heat {J/kg-K}
+	
+ 
+  Material,
+    F07 25mm stucco,         !- Name
+    Smooth,                  !- Roughness
+    0.0254,                  !- Thickness {m}
+    0.72,                    !- Conductivity {W/m-K}
+    1856,                    !- Density {kg/m3}
+    840,                     !- Specific Heat {J/kg-K}
+    0.9,                     !- Thermal Absorptance
+    0.7,                     !- Solar Absorptance
+    0.7;                     !- Visible Absorptance
+	
+	Material,
+    G01 16mm gypsum board,   !- Name
+    MediumSmooth,            !- Roughness
+    0.0159,                  !- Thickness {m}
+    0.16,                    !- Conductivity {W/m-K}
+    800,                     !- Density {kg/m3}
+    1090;                    !- Specific Heat {J/kg-K}
+ 
+!-   ===========  ALL OBJECTS IN CLASS: MATERIAL:REGULAR-R =========== 
 
-! Window Los Angeles North
-CONSTRUCTION,
-	N_Window,                   !- Name         
-	N_WindowMaterial;              !- Layer #3     
 
-##if #[WWR_Text[] EQS Twenty]
 
-WindowMaterial:SimpleGlazingSystem,
-        NonN_WindowMaterial,    !- Name
-        0.47,                   !- U-factor
-        0.36;                   !- SHGC
 
-WindowMaterial:SimpleGlazingSystem,
-        N_WindowMaterial,    !- Name
-        0.47,                   !- U-factor
-        0.51;                   !- SHGC
+  Material:NoMass,
+    Nonres_Roof_Insulation,  !- Name
+    MediumSmooth,            !- Roughness
+    3.47220376108688,        !- Thermal Resistance {m2-K/W}
+    0.9,                     !- Absorptance:Thermal
+    0.7,                     !- Absorptance:Solar
+    0.7;                     !- Absorptance:Visible
+ 
+ 
+  Material:NoMass,
+    Nonres_Exterior_Wall_Insulation,  !- Name
+    MediumSmooth,            !- Roughness
+    1.71282848878858,
+            !- Thermal Resistance {m2-K/W}
+    0.9,                     !- Thermal Absorptance
+    0.7,                     !- Solar Absorptance
+    0.7;                     !- Visible Absorptance 
+ 
+ 
+ !-   ===========  ALL OBJECTS IN CLASS: CONSTRUCTION ===========
+ Construction,
+    Roof,                   !- Name
+    F13 Built-up roofing,   !- Outside Layer
+   	Nonres_Roof_Insulation,  	!- Layer #2
+    F08 Metal surface;      !- Layer #3
 
-##endif
+  Construction,
+    Exterior_wall,               !- Name
+	F07 25mm stucco,               !- Outside Layer
+	G01 16mm gypsum board,         !- Layer #2
+	Nonres_Exterior_Wall_Insulation,      !- Layer #3
+	G01 16mm gypsum board;         !- Layer #4
 
-##if #[WWR_Text[] EQS Thirty]
+	!       Window Material/Construction file with spectral data in IDF format 
 
-WindowMaterial:SimpleGlazingSystem,
-        NonN_WindowMaterial,    !- Name
-        0.47,                   !- U-factor
-        0.36;                   !- SHGC
 
-WindowMaterial:SimpleGlazingSystem,
-        N_WindowMaterial,    !- Name
-        0.47,                   !- U-factor
-        0.47;                   !- SHGC
+!----------------------------------------------------- 
+!       Window Glass Layers 
+!----------------------------------------------------- 
 
-##endif
 
-##if #[WWR_Text[] EQS Forty]
+  WindowMaterial:Glazing,
+    REF C CLEAR HI 6MM,      !- Name
+    SpectralAverage,         !- Optical Data Type
+    ,                        !- Window Glass Spectral Data Set Name
+    0.006,                   !- Thickness {m}
+    0.200,                   !- Solar Transmittance at Normal Incidence
+    0.160,                   !- Front Side Solar Reflectance at Normal Incidence
+    0.390,                   !- Back Side Solar Reflectance at Normal Incidence
+    0.220,                   !- Visible Transmittance at Normal Incidence
+    0.170,                   !- Front Side Visible Reflectance at Normal Incidence
+    0.350,                   !- Back Side Visible Reflectance at Normal Incidence
+    0.0,                     !- Infrared Transmittance at Normal Incidence
+    0.84,                    !- Front Side Infrared Hemispherical Emissivity
+    0.55,                    !- Back Side Infrared Hemispherical Emissivity
+    0.9;                     !- Conductivity {W/m-K}
+	
+	WindowMaterial:Glazing,
+    CLEAR 6MM,               !- Name
+    SpectralAverage,         !- Optical Data Type
+    ,                        !- Window Glass Spectral Data Set Name
+    0.006,                   !- Thickness {m}
+    0.775,                   !- Solar Transmittance at Normal Incidence
+    0.071,                   !- Front Side Solar Reflectance at Normal Incidence
+    0.071,                   !- Back Side Solar Reflectance at Normal Incidence
+    0.881,                   !- Visible Transmittance at Normal Incidence
+    0.080,                   !- Front Side Visible Reflectance at Normal Incidence
+    0.080,                   !- Back Side Visible Reflectance at Normal Incidence
+    0.0,                     !- Infrared Transmittance at Normal Incidence
+    0.84,                    !- Front Side Infrared Hemispherical Emissivity
+    0.84,                    !- Back Side Infrared Hemispherical Emissivity
+    0.9;                     !- Conductivity {W/m-K}
 
-WindowMaterial:SimpleGlazingSystem,
-        NonN_WindowMaterial,    !- Name
-        0.47,                   !- U-factor
-        0.31;                   !- SHGC
+!-   ===========  ALL OBJECTS IN CLASS: MATERIAL:WINDOWGAS ===========
+ 
+  WindowMaterial:Gas,
+    AIR 6MM,                 !- Name
+    Air,                     !- Gas Type
+    0.0063;                  !- Thickness {m}
+	
+ WindowMaterial:Gas,
+    AIR 13MM,                !- Name
+    Air,                     !- Gas Type
+    0.0127;                  !- Thickness {m}
+	
+	
+!----------------------------------------------------- 
+!       Window Construction 
+!----------------------------------------------------- 
 
-WindowMaterial:SimpleGlazingSystem,
-        N_WindowMaterial,    !- Name
-        0.47,                   !- U-factor
-        0.47;                   !- SHGC
-
-##endif
-
-! Exterior Wall Sacramento
-CONSTRUCTION,
-Exterior_wall,                                      !- Stone (.0254m)         
-Stone,                                            !- Wall Insulation        
-Insulation_Wall_Sac,                              !- Air Layer Vertical Wall
-AirLayer_Vertical,                                !- Gypsum (.0159m)        
-Gypsum;     
-
-! Roof Sacramento
-CONSTRUCTION,
-	Roof,
-	BltupRoofing_0375in,                                  !- Built-up Roofing 3/8" (.0095m)
-    Insulation_Roof_Sac,
-    Concrete_LW80lb_6in;         !- Concrete 8" Heavy Weight Undried Aggregate 140lb (.2032m)
+  Construction,
+    Window, !- Name
+    REF C CLEAR HI 6MM,      !- Outside Layer
+    AIR 6MM,                 !- Layer 2
+    CLEAR 6MM;               !- Layer 3
