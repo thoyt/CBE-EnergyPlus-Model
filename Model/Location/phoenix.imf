@@ -43,21 +43,30 @@ Site:Location,
           0,      !- Daylight Savings Time Indicator
    WetBulb;      !- Humidity Indicating Type
 
-SizingPeriod:WeatherFileDays, Day178,
-6, 27,
-6, 27,
+SizingPeriod:WeatherFileDays, Day158,
+6, 7,
+6, 7,
 SummerDesignDay;
 
-SizingPeriod:WeatherFileDays, Day269,
-9, 26,
-9, 26,
+SizingPeriod:WeatherFileDays, Day316,
+11, 12,
+11, 12,
 SummerDesignDay;
 
-SizingPeriod:WeatherFileDays, Day234,
-8, 22,
-8, 22,
+SizingPeriod:WeatherFileDays, Day179,
+6, 28,
+6, 28,
 SummerDesignDay;
 
+SizingPeriod:WeatherFileDays, Day173,
+6, 22,
+6, 22,
+SummerDesignDay;
+
+SizingPeriod:WeatherFileDays, Day200,
+7, 19,
+7, 19,
+SummerDesignDay;
 
 ##if #[RunType[] EQS OH]
 Site:GroundTemperature:BuildingSurface,
